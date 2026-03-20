@@ -1766,9 +1766,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "nist_sp_800_171.yaml",
-  "source_file_date": "2026-03-20T22:56:24",
+  "source_file_date": "2026-03-20T22:59:04",
   "source_file_size": 13000,
-  "generation_date": "2026-03-20T22:57:38",
+  "generation_date": "2026-03-20T23:39:39",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/nist_sp_800_171.context.jsonld",

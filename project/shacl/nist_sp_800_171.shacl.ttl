@@ -8,62 +8,40 @@
 nist_sp_800_171:CatalogElement a sh:NodeShape ;
     rdfs:comment "Base class for catalog elements with id, props, links, and parts" ;
     sh:closed false ;
-    sh:ignoredProperties ( nist_sp_800_171:prose nist_sp_800_171:name nist_sp_800_171:params nist_sp_800_171:title nist_sp_800_171:usage nist_sp_800_171:label nist_sp_800_171:guidelines rdf:type nist_sp_800_171:_class nist_sp_800_171:select nist_sp_800_171:controls ) ;
-    sh:property [ sh:class nist_sp_800_171:Link ;
-            sh:description "List of links and relationships" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 2 ;
-            sh:path nist_sp_800_171:links ],
-        [ sh:class nist_sp_800_171:Property ;
+    sh:ignoredProperties ( rdf:type nist_sp_800_171:_class nist_sp_800_171:params nist_sp_800_171:name nist_sp_800_171:title nist_sp_800_171:guidelines nist_sp_800_171:label nist_sp_800_171:select nist_sp_800_171:prose nist_sp_800_171:usage nist_sp_800_171:controls ) ;
+    sh:property [ sh:class nist_sp_800_171:Property ;
             sh:description "List of properties" ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 1 ;
             sh:path nist_sp_800_171:props ],
+        [ sh:class nist_sp_800_171:Part ;
+            sh:description "Nested parts providing prose, statements, guidance, assessment objectives and methods" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path nist_sp_800_171:parts ],
+        [ sh:class nist_sp_800_171:Link ;
+            sh:description "List of links and relationships" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 2 ;
+            sh:path nist_sp_800_171:links ],
         [ sh:datatype xsd:string ;
             sh:description "Unique identifier for an element" ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
-            sh:path nist_sp_800_171:id ],
-        [ sh:class nist_sp_800_171:Part ;
-            sh:description "Nested parts providing prose, statements, guidance, assessment objectives and methods" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 3 ;
-            sh:path nist_sp_800_171:parts ] ;
+            sh:path nist_sp_800_171:id ] ;
     sh:targetClass nist_sp_800_171:CatalogElement .
 
 nist_sp_800_171:IdentifiedElement a sh:NodeShape ;
     rdfs:comment "A catalog element with required id, title, and optional class/label" ;
     sh:closed true ;
-    sh:ignoredProperties ( nist_sp_800_171:params nist_sp_800_171:usage nist_sp_800_171:guidelines rdf:type nist_sp_800_171:select nist_sp_800_171:controls ) ;
+    sh:ignoredProperties ( rdf:type nist_sp_800_171:params nist_sp_800_171:guidelines nist_sp_800_171:select nist_sp_800_171:usage nist_sp_800_171:controls ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "Unique identifier for an element" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path nist_sp_800_171:id ],
-        [ sh:datatype xsd:string ;
             sh:description "Human-readable title" ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
             sh:path nist_sp_800_171:title ],
-        [ sh:class nist_sp_800_171:Part ;
-            sh:description "Nested parts providing prose, statements, guidance, assessment objectives and methods" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 6 ;
-            sh:path nist_sp_800_171:parts ],
-        [ sh:description "Classification of a catalog element (e.g. family, requirement, security_requirement)" ;
-            sh:in ( "family" "requirement" ) ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path nist_sp_800_171:_class ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable label" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path nist_sp_800_171:label ],
         [ sh:class nist_sp_800_171:Link ;
             sh:description "List of links and relationships" ;
             sh:nodeKind sh:BlankNodeOrIRI ;
@@ -73,7 +51,29 @@ nist_sp_800_171:IdentifiedElement a sh:NodeShape ;
             sh:description "List of properties" ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 4 ;
-            sh:path nist_sp_800_171:props ] ;
+            sh:path nist_sp_800_171:props ],
+        [ sh:class nist_sp_800_171:Part ;
+            sh:description "Nested parts providing prose, statements, guidance, assessment objectives and methods" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path nist_sp_800_171:parts ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for an element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path nist_sp_800_171:id ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable label" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_sp_800_171:label ],
+        [ sh:description "Classification of a catalog element (e.g. family, requirement, security_requirement)" ;
+            sh:in ( "family" "requirement" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path nist_sp_800_171:_class ] ;
     sh:targetClass nist_sp_800_171:IdentifiedElement .
 
 nist_sp_800_171:Control a sh:NodeShape ;
@@ -81,16 +81,27 @@ nist_sp_800_171:Control a sh:NodeShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
+            sh:description "Human-readable label" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path nist_sp_800_171:label ],
+        [ sh:datatype xsd:string ;
             sh:description "Human-readable title" ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 1 ;
             sh:path nist_sp_800_171:title ],
-        [ sh:class nist_sp_800_171:Property ;
-            sh:description "List of properties" ;
+        [ sh:class nist_sp_800_171:Part ;
+            sh:description "Nested parts providing prose, statements, guidance, assessment objectives and methods" ;
             sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 5 ;
-            sh:path nist_sp_800_171:props ],
+            sh:order 7 ;
+            sh:path nist_sp_800_171:parts ],
+        [ sh:class nist_sp_800_171:Parameter ;
+            sh:description "List of organization-defined parameters for a requirement" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path nist_sp_800_171:params ],
         [ sh:class nist_sp_800_171:Link ;
             sh:description "List of links and relationships" ;
             sh:nodeKind sh:BlankNodeOrIRI ;
@@ -107,29 +118,23 @@ nist_sp_800_171:Control a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 4 ;
             sh:path nist_sp_800_171:id ],
-        [ sh:class nist_sp_800_171:Parameter ;
-            sh:description "List of organization-defined parameters for a requirement" ;
+        [ sh:class nist_sp_800_171:Property ;
+            sh:description "List of properties" ;
             sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 0 ;
-            sh:path nist_sp_800_171:params ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable label" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path nist_sp_800_171:label ],
-        [ sh:class nist_sp_800_171:Part ;
-            sh:description "Nested parts providing prose, statements, guidance, assessment objectives and methods" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 7 ;
-            sh:path nist_sp_800_171:parts ] ;
+            sh:order 5 ;
+            sh:path nist_sp_800_171:props ] ;
     sh:targetClass nist_sp_800_171:Control .
 
 nist_sp_800_171:ControlGroup a sh:NodeShape ;
     rdfs:comment "A family group of security requirements" ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
-    sh:property [ sh:description "Classification of a catalog element (e.g. family, requirement, security_requirement)" ;
+    sh:property [ sh:class nist_sp_800_171:Link ;
+            sh:description "List of links and relationships" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path nist_sp_800_171:links ],
+        [ sh:description "Classification of a catalog element (e.g. family, requirement, security_requirement)" ;
             sh:in ( "family" "requirement" ) ;
             sh:maxCount 1 ;
             sh:order 2 ;
@@ -140,17 +145,6 @@ nist_sp_800_171:ControlGroup a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 3 ;
             sh:path nist_sp_800_171:label ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable title" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path nist_sp_800_171:title ],
-        [ sh:class nist_sp_800_171:Control ;
-            sh:description "List of security requirements in a family group" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 0 ;
-            sh:path nist_sp_800_171:controls ],
         [ sh:class nist_sp_800_171:Property ;
             sh:description "List of properties" ;
             sh:nodeKind sh:BlankNodeOrIRI ;
@@ -162,16 +156,22 @@ nist_sp_800_171:ControlGroup a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 4 ;
             sh:path nist_sp_800_171:id ],
+        [ sh:datatype xsd:string ;
+            sh:description "Human-readable title" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_171:title ],
         [ sh:class nist_sp_800_171:Part ;
             sh:description "Nested parts providing prose, statements, guidance, assessment objectives and methods" ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 7 ;
             sh:path nist_sp_800_171:parts ],
-        [ sh:class nist_sp_800_171:Link ;
-            sh:description "List of links and relationships" ;
+        [ sh:class nist_sp_800_171:Control ;
+            sh:description "List of security requirements in a family group" ;
             sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 6 ;
-            sh:path nist_sp_800_171:links ] ;
+            sh:order 0 ;
+            sh:path nist_sp_800_171:controls ] ;
     sh:targetClass nist_sp_800_171:ControlGroup .
 
 nist_sp_800_171:Guideline a sh:NodeShape ;
@@ -196,29 +196,29 @@ nist_sp_800_171:Parameter a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
             sh:path nist_sp_800_171:usage ],
+        [ sh:class nist_sp_800_171:Guideline ;
+            sh:description "List of guidelines for a parameter" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 1 ;
+            sh:path nist_sp_800_171:guidelines ],
         [ sh:class linkml:Any ;
             sh:description "Selection constraints for an organization-defined parameter" ;
             sh:maxCount 1 ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 2 ;
             sh:path nist_sp_800_171:select ],
-        [ sh:class nist_sp_800_171:Part ;
-            sh:description "Nested parts providing prose, statements, guidance, assessment objectives and methods" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 9 ;
-            sh:path nist_sp_800_171:parts ],
-        [ sh:datatype xsd:string ;
-            sh:description "Unique identifier for an element" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 6 ;
-            sh:path nist_sp_800_171:id ],
         [ sh:datatype xsd:string ;
             sh:description "Human-readable title" ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 3 ;
             sh:path nist_sp_800_171:title ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for an element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 6 ;
+            sh:path nist_sp_800_171:id ],
         [ sh:description "Classification of a catalog element (e.g. family, requirement, security_requirement)" ;
             sh:in ( "family" "requirement" ) ;
             sh:maxCount 1 ;
@@ -230,11 +230,11 @@ nist_sp_800_171:Parameter a sh:NodeShape ;
             sh:nodeKind sh:Literal ;
             sh:order 5 ;
             sh:path nist_sp_800_171:label ],
-        [ sh:class nist_sp_800_171:Guideline ;
-            sh:description "List of guidelines for a parameter" ;
+        [ sh:class nist_sp_800_171:Part ;
+            sh:description "Nested parts providing prose, statements, guidance, assessment objectives and methods" ;
             sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 1 ;
-            sh:path nist_sp_800_171:guidelines ],
+            sh:order 9 ;
+            sh:path nist_sp_800_171:parts ],
         [ sh:class nist_sp_800_171:Link ;
             sh:description "List of links and relationships" ;
             sh:nodeKind sh:BlankNodeOrIRI ;
@@ -252,17 +252,17 @@ nist_sp_800_171:Role a sh:NodeShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "Unique identifier for an element" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_sp_800_171:id ],
-        [ sh:datatype xsd:string ;
             sh:description "Human-readable title" ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 1 ;
-            sh:path nist_sp_800_171:title ] ;
+            sh:path nist_sp_800_171:title ],
+        [ sh:datatype xsd:string ;
+            sh:description "Unique identifier for an element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_171:id ] ;
     sh:targetClass nist_sp_800_171:Role .
 
 nist_sp_800_171:Part a sh:NodeShape ;
@@ -270,27 +270,11 @@ nist_sp_800_171:Part a sh:NodeShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "Name of a property, part, or party" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_sp_800_171:name ],
-        [ sh:class nist_sp_800_171:Part ;
-            sh:description "Nested parts providing prose, statements, guidance, assessment objectives and methods" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 6 ;
-            sh:path nist_sp_800_171:parts ],
-        [ sh:datatype xsd:string ;
             sh:description "Free-text prose content" ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 2 ;
             sh:path nist_sp_800_171:prose ],
-        [ sh:description "Classification of a catalog element (e.g. family, requirement, security_requirement)" ;
-            sh:in ( "security_requirement" ) ;
-            sh:maxCount 1 ;
-            sh:order 1 ;
-            sh:path nist_sp_800_171:_class ],
         [ sh:class nist_sp_800_171:Link ;
             sh:description "List of links and relationships" ;
             sh:nodeKind sh:BlankNodeOrIRI ;
@@ -306,7 +290,23 @@ nist_sp_800_171:Part a sh:NodeShape ;
             sh:description "List of properties" ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 4 ;
-            sh:path nist_sp_800_171:props ] ;
+            sh:path nist_sp_800_171:props ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of a property, part, or party" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_171:name ],
+        [ sh:class nist_sp_800_171:Part ;
+            sh:description "Nested parts providing prose, statements, guidance, assessment objectives and methods" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path nist_sp_800_171:parts ],
+        [ sh:description "Classification of a catalog element (e.g. family, requirement, security_requirement)" ;
+            sh:in ( "security_requirement" ) ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path nist_sp_800_171:_class ] ;
     sh:targetClass nist_sp_800_171:Part .
 
 nist_sp_800_171:Link a sh:NodeShape ;
@@ -314,17 +314,17 @@ nist_sp_800_171:Link a sh:NodeShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
-            sh:description "Relationship type for a link" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path nist_sp_800_171:rel ],
-        [ sh:datatype xsd:string ;
             sh:description "Link or resource reference" ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
-            sh:path nist_sp_800_171:href ] ;
+            sh:path nist_sp_800_171:href ],
+        [ sh:datatype xsd:string ;
+            sh:description "Relationship type for a link" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_171:rel ] ;
     sh:targetClass nist_sp_800_171:Link .
 
 nist_sp_800_171:Property a sh:NodeShape ;
@@ -332,6 +332,12 @@ nist_sp_800_171:Property a sh:NodeShape ;
     sh:closed true ;
     sh:ignoredProperties ( rdf:type ) ;
     sh:property [ sh:datatype xsd:string ;
+            sh:description "Namespace URI for a property" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_sp_800_171:ns ],
+        [ sh:datatype xsd:string ;
             sh:description "Property value" ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
@@ -348,13 +354,7 @@ nist_sp_800_171:Property a sh:NodeShape ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
-            sh:path nist_sp_800_171:name ],
-        [ sh:datatype xsd:string ;
-            sh:description "Namespace URI for a property" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path nist_sp_800_171:ns ] ;
+            sh:path nist_sp_800_171:name ] ;
     sh:targetClass nist_sp_800_171:Property .
 
 linkml:Any a sh:NodeShape ;
@@ -381,52 +381,11 @@ linkml:Any a sh:NodeShape ;
         ( rdf:type ),
         ( rdf:type ),
         ( rdf:type ) ;
-    sh:property [ sh:datatype xsd:string ;
-            sh:description "Party email addresses" ;
-            sh:nodeKind sh:Literal ;
-            sh:order 4 ;
-            sh:path nist_sp_800_171:email_addresses ],
-        [ sh:datatype xsd:string ;
-            sh:description "Postal code" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path nist_sp_800_171:postal_code ],
-        [ sh:datatype xsd:string ;
-            sh:description "UUID for catalog, metadata, or resource element" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_sp_800_171:uuid ],
-        [ sh:datatype xsd:string ;
-            sh:description "UUID for catalog, metadata, or resource element" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_sp_800_171:uuid ],
-        [ sh:datatype xsd:string ;
-            sh:description "Name of a property, part, or party" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path nist_sp_800_171:name ],
-        [ sh:class linkml:Any ;
-            sh:description "Postal addresses" ;
+    sh:property [ sh:class nist_sp_800_171:ControlGroup ;
+            sh:description "List of requirement family groups in the catalog" ;
             sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 5 ;
-            sh:path nist_sp_800_171:addresses ],
-        [ sh:datatype xsd:string ;
-            sh:description "Citation text" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_sp_800_171:text ],
-        [ sh:datatype xsd:string ;
-            sh:description "State or region" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
             sh:order 2 ;
-            sh:path nist_sp_800_171:state ],
+            sh:path nist_sp_800_171:groups ],
         [ sh:datatype xsd:string ;
             sh:description "Human-readable title" ;
             sh:maxCount 1 ;
@@ -434,17 +393,60 @@ linkml:Any a sh:NodeShape ;
             sh:order 0 ;
             sh:path nist_sp_800_171:title ],
         [ sh:datatype xsd:string ;
-            sh:description "Party type" ;
+            sh:description "Human-readable title" ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 1 ;
-            sh:path nist_sp_800_171:type ],
+            sh:path nist_sp_800_171:title ],
+        [ sh:class linkml:Any ;
+            sh:description "Postal addresses" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 5 ;
+            sh:path nist_sp_800_171:addresses ],
         [ sh:datatype xsd:string ;
-            sh:description "Media type for a resource link" ;
+            sh:description "Short display name" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path nist_sp_800_171:short_name ],
+        [ sh:datatype xsd:string ;
+            sh:description "Name of a property, part, or party" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_sp_800_171:name ],
+        [ sh:class linkml:Any ;
+            sh:description "Responsible party assignments" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 9 ;
+            sh:path nist_sp_800_171:responsible_parties ],
+        [ sh:datatype xsd:string ;
+            sh:description "Postal code" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 3 ;
+            sh:path nist_sp_800_171:postal_code ],
+        [ sh:datatype xsd:string ;
+            sh:description "Publication timestamp" ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 1 ;
-            sh:path nist_sp_800_171:media_type ],
+            sh:path nist_sp_800_171:published ],
+        [ sh:datatype xsd:string ;
+            sh:description "Address lines" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_171:addr_lines ],
+        [ sh:datatype xsd:string ;
+            sh:description "List of allowed values for a parameter selection" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_171:choice ],
+        [ sh:class nist_sp_800_171:Link ;
+            sh:description "List of links and relationships" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 6 ;
+            sh:path nist_sp_800_171:links ],
         [ sh:datatype xsd:string ;
             sh:description "Version identifier" ;
             sh:maxCount 1 ;
@@ -452,38 +454,11 @@ linkml:Any a sh:NodeShape ;
             sh:order 3 ;
             sh:path nist_sp_800_171:version ],
         [ sh:class linkml:Any ;
-            sh:description "Root catalog payload" ;
+            sh:description "Catalog metadata" ;
             sh:maxCount 1 ;
             sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 0 ;
-            sh:path nist_sp_800_171:catalog ],
-        [ sh:class linkml:Any ;
-            sh:description "Citation details for a resource" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 3 ;
-            sh:path nist_sp_800_171:citation ],
-        [ sh:datatype xsd:string ;
-            sh:description "Referenced party UUIDs" ;
-            sh:nodeKind sh:Literal ;
             sh:order 1 ;
-            sh:path nist_sp_800_171:party_uuids ],
-        [ sh:class nist_sp_800_171:ControlGroup ;
-            sh:description "List of requirement family groups in the catalog" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 2 ;
-            sh:path nist_sp_800_171:groups ],
-        [ sh:datatype xsd:string ;
-            sh:description "List of allowed values for a parameter selection" ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path nist_sp_800_171:choice ],
-        [ sh:datatype xsd:string ;
-            sh:description "Resource description" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path nist_sp_800_171:description ],
+            sh:path nist_sp_800_171:metadata ],
         [ sh:class linkml:Any ;
             sh:description "Back-matter resources" ;
             sh:nodeKind sh:BlankNodeOrIRI ;
@@ -495,89 +470,47 @@ linkml:Any a sh:NodeShape ;
             sh:order 5 ;
             sh:path nist_sp_800_171:props ],
         [ sh:datatype xsd:string ;
-            sh:description "Address lines" ;
+            sh:description "Resource description" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_sp_800_171:description ],
+        [ sh:datatype xsd:string ;
+            sh:description "State or region" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_sp_800_171:state ],
+        [ sh:datatype xsd:string ;
+            sh:description "UUID for catalog, metadata, or resource element" ;
+            sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
-            sh:path nist_sp_800_171:addr_lines ],
-        [ sh:datatype xsd:string ;
-            sh:description "Publication timestamp" ;
+            sh:path nist_sp_800_171:uuid ],
+        [ sh:class linkml:Any ;
+            sh:description "Root catalog payload" ;
             sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path nist_sp_800_171:published ],
-        [ sh:datatype xsd:string ;
-            sh:description "Short display name" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 3 ;
-            sh:path nist_sp_800_171:short_name ],
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 0 ;
+            sh:path nist_sp_800_171:catalog ],
         [ sh:datatype xsd:string ;
             sh:description "City name" ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 1 ;
             sh:path nist_sp_800_171:city ],
-        [ sh:datatype xsd:string ;
-            sh:description "Human-readable title" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 1 ;
-            sh:path nist_sp_800_171:title ],
-        [ sh:class linkml:Any ;
-            sh:description "Resource links" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 4 ;
-            sh:path nist_sp_800_171:rlinks ],
-        [ sh:class nist_sp_800_171:Role ;
-            sh:description "Roles used in metadata" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 7 ;
-            sh:path nist_sp_800_171:roles ],
-        [ sh:datatype xsd:string ;
-            sh:description "Last modification timestamp" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 2 ;
-            sh:path nist_sp_800_171:last_modified ],
-        [ sh:class linkml:Any ;
-            sh:description "Catalog metadata" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 1 ;
-            sh:path nist_sp_800_171:metadata ],
-        [ sh:class nist_sp_800_171:Link ;
-            sh:description "List of links and relationships" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 6 ;
-            sh:path nist_sp_800_171:links ],
-        [ sh:datatype xsd:string ;
-            sh:description "OSCAL version identifier" ;
-            sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 4 ;
-            sh:path nist_sp_800_171:oscal_version ],
-        [ sh:description "Cardinality constraint for parameter selection choices" ;
-            sh:in ( "one" "one-or-more" ) ;
-            sh:maxCount 1 ;
-            sh:order 0 ;
-            sh:path nist_sp_800_171:how_many ],
-        [ sh:class linkml:Any ;
-            sh:description "Responsible party assignments" ;
-            sh:nodeKind sh:BlankNodeOrIRI ;
-            sh:order 9 ;
-            sh:path nist_sp_800_171:responsible_parties ],
         [ sh:class linkml:Any ;
             sh:description "Back-matter references and resources" ;
             sh:maxCount 1 ;
             sh:nodeKind sh:BlankNodeOrIRI ;
             sh:order 3 ;
             sh:path nist_sp_800_171:back_matter ],
-        [ sh:datatype xsd:string ;
-            sh:description "Link or resource reference" ;
+        [ sh:class linkml:Any ;
+            sh:description "Citation details for a resource" ;
             sh:maxCount 1 ;
-            sh:nodeKind sh:Literal ;
-            sh:order 0 ;
-            sh:path nist_sp_800_171:href ],
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 3 ;
+            sh:path nist_sp_800_171:citation ],
         [ sh:class linkml:Any ;
             sh:description "Parties used in metadata" ;
             sh:nodeKind sh:BlankNodeOrIRI ;
@@ -590,10 +523,77 @@ linkml:Any a sh:NodeShape ;
             sh:order 0 ;
             sh:path nist_sp_800_171:uuid ],
         [ sh:datatype xsd:string ;
+            sh:description "UUID for catalog, metadata, or resource element" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_171:uuid ],
+        [ sh:datatype xsd:string ;
+            sh:description "Media type for a resource link" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_171:media_type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Party type" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_171:type ],
+        [ sh:datatype xsd:string ;
+            sh:description "Referenced party UUIDs" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 1 ;
+            sh:path nist_sp_800_171:party_uuids ],
+        [ sh:datatype xsd:string ;
+            sh:description "OSCAL version identifier" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path nist_sp_800_171:oscal_version ],
+        [ sh:description "Cardinality constraint for parameter selection choices" ;
+            sh:in ( "one" "one-or-more" ) ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path nist_sp_800_171:how_many ],
+        [ sh:datatype xsd:string ;
             sh:description "Assigned role identifier" ;
             sh:maxCount 1 ;
             sh:nodeKind sh:Literal ;
             sh:order 0 ;
-            sh:path nist_sp_800_171:role_id ] ;
+            sh:path nist_sp_800_171:role_id ],
+        [ sh:datatype xsd:string ;
+            sh:description "Link or resource reference" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_171:href ],
+        [ sh:datatype xsd:string ;
+            sh:description "Last modification timestamp" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 2 ;
+            sh:path nist_sp_800_171:last_modified ],
+        [ sh:datatype xsd:string ;
+            sh:description "Party email addresses" ;
+            sh:nodeKind sh:Literal ;
+            sh:order 4 ;
+            sh:path nist_sp_800_171:email_addresses ],
+        [ sh:datatype xsd:string ;
+            sh:description "Citation text" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:Literal ;
+            sh:order 0 ;
+            sh:path nist_sp_800_171:text ],
+        [ sh:class linkml:Any ;
+            sh:description "Resource links" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 4 ;
+            sh:path nist_sp_800_171:rlinks ],
+        [ sh:class nist_sp_800_171:Role ;
+            sh:description "Roles used in metadata" ;
+            sh:nodeKind sh:BlankNodeOrIRI ;
+            sh:order 7 ;
+            sh:path nist_sp_800_171:roles ] ;
     sh:targetClass linkml:Any .
 
