@@ -513,38 +513,38 @@ Alias: links</p>
 </thead>
 <tbody>
 <tr>
-<td><a href="../ControlGroup/">ControlGroup</a></td>
-<td>A family group of security requirements</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Control/">Control</a></td>
-<td>A security requirement</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Metadata/">Metadata</a></td>
-<td>OSCAL metadata section</td>
+<td><a href="../CatalogElement/">CatalogElement</a></td>
+<td>Abstract base class for identifiable catalog elements</td>
 <td>no</td>
 </tr>
 <tr>
 <td><a href="../IdentifiedElement/">IdentifiedElement</a></td>
-<td>A catalog element with required id, title, and optional class/label</td>
+<td>A catalog element with title, optional class/label, and inherited id/props/li...</td>
 <td>no</td>
 </tr>
 <tr>
 <td><a href="../Parameter/">Parameter</a></td>
-<td>An organization-defined parameter for a security requirement</td>
+<td>A configurable or organization-defined parameter</td>
 <td>no</td>
 </tr>
 <tr>
-<td><a href="../CatalogElement/">CatalogElement</a></td>
-<td>Base class for catalog elements with id, props, links, and parts</td>
+<td><a href="../ControlGroup/">ControlGroup</a></td>
+<td>A top-level control or requirement family group</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Control/">Control</a></td>
+<td>A control, requirement, or practice</td>
 <td>no</td>
 </tr>
 <tr>
 <td><a href="../Part/">Part</a></td>
 <td>Structured narrative part containing prose and optional nested parts</td>
+<td>no</td>
+</tr>
+<tr>
+<td><a href="../Metadata/">Metadata</a></td>
+<td>OSCAL metadata section</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -586,7 +586,7 @@ Alias: links</p>
 </table>
 <h2 id="in-subsets">In Subsets</h2>
 <ul>
-<li><a href="../NistSp800171r3Catalog/">NistSp800171r3Catalog</a></li>
+<li><a href="../OscalCatalogCommon/">OscalCatalogCommon</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -617,7 +617,7 @@ Alias: links</p>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">links</span>
 <span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">List of links and relationships</span>
 <span class="nt">in_subset</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nist_sp_800_171r3_catalog</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oscal_catalog_common</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/lmodel/nist-sp-800-171</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">links</span>
