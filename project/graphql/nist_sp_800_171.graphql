@@ -1,0 +1,167 @@
+# metamodel_version: 1.7.0
+# version: 3.0.0
+enum AssessmentMethodValue
+  {
+    EXAMINE
+    INTERVIEW
+    TEST
+  }
+
+enum CatalogElementClassValue
+  {
+    family
+    requirement
+  }
+
+enum PartClassValue
+  {
+    security_requirement
+  }
+
+scalar Address
+    addr-lines: [String]
+    city: String
+    state: String
+    postal-code: String
+
+scalar BackMatter
+    resources: [Resource]
+
+scalar CatalogBody
+    uuid: String
+    metadata: Metadata
+    groups: [ControlGroup]
+    back-matter: BackMatter
+
+interface CatalogElement
+  {
+    id: String
+    props: [Property]
+    links: [Link]
+    parts: [Part]
+  }
+
+scalar Citation
+    text: String
+
+type Control
+  {
+    id: String
+    props: [Property]
+    links: [Link]
+    parts: [Part]
+    title: String
+    class: CatalogElementClassValue
+    label: String
+    params: [Parameter]
+  }
+
+type ControlGroup
+  {
+    id: String
+    props: [Property]
+    links: [Link]
+    parts: [Part]
+    title: String
+    class: CatalogElementClassValue
+    label: String
+    controls: [Control]
+  }
+
+type Guideline
+  {
+    prose: String
+  }
+
+type IdentifiedElement
+  {
+    id: String
+    props: [Property]
+    links: [Link]
+    parts: [Part]
+    title: String
+    class: CatalogElementClassValue
+    label: String
+  }
+
+type Link
+  {
+    href: String
+    rel: String
+  }
+
+scalar Metadata
+    title: String
+    published: String
+    last-modified: String
+    version: String
+    oscal-version: String
+    props: [Property]
+    links: [Link]
+    roles: [Role]
+    parties: [Party]
+    responsible-parties: [ResponsibleParty]
+
+type Parameter
+  {
+    id: String
+    props: [Property]
+    links: [Link]
+    parts: [Part]
+    title: String
+    class: CatalogElementClassValue
+    label: String
+    usage: String
+    guidelines: [Guideline]
+  }
+
+type Part
+  {
+    id: String
+    props: [Property]
+    links: [Link]
+    parts: [Part]
+    name: String
+    class: PartClassValue
+    prose: String
+  }
+
+scalar Party
+    uuid: String
+    type: String
+    name: String
+    short-name: String
+    email-addresses: [String]
+    addresses: [Address]
+
+type Property
+  {
+    name: String
+    value: String
+    ns: String
+    class: String
+  }
+
+scalar Resource
+    uuid: String
+    title: String
+    description: String
+    citation: Citation
+    rlinks: [ResourceLink]
+
+scalar ResourceLink
+    href: String
+    media-type: String
+
+scalar ResponsibleParty
+    role-id: String
+    party-uuids: [String]
+
+type Role
+  {
+    id: String
+    title: String
+  }
+
+scalar SP800171Document
+    catalog: CatalogBody

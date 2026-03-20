@@ -1,0 +1,943 @@
+{
+    "$defs": {
+        "Address": {
+            "additionalProperties": true,
+            "description": "Postal address",
+            "properties": {
+                "addr_lines": {
+                    "description": "Address lines",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "city": {
+                    "description": "City name",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "postal_code": {
+                    "description": "Postal code",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "state": {
+                    "description": "State or region",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Address",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "AssessmentMethodValue": {
+            "description": "Allowed values for assessment method property values",
+            "enum": [
+                "EXAMINE",
+                "INTERVIEW",
+                "TEST"
+            ],
+            "title": "AssessmentMethodValue",
+            "type": "string"
+        },
+        "BackMatter": {
+            "additionalProperties": true,
+            "description": "OSCAL back-matter section",
+            "properties": {
+                "resources": {
+                    "description": "Back-matter resources",
+                    "items": {
+                        "$ref": "#/$defs/Resource"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                }
+            },
+            "title": "BackMatter",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "CatalogBody": {
+            "additionalProperties": true,
+            "description": "Main catalog object",
+            "properties": {
+                "back_matter": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/BackMatter"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Back-matter references and resources"
+                },
+                "groups": {
+                    "description": "List of requirement family groups in the catalog",
+                    "items": {
+                        "$ref": "#/$defs/ControlGroup"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "metadata": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Metadata"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Catalog metadata"
+                },
+                "uuid": {
+                    "description": "UUID for catalog, metadata, or resource element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "CatalogBody",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "CatalogElementClassValue": {
+            "description": "Allowed values for group and control class attributes",
+            "enum": [
+                "family",
+                "requirement"
+            ],
+            "title": "CatalogElementClassValue",
+            "type": "string"
+        },
+        "Citation": {
+            "additionalProperties": true,
+            "description": "Citation wrapper",
+            "properties": {
+                "text": {
+                    "description": "Citation text",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Citation",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "Control": {
+            "additionalProperties": false,
+            "description": "A security requirement",
+            "properties": {
+                "_class": {
+                    "$ref": "#/$defs/CatalogElementClassValue",
+                    "description": "Classification of a catalog element (e.g. family, requirement, security_requirement)"
+                },
+                "id": {
+                    "description": "Unique identifier for an element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "description": "Human-readable label",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "links": {
+                    "description": "List of links and relationships",
+                    "items": {
+                        "$ref": "#/$defs/Link"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "params": {
+                    "description": "List of organization-defined parameters for a requirement",
+                    "items": {
+                        "$ref": "#/$defs/Parameter"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "parts": {
+                    "description": "Nested parts providing prose, statements, guidance, assessment objectives and methods",
+                    "items": {
+                        "$ref": "#/$defs/Part"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "props": {
+                    "description": "List of properties",
+                    "items": {
+                        "$ref": "#/$defs/Property"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "description": "Human-readable title",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Control",
+            "type": "object"
+        },
+        "ControlGroup": {
+            "additionalProperties": false,
+            "description": "A family group of security requirements",
+            "properties": {
+                "_class": {
+                    "$ref": "#/$defs/CatalogElementClassValue",
+                    "description": "Classification of a catalog element (e.g. family, requirement, security_requirement)"
+                },
+                "controls": {
+                    "description": "List of security requirements in a family group",
+                    "items": {
+                        "$ref": "#/$defs/Control"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Unique identifier for an element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "description": "Human-readable label",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "links": {
+                    "description": "List of links and relationships",
+                    "items": {
+                        "$ref": "#/$defs/Link"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "parts": {
+                    "description": "Nested parts providing prose, statements, guidance, assessment objectives and methods",
+                    "items": {
+                        "$ref": "#/$defs/Part"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "props": {
+                    "description": "List of properties",
+                    "items": {
+                        "$ref": "#/$defs/Property"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "description": "Human-readable title",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ControlGroup",
+            "type": "object"
+        },
+        "Guideline": {
+            "additionalProperties": false,
+            "description": "Additional prose guidance associated with a parameter",
+            "properties": {
+                "prose": {
+                    "description": "Free-text prose content",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Guideline",
+            "type": "object"
+        },
+        "IdentifiedElement": {
+            "additionalProperties": false,
+            "description": "A catalog element with required id, title, and optional class/label",
+            "properties": {
+                "_class": {
+                    "$ref": "#/$defs/CatalogElementClassValue",
+                    "description": "Classification of a catalog element (e.g. family, requirement, security_requirement)"
+                },
+                "id": {
+                    "description": "Unique identifier for an element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "description": "Human-readable label",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "links": {
+                    "description": "List of links and relationships",
+                    "items": {
+                        "$ref": "#/$defs/Link"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "parts": {
+                    "description": "Nested parts providing prose, statements, guidance, assessment objectives and methods",
+                    "items": {
+                        "$ref": "#/$defs/Part"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "props": {
+                    "description": "List of properties",
+                    "items": {
+                        "$ref": "#/$defs/Property"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "description": "Human-readable title",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "IdentifiedElement",
+            "type": "object"
+        },
+        "Link": {
+            "additionalProperties": false,
+            "description": "Relationship link",
+            "properties": {
+                "href": {
+                    "description": "Link or resource reference",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "rel": {
+                    "description": "Relationship type for a link",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Link",
+            "type": "object"
+        },
+        "Metadata": {
+            "additionalProperties": true,
+            "description": "OSCAL metadata section",
+            "properties": {
+                "last_modified": {
+                    "description": "Last modification timestamp",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "links": {
+                    "description": "List of links and relationships",
+                    "items": {
+                        "$ref": "#/$defs/Link"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "oscal_version": {
+                    "description": "OSCAL version identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "parties": {
+                    "description": "Parties used in metadata",
+                    "items": {
+                        "$ref": "#/$defs/Party"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "props": {
+                    "description": "List of properties",
+                    "items": {
+                        "$ref": "#/$defs/Property"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "published": {
+                    "description": "Publication timestamp",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "responsible_parties": {
+                    "description": "Responsible party assignments",
+                    "items": {
+                        "$ref": "#/$defs/ResponsibleParty"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "roles": {
+                    "description": "Roles used in metadata",
+                    "items": {
+                        "$ref": "#/$defs/Role"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "description": "Human-readable title",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "version": {
+                    "description": "Version identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Metadata",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "Parameter": {
+            "additionalProperties": false,
+            "description": "An organization-defined parameter for a security requirement",
+            "properties": {
+                "_class": {
+                    "$ref": "#/$defs/CatalogElementClassValue",
+                    "description": "Classification of a catalog element (e.g. family, requirement, security_requirement)"
+                },
+                "guidelines": {
+                    "description": "List of guidelines for a parameter",
+                    "items": {
+                        "$ref": "#/$defs/Guideline"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "id": {
+                    "description": "Unique identifier for an element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "label": {
+                    "description": "Human-readable label",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "links": {
+                    "description": "List of links and relationships",
+                    "items": {
+                        "$ref": "#/$defs/Link"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "parts": {
+                    "description": "Nested parts providing prose, statements, guidance, assessment objectives and methods",
+                    "items": {
+                        "$ref": "#/$defs/Part"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "props": {
+                    "description": "List of properties",
+                    "items": {
+                        "$ref": "#/$defs/Property"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "description": "Human-readable title",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "usage": {
+                    "description": "Human-readable description of an organization-defined parameter's expected value",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Parameter",
+            "type": "object"
+        },
+        "Part": {
+            "additionalProperties": false,
+            "description": "Structured narrative part containing prose and optional nested parts. Used for statements, guidance, assessment-objectives, and assessment-methods.",
+            "properties": {
+                "_class": {
+                    "$ref": "#/$defs/PartClassValue",
+                    "description": "Classification of a catalog element (e.g. family, requirement, security_requirement)"
+                },
+                "id": {
+                    "description": "Unique identifier for an element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "links": {
+                    "description": "List of links and relationships",
+                    "items": {
+                        "$ref": "#/$defs/Link"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name of a property, part, or party",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "parts": {
+                    "description": "Nested parts providing prose, statements, guidance, assessment objectives and methods",
+                    "items": {
+                        "$ref": "#/$defs/Part"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "props": {
+                    "description": "List of properties",
+                    "items": {
+                        "$ref": "#/$defs/Property"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "prose": {
+                    "description": "Free-text prose content",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Part",
+            "type": "object"
+        },
+        "PartClassValue": {
+            "description": "Allowed values for part class attributes",
+            "enum": [
+                "security_requirement"
+            ],
+            "title": "PartClassValue",
+            "type": "string"
+        },
+        "Party": {
+            "additionalProperties": true,
+            "description": "Party definition",
+            "properties": {
+                "addresses": {
+                    "description": "Postal addresses",
+                    "items": {
+                        "$ref": "#/$defs/Address"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "email_addresses": {
+                    "description": "Party email addresses",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name of a property, part, or party",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "short_name": {
+                    "description": "Short display name",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "type": {
+                    "description": "Party type",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "uuid": {
+                    "description": "UUID for catalog, metadata, or resource element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Party",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "Property": {
+            "additionalProperties": false,
+            "description": "A name-value property with optional namespace",
+            "properties": {
+                "_class": {
+                    "description": "Classification of a catalog element (e.g. family, requirement, security_requirement)",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "name": {
+                    "description": "Name of a property, part, or party",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "ns": {
+                    "description": "Namespace URI for a property",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "value": {
+                    "description": "Property value",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Property",
+            "type": "object"
+        },
+        "Resource": {
+            "additionalProperties": true,
+            "description": "Referenced resource",
+            "properties": {
+                "citation": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Citation"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Citation details for a resource"
+                },
+                "description": {
+                    "description": "Resource description",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "rlinks": {
+                    "description": "Resource links",
+                    "items": {
+                        "$ref": "#/$defs/ResourceLink"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "description": "Human-readable title",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "uuid": {
+                    "description": "UUID for catalog, metadata, or resource element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Resource",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "ResourceLink": {
+            "additionalProperties": true,
+            "description": "Reference link for a resource",
+            "properties": {
+                "href": {
+                    "description": "Link or resource reference",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "media_type": {
+                    "description": "Media type for a resource link",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ResourceLink",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "ResponsibleParty": {
+            "additionalProperties": true,
+            "description": "Assignment of parties to a role",
+            "properties": {
+                "party_uuids": {
+                    "description": "Referenced party UUIDs",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "role_id": {
+                    "description": "Assigned role identifier",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "ResponsibleParty",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        },
+        "Role": {
+            "additionalProperties": false,
+            "description": "Role definition",
+            "properties": {
+                "id": {
+                    "description": "Unique identifier for an element",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "description": "Human-readable title",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                }
+            },
+            "title": "Role",
+            "type": "object"
+        },
+        "SP800171Document": {
+            "additionalProperties": true,
+            "description": "Root wrapper for SP 800-171 catalog content",
+            "properties": {
+                "catalog": {
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/CatalogBody"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
+                    "description": "Root catalog payload"
+                }
+            },
+            "title": "SP800171Document",
+            "type": [
+                "null",
+                "boolean",
+                "object",
+                "number",
+                "string"
+            ]
+        }
+    },
+    "$id": "https://w3id.org/lmodel/nist-sp-800-171",
+    "$schema": "https://json-schema.org/draft/2019-09/schema",
+    "additionalProperties": true,
+    "description": "Root wrapper for SP 800-171 catalog content",
+    "metamodel_version": "1.7.0",
+    "properties": {
+        "catalog": {
+            "anyOf": [
+                {
+                    "$ref": "#/$defs/CatalogBody"
+                },
+                {
+                    "type": "null"
+                }
+            ],
+            "description": "Root catalog payload"
+        }
+    },
+    "title": "NIST-SP-800-171",
+    "type": "object",
+    "version": "3.0.0"
+}
