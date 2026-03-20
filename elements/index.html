@@ -569,27 +569,27 @@
 </tr>
 <tr>
 <td><a href="CatalogBody/">CatalogBody</a></td>
-<td>Main catalog object (uuid + metadata + groups + back-matter)</td>
+<td>Main catalog object</td>
 </tr>
 <tr>
 <td><a href="CatalogElement/">CatalogElement</a></td>
-<td>Abstract base class for identifiable catalog elements</td>
+<td>Base class for catalog elements with id, props, links, and parts</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="IdentifiedElement/">IdentifiedElement</a></td>
-<td>A catalog element with title, optional class/label, and inherited id/props/li...</td>
+<td>A catalog element with required id, title, and optional class/label</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Control/">Control</a></td>
-<td>A control, requirement, or practice</td>
+<td>A security requirement</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="ControlGroup/">ControlGroup</a></td>
-<td>A top-level control or requirement family group</td>
+<td>A family group of security requirements</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Parameter/">Parameter</a></td>
-<td>A configurable or organization-defined parameter</td>
+<td>An organization-defined parameter for a security requirement</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Part/">Part</a></td>
@@ -605,23 +605,27 @@
 </tr>
 <tr>
 <td><a href="Link/">Link</a></td>
-<td>Relationship link with href and optional rel/text attributes</td>
+<td>Relationship link</td>
 </tr>
 <tr>
 <td><a href="Metadata/">Metadata</a></td>
 <td>OSCAL metadata section</td>
 </tr>
 <tr>
+<td><a href="ParameterSelection/">ParameterSelection</a></td>
+<td>Selection constraints specifying allowed values for a parameter</td>
+</tr>
+<tr>
 <td><a href="Party/">Party</a></td>
-<td>Party definition (person or organization)</td>
+<td>Party definition</td>
 </tr>
 <tr>
 <td><a href="Property/">Property</a></td>
-<td>A name-value property with optional namespace and class</td>
+<td>A name-value property with optional namespace</td>
 </tr>
 <tr>
 <td><a href="Resource/">Resource</a></td>
-<td>Referenced resource in back-matter</td>
+<td>Referenced resource</td>
 </tr>
 <tr>
 <td><a href="ResourceLink/">ResourceLink</a></td>
@@ -652,7 +656,7 @@
 <tbody>
 <tr>
 <td><a href="_class/">_class</a></td>
-<td>Classification of a catalog element</td>
+<td>Classification of a catalog element (e</td>
 </tr>
 <tr>
 <td><a href="addr_lines/">addr_lines</a></td>
@@ -671,6 +675,10 @@
 <td>Root catalog payload</td>
 </tr>
 <tr>
+<td><a href="choice/">choice</a></td>
+<td>List of allowed values for a parameter selection</td>
+</tr>
+<tr>
 <td><a href="citation/">citation</a></td>
 <td>Citation details for a resource</td>
 </tr>
@@ -680,11 +688,11 @@
 </tr>
 <tr>
 <td><a href="controls/">controls</a></td>
-<td>List of controls, requirements, or practices in a group</td>
+<td>List of security requirements in a family group</td>
 </tr>
 <tr>
 <td><a href="description/">description</a></td>
-<td>Resource or element description</td>
+<td>Resource description</td>
 </tr>
 <tr>
 <td><a href="email_addresses/">email_addresses</a></td>
@@ -692,15 +700,19 @@
 </tr>
 <tr>
 <td><a href="groups/">groups</a></td>
-<td>List of top-level groupings in the catalog</td>
+<td>List of requirement family groups in the catalog</td>
 </tr>
 <tr>
 <td><a href="guidelines/">guidelines</a></td>
 <td>List of guidelines for a parameter</td>
 </tr>
 <tr>
+<td><a href="how_many/">how_many</a></td>
+<td>Cardinality constraint for parameter selection choices</td>
+</tr>
+<tr>
 <td><a href="href/">href</a></td>
-<td>Link or resource reference URI</td>
+<td>Link or resource reference</td>
 </tr>
 <tr>
 <td><a href="id/">id</a></td>
@@ -728,11 +740,11 @@
 </tr>
 <tr>
 <td><a href="name/">name</a></td>
-<td>Name of a property or part</td>
+<td>Name of a property, part, or party</td>
 </tr>
 <tr>
 <td><a href="ns/">ns</a></td>
-<td>Namespace URI for a property or part</td>
+<td>Namespace URI for a property</td>
 </tr>
 <tr>
 <td><a href="oscal_version/">oscal_version</a></td>
@@ -740,7 +752,7 @@
 </tr>
 <tr>
 <td><a href="params/">params</a></td>
-<td>List of parameters for a control or requirement</td>
+<td>List of organization-defined parameters for a requirement</td>
 </tr>
 <tr>
 <td><a href="parties/">parties</a></td>
@@ -748,7 +760,7 @@
 </tr>
 <tr>
 <td><a href="parts/">parts</a></td>
-<td>Nested parts providing prose and structure</td>
+<td>Nested parts providing prose, statements, guidance, assessment objectives and...</td>
 </tr>
 <tr>
 <td><a href="party_uuids/">party_uuids</a></td>
@@ -799,6 +811,10 @@
 <td>Roles used in metadata</td>
 </tr>
 <tr>
+<td><a href="select/">select</a></td>
+<td>Selection constraints for an organization-defined parameter</td>
+</tr>
+<tr>
 <td><a href="short_name/">short_name</a></td>
 <td>Short display name</td>
 </tr>
@@ -808,7 +824,7 @@
 </tr>
 <tr>
 <td><a href="text/">text</a></td>
-<td>Citation or link annotation text</td>
+<td>Citation text</td>
 </tr>
 <tr>
 <td><a href="title/">title</a></td>
@@ -816,15 +832,15 @@
 </tr>
 <tr>
 <td><a href="type/">type</a></td>
-<td>Party type (e</td>
+<td>Party type</td>
 </tr>
 <tr>
 <td><a href="usage/">usage</a></td>
-<td>Human-readable description of a parameter's expected value</td>
+<td>Human-readable description of an organization-defined parameter's expected va...</td>
 </tr>
 <tr>
 <td><a href="uuid/">uuid</a></td>
-<td>UUID for catalog or resource element</td>
+<td>UUID for catalog, metadata, or resource element</td>
 </tr>
 <tr>
 <td><a href="value/">value</a></td>
@@ -852,6 +868,10 @@
 <tr>
 <td><a href="CatalogElementClassValue/">CatalogElementClassValue</a></td>
 <td>Allowed values for group and control class attributes</td>
+</tr>
+<tr>
+<td><a href="HowManyValue/">HowManyValue</a></td>
+<td>Cardinality constraint for parameter selection</td>
 </tr>
 <tr>
 <td><a href="PartClassValue/">PartClassValue</a></td>
@@ -958,10 +978,6 @@
 <tr>
 <td><a href="NistSp800171r3Catalog/">NistSp800171r3Catalog</a></td>
 <td>NIST SP 800-171 Catalog subset for requirements and assessment procedures</td>
-</tr>
-<tr>
-<td><a href="OscalCatalogCommon/">OscalCatalogCommon</a></td>
-<td>Shared OSCAL-derived elements common across all NIST catalog schemas</td>
 </tr>
 </tbody>
 </table>

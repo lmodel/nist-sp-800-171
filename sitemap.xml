@@ -85,6 +85,10 @@
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
+         <loc>https://lmodel.github.io/nist_sp_800_171/elements/HowManyValue/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
          <loc>https://lmodel.github.io/nist_sp_800_171/elements/IdentifiedElement/</loc>
          <lastmod>2026-03-20</lastmod>
     </url>
@@ -129,11 +133,11 @@
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
-         <loc>https://lmodel.github.io/nist_sp_800_171/elements/OscalCatalogCommon/</loc>
+         <loc>https://lmodel.github.io/nist_sp_800_171/elements/Parameter/</loc>
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
-         <loc>https://lmodel.github.io/nist_sp_800_171/elements/Parameter/</loc>
+         <loc>https://lmodel.github.io/nist_sp_800_171/elements/ParameterSelection/</loc>
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
@@ -213,6 +217,10 @@
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
+         <loc>https://lmodel.github.io/nist_sp_800_171/elements/choice/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
          <loc>https://lmodel.github.io/nist_sp_800_171/elements/citation/</loc>
          <lastmod>2026-03-20</lastmod>
     </url>
@@ -238,6 +246,10 @@
     </url>
     <url>
          <loc>https://lmodel.github.io/nist_sp_800_171/elements/guidelines/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
+         <loc>https://lmodel.github.io/nist_sp_800_171/elements/how_many/</loc>
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>
@@ -338,6 +350,10 @@
     </url>
     <url>
          <loc>https://lmodel.github.io/nist_sp_800_171/elements/roles/</loc>
+         <lastmod>2026-03-20</lastmod>
+    </url>
+    <url>
+         <loc>https://lmodel.github.io/nist_sp_800_171/elements/select/</loc>
          <lastmod>2026-03-20</lastmod>
     </url>
     <url>

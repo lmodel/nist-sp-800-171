@@ -497,7 +497,7 @@
 
 
 <h1 id="slot-uuid">Slot: uuid</h1>
-<p><em>UUID for catalog or resource element</em></p>
+<p><em>UUID for catalog, metadata, or resource element</em></p>
 <p>URI: <a href="https://w3id.org/lmodel/nist-sp-800-171/uuid">nist_sp_800_171:uuid</a>
 Alias: uuid</p>
 <!-- no inheritance hierarchy -->
@@ -514,17 +514,17 @@ Alias: uuid</p>
 <tbody>
 <tr>
 <td><a href="../CatalogBody/">CatalogBody</a></td>
-<td>Main catalog object (uuid + metadata + groups + back-matter)</td>
+<td>Main catalog object</td>
 <td>no</td>
 </tr>
 <tr>
 <td><a href="../Resource/">Resource</a></td>
-<td>Referenced resource in back-matter</td>
+<td>Referenced resource</td>
 <td>no</td>
 </tr>
 <tr>
 <td><a href="../Party/">Party</a></td>
-<td>Party definition (person or organization)</td>
+<td>Party definition</td>
 <td>no</td>
 </tr>
 </tbody>
@@ -566,7 +566,7 @@ Alias: uuid</p>
 </table>
 <h2 id="in-subsets">In Subsets</h2>
 <ul>
-<li><a href="../OscalCatalogCommon/">OscalCatalogCommon</a></li>
+<li><a href="../NistSp800171r3Catalog/">NistSp800171r3Catalog</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
@@ -595,9 +595,9 @@ Alias: uuid</p>
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 <div class="highlight"><pre><span></span><code><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uuid</span>
-<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UUID for catalog or resource element</span>
+<span class="nt">description</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">UUID for catalog, metadata, or resource element</span>
 <span class="nt">in_subset</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">oscal_catalog_common</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">nist_sp_800_171r3_catalog</span>
 <span class="nt">from_schema</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">https://w3id.org/lmodel/nist-sp-800-171</span>
 <span class="nt">rank</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1000</span>
 <span class="nt">alias</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">uuid</span>
