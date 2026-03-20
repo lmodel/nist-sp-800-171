@@ -5,8 +5,9 @@
 # https://github.com/casey/just/issues/2540
 
 # Validate a representative catalog document with the catalog schema.
-validate-catalog:
+# https://github.com/usnistgov/oscal-content/tree/main/nist.gov/SP800-171/rev3
+validate-oscal:
         uv run linkml validate \
                 -s src/nist_sp_800_171/schema/nist_sp_800_171.yaml \
-                tests/data/nist/NIST_SP800-171_ver1_catalog.yaml
+                tests/data/nist/NIST_SP800-171_rev3_catalog.yaml
 

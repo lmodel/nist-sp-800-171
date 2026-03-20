@@ -100,6 +100,13 @@ message Parameter
   string label = 0
   string usage = 0
  repeated  guideline guidelines = 0
+  parameterSelection select = 0
+ }
+// Selection constraints specifying allowed values for a parameter
+message ParameterSelection
+ {
+  howManyValue how-many = 0
+ repeated  string choice = 0
  }
 // Structured narrative part containing prose and optional nested parts. Used for statements, guidance, assessment-objectives, and assessment-methods.
 message Part

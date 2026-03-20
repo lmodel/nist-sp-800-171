@@ -13,6 +13,12 @@ enum CatalogElementClassValue
     requirement
   }
 
+enum HowManyValue
+  {
+    one
+    one__HYPHEN_MINUS__or__HYPHEN_MINUS__more
+  }
+
 enum PartClassValue
   {
     security_requirement
@@ -113,7 +119,12 @@ type Parameter
     label: String
     usage: String
     guidelines: [Guideline]
+    select: ParameterSelection
   }
+
+scalar ParameterSelection
+    how-many: HowManyValue
+    choice: [String]
 
 type Part
   {

@@ -58,20 +58,20 @@
 -- # Class: IdentifiedElement Description: A catalog element with required id, title, and optional class/label
 --     * Slot: uid
 --     * Slot: title Description: Human-readable title
---     * Slot: _class Description: Classification of a catalog element (e.g. family, requirement, security_requirement)
+--     * Slot: class Description: Classification of a catalog element (e.g. family, requirement, security_requirement)
 --     * Slot: label Description: Human-readable label
 --     * Slot: id Description: Unique identifier for an element
 -- # Class: ControlGroup Description: A family group of security requirements
 --     * Slot: uid
 --     * Slot: title Description: Human-readable title
---     * Slot: _class Description: Classification of a catalog element (e.g. family, requirement, security_requirement)
+--     * Slot: class Description: Classification of a catalog element (e.g. family, requirement, security_requirement)
 --     * Slot: label Description: Human-readable label
 --     * Slot: id Description: Unique identifier for an element
 --     * Slot: CatalogBody_id Description: Autocreated FK slot
 -- # Class: Control Description: A security requirement
 --     * Slot: uid
 --     * Slot: title Description: Human-readable title
---     * Slot: _class Description: Classification of a catalog element (e.g. family, requirement, security_requirement)
+--     * Slot: class Description: Classification of a catalog element (e.g. family, requirement, security_requirement)
 --     * Slot: label Description: Human-readable label
 --     * Slot: id Description: Unique identifier for an element
 --     * Slot: ControlGroup_uid Description: Autocreated FK slot
@@ -79,10 +79,14 @@
 --     * Slot: uid
 --     * Slot: usage Description: Human-readable description of an organization-defined parameter's expected value
 --     * Slot: title Description: Human-readable title
---     * Slot: _class Description: Classification of a catalog element (e.g. family, requirement, security_requirement)
+--     * Slot: class Description: Classification of a catalog element (e.g. family, requirement, security_requirement)
 --     * Slot: label Description: Human-readable label
 --     * Slot: id Description: Unique identifier for an element
 --     * Slot: Control_uid Description: Autocreated FK slot
+--     * Slot: select_id Description: Selection constraints for an organization-defined parameter
+-- # Class: ParameterSelection Description: Selection constraints specifying allowed values for a parameter
+--     * Slot: id
+--     * Slot: how_many Description: Cardinality constraint for parameter selection choices
 -- # Class: Guideline Description: Additional prose guidance associated with a parameter
 --     * Slot: id
 --     * Slot: prose Description: Free-text prose content
@@ -92,7 +96,7 @@
 --     * Slot: name Description: Name of a property, part, or party
 --     * Slot: value Description: Property value
 --     * Slot: ns Description: Namespace URI for a property
---     * Slot: _class Description: Classification of a catalog element (e.g. family, requirement, security_requirement)
+--     * Slot: class Description: Classification of a catalog element (e.g. family, requirement, security_requirement)
 --     * Slot: Metadata_id Description: Autocreated FK slot
 --     * Slot: CatalogElement_uid Description: Autocreated FK slot
 --     * Slot: IdentifiedElement_uid Description: Autocreated FK slot
@@ -114,7 +118,7 @@
 -- # Class: Part Description: Structured narrative part containing prose and optional nested parts. Used for statements, guidance, assessment-objectives, and assessment-methods.
 --     * Slot: uid
 --     * Slot: name Description: Name of a property, part, or party
---     * Slot: _class Description: Classification of a catalog element (e.g. family, requirement, security_requirement)
+--     * Slot: class Description: Classification of a catalog element (e.g. family, requirement, security_requirement)
 --     * Slot: prose Description: Free-text prose content
 --     * Slot: id Description: Unique identifier for an element
 --     * Slot: CatalogElement_uid Description: Autocreated FK slot
@@ -132,6 +136,9 @@
 -- # Class: ResponsibleParty_party_uuids
 --     * Slot: ResponsibleParty_id Description: Autocreated FK slot
 --     * Slot: party_uuids Description: Referenced party UUIDs
+-- # Class: ParameterSelection_choice
+--     * Slot: ParameterSelection_id Description: Autocreated FK slot
+--     * Slot: choice Description: List of allowed values for a parameter selection
 
 CREATE TABLE "Metadata" (
 	id INTEGER NOT NULL,
@@ -167,12 +174,19 @@ CREATE INDEX "ix_CatalogElement_uid" ON "CatalogElement" (uid);
 CREATE TABLE "IdentifiedElement" (
 	uid INTEGER NOT NULL,
 	title TEXT,
-	_class VARCHAR(11),
+	class VARCHAR(11),
 	label TEXT,
 	id TEXT,
 	PRIMARY KEY (uid)
 );
 CREATE INDEX "ix_IdentifiedElement_uid" ON "IdentifiedElement" (uid);
+
+CREATE TABLE "ParameterSelection" (
+	id INTEGER NOT NULL,
+	how_many VARCHAR(11),
+	PRIMARY KEY (id)
+);
+CREATE INDEX "ix_ParameterSelection_id" ON "ParameterSelection" (id);
 
 CREATE TABLE "CatalogBody" (
 	id INTEGER NOT NULL,
@@ -229,6 +243,15 @@ CREATE TABLE "Resource" (
 );
 CREATE INDEX "ix_Resource_id" ON "Resource" (id);
 
+CREATE TABLE "ParameterSelection_choice" (
+	"ParameterSelection_id" INTEGER,
+	choice TEXT,
+	PRIMARY KEY ("ParameterSelection_id", choice),
+	FOREIGN KEY("ParameterSelection_id") REFERENCES "ParameterSelection" (id)
+);
+CREATE INDEX "ix_ParameterSelection_choice_ParameterSelection_id" ON "ParameterSelection_choice" ("ParameterSelection_id");
+CREATE INDEX "ix_ParameterSelection_choice_choice" ON "ParameterSelection_choice" (choice);
+
 CREATE TABLE "SP800171Document" (
 	id INTEGER NOT NULL,
 	catalog_id INTEGER,
@@ -261,7 +284,7 @@ CREATE INDEX "ix_ResourceLink_id" ON "ResourceLink" (id);
 CREATE TABLE "ControlGroup" (
 	uid INTEGER NOT NULL,
 	title TEXT,
-	_class VARCHAR(11),
+	class VARCHAR(11),
 	label TEXT,
 	id TEXT,
 	"CatalogBody_id" INTEGER,
@@ -291,7 +314,7 @@ CREATE INDEX "ix_ResponsibleParty_party_uuids_party_uuids" ON "ResponsibleParty_
 CREATE TABLE "Control" (
 	uid INTEGER NOT NULL,
 	title TEXT,
-	_class VARCHAR(11),
+	class VARCHAR(11),
 	label TEXT,
 	id TEXT,
 	"ControlGroup_uid" INTEGER,
@@ -313,12 +336,14 @@ CREATE TABLE "Parameter" (
 	uid INTEGER NOT NULL,
 	usage TEXT,
 	title TEXT,
-	_class VARCHAR(11),
+	class VARCHAR(11),
 	label TEXT,
 	id TEXT,
 	"Control_uid" INTEGER,
+	select_id INTEGER,
 	PRIMARY KEY (uid),
-	FOREIGN KEY("Control_uid") REFERENCES "Control" (uid)
+	FOREIGN KEY("Control_uid") REFERENCES "Control" (uid),
+	FOREIGN KEY(select_id) REFERENCES "ParameterSelection" (id)
 );
 CREATE INDEX "ix_Parameter_uid" ON "Parameter" (uid);
 
@@ -334,7 +359,7 @@ CREATE INDEX "ix_Guideline_id" ON "Guideline" (id);
 CREATE TABLE "Part" (
 	uid INTEGER NOT NULL,
 	name TEXT,
-	_class VARCHAR(20),
+	class VARCHAR(20),
 	prose TEXT,
 	id TEXT,
 	"CatalogElement_uid" INTEGER,
@@ -358,7 +383,7 @@ CREATE TABLE "Property" (
 	name TEXT,
 	value TEXT,
 	ns TEXT,
-	_class TEXT,
+	class TEXT,
 	"Metadata_id" INTEGER,
 	"CatalogElement_uid" INTEGER,
 	"IdentifiedElement_uid" INTEGER,

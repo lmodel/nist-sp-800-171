@@ -22,6 +22,14 @@ export enum AssessmentMethodValue {
     INTERVIEW = "INTERVIEW",
     TEST = "TEST",
 };
+/**
+* Cardinality constraint for parameter selection
+*/
+export enum HowManyValue {
+    
+    one = "one",
+    one_or_more = "one-or-more",
+};
 
 
 /**
@@ -199,7 +207,7 @@ export interface IdentifiedElement extends CatalogElement {
     /** Human-readable title */
     title?: string,
     /** Classification of a catalog element (e.g. family, requirement, security_requirement) */
-    _class?: string,
+    class?: string,
     /** Human-readable label */
     label?: string,
 }
@@ -231,6 +239,19 @@ export interface Parameter extends IdentifiedElement {
     usage?: string,
     /** List of guidelines for a parameter */
     guidelines?: Guideline[],
+    /** Selection constraints for an organization-defined parameter */
+    select?: ParameterSelection,
+}
+
+
+/**
+ * Selection constraints specifying allowed values for a parameter
+ */
+export interface ParameterSelection {
+    /** Cardinality constraint for parameter selection choices */
+    how_many?: string,
+    /** List of allowed values for a parameter selection */
+    choice?: string[],
 }
 
 
@@ -254,7 +275,7 @@ export interface Property {
     /** Namespace URI for a property */
     ns?: string,
     /** Classification of a catalog element (e.g. family, requirement, security_requirement) */
-    _class?: string,
+    class?: string,
 }
 
 
@@ -276,7 +297,7 @@ export interface Part extends CatalogElement {
     /** Name of a property, part, or party */
     name?: string,
     /** Classification of a catalog element (e.g. family, requirement, security_requirement) */
-    _class?: string,
+    class?: string,
     /** Free-text prose content */
     prose?: string,
 }

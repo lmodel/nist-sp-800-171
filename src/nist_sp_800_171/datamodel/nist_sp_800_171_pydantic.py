@@ -112,6 +112,14 @@ class AssessmentMethodValue(str, Enum):
     TEST = "TEST"
 
 
+class HowManyValue(str, Enum):
+    """
+    Cardinality constraint for parameter selection
+    """
+    one = "one"
+    one_or_more = "one-or-more"
+
+
 
 class Role(ConfiguredBaseModel):
     """
@@ -154,7 +162,7 @@ class IdentifiedElement(CatalogElement):
 
     title: Optional[str] = Field(default=None, description="""Human-readable title""", json_schema_extra = { "linkml_meta": {'domain_of': ['Metadata', 'Role', 'Resource', 'IdentifiedElement'],
          'in_subset': ['nist_sp_800_171r3_catalog']} })
-    class_: Optional[CatalogElementClassValue] = Field(default=None, alias="_class", description="""Classification of a catalog element (e.g. family, requirement, security_requirement)""", json_schema_extra = { "linkml_meta": {'domain_of': ['IdentifiedElement', 'Property', 'Part'],
+    class_: Optional[CatalogElementClassValue] = Field(default=None, alias="class", description="""Classification of a catalog element (e.g. family, requirement, security_requirement)""", json_schema_extra = { "linkml_meta": {'domain_of': ['IdentifiedElement', 'Property', 'Part'],
          'in_subset': ['nist_sp_800_171r3_catalog']} })
     label: Optional[str] = Field(default=None, description="""Human-readable label""", json_schema_extra = { "linkml_meta": {'domain_of': ['IdentifiedElement'], 'in_subset': ['nist_sp_800_171r3_catalog']} })
     id: Optional[str] = Field(default=None, description="""Unique identifier for an element""", json_schema_extra = { "linkml_meta": {'domain_of': ['Role', 'CatalogElement'],
@@ -176,7 +184,7 @@ class ControlGroup(IdentifiedElement):
     controls: Optional[list[Control]] = Field(default=None, description="""List of security requirements in a family group""", json_schema_extra = { "linkml_meta": {'domain_of': ['ControlGroup'], 'in_subset': ['nist_sp_800_171r3_catalog']} })
     title: Optional[str] = Field(default=None, description="""Human-readable title""", json_schema_extra = { "linkml_meta": {'domain_of': ['Metadata', 'Role', 'Resource', 'IdentifiedElement'],
          'in_subset': ['nist_sp_800_171r3_catalog']} })
-    class_: Optional[CatalogElementClassValue] = Field(default=None, alias="_class", description="""Classification of a catalog element (e.g. family, requirement, security_requirement)""", json_schema_extra = { "linkml_meta": {'domain_of': ['IdentifiedElement', 'Property', 'Part'],
+    class_: Optional[CatalogElementClassValue] = Field(default=None, alias="class", description="""Classification of a catalog element (e.g. family, requirement, security_requirement)""", json_schema_extra = { "linkml_meta": {'domain_of': ['IdentifiedElement', 'Property', 'Part'],
          'in_subset': ['nist_sp_800_171r3_catalog']} })
     label: Optional[str] = Field(default=None, description="""Human-readable label""", json_schema_extra = { "linkml_meta": {'domain_of': ['IdentifiedElement'], 'in_subset': ['nist_sp_800_171r3_catalog']} })
     id: Optional[str] = Field(default=None, description="""Unique identifier for an element""", json_schema_extra = { "linkml_meta": {'domain_of': ['Role', 'CatalogElement'],
@@ -198,7 +206,7 @@ class Control(IdentifiedElement):
     params: Optional[list[Parameter]] = Field(default=None, description="""List of organization-defined parameters for a requirement""", json_schema_extra = { "linkml_meta": {'domain_of': ['Control'], 'in_subset': ['nist_sp_800_171r3_catalog']} })
     title: Optional[str] = Field(default=None, description="""Human-readable title""", json_schema_extra = { "linkml_meta": {'domain_of': ['Metadata', 'Role', 'Resource', 'IdentifiedElement'],
          'in_subset': ['nist_sp_800_171r3_catalog']} })
-    class_: Optional[CatalogElementClassValue] = Field(default=None, alias="_class", description="""Classification of a catalog element (e.g. family, requirement, security_requirement)""", json_schema_extra = { "linkml_meta": {'domain_of': ['IdentifiedElement', 'Property', 'Part'],
+    class_: Optional[CatalogElementClassValue] = Field(default=None, alias="class", description="""Classification of a catalog element (e.g. family, requirement, security_requirement)""", json_schema_extra = { "linkml_meta": {'domain_of': ['IdentifiedElement', 'Property', 'Part'],
          'in_subset': ['nist_sp_800_171r3_catalog']} })
     label: Optional[str] = Field(default=None, description="""Human-readable label""", json_schema_extra = { "linkml_meta": {'domain_of': ['IdentifiedElement'], 'in_subset': ['nist_sp_800_171r3_catalog']} })
     id: Optional[str] = Field(default=None, description="""Unique identifier for an element""", json_schema_extra = { "linkml_meta": {'domain_of': ['Role', 'CatalogElement'],
@@ -219,9 +227,10 @@ class Parameter(IdentifiedElement):
 
     usage: Optional[str] = Field(default=None, description="""Human-readable description of an organization-defined parameter's expected value""", json_schema_extra = { "linkml_meta": {'domain_of': ['Parameter'], 'in_subset': ['nist_sp_800_171r3_catalog']} })
     guidelines: Optional[list[Guideline]] = Field(default=None, description="""List of guidelines for a parameter""", json_schema_extra = { "linkml_meta": {'domain_of': ['Parameter'], 'in_subset': ['nist_sp_800_171r3_catalog']} })
+    select: Optional[Any] = Field(default=None, description="""Selection constraints for an organization-defined parameter""", json_schema_extra = { "linkml_meta": {'domain_of': ['Parameter'], 'in_subset': ['nist_sp_800_171r3_catalog']} })
     title: Optional[str] = Field(default=None, description="""Human-readable title""", json_schema_extra = { "linkml_meta": {'domain_of': ['Metadata', 'Role', 'Resource', 'IdentifiedElement'],
          'in_subset': ['nist_sp_800_171r3_catalog']} })
-    class_: Optional[CatalogElementClassValue] = Field(default=None, alias="_class", description="""Classification of a catalog element (e.g. family, requirement, security_requirement)""", json_schema_extra = { "linkml_meta": {'domain_of': ['IdentifiedElement', 'Property', 'Part'],
+    class_: Optional[CatalogElementClassValue] = Field(default=None, alias="class", description="""Classification of a catalog element (e.g. family, requirement, security_requirement)""", json_schema_extra = { "linkml_meta": {'domain_of': ['IdentifiedElement', 'Property', 'Part'],
          'in_subset': ['nist_sp_800_171r3_catalog']} })
     label: Optional[str] = Field(default=None, description="""Human-readable label""", json_schema_extra = { "linkml_meta": {'domain_of': ['IdentifiedElement'], 'in_subset': ['nist_sp_800_171r3_catalog']} })
     id: Optional[str] = Field(default=None, description="""Unique identifier for an element""", json_schema_extra = { "linkml_meta": {'domain_of': ['Role', 'CatalogElement'],
@@ -254,7 +263,7 @@ class Property(ConfiguredBaseModel):
          'in_subset': ['nist_sp_800_171r3_catalog']} })
     value: Optional[str] = Field(default=None, description="""Property value""", json_schema_extra = { "linkml_meta": {'domain_of': ['Property'], 'in_subset': ['nist_sp_800_171r3_catalog']} })
     ns: Optional[str] = Field(default=None, description="""Namespace URI for a property""", json_schema_extra = { "linkml_meta": {'domain_of': ['Property'], 'in_subset': ['nist_sp_800_171r3_catalog']} })
-    class_: Optional[str] = Field(default=None, alias="_class", description="""Classification of a catalog element (e.g. family, requirement, security_requirement)""", json_schema_extra = { "linkml_meta": {'domain_of': ['IdentifiedElement', 'Property', 'Part'],
+    class_: Optional[str] = Field(default=None, alias="class", description="""Classification of a catalog element (e.g. family, requirement, security_requirement)""", json_schema_extra = { "linkml_meta": {'domain_of': ['IdentifiedElement', 'Property', 'Part'],
          'in_subset': ['nist_sp_800_171r3_catalog']} })
 
 
@@ -280,7 +289,7 @@ class Part(CatalogElement):
 
     name: Optional[str] = Field(default=None, description="""Name of a property, part, or party""", json_schema_extra = { "linkml_meta": {'domain_of': ['Party', 'Property', 'Part'],
          'in_subset': ['nist_sp_800_171r3_catalog']} })
-    class_: Optional[PartClassValue] = Field(default=None, alias="_class", description="""Classification of a catalog element (e.g. family, requirement, security_requirement)""", json_schema_extra = { "linkml_meta": {'domain_of': ['IdentifiedElement', 'Property', 'Part'],
+    class_: Optional[PartClassValue] = Field(default=None, alias="class", description="""Classification of a catalog element (e.g. family, requirement, security_requirement)""", json_schema_extra = { "linkml_meta": {'domain_of': ['IdentifiedElement', 'Property', 'Part'],
          'in_subset': ['nist_sp_800_171r3_catalog']} })
     prose: Optional[str] = Field(default=None, description="""Free-text prose content""", json_schema_extra = { "linkml_meta": {'domain_of': ['Guideline', 'Part'], 'in_subset': ['nist_sp_800_171r3_catalog']} })
     id: Optional[str] = Field(default=None, description="""Unique identifier for an element""", json_schema_extra = { "linkml_meta": {'domain_of': ['Role', 'CatalogElement'],

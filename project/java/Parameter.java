@@ -14,5 +14,6 @@ public class Parameter extends IdentifiedElement {
 
   private String usage;
   private List<Guideline> guidelines;
+  private ParameterSelection select;
 
 }

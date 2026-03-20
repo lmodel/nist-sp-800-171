@@ -41,38 +41,38 @@ nist_sp_800_171:remarks a owl:DatatypeProperty ;
 nist_sp_800_171:Address a owl:Class ;
     rdfs:label "Address" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:addr_lines ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:state ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:city ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:state ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:city ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:state ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:city ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:postal_code ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:addr_lines ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:postal_code ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:state ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:addr_lines ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:state ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:postal_code ] ;
+            owl:onProperty nist_sp_800_171:postal_code ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:city ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:state ] ;
     skos:definition "Postal address" ;
     skos:exactMatch linkml:Any ;
     skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
@@ -104,37 +104,37 @@ nist_sp_800_171:BackMatter a owl:Class ;
 nist_sp_800_171:CatalogBody a owl:Class ;
     rdfs:label "CatalogBody" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:uuid ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:BackMatter ;
-            owl:onProperty nist_sp_800_171:back_matter ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:metadata ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:ControlGroup ;
             owl:onProperty nist_sp_800_171:groups ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:metadata ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:back_matter ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:uuid ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:metadata ],
+            owl:onProperty nist_sp_800_171:back_matter ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:uuid ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:groups ],
+            owl:onProperty nist_sp_800_171:metadata ],
         [ a owl:Restriction ;
             owl:allValuesFrom nist_sp_800_171:Metadata ;
             owl:onProperty nist_sp_800_171:metadata ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom nist_sp_800_171:BackMatter ;
             owl:onProperty nist_sp_800_171:back_matter ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom nist_sp_800_171:ControlGroup ;
+            owl:onProperty nist_sp_800_171:groups ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:uuid ] ;
     skos:definition "Main catalog object" ;
     skos:exactMatch linkml:Any ;
@@ -143,32 +143,32 @@ nist_sp_800_171:CatalogBody a owl:Class ;
 nist_sp_800_171:CatalogElement a owl:Class ;
     rdfs:label "CatalogElement" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:links ],
+            owl:allValuesFrom nist_sp_800_171:Property ;
+            owl:onProperty nist_sp_800_171:props ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom nist_sp_800_171:Part ;
+            owl:onProperty nist_sp_800_171:parts ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:id ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:parts ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Link ;
             owl:onProperty nist_sp_800_171:links ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:id ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:props ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:id ],
         [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Part ;
+            owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:parts ],
         [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Property ;
-            owl:onProperty nist_sp_800_171:props ] ;
+            owl:allValuesFrom nist_sp_800_171:Link ;
+            owl:onProperty nist_sp_800_171:links ] ;
     skos:definition "Base class for catalog elements with id, props, links, and parts" ;
     skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
 
@@ -183,13 +183,13 @@ nist_sp_800_171:CatalogElement a owl:Class ;
 nist_sp_800_171:Citation a owl:Class ;
     rdfs:label "Citation" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:text ],
+        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:text ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:text ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:text ] ;
     skos:definition "Citation wrapper" ;
     skos:exactMatch linkml:Any ;
@@ -198,10 +198,10 @@ nist_sp_800_171:Citation a owl:Class ;
 nist_sp_800_171:Control a owl:Class ;
     rdfs:label "Control" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Parameter ;
+            owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:params ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom nist_sp_800_171:Parameter ;
             owl:onProperty nist_sp_800_171:params ],
         nist_sp_800_171:IdentifiedElement ;
     skos:definition "A security requirement" ;
@@ -222,94 +222,102 @@ nist_sp_800_171:ControlGroup a owl:Class ;
 nist_sp_800_171:Guideline a owl:Class ;
     rdfs:label "Guideline" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:prose ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:prose ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:prose ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:prose ] ;
     skos:definition "Additional prose guidance associated with a parameter" ;
     skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
 
+<https://w3id.org/lmodel/nist-sp-800-171/HowManyValue#one> a owl:Class ;
+    rdfs:label "one" ;
+    rdfs:subClassOf nist_sp_800_171:HowManyValue .
+
+<https://w3id.org/lmodel/nist-sp-800-171/HowManyValue#one-or-more> a owl:Class ;
+    rdfs:label "one-or-more" ;
+    rdfs:subClassOf nist_sp_800_171:HowManyValue .
+
 nist_sp_800_171:Metadata a owl:Class ;
     rdfs:label "Metadata" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:allValuesFrom nist_sp_800_171:Link ;
+            owl:onProperty nist_sp_800_171:links ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:oscal_version ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:title ],
+            owl:onProperty nist_sp_800_171:version ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom nist_sp_800_171:ResponsibleParty ;
+            owl:onProperty nist_sp_800_171:responsible_parties ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom nist_sp_800_171:Role ;
+            owl:onProperty nist_sp_800_171:roles ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:published ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:oscal_version ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:published ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:last_modified ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:version ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:title ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:links ],
+            owl:onProperty nist_sp_800_171:roles ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom nist_sp_800_171:Property ;
+            owl:onProperty nist_sp_800_171:props ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:published ],
+            owl:onProperty nist_sp_800_171:last_modified ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:responsible_parties ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:props ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:version ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:published ],
         [ a owl:Restriction ;
             owl:allValuesFrom nist_sp_800_171:Party ;
             owl:onProperty nist_sp_800_171:parties ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:responsible_parties ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:oscal_version ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Property ;
-            owl:onProperty nist_sp_800_171:props ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Role ;
-            owl:onProperty nist_sp_800_171:roles ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:roles ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:parties ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:last_modified ],
         [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Link ;
-            owl:onProperty nist_sp_800_171:links ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:version ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:version ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:published ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:ResponsibleParty ;
-            owl:onProperty nist_sp_800_171:responsible_parties ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:oscal_version ],
+            owl:onProperty nist_sp_800_171:title ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:last_modified ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:title ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:links ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:oscal_version ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:title ] ;
+            owl:onProperty nist_sp_800_171:version ] ;
     skos:definition "OSCAL metadata section" ;
     skos:exactMatch linkml:Any ;
     skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
@@ -317,52 +325,82 @@ nist_sp_800_171:Metadata a owl:Class ;
 nist_sp_800_171:Parameter a owl:Class ;
     rdfs:label "Parameter" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:usage ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Guideline ;
-            owl:onProperty nist_sp_800_171:guidelines ],
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:select ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:usage ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:select ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:usage ],
         [ a owl:Restriction ;
+            owl:allValuesFrom nist_sp_800_171:ParameterSelection ;
+            owl:onProperty nist_sp_800_171:select ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:guidelines ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom nist_sp_800_171:Guideline ;
+            owl:onProperty nist_sp_800_171:guidelines ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:usage ],
         nist_sp_800_171:IdentifiedElement ;
     skos:definition "An organization-defined parameter for a security requirement" ;
+    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+
+nist_sp_800_171:ParameterSelection a owl:Class ;
+    rdfs:label "ParameterSelection" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:choice ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:how_many ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom nist_sp_800_171:HowManyValue ;
+            owl:onProperty nist_sp_800_171:how_many ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:how_many ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:choice ] ;
+    skos:definition "Selection constraints specifying allowed values for a parameter" ;
+    skos:exactMatch linkml:Any ;
     skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
 
 nist_sp_800_171:Part a owl:Class ;
     rdfs:label "Part" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:name ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:prose ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:_class ],
         [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:prose ],
+        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:prose ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:_class ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:name ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:prose ],
         [ a owl:Restriction ;
             owl:allValuesFrom nist_sp_800_171:PartClassValue ;
-            owl:onProperty nist_sp_800_171:_class ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:_class ],
         nist_sp_800_171:CatalogElement ;
     skos:definition "Structured narrative part containing prose and optional nested parts. Used for statements, guidance, assessment-objectives, and assessment-methods." ;
@@ -377,53 +415,53 @@ nist_sp_800_171:PartClassValue a owl:Class ;
 nist_sp_800_171:Party a owl:Class ;
     rdfs:label "Party" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:short_name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:name ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:email_addresses ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:email_addresses ],
+            owl:onProperty nist_sp_800_171:short_name ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:uuid ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:name ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:addresses ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:uuid ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:short_name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:type ],
         [ a owl:Restriction ;
             owl:allValuesFrom nist_sp_800_171:Address ;
             owl:onProperty nist_sp_800_171:addresses ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:uuid ],
+            owl:onProperty nist_sp_800_171:short_name ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:short_name ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:type ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:short_name ] ;
+            owl:onProperty nist_sp_800_171:uuid ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:type ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:email_addresses ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:name ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:email_addresses ] ;
     skos:definition "Party definition" ;
     skos:exactMatch linkml:Any ;
     skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
@@ -431,47 +469,47 @@ nist_sp_800_171:Party a owl:Class ;
 nist_sp_800_171:Resource a owl:Class ;
     rdfs:label "Resource" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:description ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:uuid ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:uuid ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:rlinks ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:title ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:citation ],
         [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:ResourceLink ;
-            owl:onProperty nist_sp_800_171:rlinks ],
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:uuid ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:rlinks ],
+            owl:onProperty nist_sp_800_171:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:title ],
         [ a owl:Restriction ;
             owl:allValuesFrom nist_sp_800_171:Citation ;
             owl:onProperty nist_sp_800_171:citation ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:description ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:uuid ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:citation ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:description ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:title ],
         [ a owl:Restriction ;
+            owl:allValuesFrom nist_sp_800_171:ResourceLink ;
+            owl:onProperty nist_sp_800_171:rlinks ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:description ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:title ] ;
+            owl:onProperty nist_sp_800_171:citation ] ;
     skos:definition "Referenced resource" ;
     skos:exactMatch linkml:Any ;
     skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
@@ -479,20 +517,20 @@ nist_sp_800_171:Resource a owl:Class ;
 nist_sp_800_171:ResourceLink a owl:Class ;
     rdfs:label "ResourceLink" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:href ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:media_type ],
         [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:href ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:href ],
+        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:media_type ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:media_type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:href ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:href ] ;
@@ -504,19 +542,19 @@ nist_sp_800_171:ResponsibleParty a owl:Class ;
     rdfs:label "ResponsibleParty" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:role_id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:role_id ],
+            owl:onProperty nist_sp_800_171:party_uuids ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:party_uuids ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:party_uuids ],
+            owl:onProperty nist_sp_800_171:role_id ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:role_id ] ;
+            owl:onProperty nist_sp_800_171:role_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:role_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:party_uuids ] ;
     skos:definition "Assignment of parties to a role" ;
     skos:exactMatch linkml:Any ;
     skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
@@ -530,17 +568,17 @@ nist_sp_800_171:Role a owl:Class ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:title ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:id ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:title ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:title ],
-        [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:id ] ;
+            owl:onProperty nist_sp_800_171:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:id ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:title ] ;
     skos:definition "Role definition" ;
     skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
 
@@ -554,6 +592,11 @@ nist_sp_800_171:addresses a owl:ObjectProperty ;
     rdfs:label "addresses" ;
     rdfs:range nist_sp_800_171:Address ;
     skos:definition "Postal addresses" ;
+    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+
+nist_sp_800_171:choice a owl:DatatypeProperty ;
+    rdfs:label "choice" ;
+    skos:definition "List of allowed values for a parameter selection" ;
     skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
 
 nist_sp_800_171:controls a owl:ObjectProperty ;
@@ -650,31 +693,31 @@ nist_sp_800_171:IdentifiedElement a owl:Class ;
     rdfs:label "IdentifiedElement" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:title ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:label ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:title ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:label ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:_class ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:label ],
         [ a owl:Restriction ;
             owl:allValuesFrom nist_sp_800_171:CatalogElementClassValue ;
             owl:onProperty nist_sp_800_171:_class ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:label ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:_class ],
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:title ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:title ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:_class ],
         nist_sp_800_171:CatalogElement ;
     skos:definition "A catalog element with required id, title, and optional class/label" ;
     skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
@@ -682,22 +725,22 @@ nist_sp_800_171:IdentifiedElement a owl:Class ;
 nist_sp_800_171:Link a owl:Class ;
     rdfs:label "Link" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:href ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:href ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:rel ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:rel ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:href ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:rel ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:href ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:rel ] ;
     skos:definition "Relationship link" ;
     skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
@@ -705,41 +748,41 @@ nist_sp_800_171:Link a owl:Class ;
 nist_sp_800_171:Property a owl:Class ;
     rdfs:label "Property" ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:value ],
+        [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:name ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:ns ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:_class ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:value ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:_class ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:ns ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:ns ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:value ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:_class ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:_class ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:name ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:value ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:_class ] ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:ns ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:name ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:ns ] ;
     skos:definition "A name-value property with optional namespace" ;
     skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
 
@@ -770,6 +813,13 @@ nist_sp_800_171:city a owl:DatatypeProperty ;
 nist_sp_800_171:description a owl:DatatypeProperty ;
     rdfs:label "description" ;
     skos:definition "Resource description" ;
+    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+
+nist_sp_800_171:how_many a owl:ObjectProperty ;
+    rdfs:label "how-many" ;
+    rdfs:range nist_sp_800_171:HowManyValue ;
+    skos:altLabel "how_many" ;
+    skos:definition "Cardinality constraint for parameter selection choices" ;
     skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
 
 nist_sp_800_171:label a owl:DatatypeProperty ;
@@ -828,6 +878,12 @@ nist_sp_800_171:role_id a owl:DatatypeProperty ;
     skos:definition "Assigned role identifier" ;
     skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
 
+nist_sp_800_171:select a owl:ObjectProperty ;
+    rdfs:label "select" ;
+    rdfs:range nist_sp_800_171:ParameterSelection ;
+    skos:definition "Selection constraints for an organization-defined parameter" ;
+    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+
 nist_sp_800_171:short_name a owl:DatatypeProperty ;
     rdfs:label "short-name" ;
     skos:altLabel "short_name" ;
@@ -864,6 +920,14 @@ nist_sp_800_171:version a owl:DatatypeProperty ;
     skos:definition "Version identifier" ;
     skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
 
+nist_sp_800_171:HowManyValue a owl:Class ;
+    rdfs:label "HowManyValue" ;
+    owl:unionOf ( <https://w3id.org/lmodel/nist-sp-800-171/HowManyValue#one> <https://w3id.org/lmodel/nist-sp-800-171/HowManyValue#one-or-more> ) ;
+    skos:definition "Cardinality constraint for parameter selection" ;
+    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> ;
+    linkml:permissible_values <https://w3id.org/lmodel/nist-sp-800-171/HowManyValue#one>,
+        <https://w3id.org/lmodel/nist-sp-800-171/HowManyValue#one-or-more> .
+
 nist_sp_800_171:links a owl:ObjectProperty ;
     rdfs:label "links" ;
     rdfs:range nist_sp_800_171:Link ;
@@ -894,7 +958,8 @@ nist_sp_800_171:prose a owl:DatatypeProperty ;
 nist_sp_800_171:_class a owl:DatatypeProperty ;
     rdfs:label "_class" ;
     skos:definition "Classification of a catalog element (e.g. family, requirement, security_requirement)" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> ;
+    skos:prefLabel "class" .
 
 nist_sp_800_171:name a owl:DatatypeProperty ;
     rdfs:label "name" ;

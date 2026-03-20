@@ -3,9 +3,10 @@
       "xsd": "http://www.w3.org/2001/XMLSchema#",
       "linkml": "https://w3id.org/linkml/",
       "nist_sp_800_171": "https://w3id.org/lmodel/nist-sp-800-171/",
+      "skos": "http://www.w3.org/2004/02/skos/core#",
       "@vocab": "https://w3id.org/lmodel/nist-sp-800-171/",
-      "_class": {
-         "@id": "_class"
+      "class": {
+         "@id": "class"
       },
       "addr_lines": {
          "@id": "addr_lines"
@@ -21,6 +22,9 @@
       "catalog": {
          "@type": "@id",
          "@id": "catalog"
+      },
+      "choice": {
+         "@id": "choice"
       },
       "citation": {
          "@type": "@id",
@@ -46,6 +50,14 @@
       "guidelines": {
          "@type": "@id",
          "@id": "guidelines"
+      },
+      "how_many": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "how_many"
       },
       "href": {
          "@id": "href"
@@ -132,6 +144,10 @@
          "@type": "@id",
          "@id": "roles"
       },
+      "select": {
+         "@type": "@id",
+         "@id": "select"
+      },
       "short_name": {
          "@id": "short_name"
       },
@@ -194,6 +210,9 @@
       },
       "Parameter": {
          "@id": "Parameter"
+      },
+      "ParameterSelection": {
+         "@id": "linkml:Any"
       },
       "Part": {
          "@id": "Part"

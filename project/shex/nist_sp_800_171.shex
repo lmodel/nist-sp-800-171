@@ -119,7 +119,7 @@ linkml:Sparqlpath xsd:string
        (  $<IdentifiedElement_tes> (  &<CatalogElement_tes> ;
              rdf:type [ <CatalogElement> ] ? ;
              <title> @linkml:String ? ;
-             <_class> [ <https://w3id.org/lmodel/nist-sp-800-171/CatalogElementClassValue#family>
+             <class> [ <https://w3id.org/lmodel/nist-sp-800-171/CatalogElementClassValue#family>
                 <https://w3id.org/lmodel/nist-sp-800-171/CatalogElementClassValue#requirement> ] ? ;
              <label> @linkml:String ?
           ) ;
@@ -156,9 +156,19 @@ linkml:Sparqlpath xsd:string
     (  $<Parameter_tes> (  &<IdentifiedElement_tes> ;
           rdf:type [ <IdentifiedElement> ] ? ;
           <usage> @linkml:String ? ;
-          <guidelines> @<Guideline> *
+          <guidelines> @<Guideline> * ;
+          <select> @<ParameterSelection> ?
        ) ;
        rdf:type [ <Parameter> ] ?
+    )
+}
+
+<ParameterSelection> CLOSED {
+    (  $<ParameterSelection_tes> (  <how_many> [ <https://w3id.org/lmodel/nist-sp-800-171/HowManyValue#one>
+             <https://w3id.org/lmodel/nist-sp-800-171/HowManyValue#one-or-more> ] ? ;
+          <choice> @linkml:String *
+       ) ;
+       rdf:type [ linkml:Any ] ?
     )
 }
 
@@ -166,7 +176,7 @@ linkml:Sparqlpath xsd:string
     (  $<Part_tes> (  &<CatalogElement_tes> ;
           rdf:type [ <CatalogElement> ] ? ;
           <name> @linkml:String ? ;
-          <_class> [ <https://w3id.org/lmodel/nist-sp-800-171/PartClassValue#security_requirement> ] ? ;
+          <class> [ <https://w3id.org/lmodel/nist-sp-800-171/PartClassValue#security_requirement> ] ? ;
           <prose> @linkml:String ?
        ) ;
        rdf:type [ <Part> ] ?
@@ -189,7 +199,7 @@ linkml:Sparqlpath xsd:string
     (  $<Property_tes> (  <name> @linkml:String ? ;
           <value> @linkml:String ? ;
           <ns> @linkml:String ? ;
-          <_class> @linkml:String ?
+          <class> @linkml:String ?
        ) ;
        rdf:type [ <Property> ] ?
     )

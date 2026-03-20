@@ -328,6 +328,18 @@ enums:
         text: INTERVIEW
       TEST:
         text: TEST
+  HowManyValue:
+    name: HowManyValue
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/HowManyValue
+    description: Cardinality constraint for parameter selection
+    in_subset:
+    - nist_sp_800_171r3_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    permissible_values:
+      one:
+        text: one
+      one-or-more:
+        text: one-or-more
 slots:
   catalog:
     name: catalog
@@ -566,7 +578,8 @@ slots:
     in_subset:
     - nist_sp_800_171r3_catalog
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:_class
+    slot_uri: nist_sp_800_171:class
+    alias: class
     owner: Part
     domain_of:
     - IdentifiedElement
@@ -966,6 +979,47 @@ slots:
     domain_of:
     - Link
     range: string
+  select:
+    name: select
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/select
+    description: Selection constraints for an organization-defined parameter
+    in_subset:
+    - nist_sp_800_171r3_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:select
+    owner: Parameter
+    domain_of:
+    - Parameter
+    range: ParameterSelection
+    inlined: true
+    inlined_as_list: true
+  how-many:
+    name: how-many
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/how_many
+    description: Cardinality constraint for parameter selection choices
+    in_subset:
+    - nist_sp_800_171r3_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    aliases:
+    - how_many
+    slot_uri: nist_sp_800_171:how_many
+    owner: ParameterSelection
+    domain_of:
+    - ParameterSelection
+    range: HowManyValue
+  choice:
+    name: choice
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/choice
+    description: List of allowed values for a parameter selection
+    in_subset:
+    - nist_sp_800_171r3_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:choice
+    owner: ParameterSelection
+    domain_of:
+    - ParameterSelection
+    range: string
+    multivalued: true
   IdentifiedElement__class:
     name: IdentifiedElement__class
     definition_uri: https://w3id.org/lmodel/nist-sp-800-171/_class
@@ -975,8 +1029,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
     is_a: _class
     domain: IdentifiedElement
-    slot_uri: nist_sp_800_171:_class
-    alias: _class
+    slot_uri: nist_sp_800_171:class
+    alias: class
     owner: IdentifiedElement
     domain_of:
     - IdentifiedElement
@@ -992,8 +1046,8 @@ slots:
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
     is_a: _class
     domain: Part
-    slot_uri: nist_sp_800_171:_class
-    alias: _class
+    slot_uri: nist_sp_800_171:class
+    alias: class
     owner: Part
     domain_of:
     - Part
@@ -1248,7 +1302,21 @@ classes:
     - label
     - usage
     - guidelines
+    - select
     class_uri: nist_sp_800_171:Parameter
+  ParameterSelection:
+    name: ParameterSelection
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/ParameterSelection
+    description: Selection constraints specifying allowed values for a parameter
+    in_subset:
+    - nist_sp_800_171r3_catalog
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    mappings:
+    - linkml:Any
+    slots:
+    - how-many
+    - choice
+    class_uri: linkml:Any
   Guideline:
     name: Guideline
     definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Guideline
@@ -1307,7 +1375,7 @@ classes:
     class_uri: nist_sp_800_171:Part
 metamodel_version: 1.7.0
 source_file: nist_sp_800_171.yaml
-source_file_date: '2026-03-20T16:20:38'
-source_file_size: 12037
-generation_date: '2026-03-20T17:11:42'
+source_file_date: '2026-03-20T22:56:24'
+source_file_size: 13000
+generation_date: '2026-03-20T22:57:47'
 

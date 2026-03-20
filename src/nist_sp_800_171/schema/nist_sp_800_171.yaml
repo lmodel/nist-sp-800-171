@@ -140,6 +140,7 @@ slots:
 
   _class:
     description: Classification of a catalog element (e.g. family, requirement, security_requirement)
+    alias: class
     in_subset:
       - nist_sp_800_171r3_catalog
 
@@ -337,6 +338,27 @@ slots:
     in_subset:
       - nist_sp_800_171r3_catalog
 
+  select:
+    description: Selection constraints for an organization-defined parameter
+    range: ParameterSelection
+    inlined: true
+    in_subset:
+      - nist_sp_800_171r3_catalog
+
+  "how-many":
+    description: Cardinality constraint for parameter selection choices
+    aliases:
+      - how_many
+    range: HowManyValue
+    in_subset:
+      - nist_sp_800_171r3_catalog
+
+  choice:
+    description: List of allowed values for a parameter selection
+    multivalued: true
+    in_subset:
+      - nist_sp_800_171r3_catalog
+
 enums:
   CatalogElementClassValue:
     description: Allowed values for group and control class attributes
@@ -359,6 +381,14 @@ enums:
       EXAMINE:
       INTERVIEW:
       TEST:
+    in_subset:
+      - nist_sp_800_171r3_catalog
+
+  HowManyValue:
+    description: Cardinality constraint for parameter selection
+    permissible_values:
+      one:
+      one-or-more:
     in_subset:
       - nist_sp_800_171r3_catalog
 
@@ -524,6 +554,16 @@ classes:
     slots:
       - usage
       - guidelines
+      - select
+    in_subset:
+      - nist_sp_800_171r3_catalog
+
+  ParameterSelection:
+    description: Selection constraints specifying allowed values for a parameter
+    class_uri: linkml:Any
+    slots:
+      - "how-many"
+      - choice
     in_subset:
       - nist_sp_800_171r3_catalog
 

@@ -16,6 +16,9 @@
    "Metadata": {
       "@id": "linkml:Any"
    },
+   "ParameterSelection": {
+      "@id": "linkml:Any"
+   },
    "Party": {
       "@id": "linkml:Any"
    },

@@ -390,6 +390,23 @@
           "text": "TEST"
         }
       ]
+    },
+    {
+      "name": "HowManyValue",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-171/HowManyValue",
+      "description": "Cardinality constraint for parameter selection",
+      "in_subset": [
+        "nist_sp_800_171r3_catalog"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "permissible_values": [
+        {
+          "text": "one"
+        },
+        {
+          "text": "one-or-more"
+        }
+      ]
     }
   ],
   "slots": [
@@ -696,7 +713,8 @@
         "nist_sp_800_171r3_catalog"
       ],
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-171/_class",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-171/class",
+      "alias": "class",
       "owner": "Part",
       "domain_of": [
         "IdentifiedElement",
@@ -1223,6 +1241,60 @@
       "@type": "SlotDefinition"
     },
     {
+      "name": "select",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-171/select",
+      "description": "Selection constraints for an organization-defined parameter",
+      "in_subset": [
+        "nist_sp_800_171r3_catalog"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-171/select",
+      "owner": "Parameter",
+      "domain_of": [
+        "Parameter"
+      ],
+      "range": "ParameterSelection",
+      "inlined": true,
+      "inlined_as_list": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "how_many",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-171/how_many",
+      "description": "Cardinality constraint for parameter selection choices",
+      "in_subset": [
+        "nist_sp_800_171r3_catalog"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "aliases": [
+        "how_many"
+      ],
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-171/how_many",
+      "owner": "ParameterSelection",
+      "domain_of": [
+        "ParameterSelection"
+      ],
+      "range": "HowManyValue",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "choice",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-171/choice",
+      "description": "List of allowed values for a parameter selection",
+      "in_subset": [
+        "nist_sp_800_171r3_catalog"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-171/choice",
+      "owner": "ParameterSelection",
+      "domain_of": [
+        "ParameterSelection"
+      ],
+      "range": "string",
+      "multivalued": true,
+      "@type": "SlotDefinition"
+    },
+    {
       "name": "IdentifiedElement__class",
       "definition_uri": "https://w3id.org/lmodel/nist-sp-800-171/_class",
       "description": "Classification of a catalog element (e.g. family, requirement, security_requirement)",
@@ -1232,8 +1304,8 @@
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
       "is_a": "_class",
       "domain": "IdentifiedElement",
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-171/_class",
-      "alias": "_class",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-171/class",
+      "alias": "class",
       "owner": "IdentifiedElement",
       "domain_of": [
         "IdentifiedElement"
@@ -1253,8 +1325,8 @@
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
       "is_a": "_class",
       "domain": "Part",
-      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-171/_class",
-      "alias": "_class",
+      "slot_uri": "https://w3id.org/lmodel/nist-sp-800-171/class",
+      "alias": "class",
       "owner": "Part",
       "domain_of": [
         "Part"
@@ -1594,10 +1666,30 @@
         "IdentifiedElement__class",
         "label",
         "usage",
-        "guidelines"
+        "guidelines",
+        "select"
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/lmodel/nist-sp-800-171/Parameter",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ParameterSelection",
+      "definition_uri": "https://w3id.org/lmodel/nist-sp-800-171/ParameterSelection",
+      "description": "Selection constraints specifying allowed values for a parameter",
+      "in_subset": [
+        "nist_sp_800_171r3_catalog"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "mappings": [
+        "linkml:Any"
+      ],
+      "slots": [
+        "how_many",
+        "choice"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/linkml/Any",
       "@type": "ClassDefinition"
     },
     {
@@ -1674,9 +1766,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "nist_sp_800_171.yaml",
-  "source_file_date": "2026-03-20T16:20:38",
-  "source_file_size": 12037,
-  "generation_date": "2026-03-20T17:11:34",
+  "source_file_date": "2026-03-20T22:56:24",
+  "source_file_size": 13000,
+  "generation_date": "2026-03-20T22:57:38",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/nist_sp_800_171.context.jsonld",

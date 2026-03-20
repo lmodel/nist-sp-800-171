@@ -1,5 +1,5 @@
 # Auto generated from nist_sp_800_171.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-03-20T17:11:34
+# Generation date: 2026-03-20T22:57:38
 # Schema: NIST-SP-800-171
 #
 # id: https://w3id.org/lmodel/nist-sp-800-171
@@ -167,15 +167,15 @@ class IdentifiedElement(CatalogElement):
     class_model_uri: ClassVar[URIRef] = NIST_SP_800_171.IdentifiedElement
 
     title: Optional[str] = None
-    _class: Optional[Union[str, "CatalogElementClassValue"]] = None
+    class: Optional[Union[str, "CatalogElementClassValue"]] = None
     label: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self.title is not None and not isinstance(self.title, str):
             self.title = str(self.title)
 
-        if self._class is not None and not isinstance(self._class, CatalogElementClassValue):
-            self._class = CatalogElementClassValue(self._class)
+        if self.class is not None and not isinstance(self.class, CatalogElementClassValue):
+            self.class = CatalogElementClassValue(self.class)
 
         if self.label is not None and not isinstance(self.label, str):
             self.label = str(self.label)
@@ -241,6 +241,7 @@ class Parameter(IdentifiedElement):
 
     usage: Optional[str] = None
     guidelines: Optional[Union[Union[dict, "Guideline"], list[Union[dict, "Guideline"]]]] = empty_list()
+    select: Optional[Union[dict, "ParameterSelection"]] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self.usage is not None and not isinstance(self.usage, str):
@@ -252,6 +253,8 @@ class Parameter(IdentifiedElement):
 
         super().__post_init__(**kwargs)
 
+
+ParameterSelection = Any
 
 @dataclass(repr=False)
 class Guideline(YAMLRoot):
@@ -289,7 +292,7 @@ class Property(YAMLRoot):
     name: Optional[str] = None
     value: Optional[str] = None
     ns: Optional[str] = None
-    _class: Optional[str] = None
+    class: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self.name is not None and not isinstance(self.name, str):
@@ -301,8 +304,8 @@ class Property(YAMLRoot):
         if self.ns is not None and not isinstance(self.ns, str):
             self.ns = str(self.ns)
 
-        if self._class is not None and not isinstance(self._class, str):
-            self._class = str(self._class)
+        if self.class is not None and not isinstance(self.class, str):
+            self.class = str(self.class)
 
         super().__post_init__(**kwargs)
 
@@ -346,15 +349,15 @@ class Part(CatalogElement):
     class_model_uri: ClassVar[URIRef] = NIST_SP_800_171.Part
 
     name: Optional[str] = None
-    _class: Optional[Union[str, "PartClassValue"]] = None
+    class: Optional[Union[str, "PartClassValue"]] = None
     prose: Optional[str] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self.name is not None and not isinstance(self.name, str):
             self.name = str(self.name)
 
-        if self._class is not None and not isinstance(self._class, PartClassValue):
-            self._class = PartClassValue(self._class)
+        if self.class is not None and not isinstance(self.class, PartClassValue):
+            self.class = PartClassValue(self.class)
 
         if self.prose is not None and not isinstance(self.prose, str):
             self.prose = str(self.prose)
@@ -398,6 +401,22 @@ class AssessmentMethodValue(EnumDefinitionImpl):
         name="AssessmentMethodValue",
         description="Allowed values for assessment method property values",
     )
+
+class HowManyValue(EnumDefinitionImpl):
+    """
+    Cardinality constraint for parameter selection
+    """
+    one = PermissibleValue(text="one")
+
+    _defn = EnumDefinition(
+        name="HowManyValue",
+        description="Cardinality constraint for parameter selection",
+    )
+
+    @classmethod
+    def _addvals(cls):
+        setattr(cls, "one-or-more",
+            PermissibleValue(text="one-or-more"))
 
 # Slots
 class slots:
@@ -451,7 +470,7 @@ slots.last_modified = Slot(uri=NIST_SP_800_171.last_modified, name="last-modifie
 slots.oscal_version = Slot(uri=NIST_SP_800_171.oscal_version, name="oscal-version", curie=NIST_SP_800_171.curie('oscal_version'),
                    model_uri=NIST_SP_800_171.oscal_version, domain=None, range=Optional[str])
 
-slots._class = Slot(uri=NIST_SP_800_171._class, name="_class", curie=NIST_SP_800_171.curie('_class'),
+slots._class = Slot(uri=NIST_SP_800_171.class, name="_class", curie=NIST_SP_800_171.curie('class'),
                    model_uri=NIST_SP_800_171._class, domain=None, range=Optional[str])
 
 slots.label = Slot(uri=NIST_SP_800_171.label, name="label", curie=NIST_SP_800_171.curie('label'),
@@ -541,8 +560,17 @@ slots.href = Slot(uri=NIST_SP_800_171.href, name="href", curie=NIST_SP_800_171.c
 slots.rel = Slot(uri=NIST_SP_800_171.rel, name="rel", curie=NIST_SP_800_171.curie('rel'),
                    model_uri=NIST_SP_800_171.rel, domain=None, range=Optional[str])
 
-slots.IdentifiedElement__class = Slot(uri=NIST_SP_800_171._class, name="IdentifiedElement__class", curie=NIST_SP_800_171.curie('_class'),
+slots.select = Slot(uri=NIST_SP_800_171.select, name="select", curie=NIST_SP_800_171.curie('select'),
+                   model_uri=NIST_SP_800_171.select, domain=None, range=Optional[Union[dict, ParameterSelection]])
+
+slots.how_many = Slot(uri=NIST_SP_800_171.how_many, name="how-many", curie=NIST_SP_800_171.curie('how_many'),
+                   model_uri=NIST_SP_800_171.how_many, domain=None, range=Optional[Union[str, "HowManyValue"]])
+
+slots.choice = Slot(uri=NIST_SP_800_171.choice, name="choice", curie=NIST_SP_800_171.curie('choice'),
+                   model_uri=NIST_SP_800_171.choice, domain=None, range=Optional[Union[str, list[str]]])
+
+slots.IdentifiedElement__class = Slot(uri=NIST_SP_800_171.class, name="IdentifiedElement__class", curie=NIST_SP_800_171.curie('class'),
                    model_uri=NIST_SP_800_171.IdentifiedElement__class, domain=IdentifiedElement, range=Optional[Union[str, "CatalogElementClassValue"]])
 
-slots.Part__class = Slot(uri=NIST_SP_800_171._class, name="Part__class", curie=NIST_SP_800_171.curie('_class'),
+slots.Part__class = Slot(uri=NIST_SP_800_171.class, name="Part__class", curie=NIST_SP_800_171.curie('class'),
                    model_uri=NIST_SP_800_171.Part__class, domain=Part, range=Optional[Union[str, "PartClassValue"]])
