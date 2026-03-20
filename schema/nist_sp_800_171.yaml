@@ -1307,7 +1307,7 @@ classes:
     class_uri: nist_sp_800_171:Part
 metamodel_version: 1.7.0
 source_file: nist_sp_800_171.yaml
-source_file_date: '2026-03-20T17:16:07'
+source_file_date: '2026-03-20T17:20:15'
 source_file_size: 12037
-generation_date: '2026-03-20T17:16:23'
+generation_date: '2026-03-20T17:20:24'
 
