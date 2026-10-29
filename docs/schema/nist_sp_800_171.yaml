@@ -1,12 +1,56 @@
-name: NIST-SP-800-171
-description: Electronic (LinkML) Version of Protecting Controlled Unclassified Information
-  in Nonfederal Systems and Organizations
+name: nist_sp_800_171
+annotations:
+  cprt_framework_version:
+    tag: cprt_framework_version
+    value: SP_800_171_3_0_0
+  publication_date:
+    tag: publication_date
+    value: 2024-05
+  oscal_content_tag:
+    tag: oscal_content_tag
+    value: v1.6.0
+  oscal_content_commit:
+    tag: oscal_content_commit
+    value: f0de6d8d8c059d374f15e0ae07508d82e370fc1d
+description: 'A LinkML model of NIST Special Publication 800-171 Revision 3, the security
+  requirements for protecting controlled unclassified information (CUI) in nonfederal
+  systems and organizations: its seventeen requirement families, each security requirement
+  with its statement, discussion, references and source controls, the organization-defined
+  parameters (ODPs) a requirement leaves to the organization, and the assessment objectives
+  and methods that SP 800-171A Revision 3 gives each requirement.'
+title: Protecting Controlled Unclassified Information in Nonfederal Systems and Organizations
+  (SP 800-171 Revision 3)
+comments:
+- The version is the revision of SP 800-171 the schema renders, written as NIST's
+  Cybersecurity and Privacy Reference Tool numbers it (SP_800_171_3_0_0), and source
+  is the publication's digital object identifier. The catalog NIST publishes for that
+  revision in usnistgov/oscal-content, which carries the assessment procedures of
+  SP 800-171A Revision 3 as well, is copied to src/nist_sp_800_171/schema/oscal-content/
+  at the tag and commit in the annotations. scripts/check_upstream_release.py reads
+  the same pins and reports when NIST publishes a newer revision or changes the catalog.
+  The catalog's own metadata version (1.1.0) numbers the catalog, not the publication.
+  The release tags are the schema's own versions.
+- SP 800-171 is a work of the United States Government and is not subject to copyright
+  in the United States. The descriptions here are this project's own words; NIST's
+  text of each requirement, discussion, parameter and assessment procedure stays in
+  the catalog copy.
+- NIST's catalog renders each family as an OSCAL group, each security requirement
+  as an OSCAL control of class requirement, each statement item, discussion, assessment
+  objective and assessment method as a part, each organization-defined parameter as
+  a parameter, and each reference and source control as a link to a back-matter resource.
+  The broad_mappings name those lmodel/oscal classes.
 source: https://doi.org/10.6028/NIST.SP.800-171r3
+see_also:
+- https://lmodel.github.io/nist-sp-800-171
+- https://csrc.nist.gov/pubs/sp/800/171/r3/final
+- https://doi.org/10.6028/NIST.SP.800-171Ar3
+- https://csrc.nist.gov/projects/protecting-controlled-unclassified-information
+- https://github.com/usnistgov/oscal-content/tree/v1.6.0/nist.gov/SP800-171/rev3
 id: https://w3id.org/lmodel/nist-sp-800-171
 version: 3.0.0
 imports:
 - linkml:types
-license: https://creativecommons.org/publicdomain/zero/1.0/
+license: Apache-2.0
 prefixes:
   linkml:
     prefix_prefix: linkml
@@ -14,15 +58,96 @@ prefixes:
   nist_sp_800_171:
     prefix_prefix: nist_sp_800_171
     prefix_reference: https://w3id.org/lmodel/nist-sp-800-171/
+  oscal:
+    prefix_prefix: oscal
+    prefix_reference: https://w3id.org/lmodel/oscal/
+  schema:
+    prefix_prefix: schema
+    prefix_reference: http://schema.org/
+  xsd:
+    prefix_prefix: xsd
+    prefix_reference: http://www.w3.org/2001/XMLSchema#
 default_prefix: nist_sp_800_171
 default_range: string
-subsets:
-  nist_sp_800_171r3_catalog:
-    name: nist_sp_800_171r3_catalog
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/NistSp800171r3Catalog
-    description: NIST SP 800-171 Catalog subset for requirements and assessment procedures
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
 types:
+  sp800171_family_identifier:
+    name: sp800171_family_identifier
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171FamilyIdentifier
+    description: 'A family''s number, as SP 800-171 Revision 3 numbers its seventeen
+      families: 03, a dot and two digits from 01 to 17, such as 03.01 for Access Control.'
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    typeof: string
+    base: str
+    uri: xsd:string
+    pattern: ^03\.(0[1-9]|1[0-7])$
+  sp800171_requirement_identifier:
+    name: sp800171_requirement_identifier
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementIdentifier
+    description: 'A security requirement''s identifier: its family''s number, a dot
+      and the requirement''s two-digit number within the family, such as 03.01.01.'
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    typeof: string
+    base: str
+    uri: xsd:string
+    pattern: ^03\.(0[1-9]|1[0-7])\.(0[1-9]|[1-9][0-9])$
+  sp800171_item_identifier:
+    name: sp800171_item_identifier
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171ItemIdentifier
+    description: The identifier of a lettered item of a requirement statement, such
+      as 03.01.01.a, or of a numbered item under it, such as 03.01.01.c.01.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    typeof: string
+    base: str
+    uri: xsd:string
+    pattern: ^03\.(0[1-9]|1[0-7])\.(0[1-9]|[1-9][0-9])\.[a-z](\.(0[1-9]|[1-9][0-9]))?$
+  sp800171_odp_identifier:
+    name: sp800171_odp_identifier
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171OdpIdentifier
+    description: 'An organization-defined parameter''s identifier, as SP 800-171A
+      writes it: A, the requirement''s identifier, ODP and the parameter''s two-digit
+      number in square brackets, such as A.03.01.01.ODP[01].'
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    typeof: string
+    base: str
+    uri: xsd:string
+    pattern: ^A\.03\.(0[1-9]|1[0-7])\.(0[1-9]|[1-9][0-9])\.ODP\[(0[1-9]|[1-9][0-9])\]$
+  sp800171_objective_identifier:
+    name: sp800171_objective_identifier
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171ObjectiveIdentifier
+    description: 'An assessment objective''s identifier, as SP 800-171A writes it:
+      A and the identifier of the requirement or statement item it assesses, such
+      as A.03.01.01.e, with a two-digit number in square brackets when that item has
+      several objectives, such as A.03.01.01.b[01]. NIST''s catalog writes the bracketed
+      number as a dotted one, A.03.01.01.b.01.'
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    typeof: string
+    base: str
+    uri: xsd:string
+    pattern: ^A\.03\.(0[1-9]|1[0-7])\.(0[1-9]|[1-9][0-9])(\.[a-z](\.(0[1-9]|[1-9][0-9]))?)?(\[(0[1-9]|[1-9][0-9])\])?$
+  sp800171_source_control_identifier:
+    name: sp800171_source_control_identifier
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171SourceControlIdentifier
+    description: 'The identifier of a control of SP 800-53 Revision 5 as NIST''s catalog
+      of SP 800-171 writes it: the family''s two letters, a hyphen and the control''s
+      two-digit number, with a two-digit enhancement number in parentheses where it
+      is one, such as AC-02 and AC-02(03).'
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    typeof: string
+    base: str
+    uri: xsd:string
+    pattern: ^[A-Z]{2}-(0[1-9]|[1-9][0-9])(\((0[1-9]|[1-9][0-9])\))?$
+  sp800171_cited_publication_name:
+    name: sp800171_cited_publication_name
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171CitedPublicationName
+    description: 'The short name SP 800-171 gives a publication it references: the
+      series (SP, FIPS or IR) and the publication''s number, with its revision or
+      volume where the publication has one, such as SP 800-63-3, FIPS 140-3 and IR
+      7966.'
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    typeof: string
+    base: str
+    uri: xsd:string
+    pattern: ^(FIPS|IR|SP) [1-9][0-9]*(-[0-9A-Z]+)*$
   string:
     name: string
     definition_uri: https://w3id.org/linkml/String
@@ -292,1090 +417,891 @@ types:
     uri: xsd:string
     repr: str
 enums:
-  CatalogElementClassValue:
-    name: CatalogElementClassValue
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/CatalogElementClassValue
-    description: Allowed values for group and control class attributes
-    in_subset:
-    - nist_sp_800_171r3_catalog
+  Sp800171RequirementStatus:
+    name: Sp800171RequirementStatus
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementStatus
+    description: The one status SP 800-171 Revision 3 states for a requirement. A
+      requirement in force carries none.
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    see_also:
+    - https://csrc.nist.gov/pubs/sp/800/171/r3/final
     permissible_values:
-      family:
-        text: family
-      requirement:
-        text: requirement
-  PartClassValue:
-    name: PartClassValue
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/PartClassValue
-    description: Allowed values for part class attributes
-    in_subset:
-    - nist_sp_800_171r3_catalog
+      withdrawn:
+        text: withdrawn
+        description: Revision 3 withdrew the requirement; other requirements incorporate
+          or address what it required, or nothing does.
+  Sp800171AssessmentMethodKind:
+    name: Sp800171AssessmentMethodKind
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethodKind
+    description: The three assessment methods of SP 800-171A.
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    see_also:
+    - https://doi.org/10.6028/NIST.SP.800-171Ar3
     permissible_values:
-      security_requirement:
-        text: security_requirement
-  AssessmentMethodValue:
-    name: AssessmentMethodValue
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/AssessmentMethodValue
-    description: Allowed values for assessment method property values
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    permissible_values:
-      EXAMINE:
-        text: EXAMINE
-      INTERVIEW:
-        text: INTERVIEW
-      TEST:
-        text: TEST
-  HowManyValue:
-    name: HowManyValue
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/HowManyValue
-    description: Cardinality constraint for parameter selection
-    in_subset:
-    - nist_sp_800_171r3_catalog
+      examine:
+        text: examine
+        description: Reviewing, inspecting, observing, studying or analysing assessment
+          objects such as policies, plans, records and configurations.
+      interview:
+        text: interview
+        description: Holding discussions with people such as administrators and personnel
+          with security responsibilities.
+      test:
+        text: test
+        description: Exercising mechanisms or processes under specified conditions
+          and comparing the result with what is expected.
+  Sp800171SelectionCount:
+    name: Sp800171SelectionCount
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171SelectionCount
+    description: How many choices a selection parameter takes, as OSCAL states it.
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
     permissible_values:
       one:
         text: one
-      one-or-more:
-        text: one-or-more
+        description: Exactly one of the choices.
+      one_or_more:
+        text: one_or_more
+        description: One or more of the choices.
 slots:
-  catalog:
-    name: catalog
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/catalog
-    description: Root catalog payload
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:catalog
-    owner: SP800171Document
-    domain_of:
-    - SP800171Document
-    range: CatalogBody
-    inlined: true
-    inlined_as_list: true
-  metadata:
-    name: metadata
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/metadata
-    description: Catalog metadata
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:metadata
-    owner: CatalogBody
-    domain_of:
-    - CatalogBody
-    range: Metadata
-    inlined: true
-    inlined_as_list: true
-  groups:
-    name: groups
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/groups
-    description: List of requirement family groups in the catalog
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:groups
-    owner: CatalogBody
-    domain_of:
-    - CatalogBody
-    range: ControlGroup
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  controls:
-    name: controls
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/controls
-    description: List of security requirements in a family group
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:controls
-    owner: ControlGroup
-    domain_of:
-    - ControlGroup
-    range: Control
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  params:
-    name: params
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/params
-    description: List of organization-defined parameters for a requirement
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:params
-    owner: Control
-    domain_of:
-    - Control
-    range: Parameter
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  props:
-    name: props
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/props
-    description: List of properties
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:props
-    owner: CatalogElement
-    domain_of:
-    - Metadata
-    - CatalogElement
-    range: Property
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  guidelines:
-    name: guidelines
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/guidelines
-    description: List of guidelines for a parameter
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:guidelines
-    owner: Parameter
-    domain_of:
-    - Parameter
-    range: Guideline
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  links:
-    name: links
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/links
-    description: List of links and relationships
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:links
-    owner: CatalogElement
-    domain_of:
-    - Metadata
-    - CatalogElement
-    range: Link
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  parts:
-    name: parts
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/parts
-    description: Nested parts providing prose, statements, guidance, assessment objectives
-      and methods
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:parts
-    owner: CatalogElement
-    domain_of:
-    - CatalogElement
-    range: Part
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  id:
-    name: id
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/id
-    description: Unique identifier for an element
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:id
-    owner: CatalogElement
-    domain_of:
-    - Role
-    - CatalogElement
-    range: string
-  uuid:
-    name: uuid
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/uuid
-    description: UUID for catalog, metadata, or resource element
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:uuid
-    owner: Resource
-    domain_of:
-    - CatalogBody
-    - Party
-    - Resource
-    range: string
   title:
     name: title
     definition_uri: https://w3id.org/lmodel/nist-sp-800-171/title
-    description: Human-readable title
-    in_subset:
-    - nist_sp_800_171r3_catalog
+    description: The name SP 800-171 gives a family or a security requirement, such
+      as Access Control or Account Management.
+    comments:
+    - It means what LOKF's title means and carries the same IRI, so lokf adapt folds
+      it into LOKF's slot and a knowledge bundle reads one title key.
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:title
-    owner: IdentifiedElement
+    mappings:
+    - schema:name
+    slot_uri: schema:name
+    owner: Sp800171Requirement
     domain_of:
-    - Metadata
-    - Role
-    - Resource
-    - IdentifiedElement
-    range: string
-  published:
-    name: published
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/published
-    description: Publication timestamp
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:published
-    owner: Metadata
-    domain_of:
-    - Metadata
-    range: string
-  version:
-    name: version
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/version
-    description: Version identifier
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:version
-    owner: Metadata
-    domain_of:
-    - Metadata
-    range: string
-  last-modified:
-    name: last-modified
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/last_modified
-    description: Last modification timestamp
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    aliases:
-    - last_modified
-    slot_uri: nist_sp_800_171:last_modified
-    owner: Metadata
-    domain_of:
-    - Metadata
-    range: string
-  oscal-version:
-    name: oscal-version
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/oscal_version
-    description: OSCAL version identifier
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    aliases:
-    - oscal_version
-    slot_uri: nist_sp_800_171:oscal_version
-    owner: Metadata
-    domain_of:
-    - Metadata
-    range: string
-  _class:
-    name: _class
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/_class
-    description: Classification of a catalog element (e.g. family, requirement, security_requirement)
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:class
-    alias: class
-    owner: Part
-    domain_of:
-    - IdentifiedElement
-    - Property
-    - Part
-    range: string
-  label:
-    name: label
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/label
-    description: Human-readable label
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:label
-    owner: IdentifiedElement
-    domain_of:
-    - IdentifiedElement
-    range: string
-  name:
-    name: name
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/name
-    description: Name of a property, part, or party
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:name
-    owner: Part
-    domain_of:
-    - Party
-    - Property
-    - Part
-    range: string
-  value:
-    name: value
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/value
-    description: Property value
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:value
-    owner: Property
-    domain_of:
-    - Property
-    range: string
-  ns:
-    name: ns
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/ns
-    description: Namespace URI for a property
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:ns
-    owner: Property
-    domain_of:
-    - Property
-    range: string
-  prose:
-    name: prose
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/prose
-    description: Free-text prose content
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:prose
-    owner: Part
-    domain_of:
-    - Guideline
-    - Part
-    range: string
-  usage:
-    name: usage
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/usage
-    description: Human-readable description of an organization-defined parameter's
-      expected value
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:usage
-    owner: Parameter
-    domain_of:
-    - Parameter
-    range: string
-  remarks:
-    name: remarks
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/remarks
-    description: Supplemental remarks
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:remarks
-    range: string
-  roles:
-    name: roles
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/roles
-    description: Roles used in metadata
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:roles
-    owner: Metadata
-    domain_of:
-    - Metadata
-    range: Role
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  parties:
-    name: parties
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/parties
-    description: Parties used in metadata
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:parties
-    owner: Metadata
-    domain_of:
-    - Metadata
-    range: Party
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  responsible-parties:
-    name: responsible-parties
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/responsible_parties
-    description: Responsible party assignments
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    aliases:
-    - responsible_parties
-    slot_uri: nist_sp_800_171:responsible_parties
-    owner: Metadata
-    domain_of:
-    - Metadata
-    range: ResponsibleParty
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  role-id:
-    name: role-id
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/role_id
-    description: Assigned role identifier
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    aliases:
-    - role_id
-    slot_uri: nist_sp_800_171:role_id
-    owner: ResponsibleParty
-    domain_of:
-    - ResponsibleParty
-    range: string
-  party-uuids:
-    name: party-uuids
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/party_uuids
-    description: Referenced party UUIDs
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    aliases:
-    - party_uuids
-    slot_uri: nist_sp_800_171:party_uuids
-    owner: ResponsibleParty
-    domain_of:
-    - ResponsibleParty
-    range: string
-    multivalued: true
-  type:
-    name: type
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/type
-    description: Party type
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:type
-    owner: Party
-    domain_of:
-    - Party
-    range: string
-  short-name:
-    name: short-name
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/short_name
-    description: Short display name
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    aliases:
-    - short_name
-    slot_uri: nist_sp_800_171:short_name
-    owner: Party
-    domain_of:
-    - Party
-    range: string
-  email-addresses:
-    name: email-addresses
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/email_addresses
-    description: Party email addresses
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    aliases:
-    - email_addresses
-    slot_uri: nist_sp_800_171:email_addresses
-    owner: Party
-    domain_of:
-    - Party
-    range: string
-    multivalued: true
-  addresses:
-    name: addresses
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/addresses
-    description: Postal addresses
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:addresses
-    owner: Party
-    domain_of:
-    - Party
-    range: Address
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  addr-lines:
-    name: addr-lines
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/addr_lines
-    description: Address lines
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    aliases:
-    - addr_lines
-    slot_uri: nist_sp_800_171:addr_lines
-    owner: Address
-    domain_of:
-    - Address
-    range: string
-    multivalued: true
-  city:
-    name: city
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/city
-    description: City name
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:city
-    owner: Address
-    domain_of:
-    - Address
-    range: string
-  state:
-    name: state
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/state
-    description: State or region
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:state
-    owner: Address
-    domain_of:
-    - Address
-    range: string
-  postal-code:
-    name: postal-code
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/postal_code
-    description: Postal code
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    aliases:
-    - postal_code
-    slot_uri: nist_sp_800_171:postal_code
-    owner: Address
-    domain_of:
-    - Address
-    range: string
-  back-matter:
-    name: back-matter
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/back_matter
-    description: Back-matter references and resources
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    aliases:
-    - back_matter
-    slot_uri: nist_sp_800_171:back_matter
-    owner: CatalogBody
-    domain_of:
-    - CatalogBody
-    range: BackMatter
-    inlined: true
-    inlined_as_list: true
-  resources:
-    name: resources
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/resources
-    description: Back-matter resources
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:resources
-    owner: BackMatter
-    domain_of:
-    - BackMatter
-    range: Resource
-    multivalued: true
-    inlined: true
-    inlined_as_list: true
-  citation:
-    name: citation
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/citation
-    description: Citation details for a resource
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:citation
-    owner: Resource
-    domain_of:
-    - Resource
-    range: Citation
-    inlined: true
-    inlined_as_list: true
-  text:
-    name: text
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/text
-    description: Citation text
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:text
-    owner: Citation
-    domain_of:
-    - Citation
+    - Sp800171Family
+    - Sp800171Requirement
     range: string
   description:
     name: description
     definition_uri: https://w3id.org/lmodel/nist-sp-800-171/description
-    description: Resource description
-    in_subset:
-    - nist_sp_800_171r3_catalog
+    description: What the family or requirement is about, in the words of whoever
+      records it. SP 800-171 gives a family no text of its own, and a requirement's
+      own text goes in its statement, items and discussion.
+    comments:
+    - It means what LOKF's description means and carries the same IRI, so lokf adapt
+      folds it into LOKF's slot and a knowledge bundle reads one description key.
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:description
-    owner: Resource
+    mappings:
+    - schema:description
+    slot_uri: schema:description
+    owner: Sp800171Requirement
     domain_of:
-    - Resource
+    - Sp800171Family
+    - Sp800171Requirement
     range: string
-  rlinks:
-    name: rlinks
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/rlinks
-    description: Resource links
-    in_subset:
-    - nist_sp_800_171r3_catalog
+  sp800171Publication__sp800171_revision:
+    name: sp800171Publication__sp800171_revision
+    description: The revision of SP 800-171 the document renders, as NIST numbers
+      it, such as 3.
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:rlinks
-    owner: Resource
+    slot_uri: nist_sp_800_171:sp800171_revision
+    alias: sp800171_revision
+    owner: Sp800171Publication
     domain_of:
-    - Resource
-    range: ResourceLink
+    - Sp800171Publication
+    range: string
+    required: true
+    pattern: ^[1-9][0-9]*$
+  sp800171Publication__requirement_families:
+    name: sp800171Publication__requirement_families
+    description: The requirement families, in the order SP 800-171 gives them.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:requirement_families
+    alias: requirement_families
+    owner: Sp800171Publication
+    domain_of:
+    - Sp800171Publication
+    range: Sp800171Family
+    required: true
     multivalued: true
     inlined: true
     inlined_as_list: true
-  media-type:
-    name: media-type
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/media_type
-    description: Media type for a resource link
-    in_subset:
-    - nist_sp_800_171r3_catalog
+  sp800171Family__family_number:
+    name: sp800171Family__family_number
+    description: The family's number, such as 03.01.
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    aliases:
-    - media_type
-    slot_uri: nist_sp_800_171:media_type
-    owner: ResourceLink
+    slot_uri: nist_sp_800_171:family_number
+    alias: family_number
+    owner: Sp800171Family
     domain_of:
-    - ResourceLink
-    range: string
-  href:
-    name: href
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/href
-    description: Link or resource reference
-    in_subset:
-    - nist_sp_800_171r3_catalog
+    - Sp800171Family
+    range: sp800171_family_identifier
+    required: true
+  sp800171Family__family_requirements:
+    name: sp800171Family__family_requirements
+    description: The security requirements of the family, the withdrawn ones included,
+      in the order SP 800-171 numbers them. A knowledge bundle relates a requirement
+      to its family with isPartOf instead.
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:href
-    owner: Link
+    slot_uri: nist_sp_800_171:family_requirements
+    alias: family_requirements
+    owner: Sp800171Family
     domain_of:
-    - ResourceLink
-    - Link
-    range: string
-  rel:
-    name: rel
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/rel
-    description: Relationship type for a link
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:rel
-    owner: Link
-    domain_of:
-    - Link
-    range: string
-  select:
-    name: select
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/select
-    description: Selection constraints for an organization-defined parameter
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:select
-    owner: Parameter
-    domain_of:
-    - Parameter
-    range: ParameterSelection
+    - Sp800171Family
+    range: Sp800171Requirement
+    multivalued: true
     inlined: true
     inlined_as_list: true
-  how-many:
-    name: how-many
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/how_many
-    description: Cardinality constraint for parameter selection choices
-    in_subset:
-    - nist_sp_800_171r3_catalog
+  sp800171Requirement__requirement_id:
+    name: sp800171Requirement__requirement_id
+    description: The requirement's identifier, such as 03.01.01.
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    aliases:
-    - how_many
-    slot_uri: nist_sp_800_171:how_many
-    owner: ParameterSelection
+    slot_uri: nist_sp_800_171:requirement_id
+    alias: requirement_id
+    owner: Sp800171Requirement
     domain_of:
-    - ParameterSelection
-    range: HowManyValue
-  choice:
-    name: choice
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/choice
-    description: List of allowed values for a parameter selection
-    in_subset:
-    - nist_sp_800_171r3_catalog
+    - Sp800171Requirement
+    range: sp800171_requirement_identifier
+    required: true
+  sp800171Requirement__requirement_status:
+    name: sp800171Requirement__requirement_status
+    description: Withdrawn when Revision 3 withdrew the requirement. A requirement
+      with no status is in force.
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:choice
-    owner: ParameterSelection
+    slot_uri: nist_sp_800_171:requirement_status
+    alias: requirement_status
+    owner: Sp800171Requirement
     domain_of:
-    - ParameterSelection
+    - Sp800171Requirement
+    range: Sp800171RequirementStatus
+  sp800171Requirement__incorporated_into_requirements:
+    name: sp800171Requirement__incorporated_into_requirements
+    description: For a withdrawn requirement, the requirements of Revision 3 that
+      incorporate what it required, as the catalog states them.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:incorporated_into_requirements
+    alias: incorporated_into_requirements
+    owner: Sp800171Requirement
+    domain_of:
+    - Sp800171Requirement
+    range: sp800171_requirement_identifier
+    multivalued: true
+  sp800171Requirement__addressed_by_requirements:
+    name: sp800171Requirement__addressed_by_requirements
+    description: For a withdrawn requirement, the requirements of Revision 3 that
+      address what it required, as the catalog states them.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:addressed_by_requirements
+    alias: addressed_by_requirements
+    owner: Sp800171Requirement
+    domain_of:
+    - Sp800171Requirement
+    range: sp800171_requirement_identifier
+    multivalued: true
+  sp800171Requirement__requirement_statement:
+    name: sp800171Requirement__requirement_statement
+    description: The requirement statement when SP 800-171 writes it as one piece
+      of text and not as lettered items. The catalog marks an organization-defined
+      parameter in the text with an insert placeholder that names the parameter.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:requirement_statement
+    alias: requirement_statement
+    owner: Sp800171Requirement
+    domain_of:
+    - Sp800171Requirement
+    range: string
+    pattern: \S
+  sp800171Requirement__requirement_items:
+    name: sp800171Requirement__requirement_items
+    description: The lettered items of the requirement statement, in order, each with
+      its numbered items where it has them. A requirement has either these or a statement,
+      never both.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:requirement_items
+    alias: requirement_items
+    owner: Sp800171Requirement
+    domain_of:
+    - Sp800171Requirement
+    range: Sp800171RequirementItem
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  sp800171Requirement__requirement_discussion:
+    name: sp800171Requirement__requirement_discussion
+    description: 'The requirement''s discussion: SP 800-171''s explanation of what
+      the requirement means and how it relates to other requirements.'
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:requirement_discussion
+    alias: requirement_discussion
+    owner: Sp800171Requirement
+    domain_of:
+    - Sp800171Requirement
+    range: string
+    pattern: \S
+  sp800171Requirement__requirement_parameters:
+    name: sp800171Requirement__requirement_parameters
+    description: The organization-defined parameters the requirement statement leaves
+      to the organization, in the order SP 800-171A numbers them.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:requirement_parameters
+    alias: requirement_parameters
+    owner: Sp800171Requirement
+    domain_of:
+    - Sp800171Requirement
+    range: Sp800171Parameter
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  sp800171Requirement__requirement_objectives:
+    name: sp800171Requirement__requirement_objectives
+    description: 'The assessment objectives SP 800-171A gives the requirement: the
+      determination statements an assessor checks.'
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:requirement_objectives
+    alias: requirement_objectives
+    owner: Sp800171Requirement
+    domain_of:
+    - Sp800171Requirement
+    range: Sp800171AssessmentObjective
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  sp800171Requirement__requirement_methods:
+    name: sp800171Requirement__requirement_methods
+    description: The assessment methods SP 800-171A gives the requirement, each with
+      the objects it is applied to.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:requirement_methods
+    alias: requirement_methods
+    owner: Sp800171Requirement
+    domain_of:
+    - Sp800171Requirement
+    range: Sp800171AssessmentMethod
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  sp800171Requirement__requirement_references:
+    name: sp800171Requirement__requirement_references
+    description: The publications SP 800-171 lists under the requirement's references,
+      each with its citation and address as the catalog gives them.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:requirement_references
+    alias: requirement_references
+    owner: Sp800171Requirement
+    domain_of:
+    - Sp800171Requirement
+    range: Sp800171Reference
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  sp800171Requirement__source_controls:
+    name: sp800171Requirement__source_controls
+    description: The controls of SP 800-53 Revision 5 the requirement is drawn from,
+      by their identifiers, as the catalog lists them among the requirement's references.
+      The identifier is data; the schema maps nothing to a model of SP 800-53.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:source_controls
+    alias: source_controls
+    owner: Sp800171Requirement
+    domain_of:
+    - Sp800171Requirement
+    range: sp800171_source_control_identifier
+    multivalued: true
+  sp800171RequirementItem__requirement_item_id:
+    name: sp800171RequirementItem__requirement_item_id
+    description: The item's identifier, such as 03.01.01.a.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:requirement_item_id
+    alias: requirement_item_id
+    owner: Sp800171RequirementItem
+    domain_of:
+    - Sp800171RequirementItem
+    range: sp800171_item_identifier
+    required: true
+  sp800171RequirementItem__requirement_item_text:
+    name: sp800171RequirementItem__requirement_item_text
+    description: What the item requires. The catalog marks an organization-defined
+      parameter in the text with an insert placeholder that names the parameter.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:requirement_item_text
+    alias: requirement_item_text
+    owner: Sp800171RequirementItem
+    domain_of:
+    - Sp800171RequirementItem
+    range: string
+    required: true
+    pattern: \S
+  sp800171RequirementItem__requirement_subitems:
+    name: sp800171RequirementItem__requirement_subitems
+    description: The numbered items under a lettered item, in order.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:requirement_subitems
+    alias: requirement_subitems
+    owner: Sp800171RequirementItem
+    domain_of:
+    - Sp800171RequirementItem
+    range: Sp800171RequirementItem
+    multivalued: true
+    inlined: true
+    inlined_as_list: true
+  sp800171Parameter__odp_id:
+    name: sp800171Parameter__odp_id
+    description: The parameter's identifier, such as A.03.01.01.ODP[01].
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:odp_id
+    alias: odp_id
+    owner: Sp800171Parameter
+    domain_of:
+    - Sp800171Parameter
+    range: sp800171_odp_identifier
+    required: true
+  sp800171Parameter__odp_label:
+    name: sp800171Parameter__odp_label
+    description: What kind of value the parameter takes, such as time period or frequency,
+      or SELECTED PARAMETER VALUES for a selection.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:odp_label
+    alias: odp_label
+    owner: Sp800171Parameter
+    domain_of:
+    - Sp800171Parameter
+    range: string
+    required: true
+    pattern: \S
+  sp800171Parameter__odp_usage:
+    name: sp800171Parameter__odp_usage
+    description: How the requirement statement names the parameter, such as organization-defined
+      time period.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:odp_usage
+    alias: odp_usage
+    owner: Sp800171Parameter
+    domain_of:
+    - Sp800171Parameter
+    range: string
+  sp800171Parameter__odp_guideline:
+    name: sp800171Parameter__odp_guideline
+    description: 'The determination SP 800-171A gives for the parameter: what the
+      organization must have defined, such as the time period for account inactivity
+      before disabling is defined.'
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:odp_guideline
+    alias: odp_guideline
+    owner: Sp800171Parameter
+    domain_of:
+    - Sp800171Parameter
+    range: string
+  sp800171Parameter__odp_choices:
+    name: sp800171Parameter__odp_choices
+    description: For a selection, the choices SP 800-171 offers, in its order. A choice
+      may itself carry an insert placeholder naming another parameter.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:odp_choices
+    alias: odp_choices
+    owner: Sp800171Parameter
+    domain_of:
+    - Sp800171Parameter
     range: string
     multivalued: true
-  IdentifiedElement__class:
-    name: IdentifiedElement__class
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/_class
-    description: Classification of a catalog element (e.g. family, requirement, security_requirement)
-    in_subset:
-    - nist_sp_800_171r3_catalog
+  sp800171Parameter__odp_selection_count:
+    name: sp800171Parameter__odp_selection_count
+    description: How many of the choices a selection takes.
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    is_a: _class
-    domain: IdentifiedElement
-    slot_uri: nist_sp_800_171:class
-    alias: class
-    owner: IdentifiedElement
+    slot_uri: nist_sp_800_171:odp_selection_count
+    alias: odp_selection_count
+    owner: Sp800171Parameter
     domain_of:
-    - IdentifiedElement
-    is_usage_slot: true
-    usage_slot_name: _class
-    range: CatalogElementClassValue
-  Part__class:
-    name: Part__class
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/_class
-    description: Classification of a catalog element (e.g. family, requirement, security_requirement)
-    in_subset:
-    - nist_sp_800_171r3_catalog
+    - Sp800171Parameter
+    range: Sp800171SelectionCount
+  sp800171AssessmentObjective__requirement_objective_id:
+    name: sp800171AssessmentObjective__requirement_objective_id
+    description: The objective's identifier, such as A.03.01.01.b[01].
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    is_a: _class
-    domain: Part
-    slot_uri: nist_sp_800_171:class
-    alias: class
-    owner: Part
+    slot_uri: nist_sp_800_171:requirement_objective_id
+    alias: requirement_objective_id
+    owner: Sp800171AssessmentObjective
     domain_of:
-    - Part
+    - Sp800171AssessmentObjective
+    range: sp800171_objective_identifier
+    required: true
+  sp800171AssessmentObjective__requirement_determination:
+    name: sp800171AssessmentObjective__requirement_determination
+    description: 'The determination statement: what the assessor determines is the
+      case, such as system accounts are created in accordance with organizational
+      policy, procedures, prerequisites, and criteria.'
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:requirement_determination
+    alias: requirement_determination
+    owner: Sp800171AssessmentObjective
+    domain_of:
+    - Sp800171AssessmentObjective
+    range: string
+    required: true
+    pattern: \S
+  sp800171AssessmentObjective__assessed_requirement_item:
+    name: sp800171AssessmentObjective__assessed_requirement_item
+    description: The statement item the objective assesses, such as 03.01.01.b. Absent
+      when the objective assesses a requirement whose statement is one piece of text.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:assessed_requirement_item
+    alias: assessed_requirement_item
+    owner: Sp800171AssessmentObjective
+    domain_of:
+    - Sp800171AssessmentObjective
+    range: sp800171_item_identifier
+  sp800171AssessmentMethod__requirement_method_kind:
+    name: sp800171AssessmentMethod__requirement_method_kind
+    description: Which method it is.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:requirement_method_kind
+    alias: requirement_method_kind
+    owner: Sp800171AssessmentMethod
+    domain_of:
+    - Sp800171AssessmentMethod
+    range: Sp800171AssessmentMethodKind
+    required: true
+  sp800171AssessmentMethod__requirement_method_objects:
+    name: sp800171AssessmentMethod__requirement_method_objects
+    description: The assessment objects, one entry each, in the order SP 800-171A
+      lists them, such as access control policy and procedures or system administrators.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:requirement_method_objects
+    alias: requirement_method_objects
+    owner: Sp800171AssessmentMethod
+    domain_of:
+    - Sp800171AssessmentMethod
+    range: string
+    required: true
+    multivalued: true
+    pattern: \S
+  sp800171Reference__cited_publication:
+    name: sp800171Reference__cited_publication
+    description: The publication's short name, such as SP 800-63-3.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:cited_publication
+    alias: cited_publication
+    owner: Sp800171Reference
+    domain_of:
+    - Sp800171Reference
+    range: sp800171_cited_publication_name
+    required: true
+  sp800171Reference__cited_publication_citation:
+    name: sp800171Reference__cited_publication_citation
+    description: The full citation, as the catalog's back matter gives it.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:cited_publication_citation
+    alias: cited_publication_citation
+    owner: Sp800171Reference
+    domain_of:
+    - Sp800171Reference
+    range: string
+  sp800171Reference__cited_publication_url:
+    name: sp800171Reference__cited_publication_url
+    description: The publication's address, which the catalog gives as its digital
+      object identifier.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:cited_publication_url
+    alias: cited_publication_url
+    owner: Sp800171Reference
+    domain_of:
+    - Sp800171Reference
+    range: uri
+  Sp800171Family_title:
+    name: Sp800171Family_title
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/title
+    description: The name SP 800-171 gives a family or a security requirement, such
+      as Access Control or Account Management.
+    comments:
+    - It means what LOKF's title means and carries the same IRI, so lokf adapt folds
+      it into LOKF's slot and a knowledge bundle reads one title key.
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    mappings:
+    - schema:name
+    is_a: title
+    domain: Sp800171Family
+    slot_uri: schema:name
+    alias: title
+    owner: Sp800171Family
+    domain_of:
+    - Sp800171Family
     is_usage_slot: true
-    usage_slot_name: _class
-    range: PartClassValue
+    usage_slot_name: title
+    range: string
+    required: true
 classes:
-  SP800171Document:
-    name: SP800171Document
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/SP800171Document
-    description: Root wrapper for SP 800-171 catalog content
-    in_subset:
-    - nist_sp_800_171r3_catalog
+  Sp800171Publication:
+    name: Sp800171Publication
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171Publication
+    description: 'One revision of SP 800-171 as a whole: its requirement families,
+      each holding its security requirements, with the assessment procedures of the
+      matching revision of SP 800-171A inside each requirement.'
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    see_also:
+    - https://csrc.nist.gov/pubs/sp/800/171/r3/final
     mappings:
-    - linkml:Any
+    - nist_sp_800_171:Publication
+    broad_mappings:
+    - oscal:Catalog
     slots:
-    - catalog
-    class_uri: linkml:Any
+    - sp800171Publication__sp800171_revision
+    - sp800171Publication__requirement_families
+    attributes:
+      sp800171_revision:
+        name: sp800171_revision
+        description: The revision of SP 800-171 the document renders, as NIST numbers
+          it, such as 3.
+        required: true
+        pattern: ^[1-9][0-9]*$
+      requirement_families:
+        name: requirement_families
+        description: The requirement families, in the order SP 800-171 gives them.
+        range: Sp800171Family
+        required: true
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+    class_uri: nist_sp_800_171:Publication
     tree_root: true
-  CatalogBody:
-    name: CatalogBody
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/CatalogBody
-    description: Main catalog object
-    in_subset:
-    - nist_sp_800_171r3_catalog
+  Sp800171Family:
+    name: Sp800171Family
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171Family
+    description: One of the seventeen families that SP 800-171 Revision 3 sorts its
+      security requirements into, such as Access Control (03.01) or Supply Chain Risk
+      Management (03.17).
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    see_also:
+    - https://csrc.nist.gov/pubs/sp/800/171/r3/final
     mappings:
-    - linkml:Any
+    - nist_sp_800_171:Family
+    broad_mappings:
+    - oscal:Group
     slots:
-    - uuid
-    - metadata
-    - groups
-    - back-matter
-    class_uri: linkml:Any
-  Metadata:
-    name: Metadata
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Metadata
-    description: OSCAL metadata section
-    in_subset:
-    - nist_sp_800_171r3_catalog
+    - Sp800171Family_title
+    - description
+    - sp800171Family__family_number
+    - sp800171Family__family_requirements
+    slot_usage:
+      title:
+        name: title
+        required: true
+    attributes:
+      family_number:
+        name: family_number
+        description: The family's number, such as 03.01.
+        range: sp800171_family_identifier
+        required: true
+      family_requirements:
+        name: family_requirements
+        description: The security requirements of the family, the withdrawn ones included,
+          in the order SP 800-171 numbers them. A knowledge bundle relates a requirement
+          to its family with isPartOf instead.
+        range: Sp800171Requirement
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+    class_uri: nist_sp_800_171:Family
+  Sp800171Requirement:
+    name: Sp800171Requirement
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement
+    description: 'A security requirement of SP 800-171: a numbered, named requirement
+      for protecting CUI, with its statement, discussion, references and source controls,
+      the organization-defined parameters its statement leaves open, and the assessment
+      objectives and methods SP 800-171A gives it. A requirement that Revision 3 withdrew
+      keeps its number and says which requirements took its place.'
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    see_also:
+    - https://csrc.nist.gov/pubs/sp/800/171/r3/final
     mappings:
-    - linkml:Any
+    - nist_sp_800_171:Requirement
+    broad_mappings:
+    - oscal:Control
     slots:
-    - title
-    - published
-    - last-modified
-    - version
-    - oscal-version
-    - props
-    - links
-    - roles
-    - parties
-    - responsible-parties
-    class_uri: linkml:Any
-  Role:
-    name: Role
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Role
-    description: Role definition
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slots:
-    - id
-    - title
-    class_uri: nist_sp_800_171:Role
-  Party:
-    name: Party
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Party
-    description: Party definition
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    mappings:
-    - linkml:Any
-    slots:
-    - uuid
-    - type
-    - name
-    - short-name
-    - email-addresses
-    - addresses
-    class_uri: linkml:Any
-  Address:
-    name: Address
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Address
-    description: Postal address
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    mappings:
-    - linkml:Any
-    slots:
-    - addr-lines
-    - city
-    - state
-    - postal-code
-    class_uri: linkml:Any
-  ResponsibleParty:
-    name: ResponsibleParty
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/ResponsibleParty
-    description: Assignment of parties to a role
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    mappings:
-    - linkml:Any
-    slots:
-    - role-id
-    - party-uuids
-    class_uri: linkml:Any
-  BackMatter:
-    name: BackMatter
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/BackMatter
-    description: OSCAL back-matter section
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    mappings:
-    - linkml:Any
-    slots:
-    - resources
-    class_uri: linkml:Any
-  Resource:
-    name: Resource
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Resource
-    description: Referenced resource
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    mappings:
-    - linkml:Any
-    slots:
-    - uuid
     - title
     - description
-    - citation
-    - rlinks
-    class_uri: linkml:Any
-  Citation:
-    name: Citation
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Citation
-    description: Citation wrapper
-    in_subset:
-    - nist_sp_800_171r3_catalog
+    - sp800171Requirement__requirement_id
+    - sp800171Requirement__requirement_status
+    - sp800171Requirement__incorporated_into_requirements
+    - sp800171Requirement__addressed_by_requirements
+    - sp800171Requirement__requirement_statement
+    - sp800171Requirement__requirement_items
+    - sp800171Requirement__requirement_discussion
+    - sp800171Requirement__requirement_parameters
+    - sp800171Requirement__requirement_objectives
+    - sp800171Requirement__requirement_methods
+    - sp800171Requirement__requirement_references
+    - sp800171Requirement__source_controls
+    attributes:
+      requirement_id:
+        name: requirement_id
+        description: The requirement's identifier, such as 03.01.01.
+        range: sp800171_requirement_identifier
+        required: true
+      requirement_status:
+        name: requirement_status
+        description: Withdrawn when Revision 3 withdrew the requirement. A requirement
+          with no status is in force.
+        range: Sp800171RequirementStatus
+      incorporated_into_requirements:
+        name: incorporated_into_requirements
+        description: For a withdrawn requirement, the requirements of Revision 3 that
+          incorporate what it required, as the catalog states them.
+        range: sp800171_requirement_identifier
+        multivalued: true
+      addressed_by_requirements:
+        name: addressed_by_requirements
+        description: For a withdrawn requirement, the requirements of Revision 3 that
+          address what it required, as the catalog states them.
+        range: sp800171_requirement_identifier
+        multivalued: true
+      requirement_statement:
+        name: requirement_statement
+        description: The requirement statement when SP 800-171 writes it as one piece
+          of text and not as lettered items. The catalog marks an organization-defined
+          parameter in the text with an insert placeholder that names the parameter.
+        pattern: \S
+      requirement_items:
+        name: requirement_items
+        description: The lettered items of the requirement statement, in order, each
+          with its numbered items where it has them. A requirement has either these
+          or a statement, never both.
+        range: Sp800171RequirementItem
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      requirement_discussion:
+        name: requirement_discussion
+        description: 'The requirement''s discussion: SP 800-171''s explanation of
+          what the requirement means and how it relates to other requirements.'
+        pattern: \S
+      requirement_parameters:
+        name: requirement_parameters
+        description: The organization-defined parameters the requirement statement
+          leaves to the organization, in the order SP 800-171A numbers them.
+        range: Sp800171Parameter
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      requirement_objectives:
+        name: requirement_objectives
+        description: 'The assessment objectives SP 800-171A gives the requirement:
+          the determination statements an assessor checks.'
+        range: Sp800171AssessmentObjective
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      requirement_methods:
+        name: requirement_methods
+        description: The assessment methods SP 800-171A gives the requirement, each
+          with the objects it is applied to.
+        range: Sp800171AssessmentMethod
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      requirement_references:
+        name: requirement_references
+        description: The publications SP 800-171 lists under the requirement's references,
+          each with its citation and address as the catalog gives them.
+        range: Sp800171Reference
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+      source_controls:
+        name: source_controls
+        description: The controls of SP 800-53 Revision 5 the requirement is drawn
+          from, by their identifiers, as the catalog lists them among the requirement's
+          references. The identifier is data; the schema maps nothing to a model of
+          SP 800-53.
+        range: sp800171_source_control_identifier
+        multivalued: true
+    class_uri: nist_sp_800_171:Requirement
+  Sp800171RequirementItem:
+    name: Sp800171RequirementItem
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementItem
+    description: 'One item of a requirement statement: a lettered item such as 03.01.01.a,
+      or a numbered item under a lettered one such as 03.01.01.c.01.'
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    see_also:
+    - https://csrc.nist.gov/pubs/sp/800/171/r3/final
     mappings:
-    - linkml:Any
+    - nist_sp_800_171:RequirementItem
+    broad_mappings:
+    - oscal:Part
     slots:
-    - text
-    class_uri: linkml:Any
-  ResourceLink:
-    name: ResourceLink
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/ResourceLink
-    description: Reference link for a resource
-    in_subset:
-    - nist_sp_800_171r3_catalog
+    - sp800171RequirementItem__requirement_item_id
+    - sp800171RequirementItem__requirement_item_text
+    - sp800171RequirementItem__requirement_subitems
+    attributes:
+      requirement_item_id:
+        name: requirement_item_id
+        description: The item's identifier, such as 03.01.01.a.
+        range: sp800171_item_identifier
+        required: true
+      requirement_item_text:
+        name: requirement_item_text
+        description: What the item requires. The catalog marks an organization-defined
+          parameter in the text with an insert placeholder that names the parameter.
+        required: true
+        pattern: \S
+      requirement_subitems:
+        name: requirement_subitems
+        description: The numbered items under a lettered item, in order.
+        range: Sp800171RequirementItem
+        multivalued: true
+        inlined: true
+        inlined_as_list: true
+    class_uri: nist_sp_800_171:RequirementItem
+  Sp800171Parameter:
+    name: Sp800171Parameter
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171Parameter
+    description: 'An organization-defined parameter (ODP): a value, such as a time
+      period or a frequency, that a requirement statement leaves to the organization,
+      with the guideline SP 800-171A gives for defining it. A few parameters are a
+      selection among choices instead of a value.'
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    see_also:
+    - https://doi.org/10.6028/NIST.SP.800-171Ar3
     mappings:
-    - linkml:Any
+    - nist_sp_800_171:Parameter
+    broad_mappings:
+    - oscal:OscalParameter
     slots:
-    - href
-    - media-type
-    class_uri: linkml:Any
-  CatalogElement:
-    name: CatalogElement
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/CatalogElement
-    description: Base class for catalog elements with id, props, links, and parts
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    abstract: true
-    slots:
-    - id
-    - props
-    - links
-    - parts
-    class_uri: nist_sp_800_171:CatalogElement
-  IdentifiedElement:
-    name: IdentifiedElement
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/IdentifiedElement
-    description: A catalog element with required id, title, and optional class/label
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    is_a: CatalogElement
-    slots:
-    - id
-    - props
-    - links
-    - parts
-    - title
-    - IdentifiedElement__class
-    - label
-    slot_usage:
-      _class:
-        name: _class
-        range: CatalogElementClassValue
-    class_uri: nist_sp_800_171:IdentifiedElement
-  ControlGroup:
-    name: ControlGroup
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/ControlGroup
-    description: A family group of security requirements
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    is_a: IdentifiedElement
-    slots:
-    - id
-    - props
-    - links
-    - parts
-    - title
-    - IdentifiedElement__class
-    - label
-    - controls
-    class_uri: nist_sp_800_171:ControlGroup
-  Control:
-    name: Control
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Control
-    description: A security requirement
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    is_a: IdentifiedElement
-    slots:
-    - id
-    - props
-    - links
-    - parts
-    - title
-    - IdentifiedElement__class
-    - label
-    - params
-    class_uri: nist_sp_800_171:Control
-  Parameter:
-    name: Parameter
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Parameter
-    description: An organization-defined parameter for a security requirement
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    is_a: IdentifiedElement
-    slots:
-    - id
-    - props
-    - links
-    - parts
-    - title
-    - IdentifiedElement__class
-    - label
-    - usage
-    - guidelines
-    - select
+    - sp800171Parameter__odp_id
+    - sp800171Parameter__odp_label
+    - sp800171Parameter__odp_usage
+    - sp800171Parameter__odp_guideline
+    - sp800171Parameter__odp_choices
+    - sp800171Parameter__odp_selection_count
+    attributes:
+      odp_id:
+        name: odp_id
+        description: The parameter's identifier, such as A.03.01.01.ODP[01].
+        range: sp800171_odp_identifier
+        required: true
+      odp_label:
+        name: odp_label
+        description: What kind of value the parameter takes, such as time period or
+          frequency, or SELECTED PARAMETER VALUES for a selection.
+        required: true
+        pattern: \S
+      odp_usage:
+        name: odp_usage
+        description: How the requirement statement names the parameter, such as organization-defined
+          time period.
+      odp_guideline:
+        name: odp_guideline
+        description: 'The determination SP 800-171A gives for the parameter: what
+          the organization must have defined, such as the time period for account
+          inactivity before disabling is defined.'
+      odp_choices:
+        name: odp_choices
+        description: For a selection, the choices SP 800-171 offers, in its order.
+          A choice may itself carry an insert placeholder naming another parameter.
+        multivalued: true
+      odp_selection_count:
+        name: odp_selection_count
+        description: How many of the choices a selection takes.
+        range: Sp800171SelectionCount
     class_uri: nist_sp_800_171:Parameter
-  ParameterSelection:
-    name: ParameterSelection
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/ParameterSelection
-    description: Selection constraints specifying allowed values for a parameter
-    in_subset:
-    - nist_sp_800_171r3_catalog
+  Sp800171AssessmentObjective:
+    name: Sp800171AssessmentObjective
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentObjective
+    description: 'An assessment objective of SP 800-171A: one determination statement
+      that an assessor checks, tied to the requirement or to one item of its statement.'
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    see_also:
+    - https://doi.org/10.6028/NIST.SP.800-171Ar3
     mappings:
-    - linkml:Any
+    - nist_sp_800_171:AssessmentObjective
+    broad_mappings:
+    - oscal:Part
     slots:
-    - how-many
-    - choice
-    class_uri: linkml:Any
-  Guideline:
-    name: Guideline
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Guideline
-    description: Additional prose guidance associated with a parameter
-    in_subset:
-    - nist_sp_800_171r3_catalog
+    - sp800171AssessmentObjective__requirement_objective_id
+    - sp800171AssessmentObjective__requirement_determination
+    - sp800171AssessmentObjective__assessed_requirement_item
+    attributes:
+      requirement_objective_id:
+        name: requirement_objective_id
+        description: The objective's identifier, such as A.03.01.01.b[01].
+        range: sp800171_objective_identifier
+        required: true
+      requirement_determination:
+        name: requirement_determination
+        description: 'The determination statement: what the assessor determines is
+          the case, such as system accounts are created in accordance with organizational
+          policy, procedures, prerequisites, and criteria.'
+        required: true
+        pattern: \S
+      assessed_requirement_item:
+        name: assessed_requirement_item
+        description: The statement item the objective assesses, such as 03.01.01.b.
+          Absent when the objective assesses a requirement whose statement is one
+          piece of text.
+        range: sp800171_item_identifier
+    class_uri: nist_sp_800_171:AssessmentObjective
+  Sp800171AssessmentMethod:
+    name: Sp800171AssessmentMethod
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethod
+    description: One of the three assessment methods SP 800-171A applies to a requirement,
+      examine, interview or test, with the assessment objects (documents, people,
+      processes or mechanisms) it is applied to.
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    see_also:
+    - https://doi.org/10.6028/NIST.SP.800-171Ar3
+    mappings:
+    - nist_sp_800_171:AssessmentMethod
+    broad_mappings:
+    - oscal:Part
     slots:
-    - prose
-    class_uri: nist_sp_800_171:Guideline
-  Property:
-    name: Property
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Property
-    description: A name-value property with optional namespace
-    in_subset:
-    - nist_sp_800_171r3_catalog
+    - sp800171AssessmentMethod__requirement_method_kind
+    - sp800171AssessmentMethod__requirement_method_objects
+    attributes:
+      requirement_method_kind:
+        name: requirement_method_kind
+        description: Which method it is.
+        range: Sp800171AssessmentMethodKind
+        required: true
+      requirement_method_objects:
+        name: requirement_method_objects
+        description: The assessment objects, one entry each, in the order SP 800-171A
+          lists them, such as access control policy and procedures or system administrators.
+        required: true
+        multivalued: true
+        pattern: \S
+    class_uri: nist_sp_800_171:AssessmentMethod
+  Sp800171Reference:
+    name: Sp800171Reference
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171Reference
+    description: A publication that SP 800-171 lists under a requirement's references,
+      by the short name the publication gives it, with the full citation and the address
+      NIST's catalog gives it.
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    see_also:
+    - https://csrc.nist.gov/pubs/sp/800/171/r3/final
+    mappings:
+    - nist_sp_800_171:Reference
+    broad_mappings:
+    - oscal:Resource
     slots:
-    - name
-    - value
-    - ns
-    - _class
-    class_uri: nist_sp_800_171:Property
-  Link:
-    name: Link
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Link
-    description: Relationship link
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slots:
-    - href
-    - rel
-    class_uri: nist_sp_800_171:Link
-  Part:
-    name: Part
-    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Part
-    description: Structured narrative part containing prose and optional nested parts.
-      Used for statements, guidance, assessment-objectives, and assessment-methods.
-    in_subset:
-    - nist_sp_800_171r3_catalog
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    is_a: CatalogElement
-    slots:
-    - id
-    - props
-    - links
-    - parts
-    - name
-    - Part__class
-    - prose
-    slot_usage:
-      _class:
-        name: _class
-        range: PartClassValue
-    class_uri: nist_sp_800_171:Part
+    - sp800171Reference__cited_publication
+    - sp800171Reference__cited_publication_citation
+    - sp800171Reference__cited_publication_url
+    attributes:
+      cited_publication:
+        name: cited_publication
+        description: The publication's short name, such as SP 800-63-3.
+        range: sp800171_cited_publication_name
+        required: true
+      cited_publication_citation:
+        name: cited_publication_citation
+        description: The full citation, as the catalog's back matter gives it.
+      cited_publication_url:
+        name: cited_publication_url
+        description: The publication's address, which the catalog gives as its digital
+          object identifier.
+        range: uri
+    class_uri: nist_sp_800_171:Reference
 metamodel_version: 1.7.0
 source_file: nist_sp_800_171.yaml
-source_file_date: '2026-03-20T22:59:04'
-source_file_size: 13000
-generation_date: '2026-03-20T23:39:47'
+source_file_date: '2026-10-29T21:28:50'
+source_file_size: 19821
+generation_date: '2026-10-29T21:28:51'
 

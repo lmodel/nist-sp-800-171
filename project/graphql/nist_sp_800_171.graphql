@@ -1,178 +1,88 @@
 # metamodel_version: 1.7.0
 # version: 3.0.0
-enum AssessmentMethodValue
+enum Sp800171AssessmentMethodKind
   {
-    EXAMINE
-    INTERVIEW
-    TEST
+    examine
+    interview
+    test
   }
 
-enum CatalogElementClassValue
+enum Sp800171RequirementStatus
   {
-    family
-    requirement
+    withdrawn
   }
 
-enum HowManyValue
+enum Sp800171SelectionCount
   {
     one
-    one__HYPHEN_MINUS__or__HYPHEN_MINUS__more
+    one_or_more
   }
 
-enum PartClassValue
+type Sp800171AssessmentMethod
   {
-    security_requirement
+    requirementMethodKind: Sp800171AssessmentMethodKind!
+    requirementMethodObjects: [String]!
   }
 
-scalar Address
-    addr-lines: [String]
-    city: String
-    state: String
-    postal-code: String
-
-scalar BackMatter
-    resources: [Resource]
-
-scalar CatalogBody
-    uuid: String
-    metadata: Metadata
-    groups: [ControlGroup]
-    back-matter: BackMatter
-
-interface CatalogElement
+type Sp800171AssessmentObjective
   {
-    id: String
-    props: [Property]
-    links: [Link]
-    parts: [Part]
+    requirementObjectiveId: Sp800171ObjectiveIdentifier!
+    requirementDetermination: String!
+    assessedRequirementItem: Sp800171ItemIdentifier
   }
 
-scalar Citation
-    text: String
-
-type Control
+type Sp800171Family
   {
-    id: String
-    props: [Property]
-    links: [Link]
-    parts: [Part]
-    title: String
-    class: CatalogElementClassValue
-    label: String
-    params: [Parameter]
+    title: String!
+    description: String
+    familyNumber: Sp800171FamilyIdentifier!
+    familyRequirements: [Sp800171Requirement]
   }
 
-type ControlGroup
+type Sp800171Parameter
   {
-    id: String
-    props: [Property]
-    links: [Link]
-    parts: [Part]
-    title: String
-    class: CatalogElementClassValue
-    label: String
-    controls: [Control]
+    odpId: Sp800171OdpIdentifier!
+    odpLabel: String!
+    odpUsage: String
+    odpGuideline: String
+    odpChoices: [String]
+    odpSelectionCount: Sp800171SelectionCount
   }
 
-type Guideline
+type Sp800171Publication
   {
-    prose: String
+    sp800171Revision: String!
+    requirementFamilies: [Sp800171Family]!
   }
 
-type IdentifiedElement
+type Sp800171Reference
   {
-    id: String
-    props: [Property]
-    links: [Link]
-    parts: [Part]
-    title: String
-    class: CatalogElementClassValue
-    label: String
+    citedPublication: Sp800171CitedPublicationName!
+    citedPublicationCitation: String
+    citedPublicationUrl: String
   }
 
-type Link
+type Sp800171Requirement
   {
-    href: String
-    rel: String
-  }
-
-scalar Metadata
-    title: String
-    published: String
-    last-modified: String
-    version: String
-    oscal-version: String
-    props: [Property]
-    links: [Link]
-    roles: [Role]
-    parties: [Party]
-    responsible-parties: [ResponsibleParty]
-
-type Parameter
-  {
-    id: String
-    props: [Property]
-    links: [Link]
-    parts: [Part]
-    title: String
-    class: CatalogElementClassValue
-    label: String
-    usage: String
-    guidelines: [Guideline]
-    select: ParameterSelection
-  }
-
-scalar ParameterSelection
-    how-many: HowManyValue
-    choice: [String]
-
-type Part
-  {
-    id: String
-    props: [Property]
-    links: [Link]
-    parts: [Part]
-    name: String
-    class: PartClassValue
-    prose: String
-  }
-
-scalar Party
-    uuid: String
-    type: String
-    name: String
-    short-name: String
-    email-addresses: [String]
-    addresses: [Address]
-
-type Property
-  {
-    name: String
-    value: String
-    ns: String
-    class: String
-  }
-
-scalar Resource
-    uuid: String
     title: String
     description: String
-    citation: Citation
-    rlinks: [ResourceLink]
-
-scalar ResourceLink
-    href: String
-    media-type: String
-
-scalar ResponsibleParty
-    role-id: String
-    party-uuids: [String]
-
-type Role
-  {
-    id: String
-    title: String
+    requirementId: Sp800171RequirementIdentifier!
+    requirementStatus: Sp800171RequirementStatus
+    incorporatedIntoRequirements: [Sp800171RequirementIdentifier]
+    addressedByRequirements: [Sp800171RequirementIdentifier]
+    requirementStatement: String
+    requirementItems: [Sp800171RequirementItem]
+    requirementDiscussion: String
+    requirementParameters: [Sp800171Parameter]
+    requirementObjectives: [Sp800171AssessmentObjective]
+    requirementMethods: [Sp800171AssessmentMethod]
+    requirementReferences: [Sp800171Reference]
+    sourceControls: [Sp800171SourceControlIdentifier]
   }
 
-scalar SP800171Document
-    catalog: CatalogBody
+type Sp800171RequirementItem
+  {
+    requirementItemId: Sp800171ItemIdentifier!
+    requirementItemText: String!
+    requirementSubitems: [Sp800171RequirementItem]
+  }

@@ -1,11 +1,113 @@
 {
     "$defs": {
-        "Address": {
-            "additionalProperties": true,
-            "description": "Postal address",
+        "Sp800171AssessmentMethod": {
+            "additionalProperties": false,
+            "description": "One of the three assessment methods SP 800-171A applies to a requirement, examine, interview or test, with the assessment objects (documents, people, processes or mechanisms) it is applied to.",
             "properties": {
-                "addr_lines": {
-                    "description": "Address lines",
+                "requirement_method_kind": {
+                    "$ref": "#/$defs/Sp800171AssessmentMethodKind",
+                    "description": "Which method it is."
+                },
+                "requirement_method_objects": {
+                    "description": "The assessment objects, one entry each, in the order SP 800-171A lists them, such as access control policy and procedures or system administrators.",
+                    "items": {
+                        "pattern": "\\S",
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "requirement_method_kind",
+                "requirement_method_objects"
+            ],
+            "title": "Sp800171AssessmentMethod",
+            "type": "object"
+        },
+        "Sp800171AssessmentMethodKind": {
+            "description": "The three assessment methods of SP 800-171A.",
+            "enum": [
+                "examine",
+                "interview",
+                "test"
+            ],
+            "title": "Sp800171AssessmentMethodKind",
+            "type": "string"
+        },
+        "Sp800171AssessmentObjective": {
+            "additionalProperties": false,
+            "description": "An assessment objective of SP 800-171A: one determination statement that an assessor checks, tied to the requirement or to one item of its statement.",
+            "properties": {
+                "assessed_requirement_item": {
+                    "description": "The statement item the objective assesses, such as 03.01.01.b. Absent when the objective assesses a requirement whose statement is one piece of text.",
+                    "pattern": "^03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])\\.[a-z](\\.(0[1-9]|[1-9][0-9]))?$",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "requirement_determination": {
+                    "description": "The determination statement: what the assessor determines is the case, such as system accounts are created in accordance with organizational policy, procedures, prerequisites, and criteria.",
+                    "pattern": "\\S",
+                    "type": "string"
+                },
+                "requirement_objective_id": {
+                    "description": "The objective's identifier, such as A.03.01.01.b[01].",
+                    "pattern": "^A\\.03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])(\\.[a-z](\\.(0[1-9]|[1-9][0-9]))?)?(\\[(0[1-9]|[1-9][0-9])\\])?$",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "requirement_objective_id",
+                "requirement_determination"
+            ],
+            "title": "Sp800171AssessmentObjective",
+            "type": "object"
+        },
+        "Sp800171Family": {
+            "additionalProperties": false,
+            "description": "One of the seventeen families that SP 800-171 Revision 3 sorts its security requirements into, such as Access Control (03.01) or Supply Chain Risk Management (03.17).",
+            "properties": {
+                "description": {
+                    "description": "What the family or requirement is about, in the words of whoever records it. SP 800-171 gives a family no text of its own, and a requirement's own text goes in its statement, items and discussion.",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "family_number": {
+                    "description": "The family's number, such as 03.01.",
+                    "pattern": "^03\\.(0[1-9]|1[0-7])$",
+                    "type": "string"
+                },
+                "family_requirements": {
+                    "description": "The security requirements of the family, the withdrawn ones included, in the order SP 800-171 numbers them. A knowledge bundle relates a requirement to its family with isPartOf instead.",
+                    "items": {
+                        "$ref": "#/$defs/Sp800171Requirement"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "title": {
+                    "description": "The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management.",
+                    "type": "string"
+                }
+            },
+            "required": [
+                "title",
+                "family_number"
+            ],
+            "title": "Sp800171Family",
+            "type": "object"
+        },
+        "Sp800171Parameter": {
+            "additionalProperties": false,
+            "description": "An organization-defined parameter (ODP): a value, such as a time period or a frequency, that a requirement statement leaves to the organization, with the guideline SP 800-171A gives for defining it. A few parameters are a selection among choices instead of a value.",
+            "properties": {
+                "odp_choices": {
+                    "description": "For a selection, the choices SP 800-171 offers, in its order. A choice may itself carry an insert placeholder naming another parameter.",
                     "items": {
                         "type": "string"
                     },
@@ -14,887 +116,122 @@
                         "null"
                     ]
                 },
-                "city": {
-                    "description": "City name",
+                "odp_guideline": {
+                    "description": "The determination SP 800-171A gives for the parameter: what the organization must have defined, such as the time period for account inactivity before disabling is defined.",
                     "type": [
                         "string",
                         "null"
                     ]
                 },
-                "postal_code": {
-                    "description": "Postal code",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
+                "odp_id": {
+                    "description": "The parameter's identifier, such as A.03.01.01.ODP[01].",
+                    "pattern": "^A\\.03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])\\.ODP\\[(0[1-9]|[1-9][0-9])\\]$",
+                    "type": "string"
                 },
-                "state": {
-                    "description": "State or region",
+                "odp_label": {
+                    "description": "What kind of value the parameter takes, such as time period or frequency, or SELECTED PARAMETER VALUES for a selection.",
+                    "pattern": "\\S",
+                    "type": "string"
+                },
+                "odp_selection_count": {
+                    "$ref": "#/$defs/Sp800171SelectionCount",
+                    "description": "How many of the choices a selection takes."
+                },
+                "odp_usage": {
+                    "description": "How the requirement statement names the parameter, such as organization-defined time period.",
                     "type": [
                         "string",
                         "null"
                     ]
                 }
             },
-            "title": "Address",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "AssessmentMethodValue": {
-            "description": "Allowed values for assessment method property values",
-            "enum": [
-                "EXAMINE",
-                "INTERVIEW",
-                "TEST"
+            "required": [
+                "odp_id",
+                "odp_label"
             ],
-            "title": "AssessmentMethodValue",
-            "type": "string"
+            "title": "Sp800171Parameter",
+            "type": "object"
         },
-        "BackMatter": {
-            "additionalProperties": true,
-            "description": "OSCAL back-matter section",
+        "Sp800171Publication": {
+            "additionalProperties": false,
+            "description": "One revision of SP 800-171 as a whole: its requirement families, each holding its security requirements, with the assessment procedures of the matching revision of SP 800-171A inside each requirement.",
             "properties": {
-                "resources": {
-                    "description": "Back-matter resources",
+                "requirement_families": {
+                    "description": "The requirement families, in the order SP 800-171 gives them.",
                     "items": {
-                        "$ref": "#/$defs/Resource"
+                        "$ref": "#/$defs/Sp800171Family"
                     },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
+                    "type": "array"
+                },
+                "sp800171_revision": {
+                    "description": "The revision of SP 800-171 the document renders, as NIST numbers it, such as 3.",
+                    "pattern": "^[1-9][0-9]*$",
+                    "type": "string"
                 }
             },
-            "title": "BackMatter",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "CatalogBody": {
-            "additionalProperties": true,
-            "description": "Main catalog object",
-            "properties": {
-                "back_matter": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/BackMatter"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Back-matter references and resources"
-                },
-                "groups": {
-                    "description": "List of requirement family groups in the catalog",
-                    "items": {
-                        "$ref": "#/$defs/ControlGroup"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "metadata": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/Metadata"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Catalog metadata"
-                },
-                "uuid": {
-                    "description": "UUID for catalog, metadata, or resource element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "CatalogBody",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "CatalogElementClassValue": {
-            "description": "Allowed values for group and control class attributes",
-            "enum": [
-                "family",
-                "requirement"
+            "required": [
+                "sp800171_revision",
+                "requirement_families"
             ],
-            "title": "CatalogElementClassValue",
-            "type": "string"
-        },
-        "Citation": {
-            "additionalProperties": true,
-            "description": "Citation wrapper",
-            "properties": {
-                "text": {
-                    "description": "Citation text",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Citation",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "Control": {
-            "additionalProperties": false,
-            "description": "A security requirement",
-            "properties": {
-                "class": {
-                    "$ref": "#/$defs/CatalogElementClassValue",
-                    "description": "Classification of a catalog element (e.g. family, requirement, security_requirement)"
-                },
-                "id": {
-                    "description": "Unique identifier for an element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "label": {
-                    "description": "Human-readable label",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "links": {
-                    "description": "List of links and relationships",
-                    "items": {
-                        "$ref": "#/$defs/Link"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "params": {
-                    "description": "List of organization-defined parameters for a requirement",
-                    "items": {
-                        "$ref": "#/$defs/Parameter"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "parts": {
-                    "description": "Nested parts providing prose, statements, guidance, assessment objectives and methods",
-                    "items": {
-                        "$ref": "#/$defs/Part"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "props": {
-                    "description": "List of properties",
-                    "items": {
-                        "$ref": "#/$defs/Property"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Control",
+            "title": "Sp800171Publication",
             "type": "object"
         },
-        "ControlGroup": {
+        "Sp800171Reference": {
             "additionalProperties": false,
-            "description": "A family group of security requirements",
+            "description": "A publication that SP 800-171 lists under a requirement's references, by the short name the publication gives it, with the full citation and the address NIST's catalog gives it.",
             "properties": {
-                "class": {
-                    "$ref": "#/$defs/CatalogElementClassValue",
-                    "description": "Classification of a catalog element (e.g. family, requirement, security_requirement)"
+                "cited_publication": {
+                    "description": "The publication's short name, such as SP 800-63-3.",
+                    "pattern": "^(FIPS|IR|SP) [1-9][0-9]*(-[0-9A-Z]+)*$",
+                    "type": "string"
                 },
-                "controls": {
-                    "description": "List of security requirements in a family group",
-                    "items": {
-                        "$ref": "#/$defs/Control"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "id": {
-                    "description": "Unique identifier for an element",
+                "cited_publication_citation": {
+                    "description": "The full citation, as the catalog's back matter gives it.",
                     "type": [
                         "string",
                         "null"
                     ]
                 },
-                "label": {
-                    "description": "Human-readable label",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "links": {
-                    "description": "List of links and relationships",
-                    "items": {
-                        "$ref": "#/$defs/Link"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "parts": {
-                    "description": "Nested parts providing prose, statements, guidance, assessment objectives and methods",
-                    "items": {
-                        "$ref": "#/$defs/Part"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "props": {
-                    "description": "List of properties",
-                    "items": {
-                        "$ref": "#/$defs/Property"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "title": {
-                    "description": "Human-readable title",
+                "cited_publication_url": {
+                    "description": "The publication's address, which the catalog gives as its digital object identifier.",
                     "type": [
                         "string",
                         "null"
                     ]
                 }
             },
-            "title": "ControlGroup",
-            "type": "object"
-        },
-        "Guideline": {
-            "additionalProperties": false,
-            "description": "Additional prose guidance associated with a parameter",
-            "properties": {
-                "prose": {
-                    "description": "Free-text prose content",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Guideline",
-            "type": "object"
-        },
-        "HowManyValue": {
-            "description": "Cardinality constraint for parameter selection",
-            "enum": [
-                "one",
-                "one-or-more"
+            "required": [
+                "cited_publication"
             ],
-            "title": "HowManyValue",
-            "type": "string"
-        },
-        "IdentifiedElement": {
-            "additionalProperties": false,
-            "description": "A catalog element with required id, title, and optional class/label",
-            "properties": {
-                "class": {
-                    "$ref": "#/$defs/CatalogElementClassValue",
-                    "description": "Classification of a catalog element (e.g. family, requirement, security_requirement)"
-                },
-                "id": {
-                    "description": "Unique identifier for an element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "label": {
-                    "description": "Human-readable label",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "links": {
-                    "description": "List of links and relationships",
-                    "items": {
-                        "$ref": "#/$defs/Link"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "parts": {
-                    "description": "Nested parts providing prose, statements, guidance, assessment objectives and methods",
-                    "items": {
-                        "$ref": "#/$defs/Part"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "props": {
-                    "description": "List of properties",
-                    "items": {
-                        "$ref": "#/$defs/Property"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "IdentifiedElement",
+            "title": "Sp800171Reference",
             "type": "object"
         },
-        "Link": {
+        "Sp800171Requirement": {
             "additionalProperties": false,
-            "description": "Relationship link",
+            "description": "A security requirement of SP 800-171: a numbered, named requirement for protecting CUI, with its statement, discussion, references and source controls, the organization-defined parameters its statement leaves open, and the assessment objectives and methods SP 800-171A gives it. A requirement that Revision 3 withdrew keeps its number and says which requirements took its place.",
             "properties": {
-                "href": {
-                    "description": "Link or resource reference",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "rel": {
-                    "description": "Relationship type for a link",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Link",
-            "type": "object"
-        },
-        "Metadata": {
-            "additionalProperties": true,
-            "description": "OSCAL metadata section",
-            "properties": {
-                "last_modified": {
-                    "description": "Last modification timestamp",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "links": {
-                    "description": "List of links and relationships",
+                "addressed_by_requirements": {
+                    "description": "For a withdrawn requirement, the requirements of Revision 3 that address what it required, as the catalog states them.",
                     "items": {
-                        "$ref": "#/$defs/Link"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "oscal_version": {
-                    "description": "OSCAL version identifier",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "parties": {
-                    "description": "Parties used in metadata",
-                    "items": {
-                        "$ref": "#/$defs/Party"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "props": {
-                    "description": "List of properties",
-                    "items": {
-                        "$ref": "#/$defs/Property"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "published": {
-                    "description": "Publication timestamp",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "responsible_parties": {
-                    "description": "Responsible party assignments",
-                    "items": {
-                        "$ref": "#/$defs/ResponsibleParty"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "roles": {
-                    "description": "Roles used in metadata",
-                    "items": {
-                        "$ref": "#/$defs/Role"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "version": {
-                    "description": "Version identifier",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Metadata",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "Parameter": {
-            "additionalProperties": false,
-            "description": "An organization-defined parameter for a security requirement",
-            "properties": {
-                "class": {
-                    "$ref": "#/$defs/CatalogElementClassValue",
-                    "description": "Classification of a catalog element (e.g. family, requirement, security_requirement)"
-                },
-                "guidelines": {
-                    "description": "List of guidelines for a parameter",
-                    "items": {
-                        "$ref": "#/$defs/Guideline"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "id": {
-                    "description": "Unique identifier for an element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "label": {
-                    "description": "Human-readable label",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "links": {
-                    "description": "List of links and relationships",
-                    "items": {
-                        "$ref": "#/$defs/Link"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "parts": {
-                    "description": "Nested parts providing prose, statements, guidance, assessment objectives and methods",
-                    "items": {
-                        "$ref": "#/$defs/Part"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "props": {
-                    "description": "List of properties",
-                    "items": {
-                        "$ref": "#/$defs/Property"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "select": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/ParameterSelection"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Selection constraints for an organization-defined parameter"
-                },
-                "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "usage": {
-                    "description": "Human-readable description of an organization-defined parameter's expected value",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Parameter",
-            "type": "object"
-        },
-        "ParameterSelection": {
-            "additionalProperties": true,
-            "description": "Selection constraints specifying allowed values for a parameter",
-            "properties": {
-                "choice": {
-                    "description": "List of allowed values for a parameter selection",
-                    "items": {
+                        "pattern": "^03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])$",
                         "type": "string"
                     },
                     "type": [
                         "array",
                         "null"
                     ]
-                },
-                "how_many": {
-                    "$ref": "#/$defs/HowManyValue",
-                    "description": "Cardinality constraint for parameter selection choices"
-                }
-            },
-            "title": "ParameterSelection",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "Part": {
-            "additionalProperties": false,
-            "description": "Structured narrative part containing prose and optional nested parts. Used for statements, guidance, assessment-objectives, and assessment-methods.",
-            "properties": {
-                "class": {
-                    "$ref": "#/$defs/PartClassValue",
-                    "description": "Classification of a catalog element (e.g. family, requirement, security_requirement)"
-                },
-                "id": {
-                    "description": "Unique identifier for an element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "links": {
-                    "description": "List of links and relationships",
-                    "items": {
-                        "$ref": "#/$defs/Link"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Name of a property, part, or party",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "parts": {
-                    "description": "Nested parts providing prose, statements, guidance, assessment objectives and methods",
-                    "items": {
-                        "$ref": "#/$defs/Part"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "props": {
-                    "description": "List of properties",
-                    "items": {
-                        "$ref": "#/$defs/Property"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "prose": {
-                    "description": "Free-text prose content",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Part",
-            "type": "object"
-        },
-        "PartClassValue": {
-            "description": "Allowed values for part class attributes",
-            "enum": [
-                "security_requirement"
-            ],
-            "title": "PartClassValue",
-            "type": "string"
-        },
-        "Party": {
-            "additionalProperties": true,
-            "description": "Party definition",
-            "properties": {
-                "addresses": {
-                    "description": "Postal addresses",
-                    "items": {
-                        "$ref": "#/$defs/Address"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "email_addresses": {
-                    "description": "Party email addresses",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Name of a property, part, or party",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "short_name": {
-                    "description": "Short display name",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "type": {
-                    "description": "Party type",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "uuid": {
-                    "description": "UUID for catalog, metadata, or resource element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Party",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "Property": {
-            "additionalProperties": false,
-            "description": "A name-value property with optional namespace",
-            "properties": {
-                "class": {
-                    "description": "Classification of a catalog element (e.g. family, requirement, security_requirement)",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "name": {
-                    "description": "Name of a property, part, or party",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "ns": {
-                    "description": "Namespace URI for a property",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "value": {
-                    "description": "Property value",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Property",
-            "type": "object"
-        },
-        "Resource": {
-            "additionalProperties": true,
-            "description": "Referenced resource",
-            "properties": {
-                "citation": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/Citation"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Citation details for a resource"
                 },
                 "description": {
-                    "description": "Resource description",
+                    "description": "What the family or requirement is about, in the words of whoever records it. SP 800-171 gives a family no text of its own, and a requirement's own text goes in its statement, items and discussion.",
                     "type": [
                         "string",
                         "null"
                     ]
                 },
-                "rlinks": {
-                    "description": "Resource links",
+                "incorporated_into_requirements": {
+                    "description": "For a withdrawn requirement, the requirements of Revision 3 that incorporate what it required, as the catalog states them.",
                     "items": {
-                        "$ref": "#/$defs/ResourceLink"
-                    },
-                    "type": [
-                        "array",
-                        "null"
-                    ]
-                },
-                "title": {
-                    "description": "Human-readable title",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "uuid": {
-                    "description": "UUID for catalog, metadata, or resource element",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "Resource",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "ResourceLink": {
-            "additionalProperties": true,
-            "description": "Reference link for a resource",
-            "properties": {
-                "href": {
-                    "description": "Link or resource reference",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                },
-                "media_type": {
-                    "description": "Media type for a resource link",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "ResourceLink",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "ResponsibleParty": {
-            "additionalProperties": true,
-            "description": "Assignment of parties to a role",
-            "properties": {
-                "party_uuids": {
-                    "description": "Referenced party UUIDs",
-                    "items": {
+                        "pattern": "^03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])$",
                         "type": "string"
                     },
                     "type": [
@@ -902,90 +239,180 @@
                         "null"
                     ]
                 },
-                "role_id": {
-                    "description": "Assigned role identifier",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
-                }
-            },
-            "title": "ResponsibleParty",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
-        },
-        "Role": {
-            "additionalProperties": false,
-            "description": "Role definition",
-            "properties": {
-                "id": {
-                    "description": "Unique identifier for an element",
+                "requirement_discussion": {
+                    "description": "The requirement's discussion: SP 800-171's explanation of what the requirement means and how it relates to other requirements.",
+                    "pattern": "\\S",
                     "type": [
                         "string",
                         "null"
                     ]
                 },
+                "requirement_id": {
+                    "description": "The requirement's identifier, such as 03.01.01.",
+                    "pattern": "^03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])$",
+                    "type": "string"
+                },
+                "requirement_items": {
+                    "description": "The lettered items of the requirement statement, in order, each with its numbered items where it has them. A requirement has either these or a statement, never both.",
+                    "items": {
+                        "$ref": "#/$defs/Sp800171RequirementItem"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "requirement_methods": {
+                    "description": "The assessment methods SP 800-171A gives the requirement, each with the objects it is applied to.",
+                    "items": {
+                        "$ref": "#/$defs/Sp800171AssessmentMethod"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "requirement_objectives": {
+                    "description": "The assessment objectives SP 800-171A gives the requirement: the determination statements an assessor checks.",
+                    "items": {
+                        "$ref": "#/$defs/Sp800171AssessmentObjective"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "requirement_parameters": {
+                    "description": "The organization-defined parameters the requirement statement leaves to the organization, in the order SP 800-171A numbers them.",
+                    "items": {
+                        "$ref": "#/$defs/Sp800171Parameter"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "requirement_references": {
+                    "description": "The publications SP 800-171 lists under the requirement's references, each with its citation and address as the catalog gives them.",
+                    "items": {
+                        "$ref": "#/$defs/Sp800171Reference"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
+                "requirement_statement": {
+                    "description": "The requirement statement when SP 800-171 writes it as one piece of text and not as lettered items. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter.",
+                    "pattern": "\\S",
+                    "type": [
+                        "string",
+                        "null"
+                    ]
+                },
+                "requirement_status": {
+                    "$ref": "#/$defs/Sp800171RequirementStatus",
+                    "description": "Withdrawn when Revision 3 withdrew the requirement. A requirement with no status is in force."
+                },
+                "source_controls": {
+                    "description": "The controls of SP 800-53 Revision 5 the requirement is drawn from, by their identifiers, as the catalog lists them among the requirement's references. The identifier is data; the schema maps nothing to a model of SP 800-53.",
+                    "items": {
+                        "pattern": "^[A-Z]{2}-(0[1-9]|[1-9][0-9])(\\((0[1-9]|[1-9][0-9])\\))?$",
+                        "type": "string"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
+                },
                 "title": {
-                    "description": "Human-readable title",
+                    "description": "The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management.",
                     "type": [
                         "string",
                         "null"
                     ]
                 }
             },
-            "title": "Role",
+            "required": [
+                "requirement_id"
+            ],
+            "title": "Sp800171Requirement",
             "type": "object"
         },
-        "SP800171Document": {
-            "additionalProperties": true,
-            "description": "Root wrapper for SP 800-171 catalog content",
+        "Sp800171RequirementItem": {
+            "additionalProperties": false,
+            "description": "One item of a requirement statement: a lettered item such as 03.01.01.a, or a numbered item under a lettered one such as 03.01.01.c.01.",
             "properties": {
-                "catalog": {
-                    "anyOf": [
-                        {
-                            "$ref": "#/$defs/CatalogBody"
-                        },
-                        {
-                            "type": "null"
-                        }
-                    ],
-                    "description": "Root catalog payload"
+                "requirement_item_id": {
+                    "description": "The item's identifier, such as 03.01.01.a.",
+                    "pattern": "^03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])\\.[a-z](\\.(0[1-9]|[1-9][0-9]))?$",
+                    "type": "string"
+                },
+                "requirement_item_text": {
+                    "description": "What the item requires. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter.",
+                    "pattern": "\\S",
+                    "type": "string"
+                },
+                "requirement_subitems": {
+                    "description": "The numbered items under a lettered item, in order.",
+                    "items": {
+                        "$ref": "#/$defs/Sp800171RequirementItem"
+                    },
+                    "type": [
+                        "array",
+                        "null"
+                    ]
                 }
             },
-            "title": "SP800171Document",
-            "type": [
-                "null",
-                "boolean",
-                "object",
-                "number",
-                "string"
-            ]
+            "required": [
+                "requirement_item_id",
+                "requirement_item_text"
+            ],
+            "title": "Sp800171RequirementItem",
+            "type": "object"
+        },
+        "Sp800171RequirementStatus": {
+            "description": "The one status SP 800-171 Revision 3 states for a requirement. A requirement in force carries none.",
+            "enum": [
+                "withdrawn"
+            ],
+            "title": "Sp800171RequirementStatus",
+            "type": "string"
+        },
+        "Sp800171SelectionCount": {
+            "description": "How many choices a selection parameter takes, as OSCAL states it.",
+            "enum": [
+                "one",
+                "one_or_more"
+            ],
+            "title": "Sp800171SelectionCount",
+            "type": "string"
         }
     },
     "$id": "https://w3id.org/lmodel/nist-sp-800-171",
     "$schema": "https://json-schema.org/draft/2019-09/schema",
     "additionalProperties": true,
-    "description": "Root wrapper for SP 800-171 catalog content",
+    "description": "One revision of SP 800-171 as a whole: its requirement families, each holding its security requirements, with the assessment procedures of the matching revision of SP 800-171A inside each requirement.",
     "metamodel_version": "1.7.0",
     "properties": {
-        "catalog": {
-            "anyOf": [
-                {
-                    "$ref": "#/$defs/CatalogBody"
-                },
-                {
-                    "type": "null"
-                }
-            ],
-            "description": "Root catalog payload"
+        "requirement_families": {
+            "description": "The requirement families, in the order SP 800-171 gives them.",
+            "items": {
+                "$ref": "#/$defs/Sp800171Family"
+            },
+            "type": "array"
+        },
+        "sp800171_revision": {
+            "description": "The revision of SP 800-171 the document renders, as NIST numbers it, such as 3.",
+            "pattern": "^[1-9][0-9]*$",
+            "type": "string"
         }
     },
-    "title": "NIST-SP-800-171",
+    "required": [
+        "sp800171_revision",
+        "requirement_families"
+    ],
+    "title": "nist_sp_800_171",
     "type": "object",
     "version": "3.0.0"
 }

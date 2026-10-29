@@ -1,37 +1,7 @@
 {
    "linkml": "https://w3id.org/linkml/",
    "nist_sp_800_171": "https://w3id.org/lmodel/nist-sp-800-171/",
-   "Address": {
-      "@id": "linkml:Any"
-   },
-   "BackMatter": {
-      "@id": "linkml:Any"
-   },
-   "CatalogBody": {
-      "@id": "linkml:Any"
-   },
-   "Citation": {
-      "@id": "linkml:Any"
-   },
-   "Metadata": {
-      "@id": "linkml:Any"
-   },
-   "ParameterSelection": {
-      "@id": "linkml:Any"
-   },
-   "Party": {
-      "@id": "linkml:Any"
-   },
-   "Resource": {
-      "@id": "linkml:Any"
-   },
-   "ResourceLink": {
-      "@id": "linkml:Any"
-   },
-   "ResponsibleParty": {
-      "@id": "linkml:Any"
-   },
-   "SP800171Document": {
-      "@id": "linkml:Any"
-   }
+   "oscal": "https://w3id.org/lmodel/oscal/",
+   "schema": "http://schema.org/",
+   "xsd": "http://www.w3.org/2001/XMLSchema#"
 }

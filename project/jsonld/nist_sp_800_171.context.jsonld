@@ -3,240 +3,162 @@
       "xsd": "http://www.w3.org/2001/XMLSchema#",
       "linkml": "https://w3id.org/linkml/",
       "nist_sp_800_171": "https://w3id.org/lmodel/nist-sp-800-171/",
+      "oscal": "https://w3id.org/lmodel/oscal/",
+      "schema": "http://schema.org/",
       "skos": "http://www.w3.org/2004/02/skos/core#",
       "@vocab": "https://w3id.org/lmodel/nist-sp-800-171/",
-      "class": {
-         "@id": "class"
-      },
-      "addr_lines": {
-         "@id": "addr_lines"
-      },
-      "addresses": {
-         "@type": "@id",
-         "@id": "addresses"
-      },
-      "back_matter": {
-         "@type": "@id",
-         "@id": "back_matter"
-      },
-      "catalog": {
-         "@type": "@id",
-         "@id": "catalog"
-      },
-      "choice": {
-         "@id": "choice"
-      },
-      "citation": {
-         "@type": "@id",
-         "@id": "citation"
-      },
-      "city": {
-         "@id": "city"
-      },
-      "controls": {
-         "@type": "@id",
-         "@id": "controls"
-      },
       "description": {
-         "@id": "description"
+         "@id": "schema:description"
       },
-      "email_addresses": {
-         "@id": "email_addresses"
-      },
-      "groups": {
-         "@type": "@id",
-         "@id": "groups"
-      },
-      "guidelines": {
-         "@type": "@id",
-         "@id": "guidelines"
-      },
-      "how_many": {
+      "requirement_method_kind": {
          "@context": {
             "text": "skos:notation",
             "description": "skos:prefLabel",
             "meaning": "@id"
          },
-         "@id": "how_many"
+         "@id": "requirement_method_kind"
       },
-      "href": {
-         "@id": "href"
+      "requirement_method_objects": {
+         "@id": "requirement_method_objects"
       },
-      "id": {
-         "@id": "id"
+      "assessed_requirement_item": {
+         "@id": "assessed_requirement_item"
       },
-      "label": {
-         "@id": "label"
+      "requirement_determination": {
+         "@id": "requirement_determination"
       },
-      "last_modified": {
-         "@id": "last_modified"
+      "requirement_objective_id": {
+         "@id": "requirement_objective_id"
       },
-      "links": {
+      "family_number": {
+         "@id": "family_number"
+      },
+      "family_requirements": {
          "@type": "@id",
-         "@id": "links"
+         "@id": "family_requirements"
       },
-      "media_type": {
-         "@id": "media_type"
+      "odp_choices": {
+         "@id": "odp_choices"
       },
-      "metadata": {
+      "odp_guideline": {
+         "@id": "odp_guideline"
+      },
+      "odp_id": {
+         "@id": "odp_id"
+      },
+      "odp_label": {
+         "@id": "odp_label"
+      },
+      "odp_selection_count": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "odp_selection_count"
+      },
+      "odp_usage": {
+         "@id": "odp_usage"
+      },
+      "requirement_families": {
          "@type": "@id",
-         "@id": "metadata"
+         "@id": "requirement_families"
       },
-      "name": {
-         "@id": "name"
+      "sp800171_revision": {
+         "@id": "sp800171_revision"
       },
-      "ns": {
-         "@id": "ns"
+      "cited_publication": {
+         "@id": "cited_publication"
       },
-      "oscal_version": {
-         "@id": "oscal_version"
+      "cited_publication_citation": {
+         "@id": "cited_publication_citation"
       },
-      "params": {
+      "cited_publication_url": {
+         "@type": "xsd:anyURI",
+         "@id": "cited_publication_url"
+      },
+      "addressed_by_requirements": {
+         "@id": "addressed_by_requirements"
+      },
+      "incorporated_into_requirements": {
+         "@id": "incorporated_into_requirements"
+      },
+      "requirement_discussion": {
+         "@id": "requirement_discussion"
+      },
+      "requirement_id": {
+         "@id": "requirement_id"
+      },
+      "requirement_items": {
          "@type": "@id",
-         "@id": "params"
+         "@id": "requirement_items"
       },
-      "parties": {
+      "requirement_methods": {
          "@type": "@id",
-         "@id": "parties"
+         "@id": "requirement_methods"
       },
-      "parts": {
+      "requirement_objectives": {
          "@type": "@id",
-         "@id": "parts"
+         "@id": "requirement_objectives"
       },
-      "party_uuids": {
-         "@id": "party_uuids"
-      },
-      "postal_code": {
-         "@id": "postal_code"
-      },
-      "props": {
+      "requirement_parameters": {
          "@type": "@id",
-         "@id": "props"
+         "@id": "requirement_parameters"
       },
-      "prose": {
-         "@id": "prose"
-      },
-      "published": {
-         "@id": "published"
-      },
-      "rel": {
-         "@id": "rel"
-      },
-      "remarks": {
-         "@id": "remarks"
-      },
-      "resources": {
+      "requirement_references": {
          "@type": "@id",
-         "@id": "resources"
+         "@id": "requirement_references"
       },
-      "responsible_parties": {
+      "requirement_statement": {
+         "@id": "requirement_statement"
+      },
+      "requirement_status": {
+         "@context": {
+            "text": "skos:notation",
+            "description": "skos:prefLabel",
+            "meaning": "@id"
+         },
+         "@id": "requirement_status"
+      },
+      "source_controls": {
+         "@id": "source_controls"
+      },
+      "requirement_item_id": {
+         "@id": "requirement_item_id"
+      },
+      "requirement_item_text": {
+         "@id": "requirement_item_text"
+      },
+      "requirement_subitems": {
          "@type": "@id",
-         "@id": "responsible_parties"
-      },
-      "rlinks": {
-         "@type": "@id",
-         "@id": "rlinks"
-      },
-      "role_id": {
-         "@id": "role_id"
-      },
-      "roles": {
-         "@type": "@id",
-         "@id": "roles"
-      },
-      "select": {
-         "@type": "@id",
-         "@id": "select"
-      },
-      "short_name": {
-         "@id": "short_name"
-      },
-      "state": {
-         "@id": "state"
-      },
-      "text": {
-         "@id": "text"
+         "@id": "requirement_subitems"
       },
       "title": {
-         "@id": "title"
+         "@id": "schema:name"
       },
-      "type": {
-         "@id": "type"
+      "Sp800171AssessmentMethod": {
+         "@id": "AssessmentMethod"
       },
-      "usage": {
-         "@id": "usage"
+      "Sp800171AssessmentObjective": {
+         "@id": "AssessmentObjective"
       },
-      "uuid": {
-         "@id": "uuid"
+      "Sp800171Family": {
+         "@id": "Family"
       },
-      "value": {
-         "@id": "value"
-      },
-      "version": {
-         "@id": "version"
-      },
-      "Address": {
-         "@id": "linkml:Any"
-      },
-      "BackMatter": {
-         "@id": "linkml:Any"
-      },
-      "CatalogBody": {
-         "@id": "linkml:Any"
-      },
-      "CatalogElement": {
-         "@id": "CatalogElement"
-      },
-      "Citation": {
-         "@id": "linkml:Any"
-      },
-      "Control": {
-         "@id": "Control"
-      },
-      "ControlGroup": {
-         "@id": "ControlGroup"
-      },
-      "Guideline": {
-         "@id": "Guideline"
-      },
-      "IdentifiedElement": {
-         "@id": "IdentifiedElement"
-      },
-      "Link": {
-         "@id": "Link"
-      },
-      "Metadata": {
-         "@id": "linkml:Any"
-      },
-      "Parameter": {
+      "Sp800171Parameter": {
          "@id": "Parameter"
       },
-      "ParameterSelection": {
-         "@id": "linkml:Any"
+      "Sp800171Publication": {
+         "@id": "Publication"
       },
-      "Part": {
-         "@id": "Part"
+      "Sp800171Reference": {
+         "@id": "Reference"
       },
-      "Party": {
-         "@id": "linkml:Any"
+      "Sp800171Requirement": {
+         "@id": "Requirement"
       },
-      "Property": {
-         "@id": "Property"
-      },
-      "Resource": {
-         "@id": "linkml:Any"
-      },
-      "ResourceLink": {
-         "@id": "linkml:Any"
-      },
-      "ResponsibleParty": {
-         "@id": "linkml:Any"
-      },
-      "Role": {
-         "@id": "Role"
-      },
-      "SP800171Document": {
-         "@id": "linkml:Any"
+      "Sp800171RequirementItem": {
+         "@id": "RequirementItem"
       }
    }
 }

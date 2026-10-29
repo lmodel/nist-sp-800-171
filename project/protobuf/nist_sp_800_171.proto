@@ -2,170 +2,72 @@
  package
 // metamodel_version: 1.7.0
 // version: 3.0.0
-// Postal address
-message Address
+// One of the three assessment methods SP 800-171A applies to a requirement, examine, interview or test, with the assessment objects (documents, people, processes or mechanisms) it is applied to.
+message Sp800171AssessmentMethod
  {
- repeated  string addr-lines = 0
-  string city = 0
-  string state = 0
-  string postal-code = 0
+  sp800171AssessmentMethodKind requirementMethodKind = 0
+ repeated  string requirementMethodObjects = 0
  }
-// OSCAL back-matter section
-message BackMatter
+// An assessment objective of SP 800-171A: one determination statement that an assessor checks, tied to the requirement or to one item of its statement.
+message Sp800171AssessmentObjective
  {
- repeated  resource resources = 0
+  sp800171ObjectiveIdentifier requirementObjectiveId = 0
+  string requirementDetermination = 0
+  sp800171ItemIdentifier assessedRequirementItem = 0
  }
-// Main catalog object
-message CatalogBody
+// One of the seventeen families that SP 800-171 Revision 3 sorts its security requirements into, such as Access Control (03.01) or Supply Chain Risk Management (03.17).
+message Sp800171Family
  {
-  string uuid = 0
-  metadata metadata = 0
- repeated  controlGroup groups = 0
-  backMatter back-matter = 0
- }
-// Citation wrapper
-message Citation
- {
-  string text = 0
- }
-// A security requirement
-message Control
- {
-  string id = 0
- repeated  property props = 0
- repeated  link links = 0
- repeated  part parts = 0
-  string title = 0
-  catalogElementClassValue class = 0
-  string label = 0
- repeated  parameter params = 0
- }
-// A family group of security requirements
-message ControlGroup
- {
-  string id = 0
- repeated  property props = 0
- repeated  link links = 0
- repeated  part parts = 0
-  string title = 0
-  catalogElementClassValue class = 0
-  string label = 0
- repeated  control controls = 0
- }
-// Additional prose guidance associated with a parameter
-message Guideline
- {
-  string prose = 0
- }
-// A catalog element with required id, title, and optional class/label
-message IdentifiedElement
- {
-  string id = 0
- repeated  property props = 0
- repeated  link links = 0
- repeated  part parts = 0
-  string title = 0
-  catalogElementClassValue class = 0
-  string label = 0
- }
-// Relationship link
-message Link
- {
-  string href = 0
-  string rel = 0
- }
-// OSCAL metadata section
-message Metadata
- {
-  string title = 0
-  string published = 0
-  string last-modified = 0
-  string version = 0
-  string oscal-version = 0
- repeated  property props = 0
- repeated  link links = 0
- repeated  role roles = 0
- repeated  party parties = 0
- repeated  responsibleParty responsible-parties = 0
- }
-// An organization-defined parameter for a security requirement
-message Parameter
- {
-  string id = 0
- repeated  property props = 0
- repeated  link links = 0
- repeated  part parts = 0
-  string title = 0
-  catalogElementClassValue class = 0
-  string label = 0
-  string usage = 0
- repeated  guideline guidelines = 0
-  parameterSelection select = 0
- }
-// Selection constraints specifying allowed values for a parameter
-message ParameterSelection
- {
-  howManyValue how-many = 0
- repeated  string choice = 0
- }
-// Structured narrative part containing prose and optional nested parts. Used for statements, guidance, assessment-objectives, and assessment-methods.
-message Part
- {
-  string id = 0
- repeated  property props = 0
- repeated  link links = 0
- repeated  part parts = 0
-  string name = 0
-  partClassValue class = 0
-  string prose = 0
- }
-// Party definition
-message Party
- {
-  string uuid = 0
-  string type = 0
-  string name = 0
-  string short-name = 0
- repeated  string email-addresses = 0
- repeated  address addresses = 0
- }
-// A name-value property with optional namespace
-message Property
- {
-  string name = 0
-  string value = 0
-  string ns = 0
-  string class = 0
- }
-// Referenced resource
-message Resource
- {
-  string uuid = 0
   string title = 0
   string description = 0
-  citation citation = 0
- repeated  resourceLink rlinks = 0
+  sp800171FamilyIdentifier familyNumber = 0
+ repeated  sp800171Requirement familyRequirements = 0
  }
-// Reference link for a resource
-message ResourceLink
+// An organization-defined parameter (ODP): a value, such as a time period or a frequency, that a requirement statement leaves to the organization, with the guideline SP 800-171A gives for defining it. A few parameters are a selection among choices instead of a value.
+message Sp800171Parameter
  {
-  string href = 0
-  string media-type = 0
+  sp800171OdpIdentifier odpId = 0
+  string odpLabel = 0
+  string odpUsage = 0
+  string odpGuideline = 0
+ repeated  string odpChoices = 0
+  sp800171SelectionCount odpSelectionCount = 0
  }
-// Assignment of parties to a role
-message ResponsibleParty
+// One revision of SP 800-171 as a whole: its requirement families, each holding its security requirements, with the assessment procedures of the matching revision of SP 800-171A inside each requirement.
+message Sp800171Publication
  {
-  string role-id = 0
- repeated  string party-uuids = 0
+  string sp800171Revision = 0
+ repeated  sp800171Family requirementFamilies = 0
  }
-// Role definition
-message Role
+// A publication that SP 800-171 lists under a requirement's references, by the short name the publication gives it, with the full citation and the address NIST's catalog gives it.
+message Sp800171Reference
  {
-  string id = 0
+  sp800171CitedPublicationName citedPublication = 0
+  string citedPublicationCitation = 0
+  uri citedPublicationUrl = 0
+ }
+// A security requirement of SP 800-171: a numbered, named requirement for protecting CUI, with its statement, discussion, references and source controls, the organization-defined parameters its statement leaves open, and the assessment objectives and methods SP 800-171A gives it. A requirement that Revision 3 withdrew keeps its number and says which requirements took its place.
+message Sp800171Requirement
+ {
   string title = 0
+  string description = 0
+  sp800171RequirementIdentifier requirementId = 0
+  sp800171RequirementStatus requirementStatus = 0
+ repeated  sp800171RequirementIdentifier incorporatedIntoRequirements = 0
+ repeated  sp800171RequirementIdentifier addressedByRequirements = 0
+  string requirementStatement = 0
+ repeated  sp800171RequirementItem requirementItems = 0
+  string requirementDiscussion = 0
+ repeated  sp800171Parameter requirementParameters = 0
+ repeated  sp800171AssessmentObjective requirementObjectives = 0
+ repeated  sp800171AssessmentMethod requirementMethods = 0
+ repeated  sp800171Reference requirementReferences = 0
+ repeated  sp800171SourceControlIdentifier sourceControls = 0
  }
-// Root wrapper for SP 800-171 catalog content
-message SP800171Document
+// One item of a requirement statement: a lettered item such as 03.01.01.a, or a numbered item under a lettered one such as 03.01.01.c.01.
+message Sp800171RequirementItem
  {
-  catalogBody catalog = 0
+  sp800171ItemIdentifier requirementItemId = 0
+  string requirementItemText = 0
+ repeated  sp800171RequirementItem requirementSubitems = 0
  }
