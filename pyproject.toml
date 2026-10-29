@@ -68,7 +68,7 @@ skip = [
   "src/nist_sp_800_171/datamodel/nist_sp_800_171.py",
   # NIST's catalog, copied as published, and files copied in by the KTL
   # sidecar sync or written by npm, not by hand.
-  "tests/data/nist/*",
+  "src/nist_sp_800_171/schema/oscal-content/*",
   ".lokf/scripts/*",
   "website/package-lock.json",
 ]
@@ -89,7 +89,7 @@ extend-exclude = [
   "project/*",
   "src/nist_sp_800_171/datamodel/nist_sp_800_171_pydantic.py",
   "src/nist_sp_800_171/datamodel/nist_sp_800_171.py",
-  "tests/data/nist/*",
+  "src/nist_sp_800_171/schema/oscal-content/*",
   ".lokf/scripts/*",
   "website/package-lock.json",
 ]

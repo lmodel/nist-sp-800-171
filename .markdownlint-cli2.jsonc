@@ -21,7 +21,7 @@
     "docs/templates-linkml/**",
     "project/**",
     // Copied as published: NIST's catalog and its licence.
-    "tests/data/nist/**",
+    "src/nist_sp_800_171/schema/oscal-content/**",
     // What website/ generates from the files above, which are linted where they are.
     "website/dist/**",
     "website/public/**",
