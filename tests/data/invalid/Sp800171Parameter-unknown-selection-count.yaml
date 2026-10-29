@@ -1,0 +1,7 @@
+# Invalid: a selection takes one choice or one or more, as OSCAL states it.
+odp_id: "A.03.01.08.ODP[03]"
+odp_label: SELECTED PARAMETER VALUES
+odp_choices:
+  - delay the next logon prompt
+  - notify a system administrator
+odp_selection_count: two

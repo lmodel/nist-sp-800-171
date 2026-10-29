@@ -1,0 +1,8 @@
+# The Access Control family as a knowledge bundle might record it, with no
+# requirements inlined: a bundle relates a requirement to its family with
+# isPartOf.
+family_number: "03.01"
+title: Access Control
+description: >-
+  Requirements that limit system access to authorized users, processes and
+  devices, and to the kinds of transactions and functions they are allowed.

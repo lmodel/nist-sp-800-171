@@ -1,0 +1,4 @@
+# Invalid: an assessment object is more than white space.
+requirement_method_kind: examine
+requirement_method_objects:
+  - " "

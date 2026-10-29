@@ -1,0 +1,12 @@
+# The third parameter of requirement 03.01.08, a selection among choices,
+# with the choices paraphrased. A choice may name another parameter with the
+# catalog's insert placeholder.
+odp_id: "A.03.01.08.ODP[03]"
+odp_label: SELECTED PARAMETER VALUES
+odp_choices:
+  - "lock the account or node for an {{ insert: param, A.03.01.08.ODP.04 }}"
+  - lock the account or node until an administrator releases it
+  - delay the next logon prompt
+  - notify a system administrator
+  - take another action
+odp_selection_count: one_or_more

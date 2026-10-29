@@ -1,0 +1,49 @@
+# A publication document cut down to two families and one requirement each,
+# one of them withdrawn. The text paraphrases SP 800-171; the identifiers
+# are its own. tests/test_upstream.py derives the whole of Revision 3 from
+# NIST's catalog and validates it as one of these.
+sp800171_revision: "3"
+requirement_families:
+  - family_number: "03.01"
+    title: Access Control
+    family_requirements:
+      - requirement_id: "03.01.08"
+        title: Unsuccessful Logon Attempts
+        requirement_items:
+          - requirement_item_id: "03.01.08.a"
+            requirement_item_text: >-
+              Limit the number of consecutive invalid logon attempts a user may
+              make in a defined time period.
+          - requirement_item_id: "03.01.08.b"
+            requirement_item_text: >-
+              Take a defined action once that limit is exceeded.
+        requirement_discussion: >-
+          Limiting failed attempts slows down password guessing; the limit and
+          the action are the organization's to choose.
+        requirement_parameters:
+          - odp_id: "A.03.01.08.ODP[01]"
+            odp_label: number
+            odp_usage: organization-defined number
+            odp_guideline: >-
+              the number of consecutive invalid logon attempts allowed in a
+              time period is defined.
+        source_controls:
+          - AC-07
+      - requirement_id: "03.01.13"
+        requirement_status: withdrawn
+        addressed_by_requirements:
+          - "03.13.08"
+  - family_number: "03.17"
+    title: Supply Chain Risk Management
+    family_requirements:
+      - requirement_id: "03.17.01"
+        title: Supply Chain Risk Management Plan
+        requirement_statement: >-
+          Keep a plan for managing supply chain risks to the system, review it
+          at a defined frequency, and protect it from unauthorized disclosure.
+        requirement_discussion: >-
+          Supply chain risks arise from the suppliers and components a system
+          depends on; the plan says how the organization identifies and
+          treats them.
+        source_controls:
+          - SR-02

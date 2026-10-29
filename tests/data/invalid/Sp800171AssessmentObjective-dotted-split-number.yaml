@@ -1,0 +1,6 @@
+# Invalid: A.03.01.01.a.01 would be the objective of a numbered item
+# 03.01.01.a.01; the first of several objectives of item 03.01.01.a is
+# A.03.01.01.a[01], and item a of 03.01.01 has no numbered items. The
+# identifier below has no A.
+requirement_objective_id: "03.01.01.a[01]"
+requirement_determination: the types of system account that are allowed are defined.

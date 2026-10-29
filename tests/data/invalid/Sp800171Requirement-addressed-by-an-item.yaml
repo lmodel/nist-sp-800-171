@@ -1,0 +1,6 @@
+# Invalid: a withdrawn requirement is addressed by requirements, not by a
+# statement item.
+requirement_id: "03.01.13"
+requirement_status: withdrawn
+addressed_by_requirements:
+  - "03.13.08.a"

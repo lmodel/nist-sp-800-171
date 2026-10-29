@@ -1,0 +1,4 @@
+# Invalid: a statement nests items two levels deep at most, a lettered item
+# and numbered items under it.
+requirement_item_id: "03.01.01.c.01.01"
+requirement_item_text: the authorized users of the system,
