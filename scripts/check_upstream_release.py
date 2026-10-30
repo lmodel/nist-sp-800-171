@@ -82,7 +82,9 @@ def _get(url: str) -> bytes:
     )
     token = os.environ.get("GITHUB_TOKEN")
     if token and url.startswith(API):
-        req.add_header("Authorization", f"Bearer {token}")
+        # urllib copies ordinary headers onto a redirect, wherever it leads,
+        # so the token goes in a header that stays with this request alone.
+        req.add_unredirected_header("Authorization", f"Bearer {token}")
     with urllib.request.urlopen(req, timeout=60) as resp:
         return resp.read()
 
