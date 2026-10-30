@@ -57,7 +57,39 @@ export const DOCS = { dir: "docs", exclude: ["templates-linkml"] };
 // names. An entry whose key and value both end in /[...slug] stands for one
 // redirect per schema page.
 //   export const REDIRECTS = { "/elements": "/schema/", "/elements/[...slug]": "/schema/[...slug]", "/about": "/docs/about/" };
-export const REDIRECTS = { "/elements": "/schema/", "/elements/[...slug]": "/schema/[...slug]", "/about": "/docs/about/" };
+export const REDIRECTS = {
+  // The mkdocs site's pages for the classes and enums of the OSCAL-shaped
+  // schema this one replaced, each sent to the page of the element that
+  // succeeds it, or to the schema's index where none does.
+  "/elements/SP800171Document": "/schema/Sp800171Publication/",
+  "/elements/CatalogBody": "/schema/Sp800171Publication/",
+  "/elements/ControlGroup": "/schema/Sp800171Family/",
+  "/elements/Control": "/schema/Sp800171Requirement/",
+  "/elements/Parameter": "/schema/Sp800171Parameter/",
+  "/elements/ParameterSelection": "/schema/Sp800171Parameter/",
+  "/elements/Guideline": "/schema/Sp800171Parameter/",
+  "/elements/Resource": "/schema/Sp800171Reference/",
+  "/elements/Citation": "/schema/Sp800171Reference/",
+  "/elements/ResourceLink": "/schema/Sp800171Reference/",
+  "/elements/AssessmentMethodValue": "/schema/Sp800171AssessmentMethodKind/",
+  "/elements/HowManyValue": "/schema/Sp800171SelectionCount/",
+  "/elements/Metadata": "/schema/",
+  "/elements/Role": "/schema/",
+  "/elements/Party": "/schema/",
+  "/elements/Address": "/schema/",
+  "/elements/ResponsibleParty": "/schema/",
+  "/elements/BackMatter": "/schema/",
+  "/elements/CatalogElement": "/schema/",
+  "/elements/IdentifiedElement": "/schema/",
+  "/elements/Property": "/schema/",
+  "/elements/Link": "/schema/",
+  "/elements/Part": "/schema/",
+  "/elements/CatalogElementClassValue": "/schema/",
+  "/elements/PartClassValue": "/schema/",
+  "/elements": "/schema/",
+  "/elements/[...slug]": "/schema/[...slug]",
+  "/about": "/docs/about/",
+};
 
 // A Keep a Changelog file, read as a page per release. "auto" takes
 // CHANGELOG.md when it holds a released version.
