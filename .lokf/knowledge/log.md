@@ -2,6 +2,7 @@
 
 ## 2026-10-30
 
+* **Prose**: reworded 23 concept bodies in plain English. No fact, link, number or frontmatter changed.
 * **Changed**: Test data and tests now counts 43 counter-examples, with a reference missing its citation or its address among them.
 * **Changed**: the generators' settings moved from `config.yaml` to `.linkml/generators.yaml`.
 * **Changed**: nist-sp-800-171 LinkML schema now says the parameter maps to `oscal:Parameter`, the class lmodel/oscal's copy renames OscalParameter, and that a reference requires its citation and a doi.org address.

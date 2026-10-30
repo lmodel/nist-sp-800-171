@@ -17,7 +17,7 @@ status: draft
 
 # AI covenant
 
-`AI_COVENANT.md` says that everything a person contributes is theirs, whatever tools helped make it, and that they answer for it in review.[^ai_covenant.md] Its note for this project says that the repository models someone else's publication, so a requirement, parameter or rule a model invented would read as what SP 800-171 says. It sets three rules:
+`AI_COVENANT.md` says that everything a person contributes is theirs, whatever tools helped make it, and that they answer for it in review.[^ai_covenant.md] Its note for this project says that the repository models someone else's publication. So a requirement, parameter or rule a model invented would read as what SP 800-171 says. It sets three rules:
 
 - every class, slot and enum under `src/nist_sp_800_171/schema/` renders an element of SP 800-171 or SP 800-171A at the pinned edition, in the project's own words, and the pull request cites the section or table;
 - `src/nist_sp_800_171/schema/oscal-content/` holds NIST's catalog as published and is never edited;

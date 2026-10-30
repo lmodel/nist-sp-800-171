@@ -28,7 +28,13 @@ verified:
 
 # Organization-defined parameter (ODP)
 
-The schema describes an organization-defined parameter as a value, such as a time period or a frequency, that a requirement statement leaves to the organization, with the guideline SP 800-171A gives for defining it. It renders one as `Sp800171Parameter`, which requires `odp_id`, such as `A.03.01.01.ODP[01]`, and `odp_label`, the kind of value, and may hold `odp_usage`, how the statement names it, `odp_guideline`, the determination that the value is defined, and for a selection `odp_choices` with `odp_selection_count`.[^nist_sp_800_171.yaml] NIST's catalog renders a parameter as an OSCAL parameter of its requirement, with the publication's identifier in its `label` property and a `select` block for a selection; a statement marks the parameter's place with an insert placeholder that names it.[^nist_sp800-171_rev3_catalog.json] Revision 3 has 88 parameters, 3 of them selections, and a knowledge bundle may type a concept with `Sp800171Parameter` and name its requirement's concept in `isPartOf`.
+The schema describes an organization-defined parameter as a value, such as a time period or a frequency, that a requirement statement leaves to the organization, with the guideline SP 800-171A gives for defining it. It renders one as `Sp800171Parameter`, which requires `odp_id`, such as `A.03.01.01.ODP[01]`, and `odp_label`, the kind of value. A parameter may hold:
+
+- `odp_usage`, how the statement names it;
+- `odp_guideline`, the determination that the value is defined;
+- for a selection, `odp_choices` with `odp_selection_count`.[^nist_sp_800_171.yaml]
+
+NIST's catalog renders a parameter as an OSCAL parameter of its requirement, with the publication's identifier in its `label` property and a `select` block for a selection. A statement marks the parameter's place with an insert placeholder that names it.[^nist_sp800-171_rev3_catalog.json] Revision 3 has 88 parameters, 3 of them selections. A knowledge bundle may type a concept with `Sp800171Parameter` and name its requirement's concept in `isPartOf`.
 
 [^nist_sp_800_171.yaml]: src/nist_sp_800_171/schema/nist_sp_800_171.yaml, the class Sp800171Parameter
 [^nist_sp800-171_rev3_catalog.json]: src/nist_sp_800_171/schema/oscal-content/NIST_SP800-171_rev3_catalog.json, the params of each control

@@ -28,7 +28,7 @@ verified:
 
 # Family
 
-The schema describes a family as one of the seventeen groups that SP 800-171 Revision 3 sorts its security requirements into, such as Access Control (03.01) or Supply Chain Risk Management (03.17). It renders a family as `Sp800171Family`, which requires `family_number` and a `title` and may hold the family's requirements in `family_requirements`.[^nist_sp_800_171.yaml] NIST's catalog renders each family as a group of class `family` with no text of its own, so a family's `description` is in the words of whoever records it.[^nist_sp800-171_rev3_catalog.json] In a knowledge bundle a requirement names its family with `isPartOf` instead. The bundle describes each family under [families](../families/index.md).
+The schema describes a family as one of the seventeen groups that SP 800-171 Revision 3 sorts its security requirements into, such as Access Control (03.01) or Supply Chain Risk Management (03.17). It renders a family as `Sp800171Family`, which requires `family_number` and a `title`. A family may hold its requirements in `family_requirements`.[^nist_sp_800_171.yaml] NIST's catalog renders each family as a group of class `family` with no text of its own, so a family's `description` is in the words of whoever records it.[^nist_sp800-171_rev3_catalog.json] In a knowledge bundle a requirement names its family with `isPartOf` instead. The bundle describes each family under [families](../families/index.md).
 
 [^nist_sp_800_171.yaml]: src/nist_sp_800_171/schema/nist_sp_800_171.yaml, the class Sp800171Family
 [^nist_sp800-171_rev3_catalog.json]: src/nist_sp_800_171/schema/oscal-content/NIST_SP800-171_rev3_catalog.json, the groups

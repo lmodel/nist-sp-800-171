@@ -36,7 +36,7 @@ The schema models the family, the security requirement, the statement item, the 
 
 ## Mappings
 
-The README says that the schema crosses to three kinds of vocabulary and borrows from none. NIST's catalog renders a family as an OSCAL group, a requirement as a control, a statement item, an objective and a method as parts, a parameter as a parameter and a reference as a back-matter resource, so each class names its lmodel/oscal counterpart in `broad_mappings`. The OSCAL class is the more general one. A requirement's `source_controls` carries the identifiers of the SP 800-53 Revision 5 controls it is drawn from, such as `AC-02`, as data in a document and not as a mapping in the schema, which binds no prefix for a model of SP 800-53. `Sp800171Reference` names each publication a requirement references by its short name, with the citation and the digital object identifier the catalog gives it.
+The README says that the schema crosses to three kinds of vocabulary and borrows from none. NIST's catalog renders a family as an OSCAL group, a requirement as a control, a statement item, an objective and a method as parts, a parameter as a parameter and a reference as a back-matter resource. So each class names its lmodel/oscal counterpart in `broad_mappings`. The OSCAL class is the more general one. A requirement's `source_controls` carries the identifiers of the SP 800-53 Revision 5 controls it is drawn from, such as `AC-02`. That is data in a document, not a mapping in the schema, which binds no prefix for a model of SP 800-53. `Sp800171Reference` names each publication a requirement references by its short name, with the citation and the digital object identifier the catalog gives it.
 
 ## Not modelled here
 
