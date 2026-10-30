@@ -100,6 +100,9 @@ generated:
   by: process:ktl-librarian
   at: "2026-10-30T08:32:20Z"
 status: draft
+verified:
+  - by: process:ktl-librarian
+    at: "2026-10-30T08:54:19Z"
 ---
 
 # Knowledge sources
