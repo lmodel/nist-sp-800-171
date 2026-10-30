@@ -15,7 +15,7 @@ sources:
     title: the group SP_800_171_03.08
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T01:13:03Z"
+  at: "2026-10-30T08:32:20Z"
 status: draft
 ---
 
@@ -33,7 +33,7 @@ NIST's catalog renders the family as the group `SP_800_171_03.08`, titled Media 
 
 Revision 3 withdrew two of the family's requirements:
 
-- `03.08.06`, incorporated into `03.13.08`
+- `03.08.06`, incorporated into `03.13.08` as NIST's catalog gives it; SP 800-171 and SP 800-171A say that `03.13.08` addresses it
 - `03.08.08`, incorporated into `03.08.07`
 
 [^nist_sp800-171_rev3_catalog.json]: src/nist_sp_800_171/schema/oscal-content/NIST_SP800-171_rev3_catalog.json, the group SP_800_171_03.08

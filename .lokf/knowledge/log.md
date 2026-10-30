@@ -2,6 +2,18 @@
 
 ## 2026-10-30
 
+* **Changed**: Test data and tests now counts 43 counter-examples, with a reference missing its citation or its address among them.
+* **Changed**: the generators' settings moved from `config.yaml` to `.linkml/generators.yaml`.
+* **Changed**: nist-sp-800-171 LinkML schema now says the parameter maps to `oscal:Parameter`, the class lmodel/oscal's copy renames OscalParameter, and that a reference requires its citation and a doi.org address.
+* **Changed**: NIST's SP 800-171 catalog copy now gives the counts as the catalog's and names the three places where it departs from the publication.
+* **Changed**: Test data and tests now counts 41 counter-examples, each naming where it fails, and covers the stubbed watch tests, the catalog's known departures, the check of valid examples against the catalog and the oscal mapping check.
+* **Changed**: Media Protection now says that the publication, unlike NIST's catalog, has 03.13.08 address 03.08.06.
+* **Changed**: Validate data against the schema now names LinkML 1.12.1 and the nine rules `docs/index.md` lists as checked over the catalog alone.
+* **Changed**: Update the upstream pins now covers the watch's new findings: a dropped folder or file, a moved tag, a file NIST adds, and a check that could not finish.
+* **Changed**: Upstream watch now says the job stops after ten minutes and reports a check that could not finish.
+* **Changed**: Security policy now counts four Dependabot entries, the website's npm packages among them.
+* **Changed**: Documentation site now says the old class pages redirect to their successors' pages.
+* **Changed**: Element names and the shared namespace now says the schema rules test checks the oscal mappings.
 * **Changed**: Security policy now says that a ruleset on `main` blocks deletion and force-pushes, as `SECURITY.md` does since the repository's settings were read; two settings remain not in force.
 * **Added**: Documentation site, from `website/site.config.mjs` and `website/README.md`.
 * **Added**: nist-sp-800-171 LinkML schema, from `src/nist_sp_800_171/schema/nist_sp_800_171.yaml`, its adapt copy and the lokf-adapt recipes.

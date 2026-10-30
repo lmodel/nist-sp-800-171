@@ -13,7 +13,7 @@ sources:
     title: the Validating data section
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T01:13:03Z"
+  at: "2026-10-30T08:32:20Z"
 status: draft
 ---
 
@@ -21,11 +21,11 @@ status: draft
 
 Run `linkml-validate -s src/nist_sp_800_171/schema/nist_sp_800_171.yaml -C Sp800171Requirement requirement.yaml`, naming the class the file holds. It checks the file against the JSON Schema the validator generates from the schema, and `tests/test_data.py` holds every example to the same check.[^docs-index.md]
 
-Validate a file before loading it into either model in `src/nist_sp_800_171/datamodel/`. The page says that the models LinkML 1.10.0 generates check less:
+Validate a file before loading it into either model in `src/nist_sp_800_171/datamodel/`. The page says that the models LinkML 1.12.1 generates check less:
 
 - the dataclasses check required fields and enum values, but no pattern;
 - the Pydantic models also check the patterns a field carries itself, such as the form of `sp800171_revision` or a blank discussion, but not the patterns of the seven identifier types.
 
-No check covers seven rules: that identifiers nest inside the identifier of what holds them, that a list never repeats one, that a requirement has a statement or items and never both, that a withdrawn requirement carries nothing but its identifier, status and successors and that only a withdrawn one carries those, that an objective's assessed item belongs to the same requirement, that an insert placeholder names a parameter of the same requirement, and that a selection parameter has both its choices and its count. `tests/test_upstream.py` checks all of them over NIST's catalog of Revision 3.
+No check covers nine rules: that identifiers nest inside the identifier of what holds them; that no family, requirement, item, parameter or objective identifier repeats; that a requirement has a statement or items and never both; that a requirement in force carries a title, a discussion, a source control and an objective; that a withdrawn requirement carries nothing but its identifier, status and successors, never both kinds, that only a withdrawn one carries those and that each is in force; that an objective's identifier is A and the item it assesses, or its requirement, with at most a bracketed number, so the catalog's dotted form passes the pattern; that an objective's assessed item belongs to the same requirement; that an insert placeholder has the catalog's form and names a parameter of the same requirement; and that a selection parameter has both its choices and its count, and any other parameter its usage and guideline. `tests/test_upstream.py` checks all of them over NIST's catalog of Revision 3.
 
 [^docs-index.md]: docs/index.md, Validating data

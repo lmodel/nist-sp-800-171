@@ -30,7 +30,7 @@ sources:
     title: the tool.lokf table
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T01:13:03Z"
+  at: "2026-10-30T08:32:20Z"
 status: draft
 ---
 
@@ -40,20 +40,22 @@ status: draft
 
 ## Classes
 
-- **`Sp800171Publication`** is the tree root: one revision as a whole. It requires `sp800171_revision`, one number such as `3`, and `requirement_families`.
+- **`Sp800171Publication`** is the tree root: one revision as a whole. It requires `sp800171_revision`, one number such as `3`, and at least one family in `requirement_families`.
 - **`Sp800171Family`** is one of the seventeen families. It requires `family_number`, such as `03.01`, and a `title`, and it may hold its requirements in `family_requirements`.
 - **`Sp800171Requirement`** is a security requirement. It requires `requirement_id`, such as `03.01.01`. It may hold a `title`, a `requirement_statement` or `requirement_items`, a `requirement_discussion`, `requirement_parameters`, `requirement_objectives`, `requirement_methods`, `requirement_references` and `source_controls`. A withdrawn requirement sets `requirement_status: withdrawn` and may name its successors in `incorporated_into_requirements` or `addressed_by_requirements`.
 - **`Sp800171RequirementItem`** is one lettered or numbered item of a statement. It requires `requirement_item_id`, such as `03.01.01.a`, and `requirement_item_text`, and it may hold `requirement_subitems`.
 - **`Sp800171Parameter`** is an organization-defined parameter. It requires `odp_id`, such as `A.03.01.01.ODP[01]`, and `odp_label`, and it may hold `odp_usage`, `odp_guideline`, `odp_choices` and `odp_selection_count`.
 - **`Sp800171AssessmentObjective`** is one determination statement of SP 800-171A. It requires `requirement_objective_id`, such as `A.03.01.01.b[01]`, and `requirement_determination`, and it may name the item it assesses in `assessed_requirement_item`.
-- **`Sp800171AssessmentMethod`** is one of the three methods. It requires `requirement_method_kind` and `requirement_method_objects`.
-- **`Sp800171Reference`** is a publication a requirement references. It requires `cited_publication`, such as `SP 800-63-3`, and it may hold `cited_publication_citation` and `cited_publication_url`.
+- **`Sp800171AssessmentMethod`** is one of the three methods. It requires `requirement_method_kind` and at least one object in `requirement_method_objects`.
+- **`Sp800171Reference`** is a publication a requirement references. It requires `cited_publication`, such as `SP 800-63-3`, `cited_publication_citation`, and `cited_publication_url`, which must be a digital object identifier at doi.org.
 
 The three enums are `Sp800171RequirementStatus` (`withdrawn`), `Sp800171AssessmentMethodKind` (`examine`, `interview`, `test`) and `Sp800171SelectionCount` (`one`, `one_or_more`). Seven types hold the forms of the identifiers, each with a pattern: `sp800171_family_identifier`, `sp800171_requirement_identifier`, `sp800171_item_identifier`, `sp800171_odp_identifier`, `sp800171_objective_identifier`, `sp800171_source_control_identifier` and `sp800171_cited_publication_name`. The schema's slots `title` and `description` carry the IRIs `schema:name` and `schema:description`.
 
+A blank statement, item text, discussion, parameter label, determination or assessment object fails the pattern `^\s*\S`, which the validator and the Pydantic models read alike.
+
 ## Mappings
 
-Each class names a class of lmodel/oscal in `broad_mappings`: `oscal:Catalog` for the publication, `oscal:Group` for the family, `oscal:Control` for the requirement, `oscal:Part` for the statement item, the objective and the method, `oscal:OscalParameter` for the parameter and `oscal:Resource` for the reference. A comment in the header says that NIST's catalog renders the elements that way. [Scope, influences and mappings](../explanations/scope-and-influences.md) says more.
+Each class names a class of lmodel/oscal in `broad_mappings`: `oscal:Catalog` for the publication, `oscal:Group` for the family, `oscal:Control` for the requirement, `oscal:Part` for the statement item, the objective and the method, `oscal:Parameter` for the parameter and `oscal:Resource` for the reference. A comment in the header says that NIST's catalog renders the elements that way. [Scope, influences and mappings](../explanations/scope-and-influences.md) says more.
 
 ## As the bundle's domain schema
 
