@@ -1,10 +1,10 @@
 # nist-sp-800-171
 
-This project is a LinkML model of Special Publication (SP) 800-171 Revision 3,
-in which the National Institute of Standards and Technology (NIST) sets the
-security requirements for protecting controlled unclassified information (CUI)
-in nonfederal systems and organizations, and of the assessment procedures that
-SP 800-171A Revision 3 gives each requirement. It covers the families, the
+This project is a LinkML model of Special Publication (SP) 800-171 Revision 3:
+the security requirements that the National Institute of Standards and
+Technology (NIST) sets for protecting controlled unclassified information
+(CUI) in nonfederal systems and organizations. It also models the assessment
+procedures that SP 800-171A Revision 3 gives each requirement. It covers the families, the
 security requirements with their statements, discussions, references and
 source controls, the organization-defined parameters, and the assessment
 objectives and methods.

@@ -21,7 +21,7 @@ The security requirements for protecting controlled unclassified information (CU
 * **Statement items** (`Sp800171RequirementItem`): the 252 lettered and numbered items of the 68 requirement statements that have them, such as `03.01.01.a` and `03.01.01.c.01`. The other 29 statements are one piece of text.
 * **Organization-defined parameters** (`Sp800171Parameter`): the 88 values, such as `A.03.01.01.ODP[01]`, that the requirements leave to the organization, each with the guideline SP 800-171A gives for defining it. Three are selections among choices.
 * **Assessment objectives** (`Sp800171AssessmentObjective`): the 422 determination statements of SP 800-171A, such as `A.03.01.01.b[01]`, each tied to the requirement or to one item of its statement.
-* **Assessment methods** (`Sp800171AssessmentMethod`): the examine, interview and test entries of SP 800-171A, each with its assessment objects: 281 in NIST's catalog, which leaves out the three that SP 800-171A gives each of `03.01.22` and `03.14.03`, 287 in all.
+* **Assessment methods** (`Sp800171AssessmentMethod`): the examine, interview and test entries of SP 800-171A, each with its assessment objects. NIST's catalog holds 281 of them: it leaves out the three that SP 800-171A gives each of `03.01.22` and `03.14.03`, which make 287 in all.
 * **References** (`Sp800171Reference`): the 199 references from the requirements to 65 NIST publications, with their citations and addresses.
 * **The publication** (`Sp800171Publication`): one revision as a single document that holds all of these.
 
@@ -31,19 +31,19 @@ Revision 3 is the current edition, and NIST has published no draft of a Revision
 
 ## Influences
 
-None beyond SP 800-171 and SP 800-171A themselves: the schema renders one publication, and its release asset and governance files follow [lmodel/slsa](https://github.com/lmodel/slsa).
+None beyond SP 800-171 and SP 800-171A: the schema renders one publication, and its release asset and governance files follow [lmodel/slsa](https://github.com/lmodel/slsa).
 
 ## Mappings
 
 The schema crosses to three kinds of vocabulary and borrows from none.
 
 * **OSCAL**: NIST's catalog renders a family as an OSCAL group, a requirement as a control, a statement item, an objective and a method as parts, a parameter as a parameter, and a reference as a back-matter resource. Each class names its counterpart in [lmodel/oscal](https://github.com/lmodel/oscal) in `broad_mappings`, because the OSCAL class is the more general one.
-* **SP 800-53 Revision 5**: a requirement's `source_controls` carries the identifiers of the controls it is drawn from, such as `AC-02` and `AC-02(03)`, as the catalog lists them among the requirement's references. That is data in a document, not a mapping in the schema, and the schema binds no prefix for a model of SP 800-53; [lmodel/nist-sp-800-53](https://github.com/lmodel/nist-sp-800-53) is where that model is being built.
+* **SP 800-53 Revision 5**: a requirement's `source_controls` carries the identifiers of the controls it is drawn from, such as `AC-02` and `AC-02(03)`, as the catalog lists them among the requirement's references. That is data in a document, not a mapping in the schema, and the schema binds no prefix for a model of SP 800-53. [lmodel/nist-sp-800-53](https://github.com/lmodel/nist-sp-800-53) is where that model is being built.
 * **The publications SP 800-171 references**: `Sp800171Reference` names each by its short name, such as `SP 800-63-3` or `FIPS 140-3`, with the citation and the DOI the catalog gives it.
 
 ## Not modelled here
 
-* The publication's chapters and appendices outside the requirements themselves, such as the introduction, the glossary and the tailoring criteria.
+* The publication's chapters and appendices outside the requirements, such as the introduction, the glossary and the tailoring criteria.
 * SP 800-171A beyond the objectives and methods the catalog carries for each requirement.
 * The enhanced security requirements of SP 800-172, and the requirements of Revision 2 that Revision 3 withdrew, except as a withdrawn requirement's number, status and successors.
 * The catalog's own metadata, roles and parties, and the four back-matter resources that no requirement references.
