@@ -52,15 +52,24 @@ def test_valid_data_files_validate(filepath):
     assert not report.results, [r.message for r in report.results]
 
 
+# A counter-example's first line, "# Fails at: <JSON pointer>", names where it
+# breaks the schema, and the validator ends each message with "in <pointer>".
+# So a counter-example that fails somewhere else, for another reason, fails
+# this test.
 @pytest.mark.parametrize("filepath", INVALID_EXAMPLE_FILES)
 def test_invalid_data_files_fail(filepath):
-    """Every counter-example fails the validator."""
+    """Every counter-example fails the validator where its first line says."""
+    text = Path(filepath).read_text()
+    first, _, _ = text.partition("\n")
+    assert first.startswith("# Fails at: "), filepath
+    pointer = first.removeprefix("# Fails at: ").strip()
     report = validate(
-        yaml.safe_load(Path(filepath).read_text()),
+        yaml.safe_load(text),
         str(SCHEMA),
         Path(filepath).stem.split("-")[0],
     )
-    assert report.results
+    messages = [r.message for r in report.results]
+    assert any(m.endswith(f" in {pointer}") for m in messages), messages
 
 
 def test_every_concept_class_has_an_example():

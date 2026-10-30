@@ -1,0 +1,7 @@
+# Fails at: /
+# Invalid: a reference carries the address the catalog gives it.
+cited_publication: FIPS 140-3
+cited_publication_citation: >-
+  National Institute of Standards and Technology (2019) Security Requirements
+  for Cryptographic Modules. Federal Information Processing Standards
+  Publication (FIPS) 140-3.

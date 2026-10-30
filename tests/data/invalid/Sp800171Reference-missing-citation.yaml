@@ -1,0 +1,5 @@
+# Fails at: /
+# Invalid: a reference carries the full citation the catalog's back matter
+# gives it.
+cited_publication: FIPS 140-3
+cited_publication_url: https://doi.org/10.6028/NIST.FIPS.140-3

@@ -1,0 +1,4 @@
+# Fails at: /odp_label
+# Invalid: a parameter's label is more than white space.
+odp_id: "A.03.01.01.ODP[01]"
+odp_label: " "

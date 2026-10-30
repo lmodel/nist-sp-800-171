@@ -1,0 +1,5 @@
+# Fails at: /requirement_families
+# Invalid: a publication document holds at least one family, so an empty
+# list fails as a missing one does.
+sp800171_revision: "3"
+requirement_families: []

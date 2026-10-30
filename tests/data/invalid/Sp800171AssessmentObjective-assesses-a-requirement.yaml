@@ -1,3 +1,4 @@
+# Fails at: /assessed_requirement_item
 # Invalid: the assessed item is a statement item, such as 03.01.01.a; an
 # objective that assesses the whole requirement names no item.
 requirement_objective_id: "A.03.01.02[01]"

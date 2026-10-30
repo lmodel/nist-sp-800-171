@@ -1,3 +1,4 @@
+# Fails at: /requirement_method_kind
 # Invalid: SP 800-171A has three methods, examine, interview and test.
 requirement_method_kind: observe
 requirement_method_objects:

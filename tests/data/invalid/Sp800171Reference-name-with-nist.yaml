@@ -1,3 +1,9 @@
+# Fails at: /cited_publication
 # Invalid: the short name is the series and the number, FIPS 140-3, without
 # the publisher.
 cited_publication: NIST FIPS 140-3
+cited_publication_citation: >-
+  National Institute of Standards and Technology (2019) Security Requirements
+  for Cryptographic Modules. Federal Information Processing Standards
+  Publication (FIPS) 140-3.
+cited_publication_url: https://doi.org/10.6028/NIST.FIPS.140-3
