@@ -37,6 +37,27 @@ nothing of what it once required. The schema holds none of the publication's
 prose outside the requirements, nothing of SP 800-172's enhanced requirements,
 and none of the catalog's own metadata.
 
+## Where NIST's catalog departs from the publication
+
+The schema renders what NIST's catalog states, and the catalog departs from
+the two publications in three places. `tests/test_upstream.py` holds each as
+`KNOWN_DEPARTURES`, so a corrected catalog fails the test and is noticed. The
+page numbers are the publications' printed ones.
+
+- SP 800-171A Revision 3 gives requirement `03.01.22` the examine, interview
+  and test methods (page 21); the catalog gives it none.
+- SP 800-171A Revision 3 gives requirement `03.14.03` the same three methods
+  (page 86); the catalog gives it none. So the catalog holds 281 assessment
+  methods and the publication 287.
+- SP 800-171 Revision 3 (page 47) and SP 800-171A Revision 3 (page 60) say
+  that `03.13.08` addresses the withdrawn requirement `03.08.06`; the catalog
+  says that `03.13.08` incorporates it. So the catalog has 24
+  incorporated-into and 17 addressed-by links and the publication 23 and 18.
+
+Both NIST's text and its catalog number the two objectives of item
+`03.01.12.d` with one digit, `A.03.01.12.d[1]`; the schema writes them with
+two, `A.03.01.12.d[01]`, as it writes every other objective.
+
 ## Reference
 
 - [Special Publication 800-171 Revision 3 on NIST's site](https://csrc.nist.gov/pubs/sp/800/171/r3/final)

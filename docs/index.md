@@ -35,14 +35,24 @@ No check covers these rules:
 - that a requirement's identifier starts with its family's number, a statement
   item's with its requirement's, a numbered item's with its lettered item's,
   and a parameter's and an objective's with their requirement's;
-- that a list never repeats an identifier;
+- that no family, requirement, statement item, parameter or objective
+  identifier repeats;
 - that a requirement has a statement or statement items, never both;
+- that a requirement in force carries a title, a discussion, at least one
+  source control and at least one assessment objective;
 - that a withdrawn requirement carries nothing but its identifier, its status
-  and the requirements that incorporate or address it, that only a withdrawn
-  requirement carries those, and that each of them is in force;
+  and the requirements that incorporate it or those that address it, never
+  both, that only a withdrawn requirement carries those, and that each of them
+  is in force;
+- that an objective's identifier is A and the item it assesses, or its
+  requirement when it names no item, with at most a bracketed number, so the
+  catalog's dotted form `A.03.01.01.b.01` passes the pattern as the objective
+  of a numbered item;
 - that an objective's assessed item is an item of the same requirement;
-- that an insert placeholder in a statement, an item, a choice or an objective
-  names a parameter of the same requirement;
-- that a selection parameter has both its choices and its count.
+- that every insert placeholder in a statement, an item, a choice or an
+  objective has the catalog's form and names a parameter of the same
+  requirement;
+- that a selection parameter has both its choices and its count, and any
+  other parameter its usage and guideline.
 
 `tests/test_upstream.py` checks all of them over NIST's catalog of Revision 3.
