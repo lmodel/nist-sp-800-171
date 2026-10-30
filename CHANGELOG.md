@@ -6,6 +6,8 @@ The `v0.0.0` tag is a baseline, not a release: it marks where versioning starts 
 
 ## [Unreleased]
 
+## [0.1.0] - 2026-10-30
+
 ### Added
 
 - **A LinkML schema of NIST Special Publication (SP) 800-171 Revision 3**, the security requirements for protecting controlled unclassified information (CUI) in nonfederal systems and organizations, with the assessment procedures of SP 800-171A Revision 3. It holds the seventeen families, the 97 security requirements in force and the 33 withdrawn ones with the requirements that took their place where the catalog names them, each requirement's statement items, discussion, references and SP 800-53 source controls, the 88 organization-defined parameters, and the assessment objectives and methods.
