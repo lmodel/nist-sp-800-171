@@ -6,17 +6,20 @@ without any change in this repository:
 
 - NIST publishes a newer revision of SP 800-171, so the schema falls behind;
 - NIST releases a changed catalog of the pinned edition in
-  usnistgov/oscal-content;
+  usnistgov/oscal-content, moves the pinned tag, or moves the catalog's
+  folder;
 - the copied files drift from the files they were taken from.
 
 The copy has no version in its path, so the release, the commit its tag
 names and each file's git object hash are pinned below. This script asks the
-GitHub API for usnistgov/oscal-content's latest release and for a few folder
-listings, and compares every copied file with its blob by git object hash,
-so nothing is downloaded but listings. It asks doi.org whether NIST has
-registered the identifier of the next final edition, because NIST registers
-one for every publication. It prints a Markdown report and exits 1 when a
-newer edition is out, the catalog changed or a file differs.
+GitHub API for usnistgov/oscal-content's latest release, for the commit the
+pinned tag names and for a few folder listings, and compares every copied
+file with its blob by git object hash, so nothing is downloaded but listings.
+It asks doi.org whether NIST has registered the identifier of the next final
+edition, because NIST registers one for every publication. It prints a
+Markdown report and exits 1 when a newer edition is out, the catalog or its
+folder changed, the tag moved, a file differs, or a check could not finish.
+A file NIST adds beside the catalog is reported for information only.
 
 Set ``GITHUB_TOKEN`` to raise the API rate limit. Usage::
 
@@ -63,6 +66,10 @@ PINNED_BLOBS = {
     "LICENSE.md": ("LICENSE.md", "109af23dd24c2c465143aeab12ffebfffe2a4cd5"),
 }
 
+# The files in PINNED_PATH that the copy leaves out on purpose: the minified
+# form of the same catalog. Any other file there is reported as new.
+UNCOPIED = {"NIST_SP800-171_rev3_catalog-min.json"}
+
 # The revision the schema renders, as its digital object identifier (DOI), and
 # the identifier NIST would give the next final revision. Drafts of that
 # revision are reported, not acted on: the schema follows final revisions.
@@ -102,11 +109,63 @@ def _blob_sha(path: Path) -> str:
 
 
 def _listing(path: str, ref: str) -> dict[str, dict]:
-    """The entries of one folder at a ref, by name."""
-    entries = json.loads(_get(f"{API}/contents/{path}?ref={ref}"))
+    """The entries of one folder at a ref, by name, or the one entry when the
+    path is a file. Empty when the ref holds nothing at the path."""
+    try:
+        entries = json.loads(_get(f"{API}/contents/{path}?ref={ref}"))
+    except urllib.error.HTTPError as err:
+        if err.code == 404:
+            return {}
+        raise
     if isinstance(entries, dict):
         entries = [entries]
     return {e["name"]: e for e in entries}
+
+
+def _tag_commit(tag: str) -> str | None:
+    """The commit a tag names, read through the tag object when the tag is
+    annotated, or None when the tag is gone."""
+    try:
+        target = json.loads(_get(f"{API}/git/ref/tags/{tag}"))["object"]
+    except urllib.error.HTTPError as err:
+        if err.code == 404:
+            return None
+        raise
+    if target["type"] == "tag":
+        target = json.loads(_get(f"{API}/git/tags/{target['sha']}"))["object"]
+    return target["sha"]
+
+
+def _blobs_at(ref: str) -> tuple[dict[str, str | None], dict[str, dict]]:
+    """Each pinned file's git object hash at a ref, None where the ref lacks
+    the file, and the listing of PINNED_PATH there."""
+    listings = {PINNED_PATH: _listing(PINNED_PATH, ref)}
+    shas = {}
+    for name, (source, _sha) in PINNED_BLOBS.items():
+        folder, _, base = source.rpartition("/")
+        where = folder or base
+        if where not in listings:
+            listings[where] = _listing(where, ref)
+        shas[name] = listings[where].get(base, {}).get("sha")
+    return shas, listings[PINNED_PATH]
+
+
+def _unlisted(folder: dict[str, dict], ref: str) -> list[str]:
+    """A line for information naming the files in PINNED_PATH at a ref that
+    the copy neither pins nor leaves out on purpose."""
+    pinned = {source.rpartition("/")[2] for source, _sha in PINNED_BLOBS.values()}
+    new = sorted(
+        name
+        for name, entry in folder.items()
+        if entry.get("type", "file") == "file" and name not in pinned | UNCOPIED
+    )
+    if not new:
+        return []
+    return [
+        f"- For information: `{PINNED_PATH}/` at {ref} also holds "
+        + ", ".join(f"`{name}`" for name in new)
+        + ", which the copy does not pin."
+    ]
 
 
 def _doi_registered(doi: str) -> bool:
@@ -158,34 +217,67 @@ def check_catalog() -> tuple[list[str], bool]:
     ]
     attention = False
 
+    tagged = _tag_commit(PINNED_TAG)
+    if tagged is None:
+        attention = True
+        report.append(
+            f"- **usnistgov/oscal-content no longer has the tag `{PINNED_TAG}`.**"
+        )
+    elif tagged != PINNED_COMMIT:
+        attention = True
+        report.append(
+            f"- **The tag `{PINNED_TAG}` now names commit `{tagged[:12]}`, not the "
+            f"pinned `{PINNED_COMMIT[:12]}`.** Compare the two before moving any pin."
+        )
+
+    pinned_shas, pinned_folder = _blobs_at(PINNED_COMMIT)
+    report += _unlisted(pinned_folder, PINNED_TAG)
+
     latest = json.loads(_get(f"{API}/releases/latest"))["tag_name"]
     if _version_key(latest) > _version_key(PINNED_TAG):
-        catalog, (source, pinned_sha) = next(iter(PINNED_BLOBS.items()))
-        folder, _, name = source.rpartition("/")
-        theirs = _listing(folder, latest).get(name, {}).get("sha")
-        if theirs != pinned_sha:
+        latest_shas, latest_folder = _blobs_at(latest)
+        changed = False
+        if not latest_folder:
+            changed = attention = True
+            report.append(
+                f"- **usnistgov/oscal-content {latest} no longer holds `{PINNED_PATH}/`.**"
+            )
+        for name, (source, pinned_sha) in sorted(PINNED_BLOBS.items()):
+            if not latest_folder and source.startswith(f"{PINNED_PATH}/"):
+                continue
+            theirs = latest_shas[name]
+            if theirs is None:
+                changed = attention = True
+                report.append(
+                    f"- **usnistgov/oscal-content {latest} no longer holds `{source}`.**"
+                )
+            elif theirs != pinned_sha:
+                changed = attention = True
+                report.append(
+                    f"- **usnistgov/oscal-content {latest} changes `{source}`.** Replace "
+                    f"`src/nist_sp_800_171/schema/oscal-content/{name}` with the file at that "
+                    f"tag (https://github.com/usnistgov/oscal-content/tree/{latest}), move the "
+                    "pins here and in the schema header, and run `just test`."
+                )
+        if not changed:
+            report.append(
+                f"- Latest release: {latest}, which holds the pinned files unchanged."
+            )
+        report += _unlisted(latest_folder, latest)
+        editions = _listing(EDITIONS_PATH, latest)
+        if not editions:
             attention = True
             report.append(
-                f"- **usnistgov/oscal-content {latest} changes `{name}`.** Replace "
-                f"`src/nist_sp_800_171/schema/oscal-content/{catalog}` with the file at that tag "
-                f"(https://github.com/usnistgov/oscal-content/tree/{latest}/{folder}), move the "
-                "pins here and in the schema header, and run `just test`."
+                f"- **usnistgov/oscal-content {latest} no longer holds `{EDITIONS_PATH}/`.**"
             )
-        else:
-            report.append(
-                f"- Latest release: {latest}, which holds the pinned catalog unchanged."
-            )
-        editions = {
-            n for n, e in _listing(EDITIONS_PATH, latest).items() if e["type"] == "dir"
-        }
-        if editions - PINNED_EDITIONS:
+        others = {
+            n for n, e in editions.items() if e["type"] == "dir"
+        } - PINNED_EDITIONS
+        if others:
             attention = True
             report.append(
                 f"- **usnistgov/oscal-content {latest} holds another revision of SP 800-171:** "
-                + ", ".join(
-                    f"`{EDITIONS_PATH}/{e}/`"
-                    for e in sorted(editions - PINNED_EDITIONS)
-                )
+                + ", ".join(f"`{EDITIONS_PATH}/{e}/`" for e in sorted(others))
                 + "."
             )
     else:
@@ -194,11 +286,9 @@ def check_catalog() -> tuple[list[str], bool]:
     matching, differing = 0, []
     for name, (source, pinned_sha) in sorted(PINNED_BLOBS.items()):
         path = COPY / name
-        folder, _, base = source.rpartition("/")
-        upstream = _listing(folder or base, PINNED_COMMIT).get(base, {}).get("sha")
         if not path.is_file():
             differing.append(f"`{name}` is missing from the copy")
-        elif upstream != pinned_sha:
+        elif pinned_shas[name] != pinned_sha:
             differing.append(f"`{source}` at {PINNED_TAG} is not the pinned blob")
         elif _blob_sha(path) != pinned_sha:
             differing.append(f"`{name}` differs from `{source}` at {PINNED_TAG}")
@@ -223,8 +313,14 @@ def main(argv: list[str] | None = None) -> int:
     )
     args = parser.parse_args(argv)
     lines, attention = [], False
-    for part in (check_editions, check_catalog):
-        found, needs = part()
+    # A check that cannot reach doi.org or GitHub becomes a line of the
+    # report rather than a traceback, so the other check still runs and the
+    # issue says what failed.
+    for name, part in (("editions", check_editions), ("catalog", check_catalog)):
+        try:
+            found, needs = part()
+        except (urllib.error.URLError, TimeoutError, OSError) as err:
+            found, needs = [f"- **The {name} check could not finish: {err}.**"], True
         lines += found
         attention = attention or needs
     text = "\n".join(lines) + "\n"
