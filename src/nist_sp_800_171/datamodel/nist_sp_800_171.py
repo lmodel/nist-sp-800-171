@@ -1,5 +1,5 @@
 # Auto generated from nist_sp_800_171.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-10-29T21:28:06
+# Generation date: 2026-10-30T08:16:17
 # Schema: nist_sp_800_171
 #
 # id: https://w3id.org/lmodel/nist-sp-800-171
@@ -121,7 +121,7 @@ class Sp800171SourceControlIdentifier(String):
 
 
 class Sp800171CitedPublicationName(String):
-    """ The short name SP 800-171 gives a publication it references: the series (SP, FIPS or IR) and the publication's number, with its revision or volume where the publication has one, such as SP 800-63-3, FIPS 140-3 and IR 7966. """
+    """ The short name SP 800-171 gives a publication it references: the series (SP, FIPS or IR) and the publication's number, with the number of a part or volume where the publication has one, such as SP 800-57-1, SP 800-160-1, IR 8011-2 or FIPS 140-3. The short name leaves out the publication's revision, which the citation and the address carry: SP 800-53 stands for Revision 5. """
     type_class_uri = XSD["string"]
     type_class_curie = "xsd:string"
     type_name = "sp800171_cited_publication_name"
@@ -434,8 +434,8 @@ class Sp800171Reference(YAMLRoot):
     class_model_uri: ClassVar[URIRef] = NIST_SP_800_171.Sp800171Reference
 
     cited_publication: Union[str, Sp800171CitedPublicationName] = None
-    cited_publication_citation: Optional[str] = None
-    cited_publication_url: Optional[Union[str, URI]] = None
+    cited_publication_citation: str = None
+    cited_publication_url: Union[str, URI] = None
 
     def __post_init__(self, *_: str, **kwargs: Any):
         if self._is_empty(self.cited_publication):
@@ -443,10 +443,14 @@ class Sp800171Reference(YAMLRoot):
         if not isinstance(self.cited_publication, Sp800171CitedPublicationName):
             self.cited_publication = Sp800171CitedPublicationName(self.cited_publication)
 
-        if self.cited_publication_citation is not None and not isinstance(self.cited_publication_citation, str):
+        if self._is_empty(self.cited_publication_citation):
+            self.MissingRequiredField("cited_publication_citation")
+        if not isinstance(self.cited_publication_citation, str):
             self.cited_publication_citation = str(self.cited_publication_citation)
 
-        if self.cited_publication_url is not None and not isinstance(self.cited_publication_url, URI):
+        if self._is_empty(self.cited_publication_url):
+            self.MissingRequiredField("cited_publication_url")
+        if not isinstance(self.cited_publication_url, URI):
             self.cited_publication_url = URI(self.cited_publication_url)
 
         super().__post_init__(**kwargs)
@@ -538,14 +542,14 @@ slots.sp800171Requirement__addressed_by_requirements = Slot(uri=NIST_SP_800_171.
 
 slots.sp800171Requirement__requirement_statement = Slot(uri=NIST_SP_800_171.requirement_statement, name="sp800171Requirement__requirement_statement", curie=NIST_SP_800_171.curie('requirement_statement'),
                    model_uri=NIST_SP_800_171.sp800171Requirement__requirement_statement, domain=None, range=Optional[str],
-                   pattern=re.compile(r'\S'))
+                   pattern=re.compile(r'^\s*\S'))
 
 slots.sp800171Requirement__requirement_items = Slot(uri=NIST_SP_800_171.requirement_items, name="sp800171Requirement__requirement_items", curie=NIST_SP_800_171.curie('requirement_items'),
                    model_uri=NIST_SP_800_171.sp800171Requirement__requirement_items, domain=None, range=Optional[Union[Union[dict, Sp800171RequirementItem], list[Union[dict, Sp800171RequirementItem]]]])
 
 slots.sp800171Requirement__requirement_discussion = Slot(uri=NIST_SP_800_171.requirement_discussion, name="sp800171Requirement__requirement_discussion", curie=NIST_SP_800_171.curie('requirement_discussion'),
                    model_uri=NIST_SP_800_171.sp800171Requirement__requirement_discussion, domain=None, range=Optional[str],
-                   pattern=re.compile(r'\S'))
+                   pattern=re.compile(r'^\s*\S'))
 
 slots.sp800171Requirement__requirement_parameters = Slot(uri=NIST_SP_800_171.requirement_parameters, name="sp800171Requirement__requirement_parameters", curie=NIST_SP_800_171.curie('requirement_parameters'),
                    model_uri=NIST_SP_800_171.sp800171Requirement__requirement_parameters, domain=None, range=Optional[Union[Union[dict, Sp800171Parameter], list[Union[dict, Sp800171Parameter]]]])
@@ -567,7 +571,7 @@ slots.sp800171RequirementItem__requirement_item_id = Slot(uri=NIST_SP_800_171.re
 
 slots.sp800171RequirementItem__requirement_item_text = Slot(uri=NIST_SP_800_171.requirement_item_text, name="sp800171RequirementItem__requirement_item_text", curie=NIST_SP_800_171.curie('requirement_item_text'),
                    model_uri=NIST_SP_800_171.sp800171RequirementItem__requirement_item_text, domain=None, range=str,
-                   pattern=re.compile(r'\S'))
+                   pattern=re.compile(r'^\s*\S'))
 
 slots.sp800171RequirementItem__requirement_subitems = Slot(uri=NIST_SP_800_171.requirement_subitems, name="sp800171RequirementItem__requirement_subitems", curie=NIST_SP_800_171.curie('requirement_subitems'),
                    model_uri=NIST_SP_800_171.sp800171RequirementItem__requirement_subitems, domain=None, range=Optional[Union[Union[dict, Sp800171RequirementItem], list[Union[dict, Sp800171RequirementItem]]]])
@@ -577,7 +581,7 @@ slots.sp800171Parameter__odp_id = Slot(uri=NIST_SP_800_171.odp_id, name="sp80017
 
 slots.sp800171Parameter__odp_label = Slot(uri=NIST_SP_800_171.odp_label, name="sp800171Parameter__odp_label", curie=NIST_SP_800_171.curie('odp_label'),
                    model_uri=NIST_SP_800_171.sp800171Parameter__odp_label, domain=None, range=str,
-                   pattern=re.compile(r'\S'))
+                   pattern=re.compile(r'^\s*\S'))
 
 slots.sp800171Parameter__odp_usage = Slot(uri=NIST_SP_800_171.odp_usage, name="sp800171Parameter__odp_usage", curie=NIST_SP_800_171.curie('odp_usage'),
                    model_uri=NIST_SP_800_171.sp800171Parameter__odp_usage, domain=None, range=Optional[str])
@@ -596,7 +600,7 @@ slots.sp800171AssessmentObjective__requirement_objective_id = Slot(uri=NIST_SP_8
 
 slots.sp800171AssessmentObjective__requirement_determination = Slot(uri=NIST_SP_800_171.requirement_determination, name="sp800171AssessmentObjective__requirement_determination", curie=NIST_SP_800_171.curie('requirement_determination'),
                    model_uri=NIST_SP_800_171.sp800171AssessmentObjective__requirement_determination, domain=None, range=str,
-                   pattern=re.compile(r'\S'))
+                   pattern=re.compile(r'^\s*\S'))
 
 slots.sp800171AssessmentObjective__assessed_requirement_item = Slot(uri=NIST_SP_800_171.assessed_requirement_item, name="sp800171AssessmentObjective__assessed_requirement_item", curie=NIST_SP_800_171.curie('assessed_requirement_item'),
                    model_uri=NIST_SP_800_171.sp800171AssessmentObjective__assessed_requirement_item, domain=None, range=Optional[Union[str, Sp800171ItemIdentifier]])
@@ -606,16 +610,17 @@ slots.sp800171AssessmentMethod__requirement_method_kind = Slot(uri=NIST_SP_800_1
 
 slots.sp800171AssessmentMethod__requirement_method_objects = Slot(uri=NIST_SP_800_171.requirement_method_objects, name="sp800171AssessmentMethod__requirement_method_objects", curie=NIST_SP_800_171.curie('requirement_method_objects'),
                    model_uri=NIST_SP_800_171.sp800171AssessmentMethod__requirement_method_objects, domain=None, range=Union[str, list[str]],
-                   pattern=re.compile(r'\S'))
+                   pattern=re.compile(r'^\s*\S'))
 
 slots.sp800171Reference__cited_publication = Slot(uri=NIST_SP_800_171.cited_publication, name="sp800171Reference__cited_publication", curie=NIST_SP_800_171.curie('cited_publication'),
                    model_uri=NIST_SP_800_171.sp800171Reference__cited_publication, domain=None, range=Union[str, Sp800171CitedPublicationName])
 
 slots.sp800171Reference__cited_publication_citation = Slot(uri=NIST_SP_800_171.cited_publication_citation, name="sp800171Reference__cited_publication_citation", curie=NIST_SP_800_171.curie('cited_publication_citation'),
-                   model_uri=NIST_SP_800_171.sp800171Reference__cited_publication_citation, domain=None, range=Optional[str])
+                   model_uri=NIST_SP_800_171.sp800171Reference__cited_publication_citation, domain=None, range=str)
 
 slots.sp800171Reference__cited_publication_url = Slot(uri=NIST_SP_800_171.cited_publication_url, name="sp800171Reference__cited_publication_url", curie=NIST_SP_800_171.curie('cited_publication_url'),
-                   model_uri=NIST_SP_800_171.sp800171Reference__cited_publication_url, domain=None, range=Optional[Union[str, URI]])
+                   model_uri=NIST_SP_800_171.sp800171Reference__cited_publication_url, domain=None, range=Union[str, URI],
+                   pattern=re.compile(r'^https://doi\.org/10\.[0-9]+/\S+$'))
 
 slots.Sp800171Family_title = Slot(uri=SCHEMA.name, name="Sp800171Family_title", curie=SCHEMA.curie('name'),
                    model_uri=NIST_SP_800_171.Sp800171Family_title, domain=Sp800171Family, range=str)

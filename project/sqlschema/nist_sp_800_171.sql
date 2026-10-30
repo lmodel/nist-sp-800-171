@@ -44,7 +44,7 @@
 --     * Slot: id
 --     * Slot: cited_publication Description: The publication's short name, such as SP 800-63-3.
 --     * Slot: cited_publication_citation Description: The full citation, as the catalog's back matter gives it.
---     * Slot: cited_publication_url Description: The publication's address, which the catalog gives as its digital object identifier.
+--     * Slot: cited_publication_url Description: The publication's address, which the catalog gives as its digital object identifier at doi.org.
 --     * Slot: Sp800171Requirement_id Description: Autocreated FK slot
 -- # Class: Sp800171Requirement_incorporated_into_requirements
 --     * Slot: Sp800171Requirement_id Description: Autocreated FK slot
@@ -142,8 +142,8 @@ CREATE INDEX "ix_Sp800171AssessmentMethod_id" ON "Sp800171AssessmentMethod" (id)
 CREATE TABLE "Sp800171Reference" (
 	id INTEGER NOT NULL,
 	cited_publication TEXT NOT NULL,
-	cited_publication_citation TEXT,
-	cited_publication_url TEXT,
+	cited_publication_citation TEXT NOT NULL,
+	cited_publication_url TEXT NOT NULL,
 	"Sp800171Requirement_id" INTEGER,
 	PRIMARY KEY (id),
 	FOREIGN KEY("Sp800171Requirement_id") REFERENCES "Sp800171Requirement" (id)
@@ -156,8 +156,8 @@ CREATE TABLE "Sp800171Requirement_incorporated_into_requirements" (
 	PRIMARY KEY ("Sp800171Requirement_id", incorporated_into_requirements),
 	FOREIGN KEY("Sp800171Requirement_id") REFERENCES "Sp800171Requirement" (id)
 );
-CREATE INDEX "ix_Sp800171Requirement_incorporated_into_requirements_incorporated_into_requirements" ON "Sp800171Requirement_incorporated_into_requirements" (incorporated_into_requirements);
 CREATE INDEX "ix_Sp800171Requirement_incorporated_into_requirements_Sp800171Requirement_id" ON "Sp800171Requirement_incorporated_into_requirements" ("Sp800171Requirement_id");
+CREATE INDEX "ix_Sp800171Requirement_incorporated_into_requirements_incorporated_into_requirements" ON "Sp800171Requirement_incorporated_into_requirements" (incorporated_into_requirements);
 
 CREATE TABLE "Sp800171Requirement_addressed_by_requirements" (
 	"Sp800171Requirement_id" INTEGER,

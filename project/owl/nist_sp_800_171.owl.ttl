@@ -34,20 +34,20 @@ nist_sp_800_171:Sp800171Publication a owl:Class ;
     rdfs:seeAlso <https://csrc.nist.gov/pubs/sp/800/171/r3/final> ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:minCardinality 1 ;
+            owl:onProperty nist_sp_800_171:sp800171_revision ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
             owl:onProperty nist_sp_800_171:requirement_families ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^[1-9][0-9]*$" ] ) ] ;
+            owl:onProperty nist_sp_800_171:sp800171_revision ],
         [ a owl:Restriction ;
             owl:allValuesFrom nist_sp_800_171:Sp800171Family ;
             owl:onProperty nist_sp_800_171:requirement_families ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:sp800171_revision ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty nist_sp_800_171:sp800171_revision ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "^[1-9][0-9]*$" ] ) ] ;
             owl:onProperty nist_sp_800_171:sp800171_revision ] ;
     skos:broadMatch oscal:Catalog ;
     skos:definition "One revision of SP 800-171 as a whole: its requirement families, each holding its security requirements, with the assessment procedures of the matching revision of SP 800-171A inside each requirement." ;
@@ -58,8 +58,13 @@ nist_sp_800_171:Sp800171AssessmentMethod a owl:Class ;
     rdfs:label "Sp800171AssessmentMethod" ;
     rdfs:seeAlso <https://doi.org/10.6028/NIST.SP.800-171Ar3> ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Sp800171AssessmentMethodKind ;
-            owl:onProperty nist_sp_800_171:requirement_method_kind ],
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^\\s*\\S" ] ) ] ;
+            owl:onProperty nist_sp_800_171:requirement_method_objects ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty nist_sp_800_171:requirement_method_objects ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:requirement_method_kind ],
@@ -67,13 +72,8 @@ nist_sp_800_171:Sp800171AssessmentMethod a owl:Class ;
             owl:minCardinality 1 ;
             owl:onProperty nist_sp_800_171:requirement_method_kind ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty nist_sp_800_171:requirement_method_objects ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "\\S" ] ) ] ;
-            owl:onProperty nist_sp_800_171:requirement_method_objects ] ;
+            owl:allValuesFrom nist_sp_800_171:Sp800171AssessmentMethodKind ;
+            owl:onProperty nist_sp_800_171:requirement_method_kind ] ;
     skos:broadMatch oscal:Part ;
     skos:definition "One of the three assessment methods SP 800-171A applies to a requirement, examine, interview or test, with the assessment objects (documents, people, processes or mechanisms) it is applied to." ;
     skos:exactMatch nist_sp_800_171:AssessmentMethod ;
@@ -86,31 +86,31 @@ nist_sp_800_171:Sp800171AssessmentObjective a owl:Class ;
             owl:minCardinality 1 ;
             owl:onProperty nist_sp_800_171:requirement_determination ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:assessed_requirement_item ],
+            owl:minCardinality 1 ;
+            owl:onProperty nist_sp_800_171:requirement_objective_id ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:requirement_objective_id ],
+            owl:onProperty nist_sp_800_171:assessed_requirement_item ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:requirement_determination ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty nist_sp_800_171:requirement_objective_id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:assessed_requirement_item ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:assessed_requirement_item ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:requirement_objective_id ],
         [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "\\S" ] ) ] ;
-            owl:onProperty nist_sp_800_171:requirement_determination ] ;
+                    owl:withRestrictions ( [ xsd:pattern "^\\s*\\S" ] ) ] ;
+            owl:onProperty nist_sp_800_171:requirement_determination ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:requirement_objective_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:assessed_requirement_item ] ;
     skos:broadMatch oscal:Part ;
     skos:definition "An assessment objective of SP 800-171A: one determination statement that an assessor checks, tied to the requirement or to one item of its statement." ;
     skos:exactMatch nist_sp_800_171:AssessmentObjective ;
@@ -121,37 +121,37 @@ nist_sp_800_171:Sp800171Family a owl:Class ;
     rdfs:seeAlso <https://csrc.nist.gov/pubs/sp/800/171/r3/final> ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:family_number ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:title ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty nist_sp_800_171:title ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:title ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:description ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:family_number ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty nist_sp_800_171:family_number ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:family_requirements ],
         [ a owl:Restriction ;
             owl:allValuesFrom nist_sp_800_171:Sp800171Requirement ;
-            owl:onProperty nist_sp_800_171:family_requirements ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:description ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:family_number ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:description ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:family_requirements ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:description ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:title ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
-            owl:onProperty nist_sp_800_171:family_number ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:family_number ] ;
+            owl:onProperty nist_sp_800_171:family_requirements ] ;
     skos:broadMatch oscal:Group ;
     skos:definition "One of the seventeen families that SP 800-171 Revision 3 sorts its security requirements into, such as Access Control (03.01) or Supply Chain Risk Management (03.17)." ;
     skos:exactMatch nist_sp_800_171:Family ;
@@ -161,26 +161,22 @@ nist_sp_800_171:Sp800171Parameter a owl:Class ;
     rdfs:label "Sp800171Parameter" ;
     rdfs:seeAlso <https://doi.org/10.6028/NIST.SP.800-171Ar3> ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:odp_choices ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:odp_guideline ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:odp_label ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:odp_usage ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:odp_guideline ],
-        [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^\\s*\\S" ] ) ] ;
             owl:onProperty nist_sp_800_171:odp_label ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:odp_id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:odp_usage ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty nist_sp_800_171:odp_id ],
@@ -188,32 +184,36 @@ nist_sp_800_171:Sp800171Parameter a owl:Class ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:odp_choices ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:odp_selection_count ],
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:odp_id ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
+            owl:onProperty nist_sp_800_171:odp_label ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:odp_usage ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:odp_usage ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:odp_selection_count ],
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:odp_guideline ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:odp_id ],
+            owl:onProperty nist_sp_800_171:odp_label ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:odp_guideline ],
         [ a owl:Restriction ;
             owl:allValuesFrom nist_sp_800_171:Sp800171SelectionCount ;
             owl:onProperty nist_sp_800_171:odp_selection_count ],
         [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "\\S" ] ) ] ;
-            owl:onProperty nist_sp_800_171:odp_label ],
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:odp_selection_count ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:odp_guideline ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:odp_choices ] ;
-    skos:broadMatch oscal:OscalParameter ;
+            owl:onProperty nist_sp_800_171:odp_selection_count ] ;
+    skos:broadMatch oscal:Parameter ;
     skos:definition "An organization-defined parameter (ODP): a value, such as a time period or a frequency, that a requirement statement leaves to the organization, with the guideline SP 800-171A gives for defining it. A few parameters are a selection among choices instead of a value." ;
     skos:exactMatch nist_sp_800_171:Parameter ;
     skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
@@ -222,32 +222,35 @@ nist_sp_800_171:Sp800171Reference a owl:Class ;
     rdfs:label "Sp800171Reference" ;
     rdfs:seeAlso <https://csrc.nist.gov/pubs/sp/800/171/r3/final> ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:cited_publication ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:cited_publication_citation ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:intersectionOf ( xsd:anyURI [ a rdfs:Datatype ;
+                                owl:onDatatype xsd:string ;
+                                owl:withRestrictions ( [ xsd:pattern "^https://doi\\.org/10\\.[0-9]+/\\S+$" ] ) ] ) ] ;
             owl:onProperty nist_sp_800_171:cited_publication_url ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
             owl:onProperty nist_sp_800_171:cited_publication_citation ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:cited_publication_url ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:cited_publication ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
+            owl:minCardinality 1 ;
+            owl:onProperty nist_sp_800_171:cited_publication_url ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
             owl:onProperty nist_sp_800_171:cited_publication_citation ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty nist_sp_800_171:cited_publication ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:cited_publication ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:anyURI ;
-            owl:onProperty nist_sp_800_171:cited_publication_url ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:cited_publication_citation ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:cited_publication_url ] ;
+            owl:onProperty nist_sp_800_171:cited_publication ] ;
     skos:broadMatch oscal:Resource ;
     skos:definition "A publication that SP 800-171 lists under a requirement's references, by the short name the publication gives it, with the full citation and the address NIST's catalog gives it." ;
     skos:exactMatch nist_sp_800_171:Reference ;
@@ -257,111 +260,111 @@ nist_sp_800_171:Sp800171Requirement a owl:Class ;
     rdfs:label "Sp800171Requirement" ;
     rdfs:seeAlso <https://csrc.nist.gov/pubs/sp/800/171/r3/final> ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:requirement_methods ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:addressed_by_requirements ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^\\s*\\S" ] ) ] ;
+            owl:onProperty nist_sp_800_171:requirement_discussion ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:requirement_references ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:source_controls ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:requirement_id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Sp800171Reference ;
-            owl:onProperty nist_sp_800_171:requirement_references ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:requirement_statement ],
+            owl:onProperty nist_sp_800_171:requirement_status ],
         [ a owl:Restriction ;
             owl:allValuesFrom nist_sp_800_171:Sp800171AssessmentMethod ;
             owl:onProperty nist_sp_800_171:requirement_methods ],
         [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:requirement_status ],
+            owl:onProperty nist_sp_800_171:requirement_discussion ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:source_controls ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom nist_sp_800_171:Sp800171Reference ;
+            owl:onProperty nist_sp_800_171:requirement_references ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:incorporated_into_requirements ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:requirement_id ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:incorporated_into_requirements ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:title ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:title ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom nist_sp_800_171:Sp800171AssessmentObjective ;
+            owl:onProperty nist_sp_800_171:requirement_objectives ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:description ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:requirement_objectives ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
             owl:onProperty nist_sp_800_171:requirement_id ],
         [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Sp800171RequirementStatus ;
-            owl:onProperty nist_sp_800_171:requirement_status ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:incorporated_into_requirements ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:description ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:requirement_statement ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:requirement_status ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:incorporated_into_requirements ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:title ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Sp800171RequirementItem ;
-            owl:onProperty nist_sp_800_171:requirement_items ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:requirement_discussion ],
-        [ a owl:Restriction ;
             owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:title ],
+            owl:onProperty nist_sp_800_171:addressed_by_requirements ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:requirement_items ],
         [ a owl:Restriction ;
             owl:allValuesFrom nist_sp_800_171:Sp800171Parameter ;
             owl:onProperty nist_sp_800_171:requirement_parameters ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:requirement_objectives ],
+            owl:onProperty nist_sp_800_171:requirement_statement ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:source_controls ],
         [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:requirement_id ],
+            owl:allValuesFrom nist_sp_800_171:Sp800171RequirementStatus ;
+            owl:onProperty nist_sp_800_171:requirement_status ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:description ],
+            owl:onProperty nist_sp_800_171:requirement_status ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:requirement_discussion ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:description ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:title ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:addressed_by_requirements ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "\\S" ] ) ] ;
-            owl:onProperty nist_sp_800_171:requirement_discussion ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:requirement_items ],
         [ a owl:Restriction ;
             owl:minCardinality 0 ;
             owl:onProperty nist_sp_800_171:requirement_parameters ],
         [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Sp800171AssessmentObjective ;
-            owl:onProperty nist_sp_800_171:requirement_objectives ],
+            owl:allValuesFrom nist_sp_800_171:Sp800171RequirementItem ;
+            owl:onProperty nist_sp_800_171:requirement_items ],
+        [ a owl:Restriction ;
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:requirement_discussion ],
         [ a owl:Restriction ;
             owl:allValuesFrom [ a rdfs:Datatype ;
                     owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "\\S" ] ) ] ;
+                    owl:withRestrictions ( [ xsd:pattern "^\\s*\\S" ] ) ] ;
             owl:onProperty nist_sp_800_171:requirement_statement ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:requirement_methods ] ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:description ],
+        [ a owl:Restriction ;
+            owl:maxCardinality 1 ;
+            owl:onProperty nist_sp_800_171:requirement_id ] ;
     skos:broadMatch oscal:Control ;
     skos:definition "A security requirement of SP 800-171: a numbered, named requirement for protecting CUI, with its statement, discussion, references and source controls, the organization-defined parameters its statement leaves open, and the assessment objectives and methods SP 800-171A gives it. A requirement that Revision 3 withdrew keeps its number and says which requirements took its place." ;
     skos:exactMatch nist_sp_800_171:Requirement ;
@@ -391,31 +394,31 @@ nist_sp_800_171:Sp800171RequirementItem a owl:Class ;
     rdfs:label "Sp800171RequirementItem" ;
     rdfs:seeAlso <https://csrc.nist.gov/pubs/sp/800/171/r3/final> ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:requirement_item_id ],
+            owl:minCardinality 0 ;
+            owl:onProperty nist_sp_800_171:requirement_subitems ],
         [ a owl:Restriction ;
-            owl:minCardinality 1 ;
+            owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:requirement_item_id ],
         [ a owl:Restriction ;
             owl:allValuesFrom nist_sp_800_171:Sp800171RequirementItem ;
             owl:onProperty nist_sp_800_171:requirement_subitems ],
         [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:requirement_subitems ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom [ a rdfs:Datatype ;
-                    owl:onDatatype xsd:string ;
-                    owl:withRestrictions ( [ xsd:pattern "\\S" ] ) ] ;
-            owl:onProperty nist_sp_800_171:requirement_item_text ],
-        [ a owl:Restriction ;
             owl:maxCardinality 1 ;
             owl:onProperty nist_sp_800_171:requirement_item_text ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
+            owl:allValuesFrom [ a rdfs:Datatype ;
+                    owl:onDatatype xsd:string ;
+                    owl:withRestrictions ( [ xsd:pattern "^\\s*\\S" ] ) ] ;
+            owl:onProperty nist_sp_800_171:requirement_item_text ],
+        [ a owl:Restriction ;
+            owl:minCardinality 1 ;
             owl:onProperty nist_sp_800_171:requirement_item_id ],
         [ a owl:Restriction ;
             owl:minCardinality 1 ;
-            owl:onProperty nist_sp_800_171:requirement_item_text ] ;
+            owl:onProperty nist_sp_800_171:requirement_item_text ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty nist_sp_800_171:requirement_item_id ] ;
     skos:broadMatch oscal:Part ;
     skos:definition "One item of a requirement statement: a lettered item such as 03.01.01.a, or a numbered item under a lettered one such as 03.01.01.c.01." ;
     skos:exactMatch nist_sp_800_171:RequirementItem ;
@@ -528,7 +531,7 @@ nist_sp_800_171:cited_publication_citation a owl:DatatypeProperty ;
 
 nist_sp_800_171:cited_publication_url a owl:DatatypeProperty ;
     rdfs:label "cited_publication_url" ;
-    skos:definition "The publication's address, which the catalog gives as its digital object identifier." ;
+    skos:definition "The publication's address, which the catalog gives as its digital object identifier at doi.org." ;
     skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
 
 nist_sp_800_171:family_number a owl:DatatypeProperty ;
@@ -636,16 +639,7 @@ nist_sp_800_171:title a owl:DatatypeProperty ;
 xsd:string a rdfs:Datatype ;
     owl:equivalentClass [ a rdfs:Datatype ;
             owl:onDatatype xsd:string ;
-            owl:withRestrictions ( [ xsd:pattern "^03\\.(0[1-9]|1[0-7])$" ] ) ],
-        [ a rdfs:Datatype ;
-            owl:onDatatype xsd:string ;
-            owl:withRestrictions ( [ xsd:pattern "^A\\.03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])(\\.[a-z](\\.(0[1-9]|[1-9][0-9]))?)?(\\[(0[1-9]|[1-9][0-9])\\])?$" ] ) ],
-        [ a rdfs:Datatype ;
-            owl:onDatatype xsd:string ;
-            owl:withRestrictions ( [ xsd:pattern "^A\\.03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])\\.ODP\\[(0[1-9]|[1-9][0-9])\\]$" ] ) ],
-        [ a rdfs:Datatype ;
-            owl:onDatatype xsd:string ;
-            owl:withRestrictions ( [ xsd:pattern "^03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])\\.[a-z](\\.(0[1-9]|[1-9][0-9]))?$" ] ) ],
+            owl:withRestrictions ( [ xsd:pattern "^03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])$" ] ) ],
         [ a rdfs:Datatype ;
             owl:onDatatype xsd:string ;
             owl:withRestrictions ( [ xsd:pattern "^(FIPS|IR|SP) [1-9][0-9]*(-[0-9A-Z]+)*$" ] ) ],
@@ -654,6 +648,15 @@ xsd:string a rdfs:Datatype ;
             owl:withRestrictions ( [ xsd:pattern "^[A-Z]{2}-(0[1-9]|[1-9][0-9])(\\((0[1-9]|[1-9][0-9])\\))?$" ] ) ],
         [ a rdfs:Datatype ;
             owl:onDatatype xsd:string ;
-            owl:withRestrictions ( [ xsd:pattern "^03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])$" ] ) ] .
+            owl:withRestrictions ( [ xsd:pattern "^A\\.03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])\\.ODP\\[(0[1-9]|[1-9][0-9])\\]$" ] ) ],
+        [ a rdfs:Datatype ;
+            owl:onDatatype xsd:string ;
+            owl:withRestrictions ( [ xsd:pattern "^03\\.(0[1-9]|1[0-7])$" ] ) ],
+        [ a rdfs:Datatype ;
+            owl:onDatatype xsd:string ;
+            owl:withRestrictions ( [ xsd:pattern "^A\\.03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])(\\.[a-z](\\.(0[1-9]|[1-9][0-9]))?)?(\\[(0[1-9]|[1-9][0-9])\\])?$" ] ) ],
+        [ a rdfs:Datatype ;
+            owl:onDatatype xsd:string ;
+            owl:withRestrictions ( [ xsd:pattern "^03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])\\.[a-z](\\.(0[1-9]|[1-9][0-9]))?$" ] ) ] .
 
 

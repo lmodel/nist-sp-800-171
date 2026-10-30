@@ -112,8 +112,8 @@ linkml:Sparqlpath xsd:string
 
 <Sp800171Reference> CLOSED {
     (  $<Sp800171Reference_tes> (  <cited_publication> @<Sp800171CitedPublicationName> ;
-          <cited_publication_citation> @linkml:String ? ;
-          <cited_publication_url> @linkml:Uri ?
+          <cited_publication_citation> @linkml:String ;
+          <cited_publication_url> @linkml:Uri
        ) ;
        rdf:type [ <Reference> ] ?
     )

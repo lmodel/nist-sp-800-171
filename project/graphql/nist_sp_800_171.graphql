@@ -58,8 +58,8 @@ type Sp800171Publication
 type Sp800171Reference
   {
     citedPublication: Sp800171CitedPublicationName!
-    citedPublicationCitation: String
-    citedPublicationUrl: String
+    citedPublicationCitation: String!
+    citedPublicationUrl: String!
   }
 
 type Sp800171Requirement

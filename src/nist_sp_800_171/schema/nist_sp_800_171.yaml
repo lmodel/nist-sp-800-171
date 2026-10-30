@@ -133,9 +133,11 @@ types:
     uri: xsd:string
     description: >-
       The short name SP 800-171 gives a publication it references: the series
-      (SP, FIPS or IR) and the publication's number, with its revision or
-      volume where the publication has one, such as SP 800-63-3, FIPS 140-3
-      and IR 7966.
+      (SP, FIPS or IR) and the publication's number, with the number of a part
+      or volume where the publication has one, such as SP 800-57-1,
+      SP 800-160-1, IR 8011-2 or FIPS 140-3. The short name leaves out the
+      publication's revision, which the citation and the address carry: SP
+      800-53 stands for Revision 5.
     pattern: "^(FIPS|IR|SP) [1-9][0-9]*(-[0-9A-Z]+)*$"
 
 slots:
@@ -186,6 +188,7 @@ classes:
         range: Sp800171Family
         required: true
         multivalued: true
+        minimum_cardinality: 1
         inlined: true
         inlined_as_list: true
 
@@ -264,7 +267,7 @@ classes:
           text and not as lettered items. The catalog marks an
           organization-defined parameter in the text with an insert
           placeholder that names the parameter.
-        pattern: "\\S"
+        pattern: "^\\s*\\S"
       requirement_items:
         description: >-
           The lettered items of the requirement statement, in order, each with
@@ -278,7 +281,7 @@ classes:
         description: >-
           The requirement's discussion: SP 800-171's explanation of what the
           requirement means and how it relates to other requirements.
-        pattern: "\\S"
+        pattern: "^\\s*\\S"
       requirement_parameters:
         description: >-
           The organization-defined parameters the requirement statement leaves
@@ -340,7 +343,7 @@ classes:
           parameter in the text with an insert placeholder that names the
           parameter.
         required: true
-        pattern: "\\S"
+        pattern: "^\\s*\\S"
       requirement_subitems:
         description: The numbered items under a lettered item, in order.
         range: Sp800171RequirementItem
@@ -358,7 +361,7 @@ classes:
     see_also:
       - https://doi.org/10.6028/NIST.SP.800-171Ar3
     broad_mappings:
-      - oscal:OscalParameter
+      - oscal:Parameter
     attributes:
       odp_id:
         description: The parameter's identifier, such as A.03.01.01.ODP[01].
@@ -369,7 +372,7 @@ classes:
           What kind of value the parameter takes, such as time period or
           frequency, or SELECTED PARAMETER VALUES for a selection.
         required: true
-        pattern: "\\S"
+        pattern: "^\\s*\\S"
       odp_usage:
         description: >-
           How the requirement statement names the parameter, such as
@@ -410,7 +413,7 @@ classes:
           case, such as system accounts are created in accordance with
           organizational policy, procedures, prerequisites, and criteria.
         required: true
-        pattern: "\\S"
+        pattern: "^\\s*\\S"
       assessed_requirement_item:
         description: >-
           The statement item the objective assesses, such as 03.01.01.b.
@@ -440,7 +443,8 @@ classes:
           administrators.
         required: true
         multivalued: true
-        pattern: "\\S"
+        minimum_cardinality: 1
+        pattern: "^\\s*\\S"
 
   Sp800171Reference:
     class_uri: nist_sp_800_171:Reference
@@ -459,11 +463,14 @@ classes:
         required: true
       cited_publication_citation:
         description: The full citation, as the catalog's back matter gives it.
+        required: true
       cited_publication_url:
         description: >-
           The publication's address, which the catalog gives as its digital
-          object identifier.
+          object identifier at doi.org.
         range: uri
+        required: true
+        pattern: "^https://doi\\.org/10\\.[0-9]+/\\S+$"
 
 enums:
   Sp800171RequirementStatus:

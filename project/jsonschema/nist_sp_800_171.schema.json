@@ -11,9 +11,10 @@
                 "requirement_method_objects": {
                     "description": "The assessment objects, one entry each, in the order SP 800-171A lists them, such as access control policy and procedures or system administrators.",
                     "items": {
-                        "pattern": "\\S",
+                        "pattern": "^\\s*\\S",
                         "type": "string"
                     },
+                    "minItems": 1,
                     "type": "array"
                 }
             },
@@ -48,7 +49,7 @@
                 },
                 "requirement_determination": {
                     "description": "The determination statement: what the assessor determines is the case, such as system accounts are created in accordance with organizational policy, procedures, prerequisites, and criteria.",
-                    "pattern": "\\S",
+                    "pattern": "^\\s*\\S",
                     "type": "string"
                 },
                 "requirement_objective_id": {
@@ -130,7 +131,7 @@
                 },
                 "odp_label": {
                     "description": "What kind of value the parameter takes, such as time period or frequency, or SELECTED PARAMETER VALUES for a selection.",
-                    "pattern": "\\S",
+                    "pattern": "^\\s*\\S",
                     "type": "string"
                 },
                 "odp_selection_count": {
@@ -161,6 +162,7 @@
                     "items": {
                         "$ref": "#/$defs/Sp800171Family"
                     },
+                    "minItems": 1,
                     "type": "array"
                 },
                 "sp800171_revision": {
@@ -187,21 +189,18 @@
                 },
                 "cited_publication_citation": {
                     "description": "The full citation, as the catalog's back matter gives it.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
+                    "type": "string"
                 },
                 "cited_publication_url": {
-                    "description": "The publication's address, which the catalog gives as its digital object identifier.",
-                    "type": [
-                        "string",
-                        "null"
-                    ]
+                    "description": "The publication's address, which the catalog gives as its digital object identifier at doi.org.",
+                    "pattern": "^https://doi\\.org/10\\.[0-9]+/\\S+$",
+                    "type": "string"
                 }
             },
             "required": [
-                "cited_publication"
+                "cited_publication",
+                "cited_publication_citation",
+                "cited_publication_url"
             ],
             "title": "Sp800171Reference",
             "type": "object"
@@ -241,7 +240,7 @@
                 },
                 "requirement_discussion": {
                     "description": "The requirement's discussion: SP 800-171's explanation of what the requirement means and how it relates to other requirements.",
-                    "pattern": "\\S",
+                    "pattern": "^\\s*\\S",
                     "type": [
                         "string",
                         "null"
@@ -304,7 +303,7 @@
                 },
                 "requirement_statement": {
                     "description": "The requirement statement when SP 800-171 writes it as one piece of text and not as lettered items. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter.",
-                    "pattern": "\\S",
+                    "pattern": "^\\s*\\S",
                     "type": [
                         "string",
                         "null"
@@ -350,7 +349,7 @@
                 },
                 "requirement_item_text": {
                     "description": "What the item requires. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter.",
-                    "pattern": "\\S",
+                    "pattern": "^\\s*\\S",
                     "type": "string"
                 },
                 "requirement_subitems": {
@@ -400,6 +399,7 @@
             "items": {
                 "$ref": "#/$defs/Sp800171Family"
             },
+            "minItems": 1,
             "type": "array"
         },
         "sp800171_revision": {

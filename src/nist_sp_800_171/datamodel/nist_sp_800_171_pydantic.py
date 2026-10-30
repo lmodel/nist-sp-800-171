@@ -144,13 +144,24 @@ linkml_meta = LinkMLMeta({'annotations': {'cprt_framework_version': {'tag': 'cpr
                                                                   'the '
                                                                   "publication's "
                                                                   'number, with '
-                                                                  'its revision or '
-                                                                  'volume where '
-                                                                  'the publication '
-                                                                  'has one, such '
-                                                                  'as SP 800-63-3, '
-                                                                  'FIPS 140-3 and '
-                                                                  'IR 7966.',
+                                                                  'the number of a '
+                                                                  'part or volume '
+                                                                  'where the '
+                                                                  'publication has '
+                                                                  'one, such as SP '
+                                                                  '800-57-1, SP '
+                                                                  '800-160-1, IR '
+                                                                  '8011-2 or FIPS '
+                                                                  '140-3. The '
+                                                                  'short name '
+                                                                  'leaves out the '
+                                                                  "publication's "
+                                                                  'revision, which '
+                                                                  'the citation '
+                                                                  'and the address '
+                                                                  'carry: SP '
+                                                                  '800-53 stands '
+                                                                  'for Revision 5.',
                                                    'from_schema': 'https://w3id.org/lmodel/nist-sp-800-171',
                                                    'name': 'sp800171_cited_publication_name',
                                                    'pattern': '^(FIPS|IR|SP) '
@@ -333,7 +344,7 @@ class Sp800171Publication(ConfiguredBaseModel):
          'tree_root': True})
 
     sp800171_revision: str = Field(default=..., description="""The revision of SP 800-171 the document renders, as NIST numbers it, such as 3.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp800171Publication']} })
-    requirement_families: list[Sp800171Family] = Field(default=..., description="""The requirement families, in the order SP 800-171 gives them.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp800171Publication']} })
+    requirement_families: list[Sp800171Family] = Field(default=..., description="""The requirement families, in the order SP 800-171 gives them.""", min_length=1, json_schema_extra = { "linkml_meta": {'domain_of': ['Sp800171Publication']} })
 
     @field_validator('sp800171_revision')
     def pattern_sp800171_revision(cls, v):
@@ -407,7 +418,7 @@ class Sp800171Requirement(ConfiguredBaseModel):
 
     @field_validator('requirement_statement')
     def pattern_requirement_statement(cls, v):
-        pattern=re.compile(r"\S")
+        pattern=re.compile(r"^\s*\S")
         if isinstance(v, list):
             for element in v:
                 if isinstance(element, str) and not pattern.match(element):
@@ -420,7 +431,7 @@ class Sp800171Requirement(ConfiguredBaseModel):
 
     @field_validator('requirement_discussion')
     def pattern_requirement_discussion(cls, v):
-        pattern=re.compile(r"\S")
+        pattern=re.compile(r"^\s*\S")
         if isinstance(v, list):
             for element in v:
                 if isinstance(element, str) and not pattern.match(element):
@@ -447,7 +458,7 @@ class Sp800171RequirementItem(ConfiguredBaseModel):
 
     @field_validator('requirement_item_text')
     def pattern_requirement_item_text(cls, v):
-        pattern=re.compile(r"\S")
+        pattern=re.compile(r"^\s*\S")
         if isinstance(v, list):
             for element in v:
                 if isinstance(element, str) and not pattern.match(element):
@@ -463,7 +474,7 @@ class Sp800171Parameter(ConfiguredBaseModel):
     """
     An organization-defined parameter (ODP): a value, such as a time period or a frequency, that a requirement statement leaves to the organization, with the guideline SP 800-171A gives for defining it. A few parameters are a selection among choices instead of a value.
     """
-    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['oscal:OscalParameter'],
+    linkml_meta: ClassVar[LinkMLMeta] = LinkMLMeta({'broad_mappings': ['oscal:Parameter'],
          'class_uri': 'nist_sp_800_171:Parameter',
          'from_schema': 'https://w3id.org/lmodel/nist-sp-800-171',
          'see_also': ['https://doi.org/10.6028/NIST.SP.800-171Ar3']})
@@ -477,7 +488,7 @@ class Sp800171Parameter(ConfiguredBaseModel):
 
     @field_validator('odp_label')
     def pattern_odp_label(cls, v):
-        pattern=re.compile(r"\S")
+        pattern=re.compile(r"^\s*\S")
         if isinstance(v, list):
             for element in v:
                 if isinstance(element, str) and not pattern.match(element):
@@ -504,7 +515,7 @@ class Sp800171AssessmentObjective(ConfiguredBaseModel):
 
     @field_validator('requirement_determination')
     def pattern_requirement_determination(cls, v):
-        pattern=re.compile(r"\S")
+        pattern=re.compile(r"^\s*\S")
         if isinstance(v, list):
             for element in v:
                 if isinstance(element, str) and not pattern.match(element):
@@ -526,11 +537,11 @@ class Sp800171AssessmentMethod(ConfiguredBaseModel):
          'see_also': ['https://doi.org/10.6028/NIST.SP.800-171Ar3']})
 
     requirement_method_kind: Sp800171AssessmentMethodKind = Field(default=..., description="""Which method it is.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp800171AssessmentMethod']} })
-    requirement_method_objects: list[str] = Field(default=..., description="""The assessment objects, one entry each, in the order SP 800-171A lists them, such as access control policy and procedures or system administrators.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp800171AssessmentMethod']} })
+    requirement_method_objects: list[str] = Field(default=..., description="""The assessment objects, one entry each, in the order SP 800-171A lists them, such as access control policy and procedures or system administrators.""", min_length=1, json_schema_extra = { "linkml_meta": {'domain_of': ['Sp800171AssessmentMethod']} })
 
     @field_validator('requirement_method_objects')
     def pattern_requirement_method_objects(cls, v):
-        pattern=re.compile(r"\S")
+        pattern=re.compile(r"^\s*\S")
         if isinstance(v, list):
             for element in v:
                 if isinstance(element, str) and not pattern.match(element):
@@ -552,8 +563,21 @@ class Sp800171Reference(ConfiguredBaseModel):
          'see_also': ['https://csrc.nist.gov/pubs/sp/800/171/r3/final']})
 
     cited_publication: str = Field(default=..., description="""The publication's short name, such as SP 800-63-3.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp800171Reference']} })
-    cited_publication_citation: Optional[str] = Field(default=None, description="""The full citation, as the catalog's back matter gives it.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp800171Reference']} })
-    cited_publication_url: Optional[str] = Field(default=None, description="""The publication's address, which the catalog gives as its digital object identifier.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp800171Reference']} })
+    cited_publication_citation: str = Field(default=..., description="""The full citation, as the catalog's back matter gives it.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp800171Reference']} })
+    cited_publication_url: str = Field(default=..., description="""The publication's address, which the catalog gives as its digital object identifier at doi.org.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp800171Reference']} })
+
+    @field_validator('cited_publication_url')
+    def pattern_cited_publication_url(cls, v):
+        pattern=re.compile(r"^https://doi\.org/10\.[0-9]+/\S+$")
+        if isinstance(v, list):
+            for element in v:
+                if isinstance(element, str) and not pattern.match(element):
+                    err_msg = f"Invalid cited_publication_url format: {element}"
+                    raise ValueError(err_msg)
+        elif isinstance(v, str) and not pattern.match(v):
+            err_msg = f"Invalid cited_publication_url format: {v}"
+            raise ValueError(err_msg)
+        return v
 
 
 # Model rebuild

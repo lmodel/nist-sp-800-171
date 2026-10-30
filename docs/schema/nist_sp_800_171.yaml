@@ -140,9 +140,10 @@ types:
     name: sp800171_cited_publication_name
     definition_uri: https://w3id.org/lmodel/nist-sp-800-171/Sp800171CitedPublicationName
     description: 'The short name SP 800-171 gives a publication it references: the
-      series (SP, FIPS or IR) and the publication''s number, with its revision or
-      volume where the publication has one, such as SP 800-63-3, FIPS 140-3 and IR
-      7966.'
+      series (SP, FIPS or IR) and the publication''s number, with the number of a
+      part or volume where the publication has one, such as SP 800-57-1, SP 800-160-1,
+      IR 8011-2 or FIPS 140-3. The short name leaves out the publication''s revision,
+      which the citation and the address carry: SP 800-53 stands for Revision 5.'
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
     typeof: string
     base: str
@@ -525,6 +526,7 @@ slots:
     multivalued: true
     inlined: true
     inlined_as_list: true
+    minimum_cardinality: 1
   sp800171Family__family_number:
     name: sp800171Family__family_number
     description: The family's number, such as 03.01.
@@ -609,7 +611,7 @@ slots:
     domain_of:
     - Sp800171Requirement
     range: string
-    pattern: \S
+    pattern: ^\s*\S
   sp800171Requirement__requirement_items:
     name: sp800171Requirement__requirement_items
     description: The lettered items of the requirement statement, in order, each with
@@ -636,7 +638,7 @@ slots:
     domain_of:
     - Sp800171Requirement
     range: string
-    pattern: \S
+    pattern: ^\s*\S
   sp800171Requirement__requirement_parameters:
     name: sp800171Requirement__requirement_parameters
     description: The organization-defined parameters the requirement statement leaves
@@ -729,7 +731,7 @@ slots:
     - Sp800171RequirementItem
     range: string
     required: true
-    pattern: \S
+    pattern: ^\s*\S
   sp800171RequirementItem__requirement_subitems:
     name: sp800171RequirementItem__requirement_subitems
     description: The numbered items under a lettered item, in order.
@@ -766,7 +768,7 @@ slots:
     - Sp800171Parameter
     range: string
     required: true
-    pattern: \S
+    pattern: ^\s*\S
   sp800171Parameter__odp_usage:
     name: sp800171Parameter__odp_usage
     description: How the requirement statement names the parameter, such as organization-defined
@@ -836,7 +838,7 @@ slots:
     - Sp800171AssessmentObjective
     range: string
     required: true
-    pattern: \S
+    pattern: ^\s*\S
   sp800171AssessmentObjective__assessed_requirement_item:
     name: sp800171AssessmentObjective__assessed_requirement_item
     description: The statement item the objective assesses, such as 03.01.01.b. Absent
@@ -872,7 +874,8 @@ slots:
     range: string
     required: true
     multivalued: true
-    pattern: \S
+    pattern: ^\s*\S
+    minimum_cardinality: 1
   sp800171Reference__cited_publication:
     name: sp800171Reference__cited_publication
     description: The publication's short name, such as SP 800-63-3.
@@ -894,10 +897,11 @@ slots:
     domain_of:
     - Sp800171Reference
     range: string
+    required: true
   sp800171Reference__cited_publication_url:
     name: sp800171Reference__cited_publication_url
     description: The publication's address, which the catalog gives as its digital
-      object identifier.
+      object identifier at doi.org.
     from_schema: https://w3id.org/lmodel/nist-sp-800-171
     slot_uri: nist_sp_800_171:cited_publication_url
     alias: cited_publication_url
@@ -905,6 +909,8 @@ slots:
     domain_of:
     - Sp800171Reference
     range: uri
+    required: true
+    pattern: ^https://doi\.org/10\.[0-9]+/\S+$
   Sp800171Family_title:
     name: Sp800171Family_title
     definition_uri: https://w3id.org/lmodel/nist-sp-800-171/title
@@ -959,6 +965,7 @@ classes:
         multivalued: true
         inlined: true
         inlined_as_list: true
+        minimum_cardinality: 1
     class_uri: nist_sp_800_171:Publication
     tree_root: true
   Sp800171Family:
@@ -1057,7 +1064,7 @@ classes:
         description: The requirement statement when SP 800-171 writes it as one piece
           of text and not as lettered items. The catalog marks an organization-defined
           parameter in the text with an insert placeholder that names the parameter.
-        pattern: \S
+        pattern: ^\s*\S
       requirement_items:
         name: requirement_items
         description: The lettered items of the requirement statement, in order, each
@@ -1071,7 +1078,7 @@ classes:
         name: requirement_discussion
         description: 'The requirement''s discussion: SP 800-171''s explanation of
           what the requirement means and how it relates to other requirements.'
-        pattern: \S
+        pattern: ^\s*\S
       requirement_parameters:
         name: requirement_parameters
         description: The organization-defined parameters the requirement statement
@@ -1140,7 +1147,7 @@ classes:
         description: What the item requires. The catalog marks an organization-defined
           parameter in the text with an insert placeholder that names the parameter.
         required: true
-        pattern: \S
+        pattern: ^\s*\S
       requirement_subitems:
         name: requirement_subitems
         description: The numbered items under a lettered item, in order.
@@ -1162,7 +1169,7 @@ classes:
     mappings:
     - nist_sp_800_171:Parameter
     broad_mappings:
-    - oscal:OscalParameter
+    - oscal:Parameter
     slots:
     - sp800171Parameter__odp_id
     - sp800171Parameter__odp_label
@@ -1181,7 +1188,7 @@ classes:
         description: What kind of value the parameter takes, such as time period or
           frequency, or SELECTED PARAMETER VALUES for a selection.
         required: true
-        pattern: \S
+        pattern: ^\s*\S
       odp_usage:
         name: odp_usage
         description: How the requirement statement names the parameter, such as organization-defined
@@ -1229,7 +1236,7 @@ classes:
           the case, such as system accounts are created in accordance with organizational
           policy, procedures, prerequisites, and criteria.'
         required: true
-        pattern: \S
+        pattern: ^\s*\S
       assessed_requirement_item:
         name: assessed_requirement_item
         description: The statement item the objective assesses, such as 03.01.01.b.
@@ -1265,7 +1272,8 @@ classes:
           lists them, such as access control policy and procedures or system administrators.
         required: true
         multivalued: true
-        pattern: \S
+        pattern: ^\s*\S
+        minimum_cardinality: 1
     class_uri: nist_sp_800_171:AssessmentMethod
   Sp800171Reference:
     name: Sp800171Reference
@@ -1293,15 +1301,18 @@ classes:
       cited_publication_citation:
         name: cited_publication_citation
         description: The full citation, as the catalog's back matter gives it.
+        required: true
       cited_publication_url:
         name: cited_publication_url
         description: The publication's address, which the catalog gives as its digital
-          object identifier.
+          object identifier at doi.org.
         range: uri
+        required: true
+        pattern: ^https://doi\.org/10\.[0-9]+/\S+$
     class_uri: nist_sp_800_171:Reference
 metamodel_version: 1.7.0
 source_file: nist_sp_800_171.yaml
-source_file_date: '2026-10-29T21:28:50'
-source_file_size: 19821
-generation_date: '2026-10-29T21:28:51'
+source_file_date: '2026-10-30T08:15:21'
+source_file_size: 20185
+generation_date: '2026-10-30T08:15:47'
 

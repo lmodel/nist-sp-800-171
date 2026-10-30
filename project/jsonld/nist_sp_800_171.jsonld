@@ -133,7 +133,7 @@
     {
       "name": "sp800171_cited_publication_name",
       "definition_uri": "https://w3id.org/lmodel/nist-sp-800-171/Sp800171CitedPublicationName",
-      "description": "The short name SP 800-171 gives a publication it references: the series (SP, FIPS or IR) and the publication's number, with its revision or volume where the publication has one, such as SP 800-63-3, FIPS 140-3 and IR 7966.",
+      "description": "The short name SP 800-171 gives a publication it references: the series (SP, FIPS or IR) and the publication's number, with the number of a part or volume where the publication has one, such as SP 800-57-1, SP 800-160-1, IR 8011-2 or FIPS 140-3. The short name leaves out the publication's revision, which the citation and the address carry: SP 800-53 stands for Revision 5.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
       "typeof": "string",
       "base": "str",
@@ -577,6 +577,7 @@
       "multivalued": true,
       "inlined": true,
       "inlined_as_list": true,
+      "minimum_cardinality": 1,
       "@type": "SlotDefinition"
     },
     {
@@ -675,7 +676,7 @@
         "Sp800171Requirement"
       ],
       "range": "string",
-      "pattern": "\\S",
+      "pattern": "^\\s*\\S",
       "@type": "SlotDefinition"
     },
     {
@@ -705,7 +706,7 @@
         "Sp800171Requirement"
       ],
       "range": "string",
-      "pattern": "\\S",
+      "pattern": "^\\s*\\S",
       "@type": "SlotDefinition"
     },
     {
@@ -812,7 +813,7 @@
       ],
       "range": "string",
       "required": true,
-      "pattern": "\\S",
+      "pattern": "^\\s*\\S",
       "@type": "SlotDefinition"
     },
     {
@@ -857,7 +858,7 @@
       ],
       "range": "string",
       "required": true,
-      "pattern": "\\S",
+      "pattern": "^\\s*\\S",
       "@type": "SlotDefinition"
     },
     {
@@ -939,7 +940,7 @@
       ],
       "range": "string",
       "required": true,
-      "pattern": "\\S",
+      "pattern": "^\\s*\\S",
       "@type": "SlotDefinition"
     },
     {
@@ -982,7 +983,8 @@
       "range": "string",
       "required": true,
       "multivalued": true,
-      "pattern": "\\S",
+      "pattern": "^\\s*\\S",
+      "minimum_cardinality": 1,
       "@type": "SlotDefinition"
     },
     {
@@ -1010,11 +1012,12 @@
         "Sp800171Reference"
       ],
       "range": "string",
+      "required": true,
       "@type": "SlotDefinition"
     },
     {
       "name": "sp800171Reference__cited_publication_url",
-      "description": "The publication's address, which the catalog gives as its digital object identifier.",
+      "description": "The publication's address, which the catalog gives as its digital object identifier at doi.org.",
       "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
       "slot_uri": "https://w3id.org/lmodel/nist-sp-800-171/cited_publication_url",
       "alias": "cited_publication_url",
@@ -1023,6 +1026,8 @@
         "Sp800171Reference"
       ],
       "range": "uri",
+      "required": true,
+      "pattern": "^https://doi\\.org/10\\.[0-9]+/\\S+$",
       "@type": "SlotDefinition"
     },
     {
@@ -1087,6 +1092,7 @@
           "multivalued": true,
           "inlined": true,
           "inlined_as_list": true,
+          "minimum_cardinality": 1,
           "@type": "SlotDefinition"
         }
       ],
@@ -1198,7 +1204,7 @@
         {
           "name": "requirement_statement",
           "description": "The requirement statement when SP 800-171 writes it as one piece of text and not as lettered items. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter.",
-          "pattern": "\\S",
+          "pattern": "^\\s*\\S",
           "@type": "SlotDefinition"
         },
         {
@@ -1213,7 +1219,7 @@
         {
           "name": "requirement_discussion",
           "description": "The requirement's discussion: SP 800-171's explanation of what the requirement means and how it relates to other requirements.",
-          "pattern": "\\S",
+          "pattern": "^\\s*\\S",
           "@type": "SlotDefinition"
         },
         {
@@ -1295,7 +1301,7 @@
           "name": "requirement_item_text",
           "description": "What the item requires. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter.",
           "required": true,
-          "pattern": "\\S",
+          "pattern": "^\\s*\\S",
           "@type": "SlotDefinition"
         },
         {
@@ -1323,7 +1329,7 @@
         "nist_sp_800_171:Parameter"
       ],
       "broad_mappings": [
-        "oscal:OscalParameter"
+        "oscal:Parameter"
       ],
       "slots": [
         "sp800171Parameter__odp_id",
@@ -1346,7 +1352,7 @@
           "name": "odp_label",
           "description": "What kind of value the parameter takes, such as time period or frequency, or SELECTED PARAMETER VALUES for a selection.",
           "required": true,
-          "pattern": "\\S",
+          "pattern": "^\\s*\\S",
           "@type": "SlotDefinition"
         },
         {
@@ -1407,7 +1413,7 @@
           "name": "requirement_determination",
           "description": "The determination statement: what the assessor determines is the case, such as system accounts are created in accordance with organizational policy, procedures, prerequisites, and criteria.",
           "required": true,
-          "pattern": "\\S",
+          "pattern": "^\\s*\\S",
           "@type": "SlotDefinition"
         },
         {
@@ -1452,7 +1458,8 @@
           "description": "The assessment objects, one entry each, in the order SP 800-171A lists them, such as access control policy and procedures or system administrators.",
           "required": true,
           "multivalued": true,
-          "pattern": "\\S",
+          "pattern": "^\\s*\\S",
+          "minimum_cardinality": 1,
           "@type": "SlotDefinition"
         }
       ],
@@ -1490,12 +1497,15 @@
         {
           "name": "cited_publication_citation",
           "description": "The full citation, as the catalog's back matter gives it.",
+          "required": true,
           "@type": "SlotDefinition"
         },
         {
           "name": "cited_publication_url",
-          "description": "The publication's address, which the catalog gives as its digital object identifier.",
+          "description": "The publication's address, which the catalog gives as its digital object identifier at doi.org.",
           "range": "uri",
+          "required": true,
+          "pattern": "^https://doi\\.org/10\\.[0-9]+/\\S+$",
           "@type": "SlotDefinition"
         }
       ],
@@ -1505,9 +1515,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "nist_sp_800_171.yaml",
-  "source_file_date": "2026-10-29T21:24:22",
-  "source_file_size": 19814,
-  "generation_date": "2026-10-29T21:26:03",
+  "source_file_date": "2026-10-30T08:15:21",
+  "source_file_size": 20185,
+  "generation_date": "2026-10-30T08:15:40",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/nist_sp_800_171.context.jsonld",

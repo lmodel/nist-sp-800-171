@@ -154,9 +154,9 @@ export interface Sp800171Reference {
     /** The publication's short name, such as SP 800-63-3. */
     cited_publication: string,
     /** The full citation, as the catalog's back matter gives it. */
-    cited_publication_citation?: string,
-    /** The publication's address, which the catalog gives as its digital object identifier. */
-    cited_publication_url?: string,
+    cited_publication_citation: string,
+    /** The publication's address, which the catalog gives as its digital object identifier at doi.org. */
+    cited_publication_url: string,
 }
 
 
