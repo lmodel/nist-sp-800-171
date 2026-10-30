@@ -30,7 +30,7 @@ sources:
     title: the tool.lokf table
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T08:32:20Z"
+  at: "2026-10-30T09:04:23Z"
 status: draft
 verified:
   - by: process:ktl-librarian
@@ -52,7 +52,7 @@ verified:
 - **`Sp800171AssessmentMethod`** is one of the three methods. It requires `requirement_method_kind` and at least one object in `requirement_method_objects`.
 - **`Sp800171Reference`** is a publication a requirement references. It requires `cited_publication`, such as `SP 800-63-3`, `cited_publication_citation`, and `cited_publication_url`, which must be a digital object identifier at doi.org.
 
-The three enums are `Sp800171RequirementStatus` (`withdrawn`), `Sp800171AssessmentMethodKind` (`examine`, `interview`, `test`) and `Sp800171SelectionCount` (`one`, `one_or_more`). Seven types hold the forms of the identifiers, each with a pattern: `sp800171_family_identifier`, `sp800171_requirement_identifier`, `sp800171_item_identifier`, `sp800171_odp_identifier`, `sp800171_objective_identifier`, `sp800171_source_control_identifier` and `sp800171_cited_publication_name`. The schema's slots `title` and `description` carry the IRIs `schema:name` and `schema:description`.
+The three enums are `Sp800171RequirementStatus` (`withdrawn`), `Sp800171AssessmentMethodKind` (`examine`, `interview`, `test`) and `Sp800171SelectionCount` (`one`, `one_or_more`). Seven types hold the forms of the identifiers, each with a pattern: `sp800171_family_identifier`, `sp800171_requirement_identifier`, `sp800171_item_identifier`, `sp800171_odp_identifier`, `sp800171_objective_identifier`, `sp800171_source_control_identifier` and `sp800171_cited_publication_name`. The schema's slots `title` and `description` carry the IRIs `schema:name` and `schema:description`. `family_number` is a slot of its own too, listed first in `Sp800171Family`, so the generated Python dataclasses key a list of families by its number and not by the title; each other inlined list is keyed by its class's identifier, or, for an assessment method, by its kind.
 
 A blank statement, item text, discussion, parameter label, determination or assessment object fails the pattern `^\s*\S`, which the validator and the Pydantic models read alike.
 

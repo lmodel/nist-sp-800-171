@@ -2,6 +2,7 @@
 
 ## 2026-10-30
 
+* **Changed**: nist-sp-800-171 LinkML schema now says `family_number` is a slot of its own, so the dataclasses key the families by their number.
 * **Changed**: Generated artefacts no longer says `just test` leaves a generation date; LinkML 1.12.1 writes none.
 * **Changed**: Update the upstream pins now regenerates the project, the docs and the adapt copy before `just test`.
 * **Prose**: reworded 23 concept bodies in plain English. No fact, link, number or frontmatter changed.
