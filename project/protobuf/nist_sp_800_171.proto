@@ -1,73 +1,121 @@
- syntax="proto3";
- package
-// metamodel_version: 1.7.0
+syntax = "proto3";
+package nist_sp_n800_n171;
+// metamodel_version: 1.12.0
 // version: 3.0.0
 // One of the three assessment methods SP 800-171A applies to a requirement, examine, interview or test, with the assessment objects (documents, people, processes or mechanisms) it is applied to.
-message Sp800171AssessmentMethod
- {
-  sp800171AssessmentMethodKind requirementMethodKind = 0
- repeated  string requirementMethodObjects = 0
- }
+message Sp800171AssessmentMethod {
+  // Which method it is.
+  Sp800171AssessmentMethodKind requirement_method_kind = 1;
+  // The assessment objects, one entry each, in the order SP 800-171A lists them, such as access control policy and procedures or system administrators.
+  repeated string requirement_method_objects = 2;
+}
 // An assessment objective of SP 800-171A: one determination statement that an assessor checks, tied to the requirement or to one item of its statement.
-message Sp800171AssessmentObjective
- {
-  sp800171ObjectiveIdentifier requirementObjectiveId = 0
-  string requirementDetermination = 0
-  sp800171ItemIdentifier assessedRequirementItem = 0
- }
+message Sp800171AssessmentObjective {
+  // The objective's identifier, such as A.03.01.01.b[01].
+  string requirement_objective_id = 1;
+  // The determination statement: what the assessor determines is the case, such as system accounts are created in accordance with organizational policy, procedures, prerequisites, and criteria.
+  string requirement_determination = 2;
+  // The statement item the objective assesses, such as 03.01.01.b. Absent when the objective assesses a requirement whose statement is one piece of text.
+  string assessed_requirement_item = 3;
+}
 // One of the seventeen families that SP 800-171 Revision 3 sorts its security requirements into, such as Access Control (03.01) or Supply Chain Risk Management (03.17).
-message Sp800171Family
- {
-  string title = 0
-  string description = 0
-  sp800171FamilyIdentifier familyNumber = 0
- repeated  sp800171Requirement familyRequirements = 0
- }
+message Sp800171Family {
+  // The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management.
+  string title = 1;
+  // What the family or requirement is about, in the words of whoever records it. SP 800-171 gives a family no text of its own, and a requirement's own text goes in its statement, items and discussion.
+  string description = 2;
+  // The family's number, such as 03.01.
+  string family_number = 3;
+  // The security requirements of the family, the withdrawn ones included, in the order SP 800-171 numbers them. A knowledge bundle relates a requirement to its family with isPartOf instead.
+  repeated Sp800171Requirement family_requirements = 4;
+}
 // An organization-defined parameter (ODP): a value, such as a time period or a frequency, that a requirement statement leaves to the organization, with the guideline SP 800-171A gives for defining it. A few parameters are a selection among choices instead of a value.
-message Sp800171Parameter
- {
-  sp800171OdpIdentifier odpId = 0
-  string odpLabel = 0
-  string odpUsage = 0
-  string odpGuideline = 0
- repeated  string odpChoices = 0
-  sp800171SelectionCount odpSelectionCount = 0
- }
+message Sp800171Parameter {
+  // The parameter's identifier, such as A.03.01.01.ODP[01].
+  string odp_id = 1;
+  // What kind of value the parameter takes, such as time period or frequency, or SELECTED PARAMETER VALUES for a selection.
+  string odp_label = 2;
+  // How the requirement statement names the parameter, such as organization-defined time period.
+  string odp_usage = 3;
+  // The determination SP 800-171A gives for the parameter: what the organization must have defined, such as the time period for account inactivity before disabling is defined.
+  string odp_guideline = 4;
+  // For a selection, the choices SP 800-171 offers, in its order. A choice may itself carry an insert placeholder naming another parameter.
+  repeated string odp_choices = 5;
+  // How many of the choices a selection takes.
+  Sp800171SelectionCount odp_selection_count = 6;
+}
 // One revision of SP 800-171 as a whole: its requirement families, each holding its security requirements, with the assessment procedures of the matching revision of SP 800-171A inside each requirement.
-message Sp800171Publication
- {
-  string sp800171Revision = 0
- repeated  sp800171Family requirementFamilies = 0
- }
+message Sp800171Publication {
+  // The revision of SP 800-171 the document renders, as NIST numbers it, such as 3.
+  string sp800171_revision = 1;
+  // The requirement families, in the order SP 800-171 gives them.
+  repeated Sp800171Family requirement_families = 2;
+}
 // A publication that SP 800-171 lists under a requirement's references, by the short name the publication gives it, with the full citation and the address NIST's catalog gives it.
-message Sp800171Reference
- {
-  sp800171CitedPublicationName citedPublication = 0
-  string citedPublicationCitation = 0
-  uri citedPublicationUrl = 0
- }
+message Sp800171Reference {
+  // The publication's short name, such as SP 800-63-3.
+  string cited_publication = 1;
+  // The full citation, as the catalog's back matter gives it.
+  string cited_publication_citation = 2;
+  // The publication's address, which the catalog gives as its digital object identifier at doi.org.
+  string cited_publication_url = 3;
+}
 // A security requirement of SP 800-171: a numbered, named requirement for protecting CUI, with its statement, discussion, references and source controls, the organization-defined parameters its statement leaves open, and the assessment objectives and methods SP 800-171A gives it. A requirement that Revision 3 withdrew keeps its number and says which requirements took its place.
-message Sp800171Requirement
- {
-  string title = 0
-  string description = 0
-  sp800171RequirementIdentifier requirementId = 0
-  sp800171RequirementStatus requirementStatus = 0
- repeated  sp800171RequirementIdentifier incorporatedIntoRequirements = 0
- repeated  sp800171RequirementIdentifier addressedByRequirements = 0
-  string requirementStatement = 0
- repeated  sp800171RequirementItem requirementItems = 0
-  string requirementDiscussion = 0
- repeated  sp800171Parameter requirementParameters = 0
- repeated  sp800171AssessmentObjective requirementObjectives = 0
- repeated  sp800171AssessmentMethod requirementMethods = 0
- repeated  sp800171Reference requirementReferences = 0
- repeated  sp800171SourceControlIdentifier sourceControls = 0
- }
+message Sp800171Requirement {
+  // The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management.
+  string title = 1;
+  // What the family or requirement is about, in the words of whoever records it. SP 800-171 gives a family no text of its own, and a requirement's own text goes in its statement, items and discussion.
+  string description = 2;
+  // The requirement's identifier, such as 03.01.01.
+  string requirement_id = 3;
+  // Withdrawn when Revision 3 withdrew the requirement. A requirement with no status is in force.
+  Sp800171RequirementStatus requirement_status = 4;
+  // For a withdrawn requirement, the requirements of Revision 3 that incorporate what it required, as the catalog states them.
+  repeated string incorporated_into_requirements = 5;
+  // For a withdrawn requirement, the requirements of Revision 3 that address what it required, as the catalog states them.
+  repeated string addressed_by_requirements = 6;
+  // The requirement statement when SP 800-171 writes it as one piece of text and not as lettered items. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter.
+  string requirement_statement = 7;
+  // The lettered items of the requirement statement, in order, each with its numbered items where it has them. A requirement has either these or a statement, never both.
+  repeated Sp800171RequirementItem requirement_items = 8;
+  // The requirement's discussion: SP 800-171's explanation of what the requirement means and how it relates to other requirements.
+  string requirement_discussion = 9;
+  // The organization-defined parameters the requirement statement leaves to the organization, in the order SP 800-171A numbers them.
+  repeated Sp800171Parameter requirement_parameters = 10;
+  // The assessment objectives SP 800-171A gives the requirement: the determination statements an assessor checks.
+  repeated Sp800171AssessmentObjective requirement_objectives = 11;
+  // The assessment methods SP 800-171A gives the requirement, each with the objects it is applied to.
+  repeated Sp800171AssessmentMethod requirement_methods = 12;
+  // The publications SP 800-171 lists under the requirement's references, each with its citation and address as the catalog gives them.
+  repeated Sp800171Reference requirement_references = 13;
+  // The controls of SP 800-53 Revision 5 the requirement is drawn from, by their identifiers, as the catalog lists them among the requirement's references. The identifier is data; the schema maps nothing to a model of SP 800-53.
+  repeated string source_controls = 14;
+}
 // One item of a requirement statement: a lettered item such as 03.01.01.a, or a numbered item under a lettered one such as 03.01.01.c.01.
-message Sp800171RequirementItem
- {
-  sp800171ItemIdentifier requirementItemId = 0
-  string requirementItemText = 0
- repeated  sp800171RequirementItem requirementSubitems = 0
- }
+message Sp800171RequirementItem {
+  // The item's identifier, such as 03.01.01.a.
+  string requirement_item_id = 1;
+  // What the item requires. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter.
+  string requirement_item_text = 2;
+  // The numbered items under a lettered item, in order.
+  repeated Sp800171RequirementItem requirement_subitems = 3;
+}
+
+// The three assessment methods of SP 800-171A.
+enum Sp800171AssessmentMethodKind {
+  SP800171_ASSESSMENT_METHOD_KIND_UNSPECIFIED = 0;
+  SP800171_ASSESSMENT_METHOD_KIND_EXAMINE = 1;
+  SP800171_ASSESSMENT_METHOD_KIND_INTERVIEW = 2;
+  SP800171_ASSESSMENT_METHOD_KIND_TEST = 3;
+}
+// The one status SP 800-171 Revision 3 states for a requirement. A requirement in force carries none.
+enum Sp800171RequirementStatus {
+  SP800171_REQUIREMENT_STATUS_UNSPECIFIED = 0;
+  SP800171_REQUIREMENT_STATUS_WITHDRAWN = 1;
+}
+// How many choices a selection parameter takes, as OSCAL states it.
+enum Sp800171SelectionCount {
+  SP800171_SELECTION_COUNT_UNSPECIFIED = 0;
+  SP800171_SELECTION_COUNT_ONE = 1;
+  SP800171_SELECTION_COUNT_ONE_OR_MORE = 2;
+}

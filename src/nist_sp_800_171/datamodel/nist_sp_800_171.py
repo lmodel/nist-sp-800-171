@@ -1,5 +1,4 @@
 # Auto generated from nist_sp_800_171.yaml by pythongen.py version: 0.0.1
-# Generation date: 2026-10-30T08:16:17
 # Schema: nist_sp_800_171
 #
 # id: https://w3id.org/lmodel/nist-sp-800-171
@@ -59,7 +58,7 @@ from rdflib import (
 from linkml_runtime.linkml_model.types import String, Uri
 from linkml_runtime.utils.metamodelcore import URI
 
-metamodel_version = "1.7.0"
+metamodel_version = "1.12.0"
 version = "3.0.0"
 
 # Namespaces

@@ -135,7 +135,14 @@
                     "type": "string"
                 },
                 "odp_selection_count": {
-                    "$ref": "#/$defs/Sp800171SelectionCount",
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Sp800171SelectionCount"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
                     "description": "How many of the choices a selection takes."
                 },
                 "odp_usage": {
@@ -193,6 +200,7 @@
                 },
                 "cited_publication_url": {
                     "description": "The publication's address, which the catalog gives as its digital object identifier at doi.org.",
+                    "format": "uri",
                     "pattern": "^https://doi\\.org/10\\.[0-9]+/\\S+$",
                     "type": "string"
                 }
@@ -310,7 +318,14 @@
                     ]
                 },
                 "requirement_status": {
-                    "$ref": "#/$defs/Sp800171RequirementStatus",
+                    "anyOf": [
+                        {
+                            "$ref": "#/$defs/Sp800171RequirementStatus"
+                        },
+                        {
+                            "type": "null"
+                        }
+                    ],
                     "description": "Withdrawn when Revision 3 withdrew the requirement. A requirement with no status is in force."
                 },
                 "source_controls": {
@@ -390,9 +405,9 @@
     },
     "$id": "https://w3id.org/lmodel/nist-sp-800-171",
     "$schema": "https://json-schema.org/draft/2019-09/schema",
-    "additionalProperties": true,
+    "additionalProperties": false,
     "description": "One revision of SP 800-171 as a whole: its requirement families, each holding its security requirements, with the assessment procedures of the matching revision of SP 800-171A inside each requirement.",
-    "metamodel_version": "1.7.0",
+    "metamodel_version": "1.12.0",
     "properties": {
         "requirement_families": {
             "description": "The requirement families, in the order SP 800-171 gives them.",

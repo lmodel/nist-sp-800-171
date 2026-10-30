@@ -146,7 +146,7 @@
       "definition_uri": "https://w3id.org/linkml/String",
       "description": "A character string",
       "notes": [
-        "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string.   If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"."
+        "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string. If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"."
       ],
       "from_schema": "https://w3id.org/linkml/types",
       "imported_from": "linkml:types",
@@ -1065,7 +1065,7 @@
       "see_also": [
         "https://csrc.nist.gov/pubs/sp/800/171/r3/final"
       ],
-      "mappings": [
+      "exact_mappings": [
         "nist_sp_800_171:Publication"
       ],
       "broad_mappings": [
@@ -1108,7 +1108,7 @@
       "see_also": [
         "https://csrc.nist.gov/pubs/sp/800/171/r3/final"
       ],
-      "mappings": [
+      "exact_mappings": [
         "nist_sp_800_171:Family"
       ],
       "broad_mappings": [
@@ -1150,7 +1150,7 @@
       "see_also": [
         "https://csrc.nist.gov/pubs/sp/800/171/r3/final"
       ],
-      "mappings": [
+      "exact_mappings": [
         "nist_sp_800_171:Requirement"
       ],
       "broad_mappings": [
@@ -1277,7 +1277,7 @@
       "see_also": [
         "https://csrc.nist.gov/pubs/sp/800/171/r3/final"
       ],
-      "mappings": [
+      "exact_mappings": [
         "nist_sp_800_171:RequirementItem"
       ],
       "broad_mappings": [
@@ -1325,7 +1325,7 @@
       "see_also": [
         "https://doi.org/10.6028/NIST.SP.800-171Ar3"
       ],
-      "mappings": [
+      "exact_mappings": [
         "nist_sp_800_171:Parameter"
       ],
       "broad_mappings": [
@@ -1389,7 +1389,7 @@
       "see_also": [
         "https://doi.org/10.6028/NIST.SP.800-171Ar3"
       ],
-      "mappings": [
+      "exact_mappings": [
         "nist_sp_800_171:AssessmentObjective"
       ],
       "broad_mappings": [
@@ -1434,7 +1434,7 @@
       "see_also": [
         "https://doi.org/10.6028/NIST.SP.800-171Ar3"
       ],
-      "mappings": [
+      "exact_mappings": [
         "nist_sp_800_171:AssessmentMethod"
       ],
       "broad_mappings": [
@@ -1474,7 +1474,7 @@
       "see_also": [
         "https://csrc.nist.gov/pubs/sp/800/171/r3/final"
       ],
-      "mappings": [
+      "exact_mappings": [
         "nist_sp_800_171:Reference"
       ],
       "broad_mappings": [
@@ -1513,11 +1513,10 @@
       "@type": "ClassDefinition"
     }
   ],
-  "metamodel_version": "1.7.0",
+  "metamodel_version": "1.12.0",
   "source_file": "nist_sp_800_171.yaml",
   "source_file_date": "2026-10-30T08:15:21",
   "source_file_size": 20185,
-  "generation_date": "2026-10-30T08:15:40",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/nist_sp_800_171.context.jsonld",

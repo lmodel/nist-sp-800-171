@@ -29,7 +29,7 @@ from pydantic import (
 )
 
 
-metamodel_version = "1.7.0"
+metamodel_version = "1.12.0"
 version = "3.0.0"
 
 
@@ -351,10 +351,10 @@ class Sp800171Publication(ConfiguredBaseModel):
         pattern=re.compile(r"^[1-9][0-9]*$")
         if isinstance(v, list):
             for element in v:
-                if isinstance(element, str) and not pattern.match(element):
+                if isinstance(element, str) and not pattern.search(element):
                     err_msg = f"Invalid sp800171_revision format: {element}"
                     raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
+        elif isinstance(v, str) and not pattern.search(v):
             err_msg = f"Invalid sp800171_revision format: {v}"
             raise ValueError(err_msg)
         return v
@@ -421,10 +421,10 @@ class Sp800171Requirement(ConfiguredBaseModel):
         pattern=re.compile(r"^\s*\S")
         if isinstance(v, list):
             for element in v:
-                if isinstance(element, str) and not pattern.match(element):
+                if isinstance(element, str) and not pattern.search(element):
                     err_msg = f"Invalid requirement_statement format: {element}"
                     raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
+        elif isinstance(v, str) and not pattern.search(v):
             err_msg = f"Invalid requirement_statement format: {v}"
             raise ValueError(err_msg)
         return v
@@ -434,10 +434,10 @@ class Sp800171Requirement(ConfiguredBaseModel):
         pattern=re.compile(r"^\s*\S")
         if isinstance(v, list):
             for element in v:
-                if isinstance(element, str) and not pattern.match(element):
+                if isinstance(element, str) and not pattern.search(element):
                     err_msg = f"Invalid requirement_discussion format: {element}"
                     raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
+        elif isinstance(v, str) and not pattern.search(v):
             err_msg = f"Invalid requirement_discussion format: {v}"
             raise ValueError(err_msg)
         return v
@@ -461,10 +461,10 @@ class Sp800171RequirementItem(ConfiguredBaseModel):
         pattern=re.compile(r"^\s*\S")
         if isinstance(v, list):
             for element in v:
-                if isinstance(element, str) and not pattern.match(element):
+                if isinstance(element, str) and not pattern.search(element):
                     err_msg = f"Invalid requirement_item_text format: {element}"
                     raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
+        elif isinstance(v, str) and not pattern.search(v):
             err_msg = f"Invalid requirement_item_text format: {v}"
             raise ValueError(err_msg)
         return v
@@ -491,10 +491,10 @@ class Sp800171Parameter(ConfiguredBaseModel):
         pattern=re.compile(r"^\s*\S")
         if isinstance(v, list):
             for element in v:
-                if isinstance(element, str) and not pattern.match(element):
+                if isinstance(element, str) and not pattern.search(element):
                     err_msg = f"Invalid odp_label format: {element}"
                     raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
+        elif isinstance(v, str) and not pattern.search(v):
             err_msg = f"Invalid odp_label format: {v}"
             raise ValueError(err_msg)
         return v
@@ -518,10 +518,10 @@ class Sp800171AssessmentObjective(ConfiguredBaseModel):
         pattern=re.compile(r"^\s*\S")
         if isinstance(v, list):
             for element in v:
-                if isinstance(element, str) and not pattern.match(element):
+                if isinstance(element, str) and not pattern.search(element):
                     err_msg = f"Invalid requirement_determination format: {element}"
                     raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
+        elif isinstance(v, str) and not pattern.search(v):
             err_msg = f"Invalid requirement_determination format: {v}"
             raise ValueError(err_msg)
         return v
@@ -544,10 +544,10 @@ class Sp800171AssessmentMethod(ConfiguredBaseModel):
         pattern=re.compile(r"^\s*\S")
         if isinstance(v, list):
             for element in v:
-                if isinstance(element, str) and not pattern.match(element):
+                if isinstance(element, str) and not pattern.search(element):
                     err_msg = f"Invalid requirement_method_objects format: {element}"
                     raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
+        elif isinstance(v, str) and not pattern.search(v):
             err_msg = f"Invalid requirement_method_objects format: {v}"
             raise ValueError(err_msg)
         return v
@@ -571,10 +571,10 @@ class Sp800171Reference(ConfiguredBaseModel):
         pattern=re.compile(r"^https://doi\.org/10\.[0-9]+/\S+$")
         if isinstance(v, list):
             for element in v:
-                if isinstance(element, str) and not pattern.match(element):
+                if isinstance(element, str) and not pattern.search(element):
                     err_msg = f"Invalid cited_publication_url format: {element}"
                     raise ValueError(err_msg)
-        elif isinstance(v, str) and not pattern.match(v):
+        elif isinstance(v, str) and not pattern.search(v):
             err_msg = f"Invalid cited_publication_url format: {v}"
             raise ValueError(err_msg)
         return v
