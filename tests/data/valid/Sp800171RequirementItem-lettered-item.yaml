@@ -1,0 +1,8 @@
+# Item d of requirement 03.01.01 with its two numbered items, paraphrased.
+requirement_item_id: "03.01.01.d"
+requirement_item_text: "Authorize access to the system on the basis of:"
+requirement_subitems:
+  - requirement_item_id: "03.01.01.d.01"
+    requirement_item_text: a valid access authorization, and
+  - requirement_item_id: "03.01.01.d.02"
+    requirement_item_text: the intended use of the system.

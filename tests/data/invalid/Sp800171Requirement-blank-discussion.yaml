@@ -1,0 +1,5 @@
+# Fails at: /requirement_discussion
+# Invalid: a discussion is more than white space.
+requirement_id: "03.01.01"
+title: Account Management
+requirement_discussion: " "

@@ -1,0 +1,4 @@
+# Fails at: /
+# Invalid: an assessment method says which of the three methods it is.
+requirement_method_objects:
+  - access control policy and procedures

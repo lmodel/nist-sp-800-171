@@ -1,305 +1,162 @@
 /**
-* Allowed values for group and control class attributes
+* The one status SP 800-171 Revision 3 states for a requirement. A requirement in force carries none.
 */
-export enum CatalogElementClassValue {
+export enum Sp800171RequirementStatus {
     
-    family = "family",
-    requirement = "requirement",
+    /** Revision 3 withdrew the requirement; other requirements incorporate or address what it required, or nothing does. */
+    withdrawn = "withdrawn",
 };
 /**
-* Allowed values for part class attributes
+* The three assessment methods of SP 800-171A.
 */
-export enum PartClassValue {
+export enum Sp800171AssessmentMethodKind {
     
-    security_requirement = "security_requirement",
+    /** Reviewing, inspecting, observing, studying or analysing assessment objects such as policies, plans, records and configurations. */
+    examine = "examine",
+    /** Holding discussions with people such as administrators and personnel with security responsibilities. */
+    interview = "interview",
+    /** Exercising mechanisms or processes under specified conditions and comparing the result with what is expected. */
+    test = "test",
 };
 /**
-* Allowed values for assessment method property values
+* How many choices a selection parameter takes, as OSCAL states it.
 */
-export enum AssessmentMethodValue {
+export enum Sp800171SelectionCount {
     
-    EXAMINE = "EXAMINE",
-    INTERVIEW = "INTERVIEW",
-    TEST = "TEST",
-};
-/**
-* Cardinality constraint for parameter selection
-*/
-export enum HowManyValue {
-    
+    /** Exactly one of the choices. */
     one = "one",
-    one_or_more = "one-or-more",
+    /** One or more of the choices. */
+    one_or_more = "one_or_more",
 };
 
 
 /**
- * Root wrapper for SP 800-171 catalog content
+ * One revision of SP 800-171 as a whole: its requirement families, each holding its security requirements, with the assessment procedures of the matching revision of SP 800-171A inside each requirement.
  */
-export interface SP800171Document {
-    /** Root catalog payload */
-    catalog?: CatalogBody,
+export interface Sp800171Publication {
+    /** The revision of SP 800-171 the document renders, as NIST numbers it, such as 3. */
+    sp800171_revision: string,
+    /** The requirement families, in the order SP 800-171 gives them. */
+    requirement_families: Sp800171Family[],
 }
 
 
 /**
- * Main catalog object
+ * One of the seventeen families that SP 800-171 Revision 3 sorts its security requirements into, such as Access Control (03.01) or Supply Chain Risk Management (03.17).
  */
-export interface CatalogBody {
-    /** UUID for catalog, metadata, or resource element */
-    uuid?: string,
-    /** Catalog metadata */
-    metadata?: Metadata,
-    /** List of requirement family groups in the catalog */
-    groups?: ControlGroup[],
-    /** Back-matter references and resources */
-    back_matter?: BackMatter,
-}
-
-
-/**
- * OSCAL metadata section
- */
-export interface Metadata {
-    /** Human-readable title */
-    title?: string,
-    /** Publication timestamp */
-    published?: string,
-    /** Last modification timestamp */
-    last_modified?: string,
-    /** Version identifier */
-    version?: string,
-    /** OSCAL version identifier */
-    oscal_version?: string,
-    /** List of properties */
-    props?: Property[],
-    /** List of links and relationships */
-    links?: Link[],
-    /** Roles used in metadata */
-    roles?: Role[],
-    /** Parties used in metadata */
-    parties?: Party[],
-    /** Responsible party assignments */
-    responsible_parties?: ResponsibleParty[],
-}
-
-
-/**
- * Role definition
- */
-export interface Role {
-    /** Unique identifier for an element */
-    id?: string,
-    /** Human-readable title */
-    title?: string,
-}
-
-
-/**
- * Party definition
- */
-export interface Party {
-    /** UUID for catalog, metadata, or resource element */
-    uuid?: string,
-    /** Party type */
-    type?: string,
-    /** Name of a property, part, or party */
-    name?: string,
-    /** Short display name */
-    short_name?: string,
-    /** Party email addresses */
-    email_addresses?: string[],
-    /** Postal addresses */
-    addresses?: Address[],
-}
-
-
-/**
- * Postal address
- */
-export interface Address {
-    /** Address lines */
-    addr_lines?: string[],
-    /** City name */
-    city?: string,
-    /** State or region */
-    state?: string,
-    /** Postal code */
-    postal_code?: string,
-}
-
-
-/**
- * Assignment of parties to a role
- */
-export interface ResponsibleParty {
-    /** Assigned role identifier */
-    role_id?: string,
-    /** Referenced party UUIDs */
-    party_uuids?: string[],
-}
-
-
-/**
- * OSCAL back-matter section
- */
-export interface BackMatter {
-    /** Back-matter resources */
-    resources?: Resource[],
-}
-
-
-/**
- * Referenced resource
- */
-export interface Resource {
-    /** UUID for catalog, metadata, or resource element */
-    uuid?: string,
-    /** Human-readable title */
-    title?: string,
-    /** Resource description */
+export interface Sp800171Family {
+    /** The family's number, such as 03.01. */
+    family_number: string,
+    /** The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management. */
+    title: string,
+    /** What the family or requirement is about, in the words of whoever records it. SP 800-171 gives a family no text of its own, and a requirement's own text goes in its statement, items and discussion. */
     description?: string,
-    /** Citation details for a resource */
-    citation?: Citation,
-    /** Resource links */
-    rlinks?: ResourceLink[],
+    /** The security requirements of the family, the withdrawn ones included, in the order SP 800-171 numbers them. A knowledge bundle relates a requirement to its family with isPartOf instead. */
+    family_requirements?: Sp800171Requirement[],
 }
 
 
 /**
- * Citation wrapper
+ * A security requirement of SP 800-171: a numbered, named requirement for protecting CUI, with its statement, discussion, references and source controls, the organization-defined parameters its statement leaves open, and the assessment objectives and methods SP 800-171A gives it. A requirement that Revision 3 withdrew keeps its number and says which requirements took its place.
  */
-export interface Citation {
-    /** Citation text */
-    text?: string,
-}
-
-
-/**
- * Reference link for a resource
- */
-export interface ResourceLink {
-    /** Link or resource reference */
-    href?: string,
-    /** Media type for a resource link */
-    media_type?: string,
-}
-
-
-/**
- * Base class for catalog elements with id, props, links, and parts
- */
-export interface CatalogElement {
-    /** Unique identifier for an element */
-    id?: string,
-    /** List of properties */
-    props?: Property[],
-    /** List of links and relationships */
-    links?: Link[],
-    /** Nested parts providing prose, statements, guidance, assessment objectives and methods */
-    parts?: Part[],
-}
-
-
-/**
- * A catalog element with required id, title, and optional class/label
- */
-export interface IdentifiedElement extends CatalogElement {
-    /** Human-readable title */
+export interface Sp800171Requirement {
+    /** The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management. */
     title?: string,
-    /** Classification of a catalog element (e.g. family, requirement, security_requirement) */
-    class?: string,
-    /** Human-readable label */
-    label?: string,
+    /** What the family or requirement is about, in the words of whoever records it. SP 800-171 gives a family no text of its own, and a requirement's own text goes in its statement, items and discussion. */
+    description?: string,
+    /** The requirement's identifier, such as 03.01.01. */
+    requirement_id: string,
+    /** Withdrawn when Revision 3 withdrew the requirement. A requirement with no status is in force. */
+    requirement_status?: string,
+    /** For a withdrawn requirement, the requirements of Revision 3 that incorporate what it required, as the catalog states them. */
+    incorporated_into_requirements?: string[],
+    /** For a withdrawn requirement, the requirements of Revision 3 that address what it required, as the catalog states them. */
+    addressed_by_requirements?: string[],
+    /** The requirement statement when SP 800-171 writes it as one piece of text and not as lettered items. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter. */
+    requirement_statement?: string,
+    /** The lettered items of the requirement statement, in order, each with its numbered items where it has them. A requirement has either these or a statement, never both. */
+    requirement_items?: Sp800171RequirementItem[],
+    /** The requirement's discussion: SP 800-171's explanation of what the requirement means and how it relates to other requirements. */
+    requirement_discussion?: string,
+    /** The organization-defined parameters the requirement statement leaves to the organization, in the order SP 800-171A numbers them. */
+    requirement_parameters?: Sp800171Parameter[],
+    /** The assessment objectives SP 800-171A gives the requirement: the determination statements an assessor checks. */
+    requirement_objectives?: Sp800171AssessmentObjective[],
+    /** The assessment methods SP 800-171A gives the requirement, each with the objects it is applied to. */
+    requirement_methods?: Sp800171AssessmentMethod[],
+    /** The publications SP 800-171 lists under the requirement's references, each with its citation and address as the catalog gives them. */
+    requirement_references?: Sp800171Reference[],
+    /** The controls of SP 800-53 Revision 5 the requirement is drawn from, by their identifiers, as the catalog lists them among the requirement's references. The identifier is data; the schema maps nothing to a model of SP 800-53. */
+    source_controls?: string[],
 }
 
 
 /**
- * A family group of security requirements
+ * One item of a requirement statement: a lettered item such as 03.01.01.a, or a numbered item under a lettered one such as 03.01.01.c.01.
  */
-export interface ControlGroup extends IdentifiedElement {
-    /** List of security requirements in a family group */
-    controls?: Control[],
+export interface Sp800171RequirementItem {
+    /** The item's identifier, such as 03.01.01.a. */
+    requirement_item_id: string,
+    /** What the item requires. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter. */
+    requirement_item_text: string,
+    /** The numbered items under a lettered item, in order. */
+    requirement_subitems?: Sp800171RequirementItem[],
 }
 
 
 /**
- * A security requirement
+ * An organization-defined parameter (ODP): a value, such as a time period or a frequency, that a requirement statement leaves to the organization, with the guideline SP 800-171A gives for defining it. A few parameters are a selection among choices instead of a value.
  */
-export interface Control extends IdentifiedElement {
-    /** List of organization-defined parameters for a requirement */
-    params?: Parameter[],
+export interface Sp800171Parameter {
+    /** The parameter's identifier, such as A.03.01.01.ODP[01]. */
+    odp_id: string,
+    /** What kind of value the parameter takes, such as time period or frequency, or SELECTED PARAMETER VALUES for a selection. */
+    odp_label: string,
+    /** How the requirement statement names the parameter, such as organization-defined time period. */
+    odp_usage?: string,
+    /** The determination SP 800-171A gives for the parameter: what the organization must have defined, such as the time period for account inactivity before disabling is defined. */
+    odp_guideline?: string,
+    /** For a selection, the choices SP 800-171 offers, in its order. A choice may itself carry an insert placeholder naming another parameter. */
+    odp_choices?: string[],
+    /** How many of the choices a selection takes. */
+    odp_selection_count?: string,
 }
 
 
 /**
- * An organization-defined parameter for a security requirement
+ * An assessment objective of SP 800-171A: one determination statement that an assessor checks, tied to the requirement or to one item of its statement.
  */
-export interface Parameter extends IdentifiedElement {
-    /** Human-readable description of an organization-defined parameter's expected value */
-    usage?: string,
-    /** List of guidelines for a parameter */
-    guidelines?: Guideline[],
-    /** Selection constraints for an organization-defined parameter */
-    select?: ParameterSelection,
+export interface Sp800171AssessmentObjective {
+    /** The objective's identifier, such as A.03.01.01.b[01]. */
+    requirement_objective_id: string,
+    /** The determination statement: what the assessor determines is the case, such as system accounts are created in accordance with organizational policy, procedures, prerequisites, and criteria. */
+    requirement_determination: string,
+    /** The statement item the objective assesses, such as 03.01.01.b. Absent when the objective assesses a requirement whose statement is one piece of text. */
+    assessed_requirement_item?: string,
 }
 
 
 /**
- * Selection constraints specifying allowed values for a parameter
+ * One of the three assessment methods SP 800-171A applies to a requirement, examine, interview or test, with the assessment objects (documents, people, processes or mechanisms) it is applied to.
  */
-export interface ParameterSelection {
-    /** Cardinality constraint for parameter selection choices */
-    how_many?: string,
-    /** List of allowed values for a parameter selection */
-    choice?: string[],
+export interface Sp800171AssessmentMethod {
+    /** Which method it is. */
+    requirement_method_kind: string,
+    /** The assessment objects, one entry each, in the order SP 800-171A lists them, such as access control policy and procedures or system administrators. */
+    requirement_method_objects: string[],
 }
 
 
 /**
- * Additional prose guidance associated with a parameter
+ * A publication that SP 800-171 lists under a requirement's references, by the short name the publication gives it, with the full citation and the address NIST's catalog gives it.
  */
-export interface Guideline {
-    /** Free-text prose content */
-    prose?: string,
-}
-
-
-/**
- * A name-value property with optional namespace
- */
-export interface Property {
-    /** Name of a property, part, or party */
-    name?: string,
-    /** Property value */
-    value?: string,
-    /** Namespace URI for a property */
-    ns?: string,
-    /** Classification of a catalog element (e.g. family, requirement, security_requirement) */
-    class?: string,
-}
-
-
-/**
- * Relationship link
- */
-export interface Link {
-    /** Link or resource reference */
-    href?: string,
-    /** Relationship type for a link */
-    rel?: string,
-}
-
-
-/**
- * Structured narrative part containing prose and optional nested parts. Used for statements, guidance, assessment-objectives, and assessment-methods.
- */
-export interface Part extends CatalogElement {
-    /** Name of a property, part, or party */
-    name?: string,
-    /** Classification of a catalog element (e.g. family, requirement, security_requirement) */
-    class?: string,
-    /** Free-text prose content */
-    prose?: string,
+export interface Sp800171Reference {
+    /** The publication's short name, such as SP 800-63-3. */
+    cited_publication: string,
+    /** The full citation, as the catalog's back matter gives it. */
+    cited_publication_citation: string,
+    /** The publication's address, which the catalog gives as its digital object identifier at doi.org. */
+    cited_publication_url: string,
 }
 
 

@@ -1,0 +1,7 @@
+# The examine method of requirement 03.01.08 with three of its objects,
+# paraphrased.
+requirement_method_kind: examine
+requirement_method_objects:
+  - access control policy and procedures
+  - system configuration settings and the documents that set them
+  - the system security plan

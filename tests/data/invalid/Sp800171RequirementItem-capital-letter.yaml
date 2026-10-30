@@ -1,0 +1,5 @@
+# Fails at: /requirement_item_id
+# Invalid: SP 800-171 letters statement items in lower case, such as
+# 03.01.01.a.
+requirement_item_id: "03.01.01.A"
+requirement_item_text: Define which types of system account are allowed.

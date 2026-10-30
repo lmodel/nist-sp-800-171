@@ -1,979 +1,677 @@
-@prefix dcterms: <http://purl.org/dc/terms/> .
-@prefix linkml: <https://w3id.org/linkml/> .
-@prefix nist_sp_800_171: <https://w3id.org/lmodel/nist-sp-800-171/> .
-@prefix owl: <http://www.w3.org/2002/07/owl#> .
-@prefix pav: <http://purl.org/pav/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix nist_sp_800_171: <https://w3id.org/lmodel/nist-sp-800-171/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
-
-<https://w3id.org/lmodel/nist-sp-800-171.owl.ttl> a owl:Ontology ;
-    rdfs:label "NIST-SP-800-171" ;
-    dcterms:source <https://doi.org/10.6028/NIST.SP.800-171r3> ;
-    pav:version "3.0.0" ;
-    skos:definition "Electronic (LinkML) Version of Protecting Controlled Unclassified Information in Nonfederal Systems and Organizations" .
-
-nist_sp_800_171:SP800171Document a owl:Class ;
-    rdfs:label "SP800171Document" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:CatalogBody ;
-            owl:onProperty nist_sp_800_171:catalog ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:catalog ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:catalog ] ;
-    skos:definition "Root wrapper for SP 800-171 catalog content" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:remarks a owl:DatatypeProperty ;
-    rdfs:label "remarks" ;
-    skos:definition "Supplemental remarks" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-<https://w3id.org/lmodel/nist-sp-800-171/PartClassValue#security_requirement> a owl:Class ;
-    rdfs:label "security_requirement" ;
-    rdfs:subClassOf nist_sp_800_171:PartClassValue .
-
-nist_sp_800_171:Address a owl:Class ;
-    rdfs:label "Address" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:city ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:addr_lines ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:state ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:postal_code ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:state ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:city ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:state ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:addr_lines ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:city ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:postal_code ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:postal_code ] ;
-    skos:definition "Postal address" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-<https://w3id.org/lmodel/nist-sp-800-171/AssessmentMethodValue#EXAMINE> a owl:Class ;
-    rdfs:label "EXAMINE" ;
-    rdfs:subClassOf nist_sp_800_171:AssessmentMethodValue .
-
-<https://w3id.org/lmodel/nist-sp-800-171/AssessmentMethodValue#INTERVIEW> a owl:Class ;
-    rdfs:label "INTERVIEW" ;
-    rdfs:subClassOf nist_sp_800_171:AssessmentMethodValue .
-
-<https://w3id.org/lmodel/nist-sp-800-171/AssessmentMethodValue#TEST> a owl:Class ;
-    rdfs:label "TEST" ;
-    rdfs:subClassOf nist_sp_800_171:AssessmentMethodValue .
-
-nist_sp_800_171:BackMatter a owl:Class ;
-    rdfs:label "BackMatter" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Resource ;
-            owl:onProperty nist_sp_800_171:resources ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:resources ] ;
-    skos:definition "OSCAL back-matter section" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:CatalogBody a owl:Class ;
-    rdfs:label "CatalogBody" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:groups ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Metadata ;
-            owl:onProperty nist_sp_800_171:metadata ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:uuid ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:ControlGroup ;
-            owl:onProperty nist_sp_800_171:groups ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:back_matter ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:uuid ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:uuid ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:back_matter ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:metadata ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:BackMatter ;
-            owl:onProperty nist_sp_800_171:back_matter ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:metadata ] ;
-    skos:definition "Main catalog object" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:CatalogElement a owl:Class ;
-    rdfs:label "CatalogElement" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:parts ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Part ;
-            owl:onProperty nist_sp_800_171:parts ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:props ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Property ;
-            owl:onProperty nist_sp_800_171:props ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Link ;
-            owl:onProperty nist_sp_800_171:links ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:links ] ;
-    skos:definition "Base class for catalog elements with id, props, links, and parts" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-<https://w3id.org/lmodel/nist-sp-800-171/CatalogElementClassValue#family> a owl:Class ;
-    rdfs:label "family" ;
-    rdfs:subClassOf nist_sp_800_171:CatalogElementClassValue .
-
-<https://w3id.org/lmodel/nist-sp-800-171/CatalogElementClassValue#requirement> a owl:Class ;
-    rdfs:label "requirement" ;
-    rdfs:subClassOf nist_sp_800_171:CatalogElementClassValue .
-
-nist_sp_800_171:Citation a owl:Class ;
-    rdfs:label "Citation" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:text ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:text ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:text ] ;
-    skos:definition "Citation wrapper" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:Control a owl:Class ;
-    rdfs:label "Control" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:params ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Parameter ;
-            owl:onProperty nist_sp_800_171:params ],
-        nist_sp_800_171:IdentifiedElement ;
-    skos:definition "A security requirement" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:ControlGroup a owl:Class ;
-    rdfs:label "ControlGroup" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Control ;
-            owl:onProperty nist_sp_800_171:controls ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:controls ],
-        nist_sp_800_171:IdentifiedElement ;
-    skos:definition "A family group of security requirements" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:Guideline a owl:Class ;
-    rdfs:label "Guideline" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:prose ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:prose ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:prose ] ;
-    skos:definition "Additional prose guidance associated with a parameter" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-<https://w3id.org/lmodel/nist-sp-800-171/HowManyValue#one> a owl:Class ;
-    rdfs:label "one" ;
-    rdfs:subClassOf nist_sp_800_171:HowManyValue .
-
-<https://w3id.org/lmodel/nist-sp-800-171/HowManyValue#one-or-more> a owl:Class ;
-    rdfs:label "one-or-more" ;
-    rdfs:subClassOf nist_sp_800_171:HowManyValue .
-
-nist_sp_800_171:Metadata a owl:Class ;
-    rdfs:label "Metadata" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:published ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:props ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Role ;
-            owl:onProperty nist_sp_800_171:roles ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:oscal_version ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Party ;
-            owl:onProperty nist_sp_800_171:parties ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:title ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Property ;
-            owl:onProperty nist_sp_800_171:props ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:responsible_parties ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:roles ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:version ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:last_modified ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:ResponsibleParty ;
-            owl:onProperty nist_sp_800_171:responsible_parties ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:title ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Link ;
-            owl:onProperty nist_sp_800_171:links ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:links ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:last_modified ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:oscal_version ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:parties ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:last_modified ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:title ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:version ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:version ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:oscal_version ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:published ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:published ] ;
-    skos:definition "OSCAL metadata section" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:Parameter a owl:Class ;
-    rdfs:label "Parameter" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:select ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Guideline ;
-            owl:onProperty nist_sp_800_171:guidelines ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:usage ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:ParameterSelection ;
-            owl:onProperty nist_sp_800_171:select ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:guidelines ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:usage ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:usage ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:select ],
-        nist_sp_800_171:IdentifiedElement ;
-    skos:definition "An organization-defined parameter for a security requirement" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:ParameterSelection a owl:Class ;
-    rdfs:label "ParameterSelection" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:choice ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:HowManyValue ;
-            owl:onProperty nist_sp_800_171:how_many ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:choice ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:how_many ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:how_many ] ;
-    skos:definition "Selection constraints specifying allowed values for a parameter" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:Part a owl:Class ;
-    rdfs:label "Part" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:prose ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:_class ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:prose ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:_class ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:prose ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:PartClassValue ;
-            owl:onProperty nist_sp_800_171:_class ],
-        nist_sp_800_171:CatalogElement ;
-    skos:definition "Structured narrative part containing prose and optional nested parts. Used for statements, guidance, assessment-objectives, and assessment-methods." ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:PartClassValue a owl:Class ;
-    rdfs:label "PartClassValue" ;
-    skos:definition "Allowed values for part class attributes" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> ;
-    linkml:permissible_values <https://w3id.org/lmodel/nist-sp-800-171/PartClassValue#security_requirement> .
-
-nist_sp_800_171:Party a owl:Class ;
-    rdfs:label "Party" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Address ;
-            owl:onProperty nist_sp_800_171:addresses ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:addresses ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:uuid ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:uuid ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:email_addresses ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:email_addresses ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:short_name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:short_name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:short_name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:uuid ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:type ] ;
-    skos:definition "Party definition" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:Resource a owl:Class ;
-    rdfs:label "Resource" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:Citation ;
-            owl:onProperty nist_sp_800_171:citation ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:uuid ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:title ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:title ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:description ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:uuid ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:description ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:rlinks ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:citation ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:title ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:citation ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:uuid ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:description ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:ResourceLink ;
-            owl:onProperty nist_sp_800_171:rlinks ] ;
-    skos:definition "Referenced resource" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:ResourceLink a owl:Class ;
-    rdfs:label "ResourceLink" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:href ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:media_type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:media_type ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:href ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:media_type ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:href ] ;
-    skos:definition "Reference link for a resource" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:ResponsibleParty a owl:Class ;
-    rdfs:label "ResponsibleParty" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:party_uuids ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:role_id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:role_id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:party_uuids ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:role_id ] ;
-    skos:definition "Assignment of parties to a role" ;
-    skos:exactMatch linkml:Any ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:Role a owl:Class ;
-    rdfs:label "Role" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:id ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:title ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:id ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:title ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:id ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:title ] ;
-    skos:definition "Role definition" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:addr_lines a owl:DatatypeProperty ;
-    rdfs:label "addr-lines" ;
-    skos:altLabel "addr_lines" ;
-    skos:definition "Address lines" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:addresses a owl:ObjectProperty ;
-    rdfs:label "addresses" ;
-    rdfs:range nist_sp_800_171:Address ;
-    skos:definition "Postal addresses" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:choice a owl:DatatypeProperty ;
-    rdfs:label "choice" ;
-    skos:definition "List of allowed values for a parameter selection" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:controls a owl:ObjectProperty ;
-    rdfs:label "controls" ;
-    rdfs:range nist_sp_800_171:Control ;
-    skos:definition "List of security requirements in a family group" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:email_addresses a owl:DatatypeProperty ;
-    rdfs:label "email-addresses" ;
-    skos:altLabel "email_addresses" ;
-    skos:definition "Party email addresses" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:groups a owl:ObjectProperty ;
-    rdfs:label "groups" ;
-    rdfs:range nist_sp_800_171:ControlGroup ;
-    skos:definition "List of requirement family groups in the catalog" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:guidelines a owl:ObjectProperty ;
-    rdfs:label "guidelines" ;
-    rdfs:range nist_sp_800_171:Guideline ;
-    skos:definition "List of guidelines for a parameter" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:params a owl:ObjectProperty ;
-    rdfs:label "params" ;
-    rdfs:range nist_sp_800_171:Parameter ;
-    skos:definition "List of organization-defined parameters for a requirement" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:parties a owl:ObjectProperty ;
-    rdfs:label "parties" ;
-    rdfs:range nist_sp_800_171:Party ;
-    skos:definition "Parties used in metadata" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:parts a owl:ObjectProperty ;
-    rdfs:label "parts" ;
-    rdfs:range nist_sp_800_171:Part ;
-    skos:definition "Nested parts providing prose, statements, guidance, assessment objectives and methods" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:party_uuids a owl:DatatypeProperty ;
-    rdfs:label "party-uuids" ;
-    skos:altLabel "party_uuids" ;
-    skos:definition "Referenced party UUIDs" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:resources a owl:ObjectProperty ;
-    rdfs:label "resources" ;
-    rdfs:range nist_sp_800_171:Resource ;
-    skos:definition "Back-matter resources" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:responsible_parties a owl:ObjectProperty ;
-    rdfs:label "responsible-parties" ;
-    rdfs:range nist_sp_800_171:ResponsibleParty ;
-    skos:altLabel "responsible_parties" ;
-    skos:definition "Responsible party assignments" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:rlinks a owl:ObjectProperty ;
-    rdfs:label "rlinks" ;
-    rdfs:range nist_sp_800_171:ResourceLink ;
-    skos:definition "Resource links" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:roles a owl:ObjectProperty ;
-    rdfs:label "roles" ;
-    rdfs:range nist_sp_800_171:Role ;
-    skos:definition "Roles used in metadata" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:AssessmentMethodValue a owl:Class ;
-    rdfs:label "AssessmentMethodValue" ;
-    owl:unionOf ( <https://w3id.org/lmodel/nist-sp-800-171/AssessmentMethodValue#EXAMINE> <https://w3id.org/lmodel/nist-sp-800-171/AssessmentMethodValue#INTERVIEW> <https://w3id.org/lmodel/nist-sp-800-171/AssessmentMethodValue#TEST> ) ;
-    skos:definition "Allowed values for assessment method property values" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> ;
-    linkml:permissible_values <https://w3id.org/lmodel/nist-sp-800-171/AssessmentMethodValue#EXAMINE>,
-        <https://w3id.org/lmodel/nist-sp-800-171/AssessmentMethodValue#INTERVIEW>,
-        <https://w3id.org/lmodel/nist-sp-800-171/AssessmentMethodValue#TEST> .
-
-nist_sp_800_171:CatalogElementClassValue a owl:Class ;
-    rdfs:label "CatalogElementClassValue" ;
-    owl:unionOf ( <https://w3id.org/lmodel/nist-sp-800-171/CatalogElementClassValue#family> <https://w3id.org/lmodel/nist-sp-800-171/CatalogElementClassValue#requirement> ) ;
-    skos:definition "Allowed values for group and control class attributes" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> ;
-    linkml:permissible_values <https://w3id.org/lmodel/nist-sp-800-171/CatalogElementClassValue#family>,
-        <https://w3id.org/lmodel/nist-sp-800-171/CatalogElementClassValue#requirement> .
-
-nist_sp_800_171:IdentifiedElement a owl:Class ;
-    rdfs:label "IdentifiedElement" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:title ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:label ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:_class ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:_class ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:label ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:title ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:label ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:title ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom nist_sp_800_171:CatalogElementClassValue ;
-            owl:onProperty nist_sp_800_171:_class ],
-        nist_sp_800_171:CatalogElement ;
-    skos:definition "A catalog element with required id, title, and optional class/label" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:Link a owl:Class ;
-    rdfs:label "Link" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:href ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:href ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:rel ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:href ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:rel ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:rel ] ;
-    skos:definition "Relationship link" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:Property a owl:Class ;
-    rdfs:label "Property" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:name ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:value ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:value ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:_class ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:name ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:_class ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:ns ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:value ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:name ],
-        [ a owl:Restriction ;
-            owl:minCardinality 0 ;
-            owl:onProperty nist_sp_800_171:ns ],
-        [ a owl:Restriction ;
-            owl:maxCardinality 1 ;
-            owl:onProperty nist_sp_800_171:_class ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty nist_sp_800_171:ns ] ;
-    skos:definition "A name-value property with optional namespace" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:back_matter a owl:ObjectProperty ;
-    rdfs:label "back-matter" ;
-    rdfs:range nist_sp_800_171:BackMatter ;
-    skos:altLabel "back_matter" ;
-    skos:definition "Back-matter references and resources" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:catalog a owl:ObjectProperty ;
-    rdfs:label "catalog" ;
-    rdfs:range nist_sp_800_171:CatalogBody ;
-    skos:definition "Root catalog payload" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:citation a owl:ObjectProperty ;
-    rdfs:label "citation" ;
-    rdfs:range nist_sp_800_171:Citation ;
-    skos:definition "Citation details for a resource" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:city a owl:DatatypeProperty ;
-    rdfs:label "city" ;
-    skos:definition "City name" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
+@prefix oscal: <https://w3id.org/lmodel/oscal/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix pav: <http://purl.org/pav/> .
+xsd:string a rdfs:Datatype ;
+	owl:equivalentClass _:c14n136 , _:c14n138 , _:c14n140 , _:c14n142 , _:c14n144 , _:c14n146 , _:c14n148 .
+<https://w3id.org/lmodel/nist-sp-800-171.owl.ttl> dcterms:license "Apache-2.0" ;
+	dcterms:source <https://doi.org/10.6028/NIST.SP.800-171r3> ;
+	dcterms:title "Protecting Controlled Unclassified Information in Nonfederal Systems and Organizations (SP 800-171 Revision 3)" ;
+	pav:version "3.0.0" ;
+	a owl:Ontology ;
+	rdfs:label "nist_sp_800_171" ;
+	rdfs:seeAlso <https://csrc.nist.gov/projects/protecting-controlled-unclassified-information> , <https://csrc.nist.gov/pubs/sp/800/171/r3/final> , <https://doi.org/10.6028/NIST.SP.800-171Ar3> , <https://github.com/usnistgov/oscal-content/tree/v1.6.0/nist.gov/SP800-171/rev3> , <https://lmodel.github.io/nist-sp-800-171> ;
+	skos:definition "A LinkML model of NIST Special Publication 800-171 Revision 3, the security requirements for protecting controlled unclassified information (CUI) in nonfederal systems and organizations: its seventeen requirement families, each security requirement with its statement, discussion, references and source controls, the organization-defined parameters (ODPs) a requirement leaves to the organization, and the assessment objectives and methods that SP 800-171A Revision 3 gives each requirement." ;
+	skos:note "NIST's catalog renders each family as an OSCAL group, each security requirement as an OSCAL control of class requirement, each statement item, discussion, assessment objective and assessment method as a part, each organization-defined parameter as a parameter, and each reference and source control as a link to a back-matter resource. The broad_mappings name those lmodel/oscal classes." , "SP 800-171 is a work of the United States Government and is not subject to copyright in the United States. The descriptions here are this project's own words; NIST's text of each requirement, discussion, parameter and assessment procedure stays in the catalog copy." , "The version is the revision of SP 800-171 the schema renders, written as NIST's Cybersecurity and Privacy Reference Tool numbers it (SP_800_171_3_0_0), and source is the publication's digital object identifier. The catalog NIST publishes for that revision in usnistgov/oscal-content, which carries the assessment procedures of SP 800-171A Revision 3 as well, is copied to src/nist_sp_800_171/schema/oscal-content/ at the tag and commit in the annotations. scripts/check_upstream_release.py reads the same pins and reports when NIST publishes a newer revision or changes the catalog. The catalog's own metadata version (1.1.0) numbers the catalog, not the publication. The release tags are the schema's own versions." ;
+	nist_sp_800_171:cprt_framework_version "SP_800_171_3_0_0" ;
+	nist_sp_800_171:oscal_content_commit "f0de6d8d8c059d374f15e0ae07508d82e370fc1d" ;
+	nist_sp_800_171:oscal_content_tag "v1.6.0" ;
+	nist_sp_800_171:publication_date "2024-05" .
+nist_sp_800_171:Sp800171AssessmentMethod a owl:Class ;
+	rdfs:label "Sp800171AssessmentMethod" ;
+	rdfs:seeAlso <https://doi.org/10.6028/NIST.SP.800-171Ar3> ;
+	rdfs:subClassOf _:c14n112 , _:c14n32 , _:c14n34 , _:c14n71 , _:c14n9 ;
+	skos:broadMatch oscal:Part ;
+	skos:definition "One of the three assessment methods SP 800-171A applies to a requirement, examine, interview or test, with the assessment objects (documents, people, processes or mechanisms) it is applied to." ;
+	skos:exactMatch nist_sp_800_171:AssessmentMethod ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:Sp800171AssessmentMethodKind\#examine a owl:Class ;
+	rdfs:label "examine" ;
+	rdfs:subClassOf nist_sp_800_171:Sp800171AssessmentMethodKind ;
+	skos:definition "Reviewing, inspecting, observing, studying or analysing assessment objects such as policies, plans, records and configurations." .
+nist_sp_800_171:Sp800171AssessmentMethodKind\#interview a owl:Class ;
+	rdfs:label "interview" ;
+	rdfs:subClassOf nist_sp_800_171:Sp800171AssessmentMethodKind ;
+	skos:definition "Holding discussions with people such as administrators and personnel with security responsibilities." .
+nist_sp_800_171:Sp800171AssessmentMethodKind\#test a owl:Class ;
+	rdfs:label "test" ;
+	rdfs:subClassOf nist_sp_800_171:Sp800171AssessmentMethodKind ;
+	skos:definition "Exercising mechanisms or processes under specified conditions and comparing the result with what is expected." .
+nist_sp_800_171:Sp800171AssessmentMethodKind a owl:Class ;
+	rdfs:label "Sp800171AssessmentMethodKind" ;
+	rdfs:seeAlso <https://doi.org/10.6028/NIST.SP.800-171Ar3> ;
+	owl:unionOf _:c14n26 ;
+	skos:definition "The three assessment methods of SP 800-171A." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> ;
+	linkml:permissible_values nist_sp_800_171:Sp800171AssessmentMethodKind\#examine , nist_sp_800_171:Sp800171AssessmentMethodKind\#interview , nist_sp_800_171:Sp800171AssessmentMethodKind\#test .
+nist_sp_800_171:Sp800171AssessmentObjective a owl:Class ;
+	rdfs:label "Sp800171AssessmentObjective" ;
+	rdfs:seeAlso <https://doi.org/10.6028/NIST.SP.800-171Ar3> ;
+	rdfs:subClassOf _:c14n31 , _:c14n44 , _:c14n45 , _:c14n53 , _:c14n6 , _:c14n69 , _:c14n78 , _:c14n79 , _:c14n94 ;
+	skos:broadMatch oscal:Part ;
+	skos:definition "An assessment objective of SP 800-171A: one determination statement that an assessor checks, tied to the requirement or to one item of its statement." ;
+	skos:exactMatch nist_sp_800_171:AssessmentObjective ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:Sp800171Family a owl:Class ;
+	rdfs:label "Sp800171Family" ;
+	rdfs:seeAlso <https://csrc.nist.gov/pubs/sp/800/171/r3/final> ;
+	rdfs:subClassOf _:c14n1 , _:c14n107 , _:c14n114 , _:c14n115 , _:c14n37 , _:c14n42 , _:c14n43 , _:c14n48 , _:c14n75 , _:c14n81 , _:c14n88 ;
+	skos:broadMatch oscal:Group ;
+	skos:definition "One of the seventeen families that SP 800-171 Revision 3 sorts its security requirements into, such as Access Control (03.01) or Supply Chain Risk Management (03.17)." ;
+	skos:exactMatch nist_sp_800_171:Family ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:Sp800171Parameter a owl:Class ;
+	rdfs:label "Sp800171Parameter" ;
+	rdfs:seeAlso <https://doi.org/10.6028/NIST.SP.800-171Ar3> ;
+	rdfs:subClassOf _:c14n101 , _:c14n103 , _:c14n104 , _:c14n16 , _:c14n24 , _:c14n25 , _:c14n29 , _:c14n3 , _:c14n39 , _:c14n5 , _:c14n51 , _:c14n52 , _:c14n57 , _:c14n73 , _:c14n8 , _:c14n84 , _:c14n87 ;
+	skos:broadMatch oscal:Parameter ;
+	skos:definition "An organization-defined parameter (ODP): a value, such as a time period or a frequency, that a requirement statement leaves to the organization, with the guideline SP 800-171A gives for defining it. A few parameters are a selection among choices instead of a value." ;
+	skos:exactMatch nist_sp_800_171:Parameter ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:Sp800171Publication a owl:Class ;
+	rdfs:label "Sp800171Publication" ;
+	rdfs:seeAlso <https://csrc.nist.gov/pubs/sp/800/171/r3/final> ;
+	rdfs:subClassOf _:c14n27 , _:c14n28 , _:c14n49 , _:c14n64 , _:c14n93 ;
+	skos:broadMatch oscal:Catalog ;
+	skos:definition "One revision of SP 800-171 as a whole: its requirement families, each holding its security requirements, with the assessment procedures of the matching revision of SP 800-171A inside each requirement." ;
+	skos:exactMatch nist_sp_800_171:Publication ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:Sp800171Reference a owl:Class ;
+	rdfs:label "Sp800171Reference" ;
+	rdfs:seeAlso <https://csrc.nist.gov/pubs/sp/800/171/r3/final> ;
+	rdfs:subClassOf _:c14n10 , _:c14n100 , _:c14n36 , _:c14n38 , _:c14n46 , _:c14n54 , _:c14n63 , _:c14n7 , _:c14n90 ;
+	skos:broadMatch oscal:Resource ;
+	skos:definition "A publication that SP 800-171 lists under a requirement's references, by the short name the publication gives it, with the full citation and the address NIST's catalog gives it." ;
+	skos:exactMatch nist_sp_800_171:Reference ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:Sp800171Requirement a owl:Class ;
+	rdfs:label "Sp800171Requirement" ;
+	rdfs:seeAlso <https://csrc.nist.gov/pubs/sp/800/171/r3/final> ;
+	rdfs:subClassOf _:c14n105 , _:c14n106 , _:c14n108 , _:c14n11 , _:c14n110 , _:c14n111 , _:c14n113 , _:c14n17 , _:c14n18 , _:c14n20 , _:c14n22 , _:c14n30 , _:c14n35 , _:c14n4 , _:c14n40 , _:c14n41 , _:c14n55 , _:c14n56 , _:c14n58 , _:c14n59 , _:c14n65 , _:c14n66 , _:c14n67 , _:c14n68 , _:c14n74 , _:c14n76 , _:c14n80 , _:c14n82 , _:c14n86 , _:c14n91 , _:c14n92 , _:c14n95 , _:c14n96 , _:c14n97 ;
+	skos:broadMatch oscal:Control ;
+	skos:definition "A security requirement of SP 800-171: a numbered, named requirement for protecting CUI, with its statement, discussion, references and source controls, the organization-defined parameters its statement leaves open, and the assessment objectives and methods SP 800-171A gives it. A requirement that Revision 3 withdrew keeps its number and says which requirements took its place." ;
+	skos:exactMatch nist_sp_800_171:Requirement ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:Sp800171RequirementItem a owl:Class ;
+	rdfs:label "Sp800171RequirementItem" ;
+	rdfs:seeAlso <https://csrc.nist.gov/pubs/sp/800/171/r3/final> ;
+	rdfs:subClassOf _:c14n13 , _:c14n19 , _:c14n21 , _:c14n23 , _:c14n33 , _:c14n61 , _:c14n98 , _:c14n99 ;
+	skos:broadMatch oscal:Part ;
+	skos:definition "One item of a requirement statement: a lettered item such as 03.01.01.a, or a numbered item under a lettered one such as 03.01.01.c.01." ;
+	skos:exactMatch nist_sp_800_171:RequirementItem ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:Sp800171RequirementStatus\#withdrawn a owl:Class ;
+	rdfs:label "withdrawn" ;
+	rdfs:subClassOf nist_sp_800_171:Sp800171RequirementStatus ;
+	skos:definition "Revision 3 withdrew the requirement; other requirements incorporate or address what it required, or nothing does." .
+nist_sp_800_171:Sp800171RequirementStatus a owl:Class ;
+	rdfs:label "Sp800171RequirementStatus" ;
+	rdfs:seeAlso <https://csrc.nist.gov/pubs/sp/800/171/r3/final> ;
+	skos:definition "The one status SP 800-171 Revision 3 states for a requirement. A requirement in force carries none." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> ;
+	linkml:permissible_values nist_sp_800_171:Sp800171RequirementStatus\#withdrawn .
+nist_sp_800_171:Sp800171SelectionCount\#one a owl:Class ;
+	rdfs:label "one" ;
+	rdfs:subClassOf nist_sp_800_171:Sp800171SelectionCount ;
+	skos:definition "Exactly one of the choices." .
+nist_sp_800_171:Sp800171SelectionCount\#one_or_more a owl:Class ;
+	rdfs:label "one_or_more" ;
+	rdfs:subClassOf nist_sp_800_171:Sp800171SelectionCount ;
+	skos:definition "One or more of the choices." .
+nist_sp_800_171:Sp800171SelectionCount a owl:Class ;
+	rdfs:label "Sp800171SelectionCount" ;
+	owl:unionOf _:c14n85 ;
+	skos:definition "How many choices a selection parameter takes, as OSCAL states it." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> ;
+	linkml:permissible_values nist_sp_800_171:Sp800171SelectionCount\#one , nist_sp_800_171:Sp800171SelectionCount\#one_or_more .
+nist_sp_800_171:addressed_by_requirements a owl:DatatypeProperty ;
+	rdfs:label "addressed_by_requirements" ;
+	skos:definition "For a withdrawn requirement, the requirements of Revision 3 that address what it required, as the catalog states them." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:assessed_requirement_item a owl:DatatypeProperty ;
+	rdfs:label "assessed_requirement_item" ;
+	skos:definition "The statement item the objective assesses, such as 03.01.01.b. Absent when the objective assesses a requirement whose statement is one piece of text." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:cited_publication a owl:DatatypeProperty ;
+	rdfs:label "cited_publication" ;
+	skos:definition "The publication's short name, such as SP 800-63-3." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:cited_publication_citation a owl:DatatypeProperty ;
+	rdfs:label "cited_publication_citation" ;
+	skos:definition "The full citation, as the catalog's back matter gives it." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:cited_publication_url a owl:DatatypeProperty ;
+	rdfs:label "cited_publication_url" ;
+	skos:definition "The publication's address, which the catalog gives as its digital object identifier at doi.org." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
 nist_sp_800_171:description a owl:DatatypeProperty ;
-    rdfs:label "description" ;
-    skos:definition "Resource description" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:how_many a owl:ObjectProperty ;
-    rdfs:label "how-many" ;
-    rdfs:range nist_sp_800_171:HowManyValue ;
-    skos:altLabel "how_many" ;
-    skos:definition "Cardinality constraint for parameter selection choices" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:label a owl:DatatypeProperty ;
-    rdfs:label "label" ;
-    skos:definition "Human-readable label" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:last_modified a owl:DatatypeProperty ;
-    rdfs:label "last-modified" ;
-    skos:altLabel "last_modified" ;
-    skos:definition "Last modification timestamp" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:media_type a owl:DatatypeProperty ;
-    rdfs:label "media-type" ;
-    skos:altLabel "media_type" ;
-    skos:definition "Media type for a resource link" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:metadata a owl:ObjectProperty ;
-    rdfs:label "metadata" ;
-    rdfs:range nist_sp_800_171:Metadata ;
-    skos:definition "Catalog metadata" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:ns a owl:DatatypeProperty ;
-    rdfs:label "ns" ;
-    skos:definition "Namespace URI for a property" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:oscal_version a owl:DatatypeProperty ;
-    rdfs:label "oscal-version" ;
-    skos:altLabel "oscal_version" ;
-    skos:definition "OSCAL version identifier" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:postal_code a owl:DatatypeProperty ;
-    rdfs:label "postal-code" ;
-    skos:altLabel "postal_code" ;
-    skos:definition "Postal code" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:published a owl:DatatypeProperty ;
-    rdfs:label "published" ;
-    skos:definition "Publication timestamp" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:rel a owl:DatatypeProperty ;
-    rdfs:label "rel" ;
-    skos:definition "Relationship type for a link" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:role_id a owl:DatatypeProperty ;
-    rdfs:label "role-id" ;
-    skos:altLabel "role_id" ;
-    skos:definition "Assigned role identifier" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:select a owl:ObjectProperty ;
-    rdfs:label "select" ;
-    rdfs:range nist_sp_800_171:ParameterSelection ;
-    skos:definition "Selection constraints for an organization-defined parameter" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:short_name a owl:DatatypeProperty ;
-    rdfs:label "short-name" ;
-    skos:altLabel "short_name" ;
-    skos:definition "Short display name" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:state a owl:DatatypeProperty ;
-    rdfs:label "state" ;
-    skos:definition "State or region" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:text a owl:DatatypeProperty ;
-    rdfs:label "text" ;
-    skos:definition "Citation text" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:type a owl:DatatypeProperty ;
-    rdfs:label "type" ;
-    skos:definition "Party type" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:usage a owl:DatatypeProperty ;
-    rdfs:label "usage" ;
-    skos:definition "Human-readable description of an organization-defined parameter's expected value" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:value a owl:DatatypeProperty ;
-    rdfs:label "value" ;
-    skos:definition "Property value" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:version a owl:DatatypeProperty ;
-    rdfs:label "version" ;
-    skos:definition "Version identifier" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:HowManyValue a owl:Class ;
-    rdfs:label "HowManyValue" ;
-    owl:unionOf ( <https://w3id.org/lmodel/nist-sp-800-171/HowManyValue#one> <https://w3id.org/lmodel/nist-sp-800-171/HowManyValue#one-or-more> ) ;
-    skos:definition "Cardinality constraint for parameter selection" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> ;
-    linkml:permissible_values <https://w3id.org/lmodel/nist-sp-800-171/HowManyValue#one>,
-        <https://w3id.org/lmodel/nist-sp-800-171/HowManyValue#one-or-more> .
-
-nist_sp_800_171:links a owl:ObjectProperty ;
-    rdfs:label "links" ;
-    rdfs:range nist_sp_800_171:Link ;
-    skos:definition "List of links and relationships" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:props a owl:ObjectProperty ;
-    rdfs:label "props" ;
-    rdfs:range nist_sp_800_171:Property ;
-    skos:definition "List of properties" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:href a owl:DatatypeProperty ;
-    rdfs:label "href" ;
-    skos:definition "Link or resource reference" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:id a owl:DatatypeProperty ;
-    rdfs:label "id" ;
-    skos:definition "Unique identifier for an element" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:prose a owl:DatatypeProperty ;
-    rdfs:label "prose" ;
-    skos:definition "Free-text prose content" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:_class a owl:DatatypeProperty ;
-    rdfs:label "_class" ;
-    skos:definition "Classification of a catalog element (e.g. family, requirement, security_requirement)" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> ;
-    skos:prefLabel "class" .
-
-nist_sp_800_171:name a owl:DatatypeProperty ;
-    rdfs:label "name" ;
-    skos:definition "Name of a property, part, or party" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
-nist_sp_800_171:uuid a owl:DatatypeProperty ;
-    rdfs:label "uuid" ;
-    skos:definition "UUID for catalog, metadata, or resource element" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
+	rdfs:label "description" ;
+	skos:definition "What the family or requirement is about, in the words of whoever records it. SP 800-171 gives a family no text of its own, and a requirement's own text goes in its statement, items and discussion." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> ;
+	skos:note "It means what LOKF's description means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one description key." .
+nist_sp_800_171:family_number a owl:DatatypeProperty ;
+	rdfs:label "family_number" ;
+	rdfs:range xsd:string ;
+	skos:definition "The family's number, such as 03.01." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> ;
+	skos:note "A slot of its own, listed first in Sp800171Family's slots, rather than an attribute, so that the generated Python dataclasses key a list of families by their number and not by their title: they key an inlined list by the first required slot of the class, and a class lists its slots before its attributes. The adapt copy roots the family on LOKF's Concept, whose id is its identifier, so the number cannot be marked as one." .
+nist_sp_800_171:family_requirements a owl:ObjectProperty ;
+	rdfs:label "family_requirements" ;
+	skos:definition "The security requirements of the family, the withdrawn ones included, in the order SP 800-171 numbers them. A knowledge bundle relates a requirement to its family with isPartOf instead." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:incorporated_into_requirements a owl:DatatypeProperty ;
+	rdfs:label "incorporated_into_requirements" ;
+	skos:definition "For a withdrawn requirement, the requirements of Revision 3 that incorporate what it required, as the catalog states them." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:odp_choices a owl:DatatypeProperty ;
+	rdfs:label "odp_choices" ;
+	skos:definition "For a selection, the choices SP 800-171 offers, in its order. A choice may itself carry an insert placeholder naming another parameter." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:odp_guideline a owl:DatatypeProperty ;
+	rdfs:label "odp_guideline" ;
+	skos:definition "The determination SP 800-171A gives for the parameter: what the organization must have defined, such as the time period for account inactivity before disabling is defined." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:odp_id a owl:DatatypeProperty ;
+	rdfs:label "odp_id" ;
+	skos:definition "The parameter's identifier, such as A.03.01.01.ODP[01]." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:odp_label a owl:DatatypeProperty ;
+	rdfs:label "odp_label" ;
+	skos:definition "What kind of value the parameter takes, such as time period or frequency, or SELECTED PARAMETER VALUES for a selection." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:odp_selection_count a owl:ObjectProperty ;
+	rdfs:label "odp_selection_count" ;
+	skos:definition "How many of the choices a selection takes." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:odp_usage a owl:DatatypeProperty ;
+	rdfs:label "odp_usage" ;
+	skos:definition "How the requirement statement names the parameter, such as organization-defined time period." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:requirement_determination a owl:DatatypeProperty ;
+	rdfs:label "requirement_determination" ;
+	skos:definition "The determination statement: what the assessor determines is the case, such as system accounts are created in accordance with organizational policy, procedures, prerequisites, and criteria." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:requirement_discussion a owl:DatatypeProperty ;
+	rdfs:label "requirement_discussion" ;
+	skos:definition "The requirement's discussion: SP 800-171's explanation of what the requirement means and how it relates to other requirements." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:requirement_families a owl:ObjectProperty ;
+	rdfs:label "requirement_families" ;
+	skos:definition "The requirement families, in the order SP 800-171 gives them." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:requirement_id a owl:DatatypeProperty ;
+	rdfs:label "requirement_id" ;
+	skos:definition "The requirement's identifier, such as 03.01.01." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:requirement_item_id a owl:DatatypeProperty ;
+	rdfs:label "requirement_item_id" ;
+	skos:definition "The item's identifier, such as 03.01.01.a." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:requirement_item_text a owl:DatatypeProperty ;
+	rdfs:label "requirement_item_text" ;
+	skos:definition "What the item requires. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:requirement_items a owl:ObjectProperty ;
+	rdfs:label "requirement_items" ;
+	skos:definition "The lettered items of the requirement statement, in order, each with its numbered items where it has them. A requirement has either these or a statement, never both." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:requirement_method_kind a owl:ObjectProperty ;
+	rdfs:label "requirement_method_kind" ;
+	skos:definition "Which method it is." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:requirement_method_objects a owl:DatatypeProperty ;
+	rdfs:label "requirement_method_objects" ;
+	skos:definition "The assessment objects, one entry each, in the order SP 800-171A lists them, such as access control policy and procedures or system administrators." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:requirement_methods a owl:ObjectProperty ;
+	rdfs:label "requirement_methods" ;
+	skos:definition "The assessment methods SP 800-171A gives the requirement, each with the objects it is applied to." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:requirement_objective_id a owl:DatatypeProperty ;
+	rdfs:label "requirement_objective_id" ;
+	skos:definition "The objective's identifier, such as A.03.01.01.b[01]." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:requirement_objectives a owl:ObjectProperty ;
+	rdfs:label "requirement_objectives" ;
+	skos:definition "The assessment objectives SP 800-171A gives the requirement: the determination statements an assessor checks." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:requirement_parameters a owl:ObjectProperty ;
+	rdfs:label "requirement_parameters" ;
+	skos:definition "The organization-defined parameters the requirement statement leaves to the organization, in the order SP 800-171A numbers them." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:requirement_references a owl:ObjectProperty ;
+	rdfs:label "requirement_references" ;
+	skos:definition "The publications SP 800-171 lists under the requirement's references, each with its citation and address as the catalog gives them." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:requirement_statement a owl:DatatypeProperty ;
+	rdfs:label "requirement_statement" ;
+	skos:definition "The requirement statement when SP 800-171 writes it as one piece of text and not as lettered items. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:requirement_status a owl:ObjectProperty ;
+	rdfs:label "requirement_status" ;
+	skos:definition "Withdrawn when Revision 3 withdrew the requirement. A requirement with no status is in force." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:requirement_subitems a owl:ObjectProperty ;
+	rdfs:label "requirement_subitems" ;
+	skos:definition "The numbered items under a lettered item, in order." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:source_controls a owl:DatatypeProperty ;
+	rdfs:label "source_controls" ;
+	skos:definition "The controls of SP 800-53 Revision 5 the requirement is drawn from, by their identifiers, as the catalog lists them among the requirement's references. The identifier is data; the schema maps nothing to a model of SP 800-53." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+nist_sp_800_171:sp800171_revision a owl:DatatypeProperty ;
+	rdfs:label "sp800171_revision" ;
+	skos:definition "The revision of SP 800-171 the document renders, as NIST numbers it, such as 3." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
 nist_sp_800_171:title a owl:DatatypeProperty ;
-    rdfs:label "title" ;
-    skos:definition "Human-readable title" ;
-    skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
-
+	rdfs:label "title" ;
+	skos:definition "The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management." ;
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> ;
+	skos:note "It means what LOKF's title means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one title key." .
+_:c14n0 xsd:pattern "^03\\.(0[1-9]|1[0-7])$" .
+_:c14n1 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_sp_800_171:title .
+_:c14n10 a owl:Restriction ;
+	owl:allValuesFrom _:c14n62 ;
+	owl:onProperty nist_sp_800_171:cited_publication_url .
+_:c14n100 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_sp_800_171:cited_publication .
+_:c14n101 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:odp_usage .
+_:c14n102 xsd:pattern "^[A-Z]{2}-(0[1-9]|[1-9][0-9])(\\((0[1-9]|[1-9][0-9])\\))?$" .
+_:c14n103 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_sp_800_171:odp_guideline .
+_:c14n104 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:odp_id .
+_:c14n105 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:title .
+_:c14n106 a owl:Restriction ;
+	owl:allValuesFrom nist_sp_800_171:Sp800171RequirementItem ;
+	owl:onProperty nist_sp_800_171:requirement_items .
+_:c14n107 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_sp_800_171:description .
+_:c14n108 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:requirement_id .
+_:c14n109 xsd:pattern "^A\\.03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])(\\.[a-z](\\.(0[1-9]|[1-9][0-9]))?)?(\\[(0[1-9]|[1-9][0-9])\\])?$" .
+_:c14n11 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:title .
+_:c14n110 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:source_controls .
+_:c14n111 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:requirement_statement .
+_:c14n112 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty nist_sp_800_171:requirement_method_objects .
+_:c14n113 a owl:Restriction ;
+	owl:allValuesFrom nist_sp_800_171:Sp800171AssessmentObjective ;
+	owl:onProperty nist_sp_800_171:requirement_objectives .
+_:c14n114 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty nist_sp_800_171:family_number .
+_:c14n115 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_sp_800_171:family_number .
+_:c14n116 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n117 .
+_:c14n117 rdf:first _:c14n118 ;
+	rdf:rest rdf:nil .
+_:c14n118 xsd:pattern "^\\s*\\S" .
+_:c14n119 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n120 .
+_:c14n12 xsd:pattern "^03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])\\.[a-z](\\.(0[1-9]|[1-9][0-9]))?$" .
+_:c14n120 rdf:first _:c14n121 ;
+	rdf:rest rdf:nil .
+_:c14n121 xsd:pattern "^\\s*\\S" .
+_:c14n122 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n123 .
+_:c14n123 rdf:first _:c14n124 ;
+	rdf:rest rdf:nil .
+_:c14n124 xsd:pattern "^\\s*\\S" .
+_:c14n125 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n126 .
+_:c14n126 rdf:first _:c14n127 ;
+	rdf:rest rdf:nil .
+_:c14n127 xsd:pattern "^\\s*\\S" .
+_:c14n128 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n129 .
+_:c14n129 rdf:first _:c14n130 ;
+	rdf:rest rdf:nil .
+_:c14n13 a owl:Restriction ;
+	owl:allValuesFrom nist_sp_800_171:Sp800171RequirementItem ;
+	owl:onProperty nist_sp_800_171:requirement_subitems .
+_:c14n130 xsd:pattern "^\\s*\\S" .
+_:c14n131 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n132 .
+_:c14n132 rdf:first _:c14n50 ;
+	rdf:rest rdf:nil .
+_:c14n133 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n134 .
+_:c14n134 rdf:first _:c14n135 ;
+	rdf:rest rdf:nil .
+_:c14n135 xsd:pattern "^\\s*\\S" .
+_:c14n136 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n137 .
+_:c14n137 rdf:first _:c14n0 ;
+	rdf:rest rdf:nil .
+_:c14n138 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n139 .
+_:c14n139 rdf:first _:c14n109 ;
+	rdf:rest rdf:nil .
+_:c14n14 rdf:first nist_sp_800_171:Sp800171SelectionCount\#one_or_more ;
+	rdf:rest rdf:nil .
+_:c14n140 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n141 .
+_:c14n141 rdf:first _:c14n12 ;
+	rdf:rest rdf:nil .
+_:c14n142 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n143 .
+_:c14n143 rdf:first _:c14n77 ;
+	rdf:rest rdf:nil .
+_:c14n144 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n145 .
+_:c14n145 rdf:first _:c14n70 ;
+	rdf:rest rdf:nil .
+_:c14n146 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n147 .
+_:c14n147 rdf:first _:c14n60 ;
+	rdf:rest rdf:nil .
+_:c14n148 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n149 .
+_:c14n149 rdf:first _:c14n102 ;
+	rdf:rest rdf:nil .
+_:c14n15 a rdfs:Datatype ;
+	owl:onDatatype xsd:string ;
+	owl:withRestrictions _:c14n150 .
+_:c14n150 rdf:first _:c14n2 ;
+	rdf:rest rdf:nil .
+_:c14n16 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty nist_sp_800_171:odp_id .
+_:c14n17 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:requirement_status .
+_:c14n18 a owl:Restriction ;
+	owl:allValuesFrom nist_sp_800_171:Sp800171Parameter ;
+	owl:onProperty nist_sp_800_171:requirement_parameters .
+_:c14n19 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty nist_sp_800_171:requirement_item_id .
+_:c14n2 xsd:pattern "^https://doi\\.org/10\\.[0-9]+/\\S+$" .
+_:c14n20 a owl:Restriction ;
+	owl:allValuesFrom _:c14n133 ;
+	owl:onProperty nist_sp_800_171:requirement_statement .
+_:c14n21 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:requirement_subitems .
+_:c14n22 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_sp_800_171:requirement_id .
+_:c14n23 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:requirement_item_text .
+_:c14n24 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_sp_800_171:odp_usage .
+_:c14n25 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:odp_choices .
+_:c14n26 rdf:first nist_sp_800_171:Sp800171AssessmentMethodKind\#examine ;
+	rdf:rest _:c14n89 .
+_:c14n27 a owl:Restriction ;
+	owl:allValuesFrom nist_sp_800_171:Sp800171Family ;
+	owl:onProperty nist_sp_800_171:requirement_families .
+_:c14n28 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty nist_sp_800_171:sp800171_revision .
+_:c14n29 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:odp_selection_count .
+_:c14n3 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty nist_sp_800_171:odp_label .
+_:c14n30 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:requirement_status .
+_:c14n31 a owl:Restriction ;
+	owl:allValuesFrom _:c14n128 ;
+	owl:onProperty nist_sp_800_171:requirement_determination .
+_:c14n32 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:requirement_method_kind .
+_:c14n33 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_sp_800_171:requirement_item_id .
+_:c14n34 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty nist_sp_800_171:requirement_method_kind .
+_:c14n35 a owl:Restriction ;
+	owl:allValuesFrom _:c14n125 ;
+	owl:onProperty nist_sp_800_171:requirement_discussion .
+_:c14n36 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:cited_publication_url .
+_:c14n37 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:title .
+_:c14n38 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty nist_sp_800_171:cited_publication_url .
+_:c14n39 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:odp_selection_count .
+_:c14n4 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_sp_800_171:title .
+_:c14n40 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_sp_800_171:incorporated_into_requirements .
+_:c14n41 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty nist_sp_800_171:requirement_id .
+_:c14n42 a owl:Restriction ;
+	owl:allValuesFrom nist_sp_800_171:Sp800171Requirement ;
+	owl:onProperty nist_sp_800_171:family_requirements .
+_:c14n43 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:description .
+_:c14n44 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:requirement_determination .
+_:c14n45 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:assessed_requirement_item .
+_:c14n46 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_sp_800_171:cited_publication_citation .
+_:c14n47 rdf:first nist_sp_800_171:Sp800171AssessmentMethodKind\#test ;
+	rdf:rest rdf:nil .
+_:c14n48 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:description .
+_:c14n49 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty nist_sp_800_171:requirement_families .
+_:c14n5 a owl:Restriction ;
+	owl:allValuesFrom _:c14n119 ;
+	owl:onProperty nist_sp_800_171:odp_label .
+_:c14n50 xsd:pattern "^[1-9][0-9]*$" .
+_:c14n51 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:odp_label .
+_:c14n52 a owl:Restriction ;
+	owl:allValuesFrom nist_sp_800_171:Sp800171SelectionCount ;
+	owl:onProperty nist_sp_800_171:odp_selection_count .
+_:c14n53 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:requirement_objective_id .
+_:c14n54 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty nist_sp_800_171:cited_publication .
+_:c14n55 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:requirement_items .
+_:c14n56 a owl:Restriction ;
+	owl:allValuesFrom nist_sp_800_171:Sp800171RequirementStatus ;
+	owl:onProperty nist_sp_800_171:requirement_status .
+_:c14n57 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_sp_800_171:odp_id .
+_:c14n58 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_sp_800_171:addressed_by_requirements .
+_:c14n59 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:addressed_by_requirements .
+_:c14n6 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_sp_800_171:requirement_objective_id .
+_:c14n60 xsd:pattern "^03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])$" .
+_:c14n61 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:requirement_item_id .
+_:c14n62 a rdfs:Datatype ;
+	owl:intersectionOf _:c14n83 .
+_:c14n63 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:cited_publication .
+_:c14n64 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:sp800171_revision .
+_:c14n65 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_sp_800_171:source_controls .
+_:c14n66 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:requirement_references .
+_:c14n67 a owl:Restriction ;
+	owl:allValuesFrom nist_sp_800_171:Sp800171AssessmentMethod ;
+	owl:onProperty nist_sp_800_171:requirement_methods .
+_:c14n68 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:description .
+_:c14n69 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty nist_sp_800_171:requirement_determination .
+_:c14n7 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty nist_sp_800_171:cited_publication_citation .
+_:c14n70 xsd:pattern "^A\\.03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])\\.ODP\\[(0[1-9]|[1-9][0-9])\\]$" .
+_:c14n71 a owl:Restriction ;
+	owl:allValuesFrom nist_sp_800_171:Sp800171AssessmentMethodKind ;
+	owl:onProperty nist_sp_800_171:requirement_method_kind .
+_:c14n72 rdf:first _:c14n15 ;
+	rdf:rest rdf:nil .
+_:c14n73 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:odp_usage .
+_:c14n74 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:requirement_objectives .
+_:c14n75 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:family_requirements .
+_:c14n76 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:incorporated_into_requirements .
+_:c14n77 xsd:pattern "^(FIPS|IR|SP) [1-9][0-9]*(-[0-9A-Z]+)*$" .
+_:c14n78 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty nist_sp_800_171:requirement_objective_id .
+_:c14n79 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_sp_800_171:assessed_requirement_item .
+_:c14n8 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:odp_guideline .
+_:c14n80 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_sp_800_171:description .
+_:c14n81 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:family_number .
+_:c14n82 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:requirement_discussion .
+_:c14n83 rdf:first xsd:anyURI ;
+	rdf:rest _:c14n72 .
+_:c14n84 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:odp_guideline .
+_:c14n85 rdf:first nist_sp_800_171:Sp800171SelectionCount\#one ;
+	rdf:rest _:c14n14 .
+_:c14n86 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:requirement_methods .
+_:c14n87 a owl:Restriction ;
+	owl:allValuesFrom xsd:string ;
+	owl:onProperty nist_sp_800_171:odp_choices .
+_:c14n88 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty nist_sp_800_171:title .
+_:c14n89 rdf:first nist_sp_800_171:Sp800171AssessmentMethodKind\#interview ;
+	rdf:rest _:c14n47 .
+_:c14n9 a owl:Restriction ;
+	owl:allValuesFrom _:c14n122 ;
+	owl:onProperty nist_sp_800_171:requirement_method_objects .
+_:c14n90 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:cited_publication_citation .
+_:c14n91 a owl:Restriction ;
+	owl:allValuesFrom nist_sp_800_171:Sp800171Reference ;
+	owl:onProperty nist_sp_800_171:requirement_references .
+_:c14n92 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:requirement_parameters .
+_:c14n93 a owl:Restriction ;
+	owl:allValuesFrom _:c14n131 ;
+	owl:onProperty nist_sp_800_171:sp800171_revision .
+_:c14n94 a owl:Restriction ;
+	owl:maxCardinality 1 ;
+	owl:onProperty nist_sp_800_171:assessed_requirement_item .
+_:c14n95 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:requirement_statement .
+_:c14n96 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:requirement_discussion .
+_:c14n97 a owl:Restriction ;
+	owl:minCardinality 0 ;
+	owl:onProperty nist_sp_800_171:description .
+_:c14n98 a owl:Restriction ;
+	owl:allValuesFrom _:c14n116 ;
+	owl:onProperty nist_sp_800_171:requirement_item_text .
+_:c14n99 a owl:Restriction ;
+	owl:minCardinality 1 ;
+	owl:onProperty nist_sp_800_171:requirement_item_text .
 

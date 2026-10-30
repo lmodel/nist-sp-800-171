@@ -1,0 +1,7 @@
+# The first objective of requirement 03.01.02, whose statement is one piece
+# of text, so the objective names no statement item. Paraphrased from
+# SP 800-171A.
+requirement_objective_id: "A.03.01.02[01]"
+requirement_determination: >-
+  approved authorizations for logical access to CUI are enforced as the
+  access control policies say.

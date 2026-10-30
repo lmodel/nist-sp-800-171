@@ -1,0 +1,50 @@
+# A publication document cut down to two families, the first with two
+# requirements, one of them withdrawn, and the second with one. The text
+# paraphrases SP 800-171; the identifiers are its own. tests/test_upstream.py
+# derives the whole of Revision 3 from NIST's catalog and validates it as one
+# of these.
+sp800171_revision: "3"
+requirement_families:
+  - family_number: "03.01"
+    title: Access Control
+    family_requirements:
+      - requirement_id: "03.01.08"
+        title: Unsuccessful Logon Attempts
+        requirement_items:
+          - requirement_item_id: "03.01.08.a"
+            requirement_item_text: >-
+              Limit the number of consecutive invalid logon attempts a user may
+              make in a defined time period.
+          - requirement_item_id: "03.01.08.b"
+            requirement_item_text: >-
+              Take a defined action once that limit is exceeded.
+        requirement_discussion: >-
+          Limiting failed attempts slows down password guessing; the limit and
+          the action are the organization's to choose.
+        requirement_parameters:
+          - odp_id: "A.03.01.08.ODP[01]"
+            odp_label: number
+            odp_usage: organization-defined number
+            odp_guideline: >-
+              the number of consecutive invalid logon attempts allowed in a
+              time period is defined.
+        source_controls:
+          - AC-07
+      - requirement_id: "03.01.13"
+        requirement_status: withdrawn
+        addressed_by_requirements:
+          - "03.13.08"
+  - family_number: "03.17"
+    title: Supply Chain Risk Management
+    family_requirements:
+      - requirement_id: "03.17.02"
+        title: Acquisition Strategies, Tools, and Methods
+        requirement_statement: >-
+          Use acquisition strategies, contract tools and procurement methods
+          that find, guard against and reduce supply chain risks.
+        requirement_discussion: >-
+          Buying is one of the main places to protect the supply chain, for
+          example by hiding a component's end use or by asking for
+          tamper-evident packaging.
+        source_controls:
+          - SR-05

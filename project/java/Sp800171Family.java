@@ -1,0 +1,25 @@
+package example;
+
+/* metamodel_version: 1.12.0 */
+/* version: 3.0.0 */
+import java.net.URI;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.ZonedDateTime;
+import java.util.List;
+import lombok.*;
+
+/**
+  One of the seventeen families that SP 800-171 Revision 3 sorts its security requirements into, such as Access Control (03.01) or Supply Chain Risk Management (03.17).
+**/
+@Data
+@EqualsAndHashCode(callSuper=false)
+public class Sp800171Family  {
+
+  private String familyNumber;
+  private String title;
+  private String description;
+  private List<Sp800171Requirement> familyRequirements;
+
+
+}

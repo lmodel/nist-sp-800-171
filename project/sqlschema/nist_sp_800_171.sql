@@ -1,425 +1,196 @@
--- # Class: SP800171Document Description: Root wrapper for SP 800-171 catalog content
+-- # Class: Sp800171Publication Description: One revision of SP 800-171 as a whole: its requirement families, each holding its security requirements, with the assessment procedures of the matching revision of SP 800-171A inside each requirement.
 --     * Slot: id
---     * Slot: catalog_id Description: Root catalog payload
--- # Class: CatalogBody Description: Main catalog object
+--     * Slot: sp800171_revision Description: The revision of SP 800-171 the document renders, as NIST numbers it, such as 3.
+-- # Class: Sp800171Family Description: One of the seventeen families that SP 800-171 Revision 3 sorts its security requirements into, such as Access Control (03.01) or Supply Chain Risk Management (03.17).
 --     * Slot: id
---     * Slot: uuid Description: UUID for catalog, metadata, or resource element
---     * Slot: metadata_id Description: Catalog metadata
---     * Slot: back_matter_id Description: Back-matter references and resources
--- # Class: Metadata Description: OSCAL metadata section
+--     * Slot: family_number Description: The family's number, such as 03.01.
+--     * Slot: title Description: The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management.
+--     * Slot: description Description: What the family or requirement is about, in the words of whoever records it. SP 800-171 gives a family no text of its own, and a requirement's own text goes in its statement, items and discussion.
+--     * Slot: Sp800171Publication_id Description: Autocreated FK slot
+-- # Class: Sp800171Requirement Description: A security requirement of SP 800-171: a numbered, named requirement for protecting CUI, with its statement, discussion, references and source controls, the organization-defined parameters its statement leaves open, and the assessment objectives and methods SP 800-171A gives it. A requirement that Revision 3 withdrew keeps its number and says which requirements took its place.
 --     * Slot: id
---     * Slot: title Description: Human-readable title
---     * Slot: published Description: Publication timestamp
---     * Slot: last_modified Description: Last modification timestamp
---     * Slot: version Description: Version identifier
---     * Slot: oscal_version Description: OSCAL version identifier
--- # Class: Role Description: Role definition
---     * Slot: uid
---     * Slot: id Description: Unique identifier for an element
---     * Slot: title Description: Human-readable title
---     * Slot: Metadata_id Description: Autocreated FK slot
--- # Class: Party Description: Party definition
+--     * Slot: title Description: The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management.
+--     * Slot: description Description: What the family or requirement is about, in the words of whoever records it. SP 800-171 gives a family no text of its own, and a requirement's own text goes in its statement, items and discussion.
+--     * Slot: requirement_id Description: The requirement's identifier, such as 03.01.01.
+--     * Slot: requirement_status Description: Withdrawn when Revision 3 withdrew the requirement. A requirement with no status is in force.
+--     * Slot: requirement_statement Description: The requirement statement when SP 800-171 writes it as one piece of text and not as lettered items. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter.
+--     * Slot: requirement_discussion Description: The requirement's discussion: SP 800-171's explanation of what the requirement means and how it relates to other requirements.
+--     * Slot: Sp800171Family_id Description: Autocreated FK slot
+-- # Class: Sp800171RequirementItem Description: One item of a requirement statement: a lettered item such as 03.01.01.a, or a numbered item under a lettered one such as 03.01.01.c.01.
 --     * Slot: id
---     * Slot: uuid Description: UUID for catalog, metadata, or resource element
---     * Slot: type Description: Party type
---     * Slot: name Description: Name of a property, part, or party
---     * Slot: short_name Description: Short display name
---     * Slot: Metadata_id Description: Autocreated FK slot
--- # Class: Address Description: Postal address
+--     * Slot: requirement_item_id Description: The item's identifier, such as 03.01.01.a.
+--     * Slot: requirement_item_text Description: What the item requires. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter.
+--     * Slot: Sp800171Requirement_id Description: Autocreated FK slot
+--     * Slot: Sp800171RequirementItem_id Description: Autocreated FK slot
+-- # Class: Sp800171Parameter Description: An organization-defined parameter (ODP): a value, such as a time period or a frequency, that a requirement statement leaves to the organization, with the guideline SP 800-171A gives for defining it. A few parameters are a selection among choices instead of a value.
 --     * Slot: id
---     * Slot: city Description: City name
---     * Slot: state Description: State or region
---     * Slot: postal_code Description: Postal code
---     * Slot: Party_id Description: Autocreated FK slot
--- # Class: ResponsibleParty Description: Assignment of parties to a role
+--     * Slot: odp_id Description: The parameter's identifier, such as A.03.01.01.ODP[01].
+--     * Slot: odp_label Description: What kind of value the parameter takes, such as time period or frequency, or SELECTED PARAMETER VALUES for a selection.
+--     * Slot: odp_usage Description: How the requirement statement names the parameter, such as organization-defined time period.
+--     * Slot: odp_guideline Description: The determination SP 800-171A gives for the parameter: what the organization must have defined, such as the time period for account inactivity before disabling is defined.
+--     * Slot: odp_selection_count Description: How many of the choices a selection takes.
+--     * Slot: Sp800171Requirement_id Description: Autocreated FK slot
+-- # Class: Sp800171AssessmentObjective Description: An assessment objective of SP 800-171A: one determination statement that an assessor checks, tied to the requirement or to one item of its statement.
 --     * Slot: id
---     * Slot: role_id Description: Assigned role identifier
---     * Slot: Metadata_id Description: Autocreated FK slot
--- # Class: BackMatter Description: OSCAL back-matter section
+--     * Slot: requirement_objective_id Description: The objective's identifier, such as A.03.01.01.b[01].
+--     * Slot: requirement_determination Description: The determination statement: what the assessor determines is the case, such as system accounts are created in accordance with organizational policy, procedures, prerequisites, and criteria.
+--     * Slot: assessed_requirement_item Description: The statement item the objective assesses, such as 03.01.01.b. Absent when the objective assesses a requirement whose statement is one piece of text.
+--     * Slot: Sp800171Requirement_id Description: Autocreated FK slot
+-- # Class: Sp800171AssessmentMethod Description: One of the three assessment methods SP 800-171A applies to a requirement, examine, interview or test, with the assessment objects (documents, people, processes or mechanisms) it is applied to.
 --     * Slot: id
--- # Class: Resource Description: Referenced resource
+--     * Slot: requirement_method_kind Description: Which method it is.
+--     * Slot: Sp800171Requirement_id Description: Autocreated FK slot
+-- # Class: Sp800171Reference Description: A publication that SP 800-171 lists under a requirement's references, by the short name the publication gives it, with the full citation and the address NIST's catalog gives it.
 --     * Slot: id
---     * Slot: uuid Description: UUID for catalog, metadata, or resource element
---     * Slot: title Description: Human-readable title
---     * Slot: description Description: Resource description
---     * Slot: BackMatter_id Description: Autocreated FK slot
---     * Slot: citation_id Description: Citation details for a resource
--- # Class: Citation Description: Citation wrapper
---     * Slot: id
---     * Slot: text Description: Citation text
--- # Class: ResourceLink Description: Reference link for a resource
---     * Slot: id
---     * Slot: href Description: Link or resource reference
---     * Slot: media_type Description: Media type for a resource link
---     * Slot: Resource_id Description: Autocreated FK slot
--- # Abstract Class: CatalogElement Description: Base class for catalog elements with id, props, links, and parts
---     * Slot: uid
---     * Slot: id Description: Unique identifier for an element
--- # Class: IdentifiedElement Description: A catalog element with required id, title, and optional class/label
---     * Slot: uid
---     * Slot: title Description: Human-readable title
---     * Slot: class Description: Classification of a catalog element (e.g. family, requirement, security_requirement)
---     * Slot: label Description: Human-readable label
---     * Slot: id Description: Unique identifier for an element
--- # Class: ControlGroup Description: A family group of security requirements
---     * Slot: uid
---     * Slot: title Description: Human-readable title
---     * Slot: class Description: Classification of a catalog element (e.g. family, requirement, security_requirement)
---     * Slot: label Description: Human-readable label
---     * Slot: id Description: Unique identifier for an element
---     * Slot: CatalogBody_id Description: Autocreated FK slot
--- # Class: Control Description: A security requirement
---     * Slot: uid
---     * Slot: title Description: Human-readable title
---     * Slot: class Description: Classification of a catalog element (e.g. family, requirement, security_requirement)
---     * Slot: label Description: Human-readable label
---     * Slot: id Description: Unique identifier for an element
---     * Slot: ControlGroup_uid Description: Autocreated FK slot
--- # Class: Parameter Description: An organization-defined parameter for a security requirement
---     * Slot: uid
---     * Slot: usage Description: Human-readable description of an organization-defined parameter's expected value
---     * Slot: title Description: Human-readable title
---     * Slot: class Description: Classification of a catalog element (e.g. family, requirement, security_requirement)
---     * Slot: label Description: Human-readable label
---     * Slot: id Description: Unique identifier for an element
---     * Slot: Control_uid Description: Autocreated FK slot
---     * Slot: select_id Description: Selection constraints for an organization-defined parameter
--- # Class: ParameterSelection Description: Selection constraints specifying allowed values for a parameter
---     * Slot: id
---     * Slot: how_many Description: Cardinality constraint for parameter selection choices
--- # Class: Guideline Description: Additional prose guidance associated with a parameter
---     * Slot: id
---     * Slot: prose Description: Free-text prose content
---     * Slot: Parameter_uid Description: Autocreated FK slot
--- # Class: Property Description: A name-value property with optional namespace
---     * Slot: id
---     * Slot: name Description: Name of a property, part, or party
---     * Slot: value Description: Property value
---     * Slot: ns Description: Namespace URI for a property
---     * Slot: class Description: Classification of a catalog element (e.g. family, requirement, security_requirement)
---     * Slot: Metadata_id Description: Autocreated FK slot
---     * Slot: CatalogElement_uid Description: Autocreated FK slot
---     * Slot: IdentifiedElement_uid Description: Autocreated FK slot
---     * Slot: ControlGroup_uid Description: Autocreated FK slot
---     * Slot: Control_uid Description: Autocreated FK slot
---     * Slot: Parameter_uid Description: Autocreated FK slot
---     * Slot: Part_uid Description: Autocreated FK slot
--- # Class: Link Description: Relationship link
---     * Slot: id
---     * Slot: href Description: Link or resource reference
---     * Slot: rel Description: Relationship type for a link
---     * Slot: Metadata_id Description: Autocreated FK slot
---     * Slot: CatalogElement_uid Description: Autocreated FK slot
---     * Slot: IdentifiedElement_uid Description: Autocreated FK slot
---     * Slot: ControlGroup_uid Description: Autocreated FK slot
---     * Slot: Control_uid Description: Autocreated FK slot
---     * Slot: Parameter_uid Description: Autocreated FK slot
---     * Slot: Part_uid Description: Autocreated FK slot
--- # Class: Part Description: Structured narrative part containing prose and optional nested parts. Used for statements, guidance, assessment-objectives, and assessment-methods.
---     * Slot: uid
---     * Slot: name Description: Name of a property, part, or party
---     * Slot: class Description: Classification of a catalog element (e.g. family, requirement, security_requirement)
---     * Slot: prose Description: Free-text prose content
---     * Slot: id Description: Unique identifier for an element
---     * Slot: CatalogElement_uid Description: Autocreated FK slot
---     * Slot: IdentifiedElement_uid Description: Autocreated FK slot
---     * Slot: ControlGroup_uid Description: Autocreated FK slot
---     * Slot: Control_uid Description: Autocreated FK slot
---     * Slot: Parameter_uid Description: Autocreated FK slot
---     * Slot: Part_uid Description: Autocreated FK slot
--- # Class: Party_email_addresses
---     * Slot: Party_id Description: Autocreated FK slot
---     * Slot: email_addresses Description: Party email addresses
--- # Class: Address_addr_lines
---     * Slot: Address_id Description: Autocreated FK slot
---     * Slot: addr_lines Description: Address lines
--- # Class: ResponsibleParty_party_uuids
---     * Slot: ResponsibleParty_id Description: Autocreated FK slot
---     * Slot: party_uuids Description: Referenced party UUIDs
--- # Class: ParameterSelection_choice
---     * Slot: ParameterSelection_id Description: Autocreated FK slot
---     * Slot: choice Description: List of allowed values for a parameter selection
+--     * Slot: cited_publication Description: The publication's short name, such as SP 800-63-3.
+--     * Slot: cited_publication_citation Description: The full citation, as the catalog's back matter gives it.
+--     * Slot: cited_publication_url Description: The publication's address, which the catalog gives as its digital object identifier at doi.org.
+--     * Slot: Sp800171Requirement_id Description: Autocreated FK slot
+-- # Class: Sp800171Requirement_incorporated_into_requirements
+--     * Slot: Sp800171Requirement_id Description: Autocreated FK slot
+--     * Slot: incorporated_into_requirements Description: For a withdrawn requirement, the requirements of Revision 3 that incorporate what it required, as the catalog states them.
+-- # Class: Sp800171Requirement_addressed_by_requirements
+--     * Slot: Sp800171Requirement_id Description: Autocreated FK slot
+--     * Slot: addressed_by_requirements Description: For a withdrawn requirement, the requirements of Revision 3 that address what it required, as the catalog states them.
+-- # Class: Sp800171Requirement_source_controls
+--     * Slot: Sp800171Requirement_id Description: Autocreated FK slot
+--     * Slot: source_controls Description: The controls of SP 800-53 Revision 5 the requirement is drawn from, by their identifiers, as the catalog lists them among the requirement's references. The identifier is data; the schema maps nothing to a model of SP 800-53.
+-- # Class: Sp800171Parameter_odp_choices
+--     * Slot: Sp800171Parameter_id Description: Autocreated FK slot
+--     * Slot: odp_choices Description: For a selection, the choices SP 800-171 offers, in its order. A choice may itself carry an insert placeholder naming another parameter.
+-- # Class: Sp800171AssessmentMethod_requirement_method_objects
+--     * Slot: Sp800171AssessmentMethod_id Description: Autocreated FK slot
+--     * Slot: requirement_method_objects Description: The assessment objects, one entry each, in the order SP 800-171A lists them, such as access control policy and procedures or system administrators.
 
-CREATE TABLE "Metadata" (
+CREATE TABLE "Sp800171Publication" (
 	id INTEGER NOT NULL,
-	title TEXT,
-	published TEXT,
-	last_modified TEXT,
-	version TEXT,
-	oscal_version TEXT,
+	sp800171_revision TEXT NOT NULL,
 	PRIMARY KEY (id)
 );
-CREATE INDEX "ix_Metadata_id" ON "Metadata" (id);
+CREATE INDEX "ix_Sp800171Publication_id" ON "Sp800171Publication" (id);
 
-CREATE TABLE "BackMatter" (
+CREATE TABLE "Sp800171Family" (
 	id INTEGER NOT NULL,
-	PRIMARY KEY (id)
-);
-CREATE INDEX "ix_BackMatter_id" ON "BackMatter" (id);
-
-CREATE TABLE "Citation" (
-	id INTEGER NOT NULL,
-	text TEXT,
-	PRIMARY KEY (id)
-);
-CREATE INDEX "ix_Citation_id" ON "Citation" (id);
-
-CREATE TABLE "CatalogElement" (
-	uid INTEGER NOT NULL,
-	id TEXT,
-	PRIMARY KEY (uid)
-);
-CREATE INDEX "ix_CatalogElement_uid" ON "CatalogElement" (uid);
-
-CREATE TABLE "IdentifiedElement" (
-	uid INTEGER NOT NULL,
-	title TEXT,
-	class VARCHAR(11),
-	label TEXT,
-	id TEXT,
-	PRIMARY KEY (uid)
-);
-CREATE INDEX "ix_IdentifiedElement_uid" ON "IdentifiedElement" (uid);
-
-CREATE TABLE "ParameterSelection" (
-	id INTEGER NOT NULL,
-	how_many VARCHAR(11),
-	PRIMARY KEY (id)
-);
-CREATE INDEX "ix_ParameterSelection_id" ON "ParameterSelection" (id);
-
-CREATE TABLE "CatalogBody" (
-	id INTEGER NOT NULL,
-	uuid TEXT,
-	metadata_id INTEGER,
-	back_matter_id INTEGER,
+	family_number TEXT NOT NULL,
+	title TEXT NOT NULL,
+	description TEXT,
+	"Sp800171Publication_id" INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY(metadata_id) REFERENCES "Metadata" (id),
-	FOREIGN KEY(back_matter_id) REFERENCES "BackMatter" (id)
+	FOREIGN KEY("Sp800171Publication_id") REFERENCES "Sp800171Publication" (id)
 );
-CREATE INDEX "ix_CatalogBody_id" ON "CatalogBody" (id);
+CREATE INDEX "ix_Sp800171Family_id" ON "Sp800171Family" (id);
 
-CREATE TABLE "Role" (
-	uid INTEGER NOT NULL,
-	id TEXT,
-	title TEXT,
-	"Metadata_id" INTEGER,
-	PRIMARY KEY (uid),
-	FOREIGN KEY("Metadata_id") REFERENCES "Metadata" (id)
-);
-CREATE INDEX "ix_Role_uid" ON "Role" (uid);
-
-CREATE TABLE "Party" (
+CREATE TABLE "Sp800171Requirement" (
 	id INTEGER NOT NULL,
-	uuid TEXT,
-	type TEXT,
-	name TEXT,
-	short_name TEXT,
-	"Metadata_id" INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY("Metadata_id") REFERENCES "Metadata" (id)
-);
-CREATE INDEX "ix_Party_id" ON "Party" (id);
-
-CREATE TABLE "ResponsibleParty" (
-	id INTEGER NOT NULL,
-	role_id TEXT,
-	"Metadata_id" INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY("Metadata_id") REFERENCES "Metadata" (id)
-);
-CREATE INDEX "ix_ResponsibleParty_id" ON "ResponsibleParty" (id);
-
-CREATE TABLE "Resource" (
-	id INTEGER NOT NULL,
-	uuid TEXT,
 	title TEXT,
 	description TEXT,
-	"BackMatter_id" INTEGER,
-	citation_id INTEGER,
+	requirement_id TEXT NOT NULL,
+	requirement_status VARCHAR(9),
+	requirement_statement TEXT,
+	requirement_discussion TEXT,
+	"Sp800171Family_id" INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY("BackMatter_id") REFERENCES "BackMatter" (id),
-	FOREIGN KEY(citation_id) REFERENCES "Citation" (id)
+	FOREIGN KEY("Sp800171Family_id") REFERENCES "Sp800171Family" (id)
 );
-CREATE INDEX "ix_Resource_id" ON "Resource" (id);
+CREATE INDEX "ix_Sp800171Requirement_id" ON "Sp800171Requirement" (id);
 
-CREATE TABLE "ParameterSelection_choice" (
-	"ParameterSelection_id" INTEGER,
-	choice TEXT,
-	PRIMARY KEY ("ParameterSelection_id", choice),
-	FOREIGN KEY("ParameterSelection_id") REFERENCES "ParameterSelection" (id)
-);
-CREATE INDEX "ix_ParameterSelection_choice_ParameterSelection_id" ON "ParameterSelection_choice" ("ParameterSelection_id");
-CREATE INDEX "ix_ParameterSelection_choice_choice" ON "ParameterSelection_choice" (choice);
-
-CREATE TABLE "SP800171Document" (
+CREATE TABLE "Sp800171RequirementItem" (
 	id INTEGER NOT NULL,
-	catalog_id INTEGER,
+	requirement_item_id TEXT NOT NULL,
+	requirement_item_text TEXT NOT NULL,
+	"Sp800171Requirement_id" INTEGER,
+	"Sp800171RequirementItem_id" INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY(catalog_id) REFERENCES "CatalogBody" (id)
+	FOREIGN KEY("Sp800171Requirement_id") REFERENCES "Sp800171Requirement" (id),
+	FOREIGN KEY("Sp800171RequirementItem_id") REFERENCES "Sp800171RequirementItem" (id)
 );
-CREATE INDEX "ix_SP800171Document_id" ON "SP800171Document" (id);
+CREATE INDEX "ix_Sp800171RequirementItem_id" ON "Sp800171RequirementItem" (id);
 
-CREATE TABLE "Address" (
+CREATE TABLE "Sp800171Parameter" (
 	id INTEGER NOT NULL,
-	city TEXT,
-	state TEXT,
-	postal_code TEXT,
-	"Party_id" INTEGER,
+	odp_id TEXT NOT NULL,
+	odp_label TEXT NOT NULL,
+	odp_usage TEXT,
+	odp_guideline TEXT,
+	odp_selection_count VARCHAR(11),
+	"Sp800171Requirement_id" INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY("Party_id") REFERENCES "Party" (id)
+	FOREIGN KEY("Sp800171Requirement_id") REFERENCES "Sp800171Requirement" (id)
 );
-CREATE INDEX "ix_Address_id" ON "Address" (id);
+CREATE INDEX "ix_Sp800171Parameter_id" ON "Sp800171Parameter" (id);
 
-CREATE TABLE "ResourceLink" (
+CREATE TABLE "Sp800171AssessmentObjective" (
 	id INTEGER NOT NULL,
-	href TEXT,
-	media_type TEXT,
-	"Resource_id" INTEGER,
+	requirement_objective_id TEXT NOT NULL,
+	requirement_determination TEXT NOT NULL,
+	assessed_requirement_item TEXT,
+	"Sp800171Requirement_id" INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY("Resource_id") REFERENCES "Resource" (id)
+	FOREIGN KEY("Sp800171Requirement_id") REFERENCES "Sp800171Requirement" (id)
 );
-CREATE INDEX "ix_ResourceLink_id" ON "ResourceLink" (id);
+CREATE INDEX "ix_Sp800171AssessmentObjective_id" ON "Sp800171AssessmentObjective" (id);
 
-CREATE TABLE "ControlGroup" (
-	uid INTEGER NOT NULL,
-	title TEXT,
-	class VARCHAR(11),
-	label TEXT,
-	id TEXT,
-	"CatalogBody_id" INTEGER,
-	PRIMARY KEY (uid),
-	FOREIGN KEY("CatalogBody_id") REFERENCES "CatalogBody" (id)
-);
-CREATE INDEX "ix_ControlGroup_uid" ON "ControlGroup" (uid);
-
-CREATE TABLE "Party_email_addresses" (
-	"Party_id" INTEGER,
-	email_addresses TEXT,
-	PRIMARY KEY ("Party_id", email_addresses),
-	FOREIGN KEY("Party_id") REFERENCES "Party" (id)
-);
-CREATE INDEX "ix_Party_email_addresses_email_addresses" ON "Party_email_addresses" (email_addresses);
-CREATE INDEX "ix_Party_email_addresses_Party_id" ON "Party_email_addresses" ("Party_id");
-
-CREATE TABLE "ResponsibleParty_party_uuids" (
-	"ResponsibleParty_id" INTEGER,
-	party_uuids TEXT,
-	PRIMARY KEY ("ResponsibleParty_id", party_uuids),
-	FOREIGN KEY("ResponsibleParty_id") REFERENCES "ResponsibleParty" (id)
-);
-CREATE INDEX "ix_ResponsibleParty_party_uuids_ResponsibleParty_id" ON "ResponsibleParty_party_uuids" ("ResponsibleParty_id");
-CREATE INDEX "ix_ResponsibleParty_party_uuids_party_uuids" ON "ResponsibleParty_party_uuids" (party_uuids);
-
-CREATE TABLE "Control" (
-	uid INTEGER NOT NULL,
-	title TEXT,
-	class VARCHAR(11),
-	label TEXT,
-	id TEXT,
-	"ControlGroup_uid" INTEGER,
-	PRIMARY KEY (uid),
-	FOREIGN KEY("ControlGroup_uid") REFERENCES "ControlGroup" (uid)
-);
-CREATE INDEX "ix_Control_uid" ON "Control" (uid);
-
-CREATE TABLE "Address_addr_lines" (
-	"Address_id" INTEGER,
-	addr_lines TEXT,
-	PRIMARY KEY ("Address_id", addr_lines),
-	FOREIGN KEY("Address_id") REFERENCES "Address" (id)
-);
-CREATE INDEX "ix_Address_addr_lines_Address_id" ON "Address_addr_lines" ("Address_id");
-CREATE INDEX "ix_Address_addr_lines_addr_lines" ON "Address_addr_lines" (addr_lines);
-
-CREATE TABLE "Parameter" (
-	uid INTEGER NOT NULL,
-	usage TEXT,
-	title TEXT,
-	class VARCHAR(11),
-	label TEXT,
-	id TEXT,
-	"Control_uid" INTEGER,
-	select_id INTEGER,
-	PRIMARY KEY (uid),
-	FOREIGN KEY("Control_uid") REFERENCES "Control" (uid),
-	FOREIGN KEY(select_id) REFERENCES "ParameterSelection" (id)
-);
-CREATE INDEX "ix_Parameter_uid" ON "Parameter" (uid);
-
-CREATE TABLE "Guideline" (
+CREATE TABLE "Sp800171AssessmentMethod" (
 	id INTEGER NOT NULL,
-	prose TEXT,
-	"Parameter_uid" INTEGER,
+	requirement_method_kind VARCHAR(9) NOT NULL,
+	"Sp800171Requirement_id" INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY("Parameter_uid") REFERENCES "Parameter" (uid)
+	FOREIGN KEY("Sp800171Requirement_id") REFERENCES "Sp800171Requirement" (id)
 );
-CREATE INDEX "ix_Guideline_id" ON "Guideline" (id);
+CREATE INDEX "ix_Sp800171AssessmentMethod_id" ON "Sp800171AssessmentMethod" (id);
 
-CREATE TABLE "Part" (
-	uid INTEGER NOT NULL,
-	name TEXT,
-	class VARCHAR(20),
-	prose TEXT,
-	id TEXT,
-	"CatalogElement_uid" INTEGER,
-	"IdentifiedElement_uid" INTEGER,
-	"ControlGroup_uid" INTEGER,
-	"Control_uid" INTEGER,
-	"Parameter_uid" INTEGER,
-	"Part_uid" INTEGER,
-	PRIMARY KEY (uid),
-	FOREIGN KEY("CatalogElement_uid") REFERENCES "CatalogElement" (uid),
-	FOREIGN KEY("IdentifiedElement_uid") REFERENCES "IdentifiedElement" (uid),
-	FOREIGN KEY("ControlGroup_uid") REFERENCES "ControlGroup" (uid),
-	FOREIGN KEY("Control_uid") REFERENCES "Control" (uid),
-	FOREIGN KEY("Parameter_uid") REFERENCES "Parameter" (uid),
-	FOREIGN KEY("Part_uid") REFERENCES "Part" (uid)
-);
-CREATE INDEX "ix_Part_uid" ON "Part" (uid);
-
-CREATE TABLE "Property" (
+CREATE TABLE "Sp800171Reference" (
 	id INTEGER NOT NULL,
-	name TEXT,
-	value TEXT,
-	ns TEXT,
-	class TEXT,
-	"Metadata_id" INTEGER,
-	"CatalogElement_uid" INTEGER,
-	"IdentifiedElement_uid" INTEGER,
-	"ControlGroup_uid" INTEGER,
-	"Control_uid" INTEGER,
-	"Parameter_uid" INTEGER,
-	"Part_uid" INTEGER,
+	cited_publication TEXT NOT NULL,
+	cited_publication_citation TEXT NOT NULL,
+	cited_publication_url TEXT NOT NULL,
+	"Sp800171Requirement_id" INTEGER,
 	PRIMARY KEY (id),
-	FOREIGN KEY("Metadata_id") REFERENCES "Metadata" (id),
-	FOREIGN KEY("CatalogElement_uid") REFERENCES "CatalogElement" (uid),
-	FOREIGN KEY("IdentifiedElement_uid") REFERENCES "IdentifiedElement" (uid),
-	FOREIGN KEY("ControlGroup_uid") REFERENCES "ControlGroup" (uid),
-	FOREIGN KEY("Control_uid") REFERENCES "Control" (uid),
-	FOREIGN KEY("Parameter_uid") REFERENCES "Parameter" (uid),
-	FOREIGN KEY("Part_uid") REFERENCES "Part" (uid)
+	FOREIGN KEY("Sp800171Requirement_id") REFERENCES "Sp800171Requirement" (id)
 );
-CREATE INDEX "ix_Property_id" ON "Property" (id);
+CREATE INDEX "ix_Sp800171Reference_id" ON "Sp800171Reference" (id);
 
-CREATE TABLE "Link" (
-	id INTEGER NOT NULL,
-	href TEXT,
-	rel TEXT,
-	"Metadata_id" INTEGER,
-	"CatalogElement_uid" INTEGER,
-	"IdentifiedElement_uid" INTEGER,
-	"ControlGroup_uid" INTEGER,
-	"Control_uid" INTEGER,
-	"Parameter_uid" INTEGER,
-	"Part_uid" INTEGER,
-	PRIMARY KEY (id),
-	FOREIGN KEY("Metadata_id") REFERENCES "Metadata" (id),
-	FOREIGN KEY("CatalogElement_uid") REFERENCES "CatalogElement" (uid),
-	FOREIGN KEY("IdentifiedElement_uid") REFERENCES "IdentifiedElement" (uid),
-	FOREIGN KEY("ControlGroup_uid") REFERENCES "ControlGroup" (uid),
-	FOREIGN KEY("Control_uid") REFERENCES "Control" (uid),
-	FOREIGN KEY("Parameter_uid") REFERENCES "Parameter" (uid),
-	FOREIGN KEY("Part_uid") REFERENCES "Part" (uid)
+CREATE TABLE "Sp800171Requirement_incorporated_into_requirements" (
+	"Sp800171Requirement_id" INTEGER,
+	incorporated_into_requirements TEXT,
+	PRIMARY KEY ("Sp800171Requirement_id", incorporated_into_requirements),
+	FOREIGN KEY("Sp800171Requirement_id") REFERENCES "Sp800171Requirement" (id)
 );
-CREATE INDEX "ix_Link_id" ON "Link" (id);
+CREATE INDEX "ix_Sp800171Requirement_incorporated_into_requirements_Sp800171Requirement_id" ON "Sp800171Requirement_incorporated_into_requirements" ("Sp800171Requirement_id");
+CREATE INDEX "ix_Sp800171Requirement_incorporated_into_requirements_incorporated_into_requirements" ON "Sp800171Requirement_incorporated_into_requirements" (incorporated_into_requirements);
+
+CREATE TABLE "Sp800171Requirement_addressed_by_requirements" (
+	"Sp800171Requirement_id" INTEGER,
+	addressed_by_requirements TEXT,
+	PRIMARY KEY ("Sp800171Requirement_id", addressed_by_requirements),
+	FOREIGN KEY("Sp800171Requirement_id") REFERENCES "Sp800171Requirement" (id)
+);
+CREATE INDEX "ix_Sp800171Requirement_addressed_by_requirements_addressed_by_requirements" ON "Sp800171Requirement_addressed_by_requirements" (addressed_by_requirements);
+CREATE INDEX "ix_Sp800171Requirement_addressed_by_requirements_Sp800171Requirement_id" ON "Sp800171Requirement_addressed_by_requirements" ("Sp800171Requirement_id");
+
+CREATE TABLE "Sp800171Requirement_source_controls" (
+	"Sp800171Requirement_id" INTEGER,
+	source_controls TEXT,
+	PRIMARY KEY ("Sp800171Requirement_id", source_controls),
+	FOREIGN KEY("Sp800171Requirement_id") REFERENCES "Sp800171Requirement" (id)
+);
+CREATE INDEX "ix_Sp800171Requirement_source_controls_source_controls" ON "Sp800171Requirement_source_controls" (source_controls);
+CREATE INDEX "ix_Sp800171Requirement_source_controls_Sp800171Requirement_id" ON "Sp800171Requirement_source_controls" ("Sp800171Requirement_id");
+
+CREATE TABLE "Sp800171Parameter_odp_choices" (
+	"Sp800171Parameter_id" INTEGER,
+	odp_choices TEXT,
+	PRIMARY KEY ("Sp800171Parameter_id", odp_choices),
+	FOREIGN KEY("Sp800171Parameter_id") REFERENCES "Sp800171Parameter" (id)
+);
+CREATE INDEX "ix_Sp800171Parameter_odp_choices_Sp800171Parameter_id" ON "Sp800171Parameter_odp_choices" ("Sp800171Parameter_id");
+CREATE INDEX "ix_Sp800171Parameter_odp_choices_odp_choices" ON "Sp800171Parameter_odp_choices" (odp_choices);
+
+CREATE TABLE "Sp800171AssessmentMethod_requirement_method_objects" (
+	"Sp800171AssessmentMethod_id" INTEGER,
+	requirement_method_objects TEXT NOT NULL,
+	PRIMARY KEY ("Sp800171AssessmentMethod_id", requirement_method_objects),
+	FOREIGN KEY("Sp800171AssessmentMethod_id") REFERENCES "Sp800171AssessmentMethod" (id)
+);
+CREATE INDEX "ix_Sp800171AssessmentMethod_requirement_method_objects_Sp800171AssessmentMethod_id" ON "Sp800171AssessmentMethod_requirement_method_objects" ("Sp800171AssessmentMethod_id");
+CREATE INDEX "ix_Sp800171AssessmentMethod_requirement_method_objects_requirement_method_objects" ON "Sp800171AssessmentMethod_requirement_method_objects" (requirement_method_objects);

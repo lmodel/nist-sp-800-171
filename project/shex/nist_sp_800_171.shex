@@ -1,10 +1,25 @@
-# metamodel_version: 1.7.0
+# metamodel_version: 1.12.0
 # version: 3.0.0
 BASE <https://w3id.org/lmodel/nist-sp-800-171/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
 PREFIX linkml: <https://w3id.org/linkml/>
+PREFIX schema1: <http://schema.org/>
 
+
+<Sp800171FamilyIdentifier> xsd:string
+
+<Sp800171RequirementIdentifier> xsd:string
+
+<Sp800171ItemIdentifier> xsd:string
+
+<Sp800171OdpIdentifier> xsd:string
+
+<Sp800171ObjectiveIdentifier> xsd:string
+
+<Sp800171SourceControlIdentifier> xsd:string
+
+<Sp800171CitedPublicationName> xsd:string
 
 linkml:String xsd:string
 
@@ -44,204 +59,91 @@ linkml:Jsonpath xsd:string
 
 linkml:Sparqlpath xsd:string
 
-<Address> CLOSED {
-    (  $<Address_tes> (  <addr_lines> @linkml:String * ;
-          <city> @linkml:String ? ;
-          <state> @linkml:String ? ;
-          <postal_code> @linkml:String ?
+<Sp800171AssessmentMethod> CLOSED {
+    (  $<Sp800171AssessmentMethod_tes> (  <requirement_method_kind> [
+             <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethodKind#examine>
+             <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethodKind#interview>
+             <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethodKind#test> ] ;
+          <requirement_method_objects> @linkml:String +
        ) ;
-       rdf:type [ linkml:Any ] ?
+       rdf:type [ <AssessmentMethod> ] ?
     )
 }
 
-<BackMatter> CLOSED {
-    (  $<BackMatter_tes> <resources> @<Resource> * ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<CatalogBody> CLOSED {
-    (  $<CatalogBody_tes> (  <uuid> @linkml:String ? ;
-          <metadata> @<Metadata> ? ;
-          <groups> @<ControlGroup> * ;
-          <back_matter> @<BackMatter> ?
+<Sp800171AssessmentObjective> CLOSED {
+    (  $<Sp800171AssessmentObjective_tes> (  <requirement_objective_id> @<Sp800171ObjectiveIdentifier> ;
+          <requirement_determination> @linkml:String ;
+          <assessed_requirement_item> @<Sp800171ItemIdentifier> ?
        ) ;
-       rdf:type [ linkml:Any ] ?
+       rdf:type [ <AssessmentObjective> ] ?
     )
 }
 
-<CatalogElement>  (
-    @<IdentifiedElement> OR @<Part>
-)
-
-<CatalogElement_struct> {
-    (  $<CatalogElement_tes> (  <id> @linkml:String ? ;
-          <props> @<Property> * ;
-          <links> @<Link> * ;
-          <parts> @<Part> *
+<Sp800171Family> CLOSED {
+    (  $<Sp800171Family_tes> (  <family_number> @<Sp800171FamilyIdentifier> ;
+          schema1:name @linkml:String ;
+          schema1:description @linkml:String ? ;
+          <family_requirements> @<Sp800171Requirement> *
        ) ;
-       rdf:type [ <CatalogElement> ] ?
+       rdf:type [ <Family> ] ?
     )
 }
 
-<Citation> CLOSED {
-    (  $<Citation_tes> <text> @linkml:String ? ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<Control> CLOSED {
-    (  $<Control_tes> (  &<IdentifiedElement_tes> ;
-          rdf:type [ <IdentifiedElement> ] ? ;
-          <params> @<Parameter> *
-       ) ;
-       rdf:type [ <Control> ] ?
-    )
-}
-
-<ControlGroup> CLOSED {
-    (  $<ControlGroup_tes> (  &<IdentifiedElement_tes> ;
-          rdf:type [ <IdentifiedElement> ] ? ;
-          <controls> @<Control> *
-       ) ;
-       rdf:type [ <ControlGroup> ] ?
-    )
-}
-
-<Guideline> CLOSED {
-    (  $<Guideline_tes> <prose> @linkml:String ? ;
-       rdf:type [ <Guideline> ] ?
-    )
-}
-
-<IdentifiedElement>  (
-    CLOSED {
-       (  $<IdentifiedElement_tes> (  &<CatalogElement_tes> ;
-             rdf:type [ <CatalogElement> ] ? ;
-             <title> @linkml:String ? ;
-             <class> [ <https://w3id.org/lmodel/nist-sp-800-171/CatalogElementClassValue#family>
-                <https://w3id.org/lmodel/nist-sp-800-171/CatalogElementClassValue#requirement> ] ? ;
-             <label> @linkml:String ?
-          ) ;
-          rdf:type [ <IdentifiedElement> ] ?
-       )
-    } OR @<Control> OR @<ControlGroup> OR @<Parameter>
-)
-
-<Link> CLOSED {
-    (  $<Link_tes> (  <href> @linkml:String ? ;
-          <rel> @linkml:String ?
-       ) ;
-       rdf:type [ <Link> ] ?
-    )
-}
-
-<Metadata> CLOSED {
-    (  $<Metadata_tes> (  <title> @linkml:String ? ;
-          <published> @linkml:String ? ;
-          <last_modified> @linkml:String ? ;
-          <version> @linkml:String ? ;
-          <oscal_version> @linkml:String ? ;
-          <props> @<Property> * ;
-          <links> @<Link> * ;
-          <roles> @<Role> * ;
-          <parties> @<Party> * ;
-          <responsible_parties> @<ResponsibleParty> *
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<Parameter> CLOSED {
-    (  $<Parameter_tes> (  &<IdentifiedElement_tes> ;
-          rdf:type [ <IdentifiedElement> ] ? ;
-          <usage> @linkml:String ? ;
-          <guidelines> @<Guideline> * ;
-          <select> @<ParameterSelection> ?
+<Sp800171Parameter> CLOSED {
+    (  $<Sp800171Parameter_tes> (  <odp_id> @<Sp800171OdpIdentifier> ;
+          <odp_label> @linkml:String ;
+          <odp_usage> @linkml:String ? ;
+          <odp_guideline> @linkml:String ? ;
+          <odp_choices> @linkml:String * ;
+          <odp_selection_count> [ <https://w3id.org/lmodel/nist-sp-800-171/Sp800171SelectionCount#one>
+             <https://w3id.org/lmodel/nist-sp-800-171/Sp800171SelectionCount#one_or_more> ] ?
        ) ;
        rdf:type [ <Parameter> ] ?
     )
 }
 
-<ParameterSelection> CLOSED {
-    (  $<ParameterSelection_tes> (  <how_many> [ <https://w3id.org/lmodel/nist-sp-800-171/HowManyValue#one>
-             <https://w3id.org/lmodel/nist-sp-800-171/HowManyValue#one-or-more> ] ? ;
-          <choice> @linkml:String *
+<Sp800171Publication> CLOSED {
+    (  $<Sp800171Publication_tes> (  <sp800171_revision> @linkml:String ;
+          <requirement_families> @<Sp800171Family> +
        ) ;
-       rdf:type [ linkml:Any ] ?
+       rdf:type [ <Publication> ] ?
     )
 }
 
-<Part> CLOSED {
-    (  $<Part_tes> (  &<CatalogElement_tes> ;
-          rdf:type [ <CatalogElement> ] ? ;
-          <name> @linkml:String ? ;
-          <class> [ <https://w3id.org/lmodel/nist-sp-800-171/PartClassValue#security_requirement> ] ? ;
-          <prose> @linkml:String ?
+<Sp800171Reference> CLOSED {
+    (  $<Sp800171Reference_tes> (  <cited_publication> @<Sp800171CitedPublicationName> ;
+          <cited_publication_citation> @linkml:String ;
+          <cited_publication_url> @linkml:Uri
        ) ;
-       rdf:type [ <Part> ] ?
+       rdf:type [ <Reference> ] ?
     )
 }
 
-<Party> CLOSED {
-    (  $<Party_tes> (  <uuid> @linkml:String ? ;
-          <type> @linkml:String ? ;
-          <name> @linkml:String ? ;
-          <short_name> @linkml:String ? ;
-          <email_addresses> @linkml:String * ;
-          <addresses> @<Address> *
+<Sp800171Requirement> CLOSED {
+    (  $<Sp800171Requirement_tes> (  schema1:name @linkml:String ? ;
+          schema1:description @linkml:String ? ;
+          <requirement_id> @<Sp800171RequirementIdentifier> ;
+          <requirement_status> [ <https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementStatus#withdrawn> ] ? ;
+          <incorporated_into_requirements> @<Sp800171RequirementIdentifier> * ;
+          <addressed_by_requirements> @<Sp800171RequirementIdentifier> * ;
+          <requirement_statement> @linkml:String ? ;
+          <requirement_items> @<Sp800171RequirementItem> * ;
+          <requirement_discussion> @linkml:String ? ;
+          <requirement_parameters> @<Sp800171Parameter> * ;
+          <requirement_objectives> @<Sp800171AssessmentObjective> * ;
+          <requirement_methods> @<Sp800171AssessmentMethod> * ;
+          <requirement_references> @<Sp800171Reference> * ;
+          <source_controls> @<Sp800171SourceControlIdentifier> *
        ) ;
-       rdf:type [ linkml:Any ] ?
+       rdf:type [ <Requirement> ] ?
     )
 }
 
-<Property> CLOSED {
-    (  $<Property_tes> (  <name> @linkml:String ? ;
-          <value> @linkml:String ? ;
-          <ns> @linkml:String ? ;
-          <class> @linkml:String ?
+<Sp800171RequirementItem> CLOSED {
+    (  $<Sp800171RequirementItem_tes> (  <requirement_item_id> @<Sp800171ItemIdentifier> ;
+          <requirement_item_text> @linkml:String ;
+          <requirement_subitems> @<Sp800171RequirementItem> *
        ) ;
-       rdf:type [ <Property> ] ?
-    )
-}
-
-<Resource> CLOSED {
-    (  $<Resource_tes> (  <uuid> @linkml:String ? ;
-          <title> @linkml:String ? ;
-          <description> @linkml:String ? ;
-          <citation> @<Citation> ? ;
-          <rlinks> @<ResourceLink> *
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<ResourceLink> CLOSED {
-    (  $<ResourceLink_tes> (  <href> @linkml:String ? ;
-          <media_type> @linkml:String ?
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<ResponsibleParty> CLOSED {
-    (  $<ResponsibleParty_tes> (  <role_id> @linkml:String ? ;
-          <party_uuids> @linkml:String *
-       ) ;
-       rdf:type [ linkml:Any ] ?
-    )
-}
-
-<Role> CLOSED {
-    (  $<Role_tes> (  <id> @linkml:String ? ;
-          <title> @linkml:String ?
-       ) ;
-       rdf:type [ <Role> ] ?
-    )
-}
-
-<SP800171Document> CLOSED {
-    (  $<SP800171Document_tes> <catalog> @<CatalogBody> ? ;
-       rdf:type [ linkml:Any ] ?
+       rdf:type [ <RequirementItem> ] ?
     )
 }

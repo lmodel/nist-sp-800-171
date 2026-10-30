@@ -1,0 +1,4 @@
+# Fails at: /requirement_item_text
+# Invalid: a statement item's text is more than white space.
+requirement_item_id: "03.01.01.a"
+requirement_item_text: " "

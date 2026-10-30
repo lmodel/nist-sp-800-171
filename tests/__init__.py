@@ -1,1 +1,1 @@
-"""Tests for nist_sp_800_171."""
+"""Tests for nist-sp-800-171."""

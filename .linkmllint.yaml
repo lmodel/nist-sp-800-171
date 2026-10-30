@@ -1,0 +1,9 @@
+# linkml-lint reads this file from the directory `just lint` runs in.
+# The recommended rules apply as they are, and none is relaxed: class names
+# are UpperCamelCase with the Sp800171 prefix, slot and type names are
+# snake_case, and the permissible values of the three enums (withdrawn,
+# examine, one_or_more and the rest) are snake_case too. The publication's
+# own identifiers, such as 03.01.01 and A.03.01.01.ODP[01], are values the
+# patterned types describe, not element names, so the naming rule never
+# sees them.
+extends: recommended

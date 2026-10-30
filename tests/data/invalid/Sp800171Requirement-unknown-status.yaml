@@ -1,0 +1,4 @@
+# Fails at: /requirement_status
+# Invalid: the one status Revision 3 states is withdrawn.
+requirement_id: "03.01.13"
+requirement_status: retired

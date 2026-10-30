@@ -1,0 +1,5 @@
+# Fails at: /requirement_objective_id
+# Invalid: an objective's identifier starts with A, as SP 800-171A writes
+# it, A.03.01.01.a[01].
+requirement_objective_id: "03.01.01.a[01]"
+requirement_determination: the types of system account that are allowed are defined.

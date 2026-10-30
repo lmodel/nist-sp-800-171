@@ -1,0 +1,48 @@
+# Requirement 03.01.01 with two of its statement items, one of them with
+# numbered items, one parameter, two assessment objectives, one assessment
+# method, one reference and its source controls. The text paraphrases
+# SP 800-171 and SP 800-171A; the identifiers are theirs.
+requirement_id: "03.01.01"
+title: Account Management
+requirement_items:
+  - requirement_item_id: "03.01.01.a"
+    requirement_item_text: Define which types of system account are allowed and which are prohibited.
+  - requirement_item_id: "03.01.01.c"
+    requirement_item_text: "Specify:"
+    requirement_subitems:
+      - requirement_item_id: "03.01.01.c.01"
+        requirement_item_text: the authorized users of the system,
+      - requirement_item_id: "03.01.01.c.02"
+        requirement_item_text: group and role membership, and
+      - requirement_item_id: "03.01.01.c.03"
+        requirement_item_text: the access authorizations of each account.
+requirement_discussion: >-
+  Account types include individual, group, temporary, system, guest,
+  anonymous, emergency, developer and service accounts; an organization may
+  prohibit the riskier ones.
+requirement_parameters:
+  - odp_id: "A.03.01.01.ODP[01]"
+    odp_label: time period
+    odp_usage: organization-defined time period
+    odp_guideline: the time period of account inactivity before an account is disabled is defined.
+requirement_objectives:
+  - requirement_objective_id: "A.03.01.01.a[01]"
+    requirement_determination: the types of system account that are allowed are defined.
+    assessed_requirement_item: "03.01.01.a"
+  - requirement_objective_id: "A.03.01.01.c.01"
+    requirement_determination: the authorized users of the system are specified.
+    assessed_requirement_item: "03.01.01.c.01"
+requirement_methods:
+  - requirement_method_kind: interview
+    requirement_method_objects:
+      - personnel with account management responsibilities
+      - system administrators
+requirement_references:
+  - cited_publication: SP 800-63-3
+    cited_publication_citation: >-
+      Grassi PA, Garcia ME, Fenton JL (2017) Digital Identity Guidelines.
+      NIST Special Publication (SP) 800-63-3.
+    cited_publication_url: https://doi.org/10.6028/NIST.SP.800-63-3
+source_controls:
+  - AC-02
+  - AC-02(03)

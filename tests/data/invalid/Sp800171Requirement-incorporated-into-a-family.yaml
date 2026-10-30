@@ -1,0 +1,7 @@
+# Fails at: /incorporated_into_requirements/0
+# Invalid: a withdrawn requirement is incorporated into requirements, not
+# into a family.
+requirement_id: "03.04.07"
+requirement_status: withdrawn
+incorporated_into_requirements:
+  - "03.04"

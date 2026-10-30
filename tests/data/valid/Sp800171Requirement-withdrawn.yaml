@@ -1,0 +1,8 @@
+# Requirement 03.04.07, which Revision 3 withdrew and incorporated into two
+# other requirements. A withdrawn requirement carries its number, its status
+# and its successors, and no statement, discussion or assessment procedure.
+requirement_id: "03.04.07"
+requirement_status: withdrawn
+incorporated_into_requirements:
+  - "03.04.06"
+  - "03.04.08"
