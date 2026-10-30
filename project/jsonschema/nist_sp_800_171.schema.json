@@ -97,8 +97,8 @@
                 }
             },
             "required": [
-                "title",
-                "family_number"
+                "family_number",
+                "title"
             ],
             "title": "Sp800171Family",
             "type": "object"

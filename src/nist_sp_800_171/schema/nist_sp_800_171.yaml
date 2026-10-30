@@ -164,6 +164,20 @@ slots:
         lokf adapt folds it into LOKF's slot and a knowledge bundle reads one
         description key.
 
+  family_number:
+    description: The family's number, such as 03.01.
+    range: sp800171_family_identifier
+    required: true
+    comments:
+      - >-
+        A slot of its own, listed first in Sp800171Family's slots, rather
+        than an attribute, so that the generated Python dataclasses key a list
+        of families by their number and not by their title: they key an
+        inlined list by the first required slot of the class, and a class
+        lists its slots before its attributes. The adapt copy roots the family
+        on LOKF's Concept, whose id is its identifier, so the number cannot
+        be marked as one.
+
 classes:
   Sp800171Publication:
     tree_root: true
@@ -203,16 +217,13 @@ classes:
     broad_mappings:
       - oscal:Group
     slots:
+      - family_number
       - title
       - description
     slot_usage:
       title:
         required: true
     attributes:
-      family_number:
-        description: The family's number, such as 03.01.
-        range: sp800171_family_identifier
-        required: true
       family_requirements:
         description: >-
           The security requirements of the family, the withdrawn ones

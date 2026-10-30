@@ -157,8 +157,10 @@ nist_sp_800_171:description a owl:DatatypeProperty ;
 	skos:note "It means what LOKF's description means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one description key." .
 nist_sp_800_171:family_number a owl:DatatypeProperty ;
 	rdfs:label "family_number" ;
+	rdfs:range xsd:string ;
 	skos:definition "The family's number, such as 03.01." ;
-	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> .
+	skos:inScheme <https://w3id.org/lmodel/nist-sp-800-171> ;
+	skos:note "A slot of its own, listed first in Sp800171Family's slots, rather than an attribute, so that the generated Python dataclasses key a list of families by their number and not by their title: they key an inlined list by the first required slot of the class, and a class lists its slots before its attributes. The adapt copy roots the family on LOKF's Concept, whose id is its identifier, so the number cannot be marked as one." .
 nist_sp_800_171:family_requirements a owl:ObjectProperty ;
 	rdfs:label "family_requirements" ;
 	skos:definition "The security requirements of the family, the withdrawn ones included, in the order SP 800-171 numbers them. A knowledge bundle relates a requirement to its family with isPartOf instead." ;

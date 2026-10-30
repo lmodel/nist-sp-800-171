@@ -3,9 +3,9 @@
 --     * Slot: sp800171_revision Description: The revision of SP 800-171 the document renders, as NIST numbers it, such as 3.
 -- # Class: Sp800171Family Description: One of the seventeen families that SP 800-171 Revision 3 sorts its security requirements into, such as Access Control (03.01) or Supply Chain Risk Management (03.17).
 --     * Slot: id
+--     * Slot: family_number Description: The family's number, such as 03.01.
 --     * Slot: title Description: The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management.
 --     * Slot: description Description: What the family or requirement is about, in the words of whoever records it. SP 800-171 gives a family no text of its own, and a requirement's own text goes in its statement, items and discussion.
---     * Slot: family_number Description: The family's number, such as 03.01.
 --     * Slot: Sp800171Publication_id Description: Autocreated FK slot
 -- # Class: Sp800171Requirement Description: A security requirement of SP 800-171: a numbered, named requirement for protecting CUI, with its statement, discussion, references and source controls, the organization-defined parameters its statement leaves open, and the assessment objectives and methods SP 800-171A gives it. A requirement that Revision 3 withdrew keeps its number and says which requirements took its place.
 --     * Slot: id
@@ -71,9 +71,9 @@ CREATE INDEX "ix_Sp800171Publication_id" ON "Sp800171Publication" (id);
 
 CREATE TABLE "Sp800171Family" (
 	id INTEGER NOT NULL,
+	family_number TEXT NOT NULL,
 	title TEXT NOT NULL,
 	description TEXT,
-	family_number TEXT NOT NULL,
 	"Sp800171Publication_id" INTEGER,
 	PRIMARY KEY (id),
 	FOREIGN KEY("Sp800171Publication_id") REFERENCES "Sp800171Publication" (id)
@@ -192,5 +192,5 @@ CREATE TABLE "Sp800171AssessmentMethod_requirement_method_objects" (
 	PRIMARY KEY ("Sp800171AssessmentMethod_id", requirement_method_objects),
 	FOREIGN KEY("Sp800171AssessmentMethod_id") REFERENCES "Sp800171AssessmentMethod" (id)
 );
-CREATE INDEX "ix_Sp800171AssessmentMethod_requirement_method_objects_requirement_method_objects" ON "Sp800171AssessmentMethod_requirement_method_objects" (requirement_method_objects);
 CREATE INDEX "ix_Sp800171AssessmentMethod_requirement_method_objects_Sp800171AssessmentMethod_id" ON "Sp800171AssessmentMethod_requirement_method_objects" ("Sp800171AssessmentMethod_id");
+CREATE INDEX "ix_Sp800171AssessmentMethod_requirement_method_objects_requirement_method_objects" ON "Sp800171AssessmentMethod_requirement_method_objects" (requirement_method_objects);

@@ -104,7 +104,17 @@ types:
       one, such as SP 800-57-1, SP 800-160-1, IR 8011-2 or FIPS 140-3. The short name leaves out the publication''s
       revision, which the citation and the address carry: SP 800-53 stands for Revision 5.'
     pattern: ^(FIPS|IR|SP) [1-9][0-9]*(-[0-9A-Z]+)*$
-slots: {}
+slots:
+  family_number:
+    description: The family's number, such as 03.01.
+    range: sp800171_family_identifier
+    required: true
+    comments:
+    - 'A slot of its own, listed first in Sp800171Family''s slots, rather than an attribute, so that the
+      generated Python dataclasses key a list of families by their number and not by their title: they
+      key an inlined list by the first required slot of the class, and a class lists its slots before
+      its attributes. The adapt copy roots the family on LOKF''s Concept, whose id is its identifier,
+      so the number cannot be marked as one.'
 classes:
   Sp800171Publication:
     class_uri: nist_sp_800_171:Publication
@@ -137,6 +147,7 @@ classes:
     broad_mappings:
     - oscal:Group
     slots:
+    - family_number
     - title
     - description
     slot_usage:
@@ -146,10 +157,6 @@ classes:
       description:
         range: string
     attributes:
-      family_number:
-        description: The family's number, such as 03.01.
-        range: sp800171_family_identifier
-        required: true
       family_requirements:
         description: The security requirements of the family, the withdrawn ones included, in the order
           SP 800-171 numbers them. A knowledge bundle relates a requirement to its family with isPartOf

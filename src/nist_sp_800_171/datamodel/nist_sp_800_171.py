@@ -155,7 +155,7 @@ class Sp800171Publication(YAMLRoot):
 
         if self._is_empty(self.requirement_families):
             self.MissingRequiredField("requirement_families")
-        self._normalize_inlined_as_list(slot_name="requirement_families", slot_type=Sp800171Family, key_name="title", keyed=False)
+        self._normalize_inlined_as_list(slot_name="requirement_families", slot_type=Sp800171Family, key_name="family_number", keyed=False)
 
         super().__post_init__(**kwargs)
 
@@ -173,21 +173,21 @@ class Sp800171Family(YAMLRoot):
     class_name: ClassVar[str] = "Sp800171Family"
     class_model_uri: ClassVar[URIRef] = NIST_SP_800_171.Sp800171Family
 
-    title: str = None
     family_number: Union[str, Sp800171FamilyIdentifier] = None
+    title: str = None
     description: Optional[str] = None
     family_requirements: Optional[Union[Union[dict, "Sp800171Requirement"], list[Union[dict, "Sp800171Requirement"]]]] = empty_list()
 
     def __post_init__(self, *_: str, **kwargs: Any):
-        if self._is_empty(self.title):
-            self.MissingRequiredField("title")
-        if not isinstance(self.title, str):
-            self.title = str(self.title)
-
         if self._is_empty(self.family_number):
             self.MissingRequiredField("family_number")
         if not isinstance(self.family_number, Sp800171FamilyIdentifier):
             self.family_number = Sp800171FamilyIdentifier(self.family_number)
+
+        if self._is_empty(self.title):
+            self.MissingRequiredField("title")
+        if not isinstance(self.title, str):
+            self.title = str(self.title)
 
         if self.description is not None and not isinstance(self.description, str):
             self.description = str(self.description)
@@ -514,15 +514,15 @@ slots.title = Slot(uri=SCHEMA.name, name="title", curie=SCHEMA.curie('name'),
 slots.description = Slot(uri=SCHEMA.description, name="description", curie=SCHEMA.curie('description'),
                    model_uri=NIST_SP_800_171.description, domain=None, range=Optional[str])
 
+slots.family_number = Slot(uri=NIST_SP_800_171.family_number, name="family_number", curie=NIST_SP_800_171.curie('family_number'),
+                   model_uri=NIST_SP_800_171.family_number, domain=None, range=Union[str, Sp800171FamilyIdentifier])
+
 slots.sp800171Publication__sp800171_revision = Slot(uri=NIST_SP_800_171.sp800171_revision, name="sp800171Publication__sp800171_revision", curie=NIST_SP_800_171.curie('sp800171_revision'),
                    model_uri=NIST_SP_800_171.sp800171Publication__sp800171_revision, domain=None, range=str,
                    pattern=re.compile(r'^[1-9][0-9]*$'))
 
 slots.sp800171Publication__requirement_families = Slot(uri=NIST_SP_800_171.requirement_families, name="sp800171Publication__requirement_families", curie=NIST_SP_800_171.curie('requirement_families'),
                    model_uri=NIST_SP_800_171.sp800171Publication__requirement_families, domain=None, range=Union[Union[dict, Sp800171Family], list[Union[dict, Sp800171Family]]])
-
-slots.sp800171Family__family_number = Slot(uri=NIST_SP_800_171.family_number, name="sp800171Family__family_number", curie=NIST_SP_800_171.curie('family_number'),
-                   model_uri=NIST_SP_800_171.sp800171Family__family_number, domain=None, range=Union[str, Sp800171FamilyIdentifier])
 
 slots.sp800171Family__family_requirements = Slot(uri=NIST_SP_800_171.family_requirements, name="sp800171Family__family_requirements", curie=NIST_SP_800_171.curie('family_requirements'),
                    model_uri=NIST_SP_800_171.sp800171Family__family_requirements, domain=None, range=Optional[Union[Union[dict, Sp800171Requirement], list[Union[dict, Sp800171Requirement]]]])

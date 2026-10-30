@@ -10,6 +10,9 @@
       "description": {
          "@id": "schema:description"
       },
+      "family_number": {
+         "@id": "family_number"
+      },
       "requirement_method_kind": {
          "@context": {
             "text": "skos:notation",
@@ -29,9 +32,6 @@
       },
       "requirement_objective_id": {
          "@id": "requirement_objective_id"
-      },
-      "family_number": {
-         "@id": "family_number"
       },
       "family_requirements": {
          "@type": "@id",

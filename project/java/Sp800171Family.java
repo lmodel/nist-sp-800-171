@@ -16,9 +16,9 @@ import lombok.*;
 @EqualsAndHashCode(callSuper=false)
 public class Sp800171Family  {
 
+  private String familyNumber;
   private String title;
   private String description;
-  private String familyNumber;
   private List<Sp800171Requirement> familyRequirements;
 
 

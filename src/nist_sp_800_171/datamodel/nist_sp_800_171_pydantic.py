@@ -370,6 +370,15 @@ class Sp800171Family(ConfiguredBaseModel):
          'see_also': ['https://csrc.nist.gov/pubs/sp/800/171/r3/final'],
          'slot_usage': {'title': {'name': 'title', 'required': True}}})
 
+    family_number: str = Field(default=..., description="""The family's number, such as 03.01.""", json_schema_extra = { "linkml_meta": {'comments': ["A slot of its own, listed first in Sp800171Family's slots, "
+                      'rather than an attribute, so that the generated Python '
+                      'dataclasses key a list of families by their number and not by '
+                      'their title: they key an inlined list by the first required '
+                      'slot of the class, and a class lists its slots before its '
+                      "attributes. The adapt copy roots the family on LOKF's Concept, "
+                      'whose id is its identifier, so the number cannot be marked as '
+                      'one.'],
+         'domain_of': ['Sp800171Family']} })
     title: str = Field(default=..., description="""The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management.""", json_schema_extra = { "linkml_meta": {'comments': ["It means what LOKF's title means and carries the same IRI, so "
                       "lokf adapt folds it into LOKF's slot and a knowledge bundle "
                       'reads one title key.'],
@@ -380,7 +389,6 @@ class Sp800171Family(ConfiguredBaseModel):
                       'bundle reads one description key.'],
          'domain_of': ['Sp800171Family', 'Sp800171Requirement'],
          'slot_uri': 'schema:description'} })
-    family_number: str = Field(default=..., description="""The family's number, such as 03.01.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp800171Family']} })
     family_requirements: Optional[list[Sp800171Requirement]] = Field(default=None, description="""The security requirements of the family, the withdrawn ones included, in the order SP 800-171 numbers them. A knowledge bundle relates a requirement to its family with isPartOf instead.""", json_schema_extra = { "linkml_meta": {'domain_of': ['Sp800171Family']} })
 
 

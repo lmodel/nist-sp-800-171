@@ -33,9 +33,9 @@ type Sp800171AssessmentObjective
 
 type Sp800171Family
   {
+    familyNumber: Sp800171FamilyIdentifier!
     title: String!
     description: String
-    familyNumber: Sp800171FamilyIdentifier!
     familyRequirements: [Sp800171Requirement]
   }
 

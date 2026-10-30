@@ -45,12 +45,12 @@ export interface Sp800171Publication {
  * One of the seventeen families that SP 800-171 Revision 3 sorts its security requirements into, such as Access Control (03.01) or Supply Chain Risk Management (03.17).
  */
 export interface Sp800171Family {
+    /** The family's number, such as 03.01. */
+    family_number: string,
     /** The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management. */
     title: string,
     /** What the family or requirement is about, in the words of whoever records it. SP 800-171 gives a family no text of its own, and a requirement's own text goes in its statement, items and discussion. */
     description?: string,
-    /** The family's number, such as 03.01. */
-    family_number: string,
     /** The security requirements of the family, the withdrawn ones included, in the order SP 800-171 numbers them. A knowledge bundle relates a requirement to its family with isPartOf instead. */
     family_requirements?: Sp800171Requirement[],
 }

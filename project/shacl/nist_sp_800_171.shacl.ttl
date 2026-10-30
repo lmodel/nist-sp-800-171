@@ -20,13 +20,13 @@ nist_sp_800_171:Family a sh:NodeShape ;
 	rdfs:comment "One of the seventeen families that SP 800-171 Revision 3 sorts its security requirements into, such as Access Control (03.01) or Supply Chain Risk Management (03.17)." ;
 	sh:closed true ;
 	sh:ignoredProperties _:c14n5 ;
-	sh:property _:c14n10 , _:c14n18 , _:c14n26 , _:c14n47 ;
+	sh:property _:c14n10 , _:c14n17 , _:c14n24 , _:c14n43 ;
 	sh:targetClass nist_sp_800_171:Family .
 nist_sp_800_171:Parameter a sh:NodeShape ;
 	rdfs:comment "An organization-defined parameter (ODP): a value, such as a time period or a frequency, that a requirement statement leaves to the organization, with the guideline SP 800-171A gives for defining it. A few parameters are a selection among choices instead of a value." ;
 	sh:closed true ;
 	sh:ignoredProperties _:c14n20 ;
-	sh:property _:c14n14 , _:c14n25 , _:c14n28 , _:c14n35 , _:c14n38 , _:c14n41 ;
+	sh:property _:c14n14 , _:c14n26 , _:c14n28 , _:c14n35 , _:c14n38 , _:c14n41 ;
 	sh:targetClass nist_sp_800_171:Parameter .
 nist_sp_800_171:Publication a sh:NodeShape ;
 	rdfs:comment "One revision of SP 800-171 as a whole: its requirement families, each holding its security requirements, with the assessment procedures of the matching revision of SP 800-171A inside each requirement." ;
@@ -38,13 +38,13 @@ nist_sp_800_171:Reference a sh:NodeShape ;
 	rdfs:comment "A publication that SP 800-171 lists under a requirement's references, by the short name the publication gives it, with the full citation and the address NIST's catalog gives it." ;
 	sh:closed true ;
 	sh:ignoredProperties _:c14n7 ;
-	sh:property _:c14n13 , _:c14n46 , _:c14n8 ;
+	sh:property _:c14n13 , _:c14n47 , _:c14n8 ;
 	sh:targetClass nist_sp_800_171:Reference .
 nist_sp_800_171:Requirement a sh:NodeShape ;
 	rdfs:comment "A security requirement of SP 800-171: a numbered, named requirement for protecting CUI, with its statement, discussion, references and source controls, the organization-defined parameters its statement leaves open, and the assessment objectives and methods SP 800-171A gives it. A requirement that Revision 3 withdrew keeps its number and says which requirements took its place." ;
 	sh:closed true ;
 	sh:ignoredProperties _:c14n36 ;
-	sh:property _:c14n0 , _:c14n12 , _:c14n15 , _:c14n17 , _:c14n19 , _:c14n24 , _:c14n3 , _:c14n30 , _:c14n37 , _:c14n39 , _:c14n4 , _:c14n42 , _:c14n44 , _:c14n45 ;
+	sh:property _:c14n0 , _:c14n12 , _:c14n15 , _:c14n18 , _:c14n19 , _:c14n25 , _:c14n3 , _:c14n30 , _:c14n37 , _:c14n39 , _:c14n4 , _:c14n42 , _:c14n45 , _:c14n46 ;
 	sh:targetClass nist_sp_800_171:Requirement .
 nist_sp_800_171:RequirementItem a sh:NodeShape ;
 	rdfs:comment "One item of a requirement statement: a lettered item such as 03.01.01.a, or a numbered item under a lettered one such as 03.01.01.c.01." ;
@@ -98,18 +98,19 @@ _:c14n15 sh:class nist_sp_800_171:Reference ;
 _:c14n16 rdf:first rdf:type ;
 	rdf:rest rdf:nil .
 _:c14n17 sh:datatype xsd:string ;
+	sh:description "The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management." ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 1 ;
+	sh:path schema1:name .
+_:c14n18 sh:datatype xsd:string ;
 	sh:description "The requirement's discussion: SP 800-171's explanation of what the requirement means and how it relates to other requirements." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 8 ;
 	sh:path nist_sp_800_171:requirement_discussion ;
 	sh:pattern "^\\s*\\S" .
-_:c14n18 sh:datatype xsd:string ;
-	sh:description "What the family or requirement is about, in the words of whoever records it. SP 800-171 gives a family no text of its own, and a requirement's own text goes in its statement, items and discussion." ;
-	sh:maxCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 1 ;
-	sh:path schema1:description .
 _:c14n19 sh:description "Withdrawn when Revision 3 withdrew the requirement. A requirement with no status is in force." ;
 	sh:in _:c14n29 ;
 	sh:maxCount 1 ;
@@ -141,24 +142,23 @@ _:c14n23 sh:datatype xsd:string ;
 	sh:order 2 ;
 	sh:path nist_sp_800_171:assessed_requirement_item ;
 	sh:pattern "^03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])\\.[a-z](\\.(0[1-9]|[1-9][0-9]))?$" .
-_:c14n24 sh:class nist_sp_800_171:Parameter ;
+_:c14n24 sh:datatype xsd:string ;
+	sh:description "What the family or requirement is about, in the words of whoever records it. SP 800-171 gives a family no text of its own, and a requirement's own text goes in its statement, items and discussion." ;
+	sh:maxCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 2 ;
+	sh:path schema1:description .
+_:c14n25 sh:class nist_sp_800_171:Parameter ;
 	sh:description "The organization-defined parameters the requirement statement leaves to the organization, in the order SP 800-171A numbers them." ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 9 ;
 	sh:path nist_sp_800_171:requirement_parameters .
-_:c14n25 sh:datatype xsd:string ;
+_:c14n26 sh:datatype xsd:string ;
 	sh:description "How the requirement statement names the parameter, such as organization-defined time period." ;
 	sh:maxCount 1 ;
 	sh:nodeKind sh:Literal ;
 	sh:order 2 ;
 	sh:path nist_sp_800_171:odp_usage .
-_:c14n26 sh:datatype xsd:string ;
-	sh:description "The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management." ;
-	sh:maxCount 1 ;
-	sh:minCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 0 ;
-	sh:path schema1:name .
 _:c14n27 sh:datatype xsd:string ;
 	sh:description "The item's identifier, such as 03.01.01.a." ;
 	sh:maxCount 1 ;
@@ -204,7 +204,7 @@ _:c14n33 sh:datatype xsd:string ;
 	sh:path nist_sp_800_171:requirement_item_text ;
 	sh:pattern "^\\s*\\S" .
 _:c14n34 sh:description "Which method it is." ;
-	sh:in _:c14n43 ;
+	sh:in _:c14n44 ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:order 0 ;
@@ -256,34 +256,34 @@ _:c14n42 sh:class nist_sp_800_171:AssessmentObjective ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 10 ;
 	sh:path nist_sp_800_171:requirement_objectives .
-_:c14n43 rdf:first "examine" ;
+_:c14n43 sh:datatype xsd:string ;
+	sh:description "The family's number, such as 03.01." ;
+	sh:maxCount 1 ;
+	sh:minCount 1 ;
+	sh:nodeKind sh:Literal ;
+	sh:order 0 ;
+	sh:path nist_sp_800_171:family_number ;
+	sh:pattern "^03\\.(0[1-9]|1[0-7])$" .
+_:c14n44 rdf:first "examine" ;
 	rdf:rest _:c14n40 .
-_:c14n44 sh:datatype xsd:string ;
+_:c14n45 sh:datatype xsd:string ;
 	sh:description "The controls of SP 800-53 Revision 5 the requirement is drawn from, by their identifiers, as the catalog lists them among the requirement's references. The identifier is data; the schema maps nothing to a model of SP 800-53." ;
 	sh:nodeKind sh:Literal ;
 	sh:order 13 ;
 	sh:path nist_sp_800_171:source_controls ;
 	sh:pattern "^[A-Z]{2}-(0[1-9]|[1-9][0-9])(\\((0[1-9]|[1-9][0-9])\\))?$" .
-_:c14n45 sh:class nist_sp_800_171:AssessmentMethod ;
+_:c14n46 sh:class nist_sp_800_171:AssessmentMethod ;
 	sh:description "The assessment methods SP 800-171A gives the requirement, each with the objects it is applied to." ;
 	sh:nodeKind sh:BlankNodeOrIRI ;
 	sh:order 11 ;
 	sh:path nist_sp_800_171:requirement_methods .
-_:c14n46 sh:description "The publication's address, which the catalog gives as its digital object identifier at doi.org." ;
+_:c14n47 sh:description "The publication's address, which the catalog gives as its digital object identifier at doi.org." ;
 	sh:maxCount 1 ;
 	sh:minCount 1 ;
 	sh:nodeKind sh:IRI ;
 	sh:order 2 ;
 	sh:path nist_sp_800_171:cited_publication_url ;
 	sh:pattern "^https://doi\\.org/10\\.[0-9]+/\\S+$" .
-_:c14n47 sh:datatype xsd:string ;
-	sh:description "The family's number, such as 03.01." ;
-	sh:maxCount 1 ;
-	sh:minCount 1 ;
-	sh:nodeKind sh:Literal ;
-	sh:order 2 ;
-	sh:path nist_sp_800_171:family_number ;
-	sh:pattern "^03\\.(0[1-9]|1[0-7])$" .
 _:c14n48 sh:class nist_sp_800_171:RequirementItem ;
 	sh:description "The numbered items under a lettered item, in order." ;
 	sh:nodeKind sh:BlankNodeOrIRI ;

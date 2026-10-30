@@ -499,6 +499,24 @@ slots:
     - Sp800171Family
     - Sp800171Requirement
     range: string
+  family_number:
+    name: family_number
+    definition_uri: https://w3id.org/lmodel/nist-sp-800-171/family_number
+    description: The family's number, such as 03.01.
+    comments:
+    - 'A slot of its own, listed first in Sp800171Family''s slots, rather than an
+      attribute, so that the generated Python dataclasses key a list of families by
+      their number and not by their title: they key an inlined list by the first required
+      slot of the class, and a class lists its slots before its attributes. The adapt
+      copy roots the family on LOKF''s Concept, whose id is its identifier, so the
+      number cannot be marked as one.'
+    from_schema: https://w3id.org/lmodel/nist-sp-800-171
+    slot_uri: nist_sp_800_171:family_number
+    owner: Sp800171Family
+    domain_of:
+    - Sp800171Family
+    range: sp800171_family_identifier
+    required: true
   sp800171Publication__sp800171_revision:
     name: sp800171Publication__sp800171_revision
     description: The revision of SP 800-171 the document renders, as NIST numbers
@@ -527,17 +545,6 @@ slots:
     inlined: true
     inlined_as_list: true
     minimum_cardinality: 1
-  sp800171Family__family_number:
-    name: sp800171Family__family_number
-    description: The family's number, such as 03.01.
-    from_schema: https://w3id.org/lmodel/nist-sp-800-171
-    slot_uri: nist_sp_800_171:family_number
-    alias: family_number
-    owner: Sp800171Family
-    domain_of:
-    - Sp800171Family
-    range: sp800171_family_identifier
-    required: true
   sp800171Family__family_requirements:
     name: sp800171Family__family_requirements
     description: The security requirements of the family, the withdrawn ones included,
@@ -982,20 +989,15 @@ classes:
     broad_mappings:
     - oscal:Group
     slots:
+    - family_number
     - Sp800171Family_title
     - description
-    - sp800171Family__family_number
     - sp800171Family__family_requirements
     slot_usage:
       title:
         name: title
         required: true
     attributes:
-      family_number:
-        name: family_number
-        description: The family's number, such as 03.01.
-        range: sp800171_family_identifier
-        required: true
       family_requirements:
         name: family_requirements
         description: The security requirements of the family, the withdrawn ones included,
@@ -1312,6 +1314,6 @@ classes:
     class_uri: nist_sp_800_171:Reference
 metamodel_version: 1.12.0
 source_file: nist_sp_800_171.yaml
-source_file_date: '2026-10-30T08:15:21'
-source_file_size: 20185
+source_file_date: '2026-10-30T09:01:48'
+source_file_size: 20697
 

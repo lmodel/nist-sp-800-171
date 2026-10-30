@@ -80,9 +80,9 @@ linkml:Sparqlpath xsd:string
 }
 
 <Sp800171Family> CLOSED {
-    (  $<Sp800171Family_tes> (  schema1:name @linkml:String ;
+    (  $<Sp800171Family_tes> (  <family_number> @<Sp800171FamilyIdentifier> ;
+          schema1:name @linkml:String ;
           schema1:description @linkml:String ? ;
-          <family_number> @<Sp800171FamilyIdentifier> ;
           <family_requirements> @<Sp800171Requirement> *
        ) ;
        rdf:type [ <Family> ] ?
