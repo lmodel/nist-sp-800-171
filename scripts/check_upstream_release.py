@@ -13,7 +13,7 @@ without any change in this repository:
 The copy has no version in its path, so the release, the commit its tag
 names and each file's git object hash are pinned below. This script asks the
 GitHub API for usnistgov/oscal-content's latest release, for the commit the
-pinned tag names and for a few folder listings, and compares every copied
+pinned tag names and for a few folder listings. It compares every copied
 file with its blob by git object hash, so nothing is downloaded but listings.
 It asks doi.org whether NIST has registered the identifier of the next final
 edition, because NIST registers one for every publication. It prints a
