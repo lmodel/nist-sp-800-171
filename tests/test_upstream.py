@@ -136,7 +136,7 @@ def _objective(part, requirement_id):
     """The publication's form of an objective: A, the item it assesses and,
     when the catalog's identifier runs one dotted number past that item, the
     number in square brackets."""
-    (link,) = [l["href"] for l in part["links"] if l["rel"] == "assessment-for"]
+    (link,) = [x["href"] for x in part["links"] if x["rel"] == "assessment-for"]
     assessed = _number(link.lstrip("#"))
     catalog_id = part["id"].removeprefix("assessment-objective_DS-A.")
     if catalog_id == assessed:
@@ -174,7 +174,7 @@ def _requirement(control, resources):
         ("incorporated_into", "incorporated_into_requirements"),
         ("addressed_by", "addressed_by_requirements"),
     ):
-        targets = [l["href"] for l in control.get("links", []) if l["rel"] == rel]
+        targets = [x["href"] for x in control.get("links", []) if x["rel"] == rel]
         if targets:
             entry[key] = targets
     for part in control.get("parts", []):
@@ -243,7 +243,9 @@ def _publication():
 
 def _requirements():
     return [
-        r for f in _publication()["requirement_families"] for r in f["family_requirements"]
+        r
+        for f in _publication()["requirement_families"]
+        for r in f["family_requirements"]
     ]
 
 
@@ -417,7 +419,10 @@ def test_identifiers_nest_and_are_unique():
                 for item in entries:
                     assert item["requirement_item_id"].startswith(parent + "."), rid
                     items.append(item["requirement_item_id"])
-                    collect(item.get("requirement_subitems", []), item["requirement_item_id"])
+                    collect(
+                        item.get("requirement_subitems", []),
+                        item["requirement_item_id"],
+                    )
 
             collect(q.get("requirement_items", []), rid)
             seen["item"] += items
