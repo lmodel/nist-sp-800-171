@@ -23,7 +23,7 @@ generated:
 status: draft
 verified:
   - by: process:ktl-librarian
-    at: "2026-10-30T08:54:19Z"
+    at: "2026-10-30T09:10:34Z"
 ---
 
 # Update the upstream pins
