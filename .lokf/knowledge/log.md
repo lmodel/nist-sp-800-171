@@ -2,6 +2,8 @@
 
 ## 2026-10-30
 
+* **Changed**: Generated artefacts no longer says `just test` leaves a generation date; LinkML 1.12.1 writes none.
+* **Changed**: Update the upstream pins now regenerates the project, the docs and the adapt copy before `just test`.
 * **Prose**: reworded 23 concept bodies in plain English. No fact, link, number or frontmatter changed.
 * **Changed**: Test data and tests now counts 43 counter-examples, with a reference missing its citation or its address among them.
 * **Changed**: the generators' settings moved from `config.yaml` to `.linkml/generators.yaml`.

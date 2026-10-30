@@ -19,7 +19,7 @@ sources:
     title: the pin and revision tests
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T08:32:20Z"
+  at: "2026-10-30T08:50:59Z"
 status: draft
 ---
 
@@ -34,7 +34,7 @@ status: draft
 
 When doi.org or the GitHub API does not answer, the report says which check could not finish, the other check still runs, and the run fails, so the issue names what went wrong. Run the workflow again once the service answers.
 
-To replace the copy, take both files from one release: the catalog from `nist.gov/SP800-171/rev3/json/` and `LICENSE.md` from the root. Never edit them.[^contributing.md] Then move `PINNED_TAG`, `PINNED_COMMIT` and `PINNED_BLOBS` in the script, and the `oscal_content_tag` and `oscal_content_commit` annotations and the `see_also` tree in the schema header, and update NOTICE. Run `just test`. `tests/test_upstream.py` checks that the header and the script name the same pins, that each file has its pinned hash, and that the derived publication still validates with the publication's counts.[^test_upstream.py] A new revision also moves the header's `version`, the `cprt_framework_version` annotation and `PINNED_PATH`, `EDITIONS_PATH` and the identifiers in the script.
+To replace the copy, take both files from one release: the catalog from `nist.gov/SP800-171/rev3/json/` and `LICENSE.md` from the root. Never edit them.[^contributing.md] Then move `PINNED_TAG`, `PINNED_COMMIT` and `PINNED_BLOBS` in the script, and the `oscal_content_tag` and `oscal_content_commit` annotations and the `see_also` tree in the schema header, and update NOTICE. Run `just gen-project`, `just gen-doc` and `just lokf-adapt`, since the header's values reach the generated files and the adapt copy, and `just lokf-adapt-check` in CI fails on a stale copy. Then run `just test`. `tests/test_upstream.py` checks that the header and the script name the same pins, that each file has its pinned hash, and that the derived publication still validates with the publication's counts.[^test_upstream.py] A new revision also moves the header's `version`, the `cprt_framework_version` annotation and `PINNED_PATH`, `EDITIONS_PATH` and the identifiers in the script.
 
 [^check_upstream_release.py]: scripts/check_upstream_release.py, the docstring and check_editions and check_catalog
 [^contributing.md]: CONTRIBUTING.md, the item on the catalog copy
