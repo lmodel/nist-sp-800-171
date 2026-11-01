@@ -14,32 +14,15 @@ NIST SP 800-171 Protecting Controlled Unclassified Information (CUI) in Nonfeder
 
 ## What it models
 
-The security requirements for protecting controlled unclassified information (CUI) in nonfederal systems and organizations, which the National Institute of Standards and Technology (NIST) sets in [Special Publication (SP) 800-171 Revision 3](https://doi.org/10.6028/NIST.SP.800-171r3) of May 2024, and the procedures for assessing them in [SP 800-171A Revision 3](https://doi.org/10.6028/NIST.SP.800-171Ar3):
+The schema models the security requirements for protecting controlled unclassified information (CUI) in nonfederal systems and organizations, which the National Institute of Standards and Technology (NIST) sets in [Special Publication (SP) 800-171 Revision 3](https://doi.org/10.6028/NIST.SP.800-171r3) of May 2024. [SP 800-171A Revision 3](https://doi.org/10.6028/NIST.SP.800-171Ar3) gives the procedures for assessing them. The schema holds the seventeen families (`Sp800171Family`), the 130 requirements (`Sp800171Requirement`) with their statement items and organization-defined parameters (`Sp800171Parameter`), the assessment objectives and methods of SP 800-171A, and the publications the requirements reference.
 
-* **Families** (`Sp800171Family`): the seventeen families that sort the requirements, from Access Control (`03.01`) to Supply Chain Risk Management (`03.17`).
-* **Security requirements** (`Sp800171Requirement`): the 130 numbered requirements, such as `03.01.01` Account Management. 97 are in force, each with a statement, a discussion and the SP 800-53 controls it is drawn from, and 70 of them with references to supporting publications. 33 are withdrawn and keep their number, their status and, for 27 of them, the requirements that incorporate or address what they required.
-* **Statement items** (`Sp800171RequirementItem`): the 252 lettered and numbered items of the 68 requirement statements that have them, such as `03.01.01.a` and `03.01.01.c.01`. The other 29 statements are one piece of text.
-* **Organization-defined parameters** (`Sp800171Parameter`): the 88 values, such as `A.03.01.01.ODP[01]`, that the requirements leave to the organization, each with the guideline SP 800-171A gives for defining it. Three are selections among choices.
-* **Assessment objectives** (`Sp800171AssessmentObjective`): the 422 determination statements of SP 800-171A, such as `A.03.01.01.b[01]`, each tied to the requirement or to one item of its statement.
-* **Assessment methods** (`Sp800171AssessmentMethod`): the examine, interview and test entries of SP 800-171A, each with its assessment objects. NIST's catalog holds 281 of them: it leaves out the three that SP 800-171A gives each of `03.01.22` and `03.14.03`, which make 287 in all.
-* **References** (`Sp800171Reference`): the 199 references from the requirements to 65 NIST publications, with their citations and addresses.
-* **The publication** (`Sp800171Publication`): one revision as a single document that holds all of these.
-
-The schema header's `version` is the publication's revision, 3.0.0, as NIST's Cybersecurity and Privacy Reference Tool numbers it (`SP_800_171_3_0_0`). Its `source` is the publication's digital object identifier (DOI). NIST also publishes the requirements and the assessment procedures together as a catalog in the Open Security Controls Assessment Language (OSCAL). [src/nist_sp_800_171/schema/oscal-content/](src/nist_sp_800_171/schema/oscal-content) holds that catalog as usnistgov/oscal-content released it in v1.6.0, matched to the release by git object hash. `tests/test_upstream.py` derives the whole publication from the copy, validates it, and holds it to the counts above, which are the catalog's. [docs/about.md](docs/about.md#where-nists-catalog-departs-from-the-publication) lists where the catalog departs from the publication. A weekly workflow opens an issue when NIST registers the next final revision, changes the catalog, or the copy drifts.
-
-Revision 3 is the current edition, and NIST has published no draft of a Revision 4. Release tags number the schema's versions.
-
-## Influences
-
-None beyond SP 800-171 and SP 800-171A: the schema renders one publication, and its release asset and governance files follow [lmodel/slsa](https://github.com/lmodel/slsa).
+[src/nist_sp_800_171/schema/oscal-content/](src/nist_sp_800_171/schema/oscal-content) holds NIST's catalog of both publications in the Open Security Controls Assessment Language (OSCAL), from usnistgov/oscal-content v1.6.0, and `tests/test_upstream.py` derives the whole publication from it. [docs/about.md](docs/about.md#where-nists-catalog-departs-from-the-publication) lists where the catalog departs from the publication. A weekly workflow opens an issue when NIST registers the next final revision, changes the catalog, or the copy drifts.
 
 ## Mappings
 
-The schema crosses to three kinds of vocabulary and borrows from none.
-
-* **OSCAL**: NIST's catalog renders a family as an OSCAL group, a requirement as a control, a statement item, an objective and a method as parts, a parameter as a parameter, and a reference as a back-matter resource. Each class names its counterpart in [lmodel/oscal](https://github.com/lmodel/oscal) in `broad_mappings`, because the OSCAL class is the more general one.
-* **SP 800-53 Revision 5**: a requirement's `source_controls` carries the identifiers of the controls it is drawn from, such as `AC-02` and `AC-02(03)`, as the catalog lists them among the requirement's references. That is data in a document, not a mapping in the schema, and the schema binds no prefix for a model of SP 800-53. [lmodel/nist-sp-800-53](https://github.com/lmodel/nist-sp-800-53) is where that model is being built.
-* **The publications SP 800-171 references**: `Sp800171Reference` names each by its short name, such as `SP 800-63-3` or `FIPS 140-3`, with the citation and the DOI the catalog gives it.
+* **OSCAL**: each class names its counterpart in [lmodel/oscal](https://github.com/lmodel/oscal) in `broad_mappings`: a family is a group, a requirement a control, and a statement item, an objective and a method are parts.
+* **SP 800-53 Revision 5**: a requirement's `source_controls` lists the controls it is drawn from, such as `AC-02`, as data, not as a mapping.
+* **Referenced publications**: `Sp800171Reference` names each by its short name, such as `FIPS 140-3`, with its citation and DOI.
 
 ## Not modelled here
 
@@ -66,27 +49,23 @@ Run `just` to list the project's [just](https://github.com/casey/just/) recipes.
 
 ## Knowledge Trust Ladder (KTL)
 
-`.lokf/` holds this project's [KTL](https://w3id.org/ktl/) knowledge bundle, in the Linked Open Knowledge Format (LOKF). Its domain schema is `.lokf/nist-sp-800-171.yaml`, which `lokf adapt` writes from `src/nist_sp_800_171/schema/nist_sp_800_171.yaml`. Edit the source, never the copy. A release carries the copy as `schema-<tag>-nist-sp-800-171.yaml`, on the terms [CONTRIBUTING.md](CONTRIBUTING.md#releasing-maintainers) gives.
+`.lokf/` holds this project's [KTL](https://w3id.org/ktl/) knowledge bundle. Its domain schema, `.lokf/nist-sp-800-171.yaml`, is the copy `just lokf-adapt` writes from `src/nist_sp_800_171/schema/nist_sp_800_171.yaml`, and `just lokf-adapt-check` says when it is stale. Edit the source, never the copy. A release carries the copy as `schema-<tag>-nist-sp-800-171.yaml`, on the terms [CONTRIBUTING.md](CONTRIBUTING.md#releasing-maintainers) gives.
 
-`just lokf-adapt` rewrites the copy, and `just lokf-adapt-check` says when it is stale. `project.justfile` names the classes the copy roots on `Concept`, and a concept may name any of them as its `type`. In Obsidian, add these classes to the KTL Registrar and KTL Curator plugins' *Known LOKF types* setting:
+The copy roots these classes on `Concept`, so a concept may name any of them as its `type`. In Obsidian, add them to the *Known LOKF types* setting of the KTL Registrar and KTL Curator plugins:
 
 ```text
 Sp800171Family, Sp800171Requirement, Sp800171Parameter
 ```
 
-A concept writes the publication's identifier in `family_number`, `requirement_id` or `odp_id`. A requirement's concept names its family's concept in `isPartOf`, and a parameter's concept names its requirement's. A name and a description are the concept's own `title` and `description`.
+A concept writes the publication's identifier in `family_number`, `requirement_id` or `odp_id`. A requirement's concept names its family's concept in `isPartOf`, and a parameter's concept names its requirement's.
 
-A host imports the copy beside LOKF's schema, `lokf.yaml`, and beside other adapt copies. LinkML merges them into one namespace, where the last definition of a name wins silently. So no class, enum or type shares a name with LOKF's or with the copies of slsa, github-actions, oscal, spdx and nist-sp-800-218. A slot shares a name only where it carries LOKF's meaning and Internationalized Resource Identifier (IRI), as `title` and `description` do, so `lokf adapt` folds the two into LOKF's and renames nothing. The copy shares no other key with the five neighbours, and `tests/test_schema_rules.py` fails on a new shared name.
+No class, enum or type of the copy shares a name with LOKF's schema or with another lmodel copy, and `tests/test_schema_rules.py` fails on a new shared name.
 
 ## License
 
-The schema and the code are under the Apache License 2.0 ([LICENSE](LICENSE)).
+The schema and the code are under the Apache License 2.0 ([LICENSE](LICENSE)), and the knowledge bundle in `.lokf/knowledge/` is under CC BY 4.0.
 
-The knowledge bundle in `.lokf/knowledge/` is under the Creative Commons Attribution 4.0 International licence (CC BY 4.0), as its `index.md` declares.
-
-SP 800-171 and SP 800-171A are works of the United States Government and are not subject to copyright in the United States. The schema's descriptions are this project's own words. NIST's catalog in [src/nist_sp_800_171/schema/oscal-content/](src/nist_sp_800_171/schema/oscal-content) keeps NIST's licence beside it: see [NOTICE](NOTICE).
-
-This is not an official NIST project, and its use implies no endorsement by NIST.
+SP 800-171 and SP 800-171A are works of the United States Government and are not subject to copyright in the United States. The schema's descriptions are this project's own words, and NIST's catalog keeps NIST's licence beside it: see [NOTICE](NOTICE). This is not an official NIST project, and its use implies no endorsement by NIST.
 
 ## Contributing and security
 
