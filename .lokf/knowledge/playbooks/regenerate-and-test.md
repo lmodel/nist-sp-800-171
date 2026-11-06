@@ -19,7 +19,7 @@ sources:
     title: the lokf-adapt recipes
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T01:13:03Z"
+  at: "2026-11-06T21:22:53Z"
 status: draft
 verified:
   - by: process:ktl-librarian
@@ -33,7 +33,7 @@ You need Python 3.10 or later, uv and just. Clone the repository, run `uv sync -
 1. Edit `src/nist_sp_800_171/schema/nist_sp_800_171.yaml`, and name the section or table of SP 800-171 or SP 800-171A it renders in the pull request.
 2. Run `just lint`, which runs `linkml-lint --ignore-warnings` over the schema folder, so that only errors fail it.[^justfile]
 3. Run `just gen-project` and `just gen-doc`, and commit what they write in `project/`, `src/nist_sp_800_171/datamodel/` and `docs/schema/`.
-4. Run `just lokf-adapt`, which rewrites `.lokf/nist-sp-800-171.yaml`, and commit it. `just lokf-adapt-check` fails when the copy is stale.[^project.justfile]
+4. Run `just lokf-adapt`, which rewrites `.lokf/schema/nist-sp-800-171.yaml`, and commit it. `just lokf-adapt-check` fails when the copy is stale.[^project.justfile]
 5. Run `just test`. Add an example of a new class to `tests/data/valid/` and a counter-example of a new constraint to `tests/data/invalid/`.
 6. Run the pre-commit hooks on what you staged, with `uvx pre-commit run`.
 

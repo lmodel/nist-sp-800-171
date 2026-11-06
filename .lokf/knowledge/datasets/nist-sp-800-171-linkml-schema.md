@@ -3,7 +3,7 @@ type: Dataset
 id: https://w3id.org/lmodel/nist-sp-800-171/knowledge/datasets/nist-sp-800-171-linkml-schema
 genre: reference
 title: nist-sp-800-171 LinkML schema
-description: "The LinkML schema of NIST SP 800-171 Revision 3, `src/nist_sp_800_171/schema/nist_sp_800_171.yaml` (schema id `https://w3id.org/lmodel/nist-sp-800-171`, version 3.0.0): eight classes, three enums and seven identifier types. Its `lokf adapt` copy `.lokf/nist-sp-800-171.yaml`, rooted on the family, the security requirement and the organization-defined parameter, is the bundle's domain schema."
+description: "The LinkML schema of NIST SP 800-171 Revision 3, `src/nist_sp_800_171/schema/nist_sp_800_171.yaml` (schema id `https://w3id.org/lmodel/nist-sp-800-171`, version 3.0.0): eight classes, three enums and seven identifier types. Its `lokf adapt` copy `.lokf/schema/nist-sp-800-171.yaml`, rooted on the family, the security requirement and the organization-defined parameter, is the bundle's domain schema."
 resource: src/nist_sp_800_171/schema/nist_sp_800_171.yaml
 version: 3.0.0
 license: Apache-2.0
@@ -22,7 +22,7 @@ sources:
     resource: project.justfile
     title: the lokf-adapt recipes and their roots
   - id: nist-sp-800-171.yaml
-    resource: .lokf/nist-sp-800-171.yaml
+    resource: .lokf/schema/nist-sp-800-171.yaml
     title: the notes lokf adapt wrote
   - resource: .lokf/justfile
     title: the schema line
@@ -30,7 +30,7 @@ sources:
     title: the tool.lokf table
 generated:
   by: process:ktl-librarian
-  at: "2026-10-30T09:04:23Z"
+  at: "2026-11-06T21:22:53Z"
 status: draft
 verified:
   - by: process:ktl-librarian
@@ -62,7 +62,7 @@ Each class names a class of lmodel/oscal in `broad_mappings`: `oscal:Catalog` fo
 
 ## As the bundle's domain schema
 
-A LOKF domain schema is a LinkML schema that imports LOKF's `lokf.yaml` and adds a host's classes and keys, so that `lokf validate` checks the concepts typed with them. The README says that this bundle's domain schema is `.lokf/nist-sp-800-171.yaml`, which `lokf adapt` writes from the schema. Edit the source, never the copy.[^readme.md] The `schema :=` line of `.lokf/justfile` and the `[tool.lokf]` table of `.lokf/pyproject.toml` both name the copy.
+A LOKF domain schema is a LinkML schema that imports LOKF's `lokf.yaml` and adds a host's classes and keys, so that `lokf validate` checks the concepts typed with them. The README says that this bundle's domain schema is `.lokf/schema/nist-sp-800-171.yaml`, which `lokf adapt` writes from the schema. Edit the source, never the copy.[^readme.md] The `schema :=` line of `.lokf/justfile` and the `[tool.lokf]` table of `.lokf/pyproject.toml` both name the copy.
 
 `project.justfile` passes three roots to `lokf adapt`: `Sp800171Family`, `Sp800171Requirement` and `Sp800171Parameter`. Its comment says that these are the three elements that SP 800-171 gives an identifier and that other documents cite, such as a system security plan or an assessment. It also says that a statement item, an objective, a method and a reference stay inlined in their requirement.[^project.justfile] The copy's notes say that `lokf adapt` re-rooted the three classes on `Concept` and folded `title` and `description` into LOKF's slots.[^nist-sp-800-171.yaml] The copy renames nothing, and `Sp800171Publication` is no longer a tree root in it. The concepts under `families/` in this bundle are typed `Sp800171Family`.
 
@@ -71,4 +71,4 @@ The generated models, `project/` and the adapt copy come from this file: see [Ge
 [^nist_sp_800_171.yaml]: src/nist_sp_800_171/schema/nist_sp_800_171.yaml, the header and the classes
 [^readme.md]: README.md, the Knowledge Trust Ladder (KTL) section
 [^project.justfile]: project.justfile, the knowledge bundle recipes
-[^nist-sp-800-171.yaml]: .lokf/nist-sp-800-171.yaml, the notes
+[^nist-sp-800-171.yaml]: .lokf/schema/nist-sp-800-171.yaml, the notes
