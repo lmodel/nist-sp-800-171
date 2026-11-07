@@ -1,0 +1,1058 @@
+{
+  "name": "nist_sp_800_171",
+  "annotations": {
+    "cprt_framework_version": {
+      "tag": "cprt_framework_version",
+      "value": "SP_800_171_3_0_0"
+    },
+    "publication_date": {
+      "tag": "publication_date",
+      "value": "2024-05"
+    },
+    "oscal_content_tag": {
+      "tag": "oscal_content_tag",
+      "value": "v1.6.0"
+    },
+    "oscal_content_commit": {
+      "tag": "oscal_content_commit",
+      "value": "f0de6d8d8c059d374f15e0ae07508d82e370fc1d"
+    }
+  },
+  "description": "A LinkML model of NIST Special Publication 800-171 Revision 3, the security requirements for protecting controlled unclassified information (CUI) in nonfederal systems and organizations: its seventeen requirement families, each security requirement with its statement, discussion, references and source controls, the organization-defined parameters (ODPs) a requirement leaves to the organization, and the assessment objectives and methods that SP 800-171A Revision 3 gives each requirement.",
+  "title": "Protecting Controlled Unclassified Information in Nonfederal Systems and Organizations (SP 800-171 Revision 3)",
+  "comments": [
+    "The version is the revision of SP 800-171 the schema renders, written as NIST's Cybersecurity and Privacy Reference Tool numbers it (SP_800_171_3_0_0), and source is the publication's digital object identifier. The catalog NIST publishes for that revision in usnistgov/oscal-content, which carries the assessment procedures of SP 800-171A Revision 3 as well, is copied to src/nist_sp_800_171/schema/oscal-content/ at the tag and commit in the annotations. scripts/check_upstream_release.py reads the same pins and reports when NIST publishes a newer revision or changes the catalog. The catalog's own metadata version (1.1.0) numbers the catalog, not the publication. The release tags are the schema's own versions.",
+    "SP 800-171 is a work of the United States Government and is not subject to copyright in the United States. The descriptions here are this project's own words; NIST's text of each requirement, discussion, parameter and assessment procedure stays in the catalog copy.",
+    "NIST's catalog renders each family as an OSCAL group, each security requirement as an OSCAL control of class requirement, each statement item, discussion, assessment objective and assessment method as a part, each organization-defined parameter as a parameter, and each reference and source control as a link to a back-matter resource. The broad_mappings name those lmodel/oscal classes."
+  ],
+  "source": "https://doi.org/10.6028/NIST.SP.800-171r3",
+  "see_also": [
+    "https://lmodel.github.io/nist-sp-800-171",
+    "https://csrc.nist.gov/pubs/sp/800/171/r3/final",
+    "https://doi.org/10.6028/NIST.SP.800-171Ar3",
+    "https://csrc.nist.gov/projects/protecting-controlled-unclassified-information",
+    "https://github.com/usnistgov/oscal-content/tree/v1.6.0/nist.gov/SP800-171/rev3"
+  ],
+  "id": "https://w3id.org/lmodel/nist-sp-800-171",
+  "version": "3.0.0",
+  "license": "Apache-2.0",
+  "prefixes": {
+    "linkml": {
+      "prefix_prefix": "linkml",
+      "prefix_reference": "https://w3id.org/linkml/"
+    },
+    "nist_sp_800_171": {
+      "prefix_prefix": "nist_sp_800_171",
+      "prefix_reference": "https://w3id.org/lmodel/nist-sp-800-171/"
+    },
+    "oscal": {
+      "prefix_prefix": "oscal",
+      "prefix_reference": "https://w3id.org/lmodel/oscal/"
+    },
+    "schema": {
+      "prefix_prefix": "schema",
+      "prefix_reference": "http://schema.org/"
+    },
+    "xsd": {
+      "prefix_prefix": "xsd",
+      "prefix_reference": "http://www.w3.org/2001/XMLSchema#"
+    },
+    "shex": {
+      "prefix_prefix": "shex",
+      "prefix_reference": "http://www.w3.org/ns/shex#"
+    }
+  },
+  "default_prefix": "nist_sp_800_171",
+  "default_range": "string",
+  "types": {
+    "sp800171_family_identifier": {
+      "name": "sp800171_family_identifier",
+      "description": "A family's number, as SP 800-171 Revision 3 numbers its seventeen families: 03, a dot and two digits from 01 to 17, such as 03.01 for Access Control.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "typeof": "string",
+      "base": "str",
+      "uri": "xsd:string",
+      "pattern": "^03\\.(0[1-9]|1[0-7])$"
+    },
+    "sp800171_requirement_identifier": {
+      "name": "sp800171_requirement_identifier",
+      "description": "A security requirement's identifier: its family's number, a dot and the requirement's two-digit number within the family, such as 03.01.01.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "typeof": "string",
+      "base": "str",
+      "uri": "xsd:string",
+      "pattern": "^03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])$"
+    },
+    "sp800171_item_identifier": {
+      "name": "sp800171_item_identifier",
+      "description": "The identifier of a lettered item of a requirement statement, such as 03.01.01.a, or of a numbered item under it, such as 03.01.01.c.01.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "typeof": "string",
+      "base": "str",
+      "uri": "xsd:string",
+      "pattern": "^03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])\\.[a-z](\\.(0[1-9]|[1-9][0-9]))?$"
+    },
+    "sp800171_odp_identifier": {
+      "name": "sp800171_odp_identifier",
+      "description": "An organization-defined parameter's identifier, as SP 800-171A writes it: A, the requirement's identifier, ODP and the parameter's two-digit number in square brackets, such as A.03.01.01.ODP[01].",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "typeof": "string",
+      "base": "str",
+      "uri": "xsd:string",
+      "pattern": "^A\\.03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])\\.ODP\\[(0[1-9]|[1-9][0-9])\\]$"
+    },
+    "sp800171_objective_identifier": {
+      "name": "sp800171_objective_identifier",
+      "description": "An assessment objective's identifier, as SP 800-171A writes it: A and the identifier of the requirement or statement item it assesses, such as A.03.01.01.e, with a two-digit number in square brackets when that item has several objectives, such as A.03.01.01.b[01]. NIST's catalog writes the bracketed number as a dotted one, A.03.01.01.b.01.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "typeof": "string",
+      "base": "str",
+      "uri": "xsd:string",
+      "pattern": "^A\\.03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])(\\.[a-z](\\.(0[1-9]|[1-9][0-9]))?)?(\\[(0[1-9]|[1-9][0-9])\\])?$"
+    },
+    "sp800171_source_control_identifier": {
+      "name": "sp800171_source_control_identifier",
+      "description": "The identifier of a control of SP 800-53 Revision 5 as NIST's catalog of SP 800-171 writes it: the family's two letters, a hyphen and the control's two-digit number, with a two-digit enhancement number in parentheses where it is one, such as AC-02 and AC-02(03).",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "typeof": "string",
+      "base": "str",
+      "uri": "xsd:string",
+      "pattern": "^[A-Z]{2}-(0[1-9]|[1-9][0-9])(\\((0[1-9]|[1-9][0-9])\\))?$"
+    },
+    "sp800171_cited_publication_name": {
+      "name": "sp800171_cited_publication_name",
+      "description": "The short name SP 800-171 gives a publication it references: the series (SP, FIPS or IR) and the publication's number, with the number of a part or volume where the publication has one, such as SP 800-57-1, SP 800-160-1, IR 8011-2 or FIPS 140-3. The short name leaves out the publication's revision, which the citation and the address carry: SP 800-53 stands for Revision 5.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "typeof": "string",
+      "base": "str",
+      "uri": "xsd:string",
+      "pattern": "^(FIPS|IR|SP) [1-9][0-9]*(-[0-9A-Z]+)*$"
+    },
+    "string": {
+      "name": "string",
+      "description": "A character string",
+      "notes": [
+        "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string. If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "exact_mappings": [
+        "schema:Text"
+      ],
+      "base": "str",
+      "uri": "xsd:string"
+    },
+    "integer": {
+      "name": "integer",
+      "description": "An integer",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"integer\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "exact_mappings": [
+        "schema:Integer"
+      ],
+      "base": "int",
+      "uri": "xsd:integer"
+    },
+    "boolean": {
+      "name": "boolean",
+      "description": "A binary (true or false) value",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"boolean\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "exact_mappings": [
+        "schema:Boolean"
+      ],
+      "base": "Bool",
+      "uri": "xsd:boolean",
+      "repr": "bool"
+    },
+    "float": {
+      "name": "float",
+      "description": "A real number that conforms to the xsd:float specification",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"float\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "exact_mappings": [
+        "schema:Float"
+      ],
+      "base": "float",
+      "uri": "xsd:float"
+    },
+    "double": {
+      "name": "double",
+      "description": "A real number that conforms to the xsd:double specification",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"double\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "close_mappings": [
+        "schema:Float"
+      ],
+      "base": "float",
+      "uri": "xsd:double"
+    },
+    "decimal": {
+      "name": "decimal",
+      "description": "A real number with arbitrary precision that conforms to the xsd:decimal specification",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"decimal\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "broad_mappings": [
+        "schema:Number"
+      ],
+      "base": "Decimal",
+      "uri": "xsd:decimal"
+    },
+    "time": {
+      "name": "time",
+      "description": "A time object represents a (local) time of day, independent of any particular day",
+      "notes": [
+        "URI is dateTime because OWL reasoners do not work with straight date or time",
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"time\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "exact_mappings": [
+        "schema:Time"
+      ],
+      "base": "XSDTime",
+      "uri": "xsd:time",
+      "repr": "str"
+    },
+    "date": {
+      "name": "date",
+      "description": "a date (year, month and day) in an idealized calendar",
+      "notes": [
+        "URI is dateTime because OWL reasoners don't work with straight date or time",
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "exact_mappings": [
+        "schema:Date"
+      ],
+      "base": "XSDDate",
+      "uri": "xsd:date",
+      "repr": "str"
+    },
+    "datetime": {
+      "name": "datetime",
+      "description": "The combination of a date and time",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"datetime\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "exact_mappings": [
+        "schema:DateTime"
+      ],
+      "base": "XSDDateTime",
+      "uri": "xsd:dateTime",
+      "repr": "str"
+    },
+    "date_or_datetime": {
+      "name": "date_or_datetime",
+      "description": "Either a date or a datetime",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date_or_datetime\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "base": "str",
+      "uri": "linkml:DateOrDatetime",
+      "repr": "str"
+    },
+    "uriorcurie": {
+      "name": "uriorcurie",
+      "description": "a URI or a CURIE",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uriorcurie\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "base": "URIorCURIE",
+      "uri": "xsd:anyURI",
+      "repr": "str"
+    },
+    "curie": {
+      "name": "curie",
+      "conforms_to": "https://www.w3.org/TR/curie/",
+      "description": "a compact URI",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"curie\"."
+      ],
+      "comments": [
+        "in RDF serializations this MUST be expanded to a URI",
+        "in non-RDF serializations MAY be serialized as the compact representation"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "base": "Curie",
+      "uri": "xsd:string",
+      "repr": "str"
+    },
+    "uri": {
+      "name": "uri",
+      "conforms_to": "https://www.ietf.org/rfc/rfc3987.txt",
+      "description": "a complete URI",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uri\"."
+      ],
+      "comments": [
+        "in RDF serializations a slot with range of uri is treated as a literal or type xsd:anyURI unless it is an identifier or a reference to an identifier, in which case it is translated directly to a node"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "close_mappings": [
+        "schema:URL"
+      ],
+      "base": "URI",
+      "uri": "xsd:anyURI",
+      "repr": "str"
+    },
+    "ncname": {
+      "name": "ncname",
+      "description": "Prefix part of CURIE",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"ncname\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "base": "NCName",
+      "uri": "xsd:string",
+      "repr": "str"
+    },
+    "objectidentifier": {
+      "name": "objectidentifier",
+      "description": "A URI or CURIE that represents an object in the model.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"objectidentifier\"."
+      ],
+      "comments": [
+        "Used for inheritance and type checking"
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "base": "ElementIdentifier",
+      "uri": "shex:iri",
+      "repr": "str"
+    },
+    "nodeidentifier": {
+      "name": "nodeidentifier",
+      "description": "A URI, CURIE or BNODE that represents a node in a model.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"nodeidentifier\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "base": "NodeIdentifier",
+      "uri": "shex:nonLiteral",
+      "repr": "str"
+    },
+    "jsonpointer": {
+      "name": "jsonpointer",
+      "conforms_to": "https://datatracker.ietf.org/doc/html/rfc6901",
+      "description": "A string encoding a JSON Pointer. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to a valid object within the current instance document when encoded in tree form.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpointer\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "base": "str",
+      "uri": "xsd:string",
+      "repr": "str"
+    },
+    "jsonpath": {
+      "name": "jsonpath",
+      "conforms_to": "https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html",
+      "description": "A string encoding a JSON Path. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded in tree form.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpath\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "base": "str",
+      "uri": "xsd:string",
+      "repr": "str"
+    },
+    "sparqlpath": {
+      "name": "sparqlpath",
+      "conforms_to": "https://www.w3.org/TR/sparql11-query/#propertypaths",
+      "description": "A string encoding a SPARQL Property Path. The value of the string MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded as RDF.",
+      "notes": [
+        "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"sparqlpath\"."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "base": "str",
+      "uri": "xsd:string",
+      "repr": "str"
+    }
+  },
+  "enums": {
+    "Sp800171RequirementStatus": {
+      "name": "Sp800171RequirementStatus",
+      "description": "The one status SP 800-171 Revision 3 states for a requirement. A requirement in force carries none.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "see_also": [
+        "https://csrc.nist.gov/pubs/sp/800/171/r3/final"
+      ],
+      "permissible_values": {
+        "withdrawn": {
+          "text": "withdrawn",
+          "description": "Revision 3 withdrew the requirement; other requirements incorporate or address what it required, or nothing does."
+        }
+      }
+    },
+    "Sp800171AssessmentMethodKind": {
+      "name": "Sp800171AssessmentMethodKind",
+      "description": "The three assessment methods of SP 800-171A.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "see_also": [
+        "https://doi.org/10.6028/NIST.SP.800-171Ar3"
+      ],
+      "permissible_values": {
+        "examine": {
+          "text": "examine",
+          "description": "Reviewing, inspecting, observing, studying or analysing assessment objects such as policies, plans, records and configurations."
+        },
+        "interview": {
+          "text": "interview",
+          "description": "Holding discussions with people such as administrators and personnel with security responsibilities."
+        },
+        "test": {
+          "text": "test",
+          "description": "Exercising mechanisms or processes under specified conditions and comparing the result with what is expected."
+        }
+      }
+    },
+    "Sp800171SelectionCount": {
+      "name": "Sp800171SelectionCount",
+      "description": "How many choices a selection parameter takes, as OSCAL states it.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "permissible_values": {
+        "one": {
+          "text": "one",
+          "description": "Exactly one of the choices."
+        },
+        "one_or_more": {
+          "text": "one_or_more",
+          "description": "One or more of the choices."
+        }
+      }
+    }
+  },
+  "slots": {
+    "title": {
+      "name": "title",
+      "description": "The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management.",
+      "comments": [
+        "It means what LOKF's title means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one title key."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "slot_uri": "schema:name",
+      "domain_of": [
+        "Sp800171Family",
+        "Sp800171Requirement"
+      ]
+    },
+    "description": {
+      "name": "description",
+      "description": "What the family or requirement is about, in the words of whoever records it. SP 800-171 gives a family no text of its own, and a requirement's own text goes in its statement, items and discussion.",
+      "comments": [
+        "It means what LOKF's description means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one description key."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "slot_uri": "schema:description",
+      "domain_of": [
+        "Sp800171Family",
+        "Sp800171Requirement"
+      ]
+    },
+    "family_number": {
+      "name": "family_number",
+      "description": "The family's number, such as 03.01.",
+      "comments": [
+        "A slot of its own, listed first in Sp800171Family's slots, rather than an attribute, so that the generated Python dataclasses key a list of families by their number and not by their title: they key an inlined list by the first required slot of the class, and a class lists its slots before its attributes. The adapt copy roots the family on LOKF's Concept, whose id is its identifier, so the number cannot be marked as one."
+      ],
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "domain_of": [
+        "Sp800171Family"
+      ],
+      "range": "sp800171_family_identifier",
+      "required": true
+    }
+  },
+  "classes": {
+    "Sp800171Publication": {
+      "name": "Sp800171Publication",
+      "description": "One revision of SP 800-171 as a whole: its requirement families, each holding its security requirements, with the assessment procedures of the matching revision of SP 800-171A inside each requirement.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "see_also": [
+        "https://csrc.nist.gov/pubs/sp/800/171/r3/final"
+      ],
+      "broad_mappings": [
+        "oscal:Catalog"
+      ],
+      "attributes": {
+        "sp800171_revision": {
+          "name": "sp800171_revision",
+          "description": "The revision of SP 800-171 the document renders, as NIST numbers it, such as 3.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Publication",
+          "domain_of": [
+            "Sp800171Publication"
+          ],
+          "range": "string",
+          "required": true,
+          "pattern": "^[1-9][0-9]*$"
+        },
+        "requirement_families": {
+          "name": "requirement_families",
+          "description": "The requirement families, in the order SP 800-171 gives them.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Publication",
+          "domain_of": [
+            "Sp800171Publication"
+          ],
+          "range": "Sp800171Family",
+          "required": true,
+          "multivalued": true,
+          "inlined": true,
+          "inlined_as_list": true,
+          "minimum_cardinality": 1
+        }
+      },
+      "class_uri": "nist_sp_800_171:Publication",
+      "tree_root": true
+    },
+    "Sp800171Family": {
+      "name": "Sp800171Family",
+      "description": "One of the seventeen families that SP 800-171 Revision 3 sorts its security requirements into, such as Access Control (03.01) or Supply Chain Risk Management (03.17).",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "see_also": [
+        "https://csrc.nist.gov/pubs/sp/800/171/r3/final"
+      ],
+      "broad_mappings": [
+        "oscal:Group"
+      ],
+      "slots": [
+        "family_number",
+        "title",
+        "description"
+      ],
+      "slot_usage": {
+        "title": {
+          "name": "title",
+          "required": true
+        }
+      },
+      "attributes": {
+        "family_requirements": {
+          "name": "family_requirements",
+          "description": "The security requirements of the family, the withdrawn ones included, in the order SP 800-171 numbers them. A knowledge bundle relates a requirement to its family with isPartOf instead.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Family",
+          "domain_of": [
+            "Sp800171Family"
+          ],
+          "range": "Sp800171Requirement",
+          "multivalued": true,
+          "inlined": true,
+          "inlined_as_list": true
+        },
+        "family_number": {
+          "name": "family_number",
+          "description": "The family's number, such as 03.01.",
+          "comments": [
+            "A slot of its own, listed first in Sp800171Family's slots, rather than an attribute, so that the generated Python dataclasses key a list of families by their number and not by their title: they key an inlined list by the first required slot of the class, and a class lists its slots before its attributes. The adapt copy roots the family on LOKF's Concept, whose id is its identifier, so the number cannot be marked as one."
+          ],
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Family",
+          "domain_of": [
+            "Sp800171Family"
+          ],
+          "range": "sp800171_family_identifier",
+          "required": true
+        },
+        "title": {
+          "name": "title",
+          "description": "The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management.",
+          "comments": [
+            "It means what LOKF's title means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one title key."
+          ],
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "slot_uri": "schema:name",
+          "owner": "Sp800171Family",
+          "domain_of": [
+            "Sp800171Family",
+            "Sp800171Requirement"
+          ],
+          "range": "string",
+          "required": true
+        },
+        "description": {
+          "name": "description",
+          "description": "What the family or requirement is about, in the words of whoever records it. SP 800-171 gives a family no text of its own, and a requirement's own text goes in its statement, items and discussion.",
+          "comments": [
+            "It means what LOKF's description means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one description key."
+          ],
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "slot_uri": "schema:description",
+          "owner": "Sp800171Family",
+          "domain_of": [
+            "Sp800171Family",
+            "Sp800171Requirement"
+          ],
+          "range": "string"
+        }
+      },
+      "class_uri": "nist_sp_800_171:Family"
+    },
+    "Sp800171Requirement": {
+      "name": "Sp800171Requirement",
+      "description": "A security requirement of SP 800-171: a numbered, named requirement for protecting CUI, with its statement, discussion, references and source controls, the organization-defined parameters its statement leaves open, and the assessment objectives and methods SP 800-171A gives it. A requirement that Revision 3 withdrew keeps its number and says which requirements took its place.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "see_also": [
+        "https://csrc.nist.gov/pubs/sp/800/171/r3/final"
+      ],
+      "broad_mappings": [
+        "oscal:Control"
+      ],
+      "slots": [
+        "title",
+        "description"
+      ],
+      "attributes": {
+        "requirement_id": {
+          "name": "requirement_id",
+          "description": "The requirement's identifier, such as 03.01.01.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Requirement",
+          "domain_of": [
+            "Sp800171Requirement"
+          ],
+          "range": "sp800171_requirement_identifier",
+          "required": true
+        },
+        "requirement_status": {
+          "name": "requirement_status",
+          "description": "Withdrawn when Revision 3 withdrew the requirement. A requirement with no status is in force.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Requirement",
+          "domain_of": [
+            "Sp800171Requirement"
+          ],
+          "range": "Sp800171RequirementStatus"
+        },
+        "incorporated_into_requirements": {
+          "name": "incorporated_into_requirements",
+          "description": "For a withdrawn requirement, the requirements of Revision 3 that incorporate what it required, as the catalog states them.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Requirement",
+          "domain_of": [
+            "Sp800171Requirement"
+          ],
+          "range": "sp800171_requirement_identifier",
+          "multivalued": true
+        },
+        "addressed_by_requirements": {
+          "name": "addressed_by_requirements",
+          "description": "For a withdrawn requirement, the requirements of Revision 3 that address what it required, as the catalog states them.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Requirement",
+          "domain_of": [
+            "Sp800171Requirement"
+          ],
+          "range": "sp800171_requirement_identifier",
+          "multivalued": true
+        },
+        "requirement_statement": {
+          "name": "requirement_statement",
+          "description": "The requirement statement when SP 800-171 writes it as one piece of text and not as lettered items. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Requirement",
+          "domain_of": [
+            "Sp800171Requirement"
+          ],
+          "range": "string",
+          "pattern": "^\\s*\\S"
+        },
+        "requirement_items": {
+          "name": "requirement_items",
+          "description": "The lettered items of the requirement statement, in order, each with its numbered items where it has them. A requirement has either these or a statement, never both.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Requirement",
+          "domain_of": [
+            "Sp800171Requirement"
+          ],
+          "range": "Sp800171RequirementItem",
+          "multivalued": true,
+          "inlined": true,
+          "inlined_as_list": true
+        },
+        "requirement_discussion": {
+          "name": "requirement_discussion",
+          "description": "The requirement's discussion: SP 800-171's explanation of what the requirement means and how it relates to other requirements.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Requirement",
+          "domain_of": [
+            "Sp800171Requirement"
+          ],
+          "range": "string",
+          "pattern": "^\\s*\\S"
+        },
+        "requirement_parameters": {
+          "name": "requirement_parameters",
+          "description": "The organization-defined parameters the requirement statement leaves to the organization, in the order SP 800-171A numbers them.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Requirement",
+          "domain_of": [
+            "Sp800171Requirement"
+          ],
+          "range": "Sp800171Parameter",
+          "multivalued": true,
+          "inlined": true,
+          "inlined_as_list": true
+        },
+        "requirement_objectives": {
+          "name": "requirement_objectives",
+          "description": "The assessment objectives SP 800-171A gives the requirement: the determination statements an assessor checks.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Requirement",
+          "domain_of": [
+            "Sp800171Requirement"
+          ],
+          "range": "Sp800171AssessmentObjective",
+          "multivalued": true,
+          "inlined": true,
+          "inlined_as_list": true
+        },
+        "requirement_methods": {
+          "name": "requirement_methods",
+          "description": "The assessment methods SP 800-171A gives the requirement, each with the objects it is applied to.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Requirement",
+          "domain_of": [
+            "Sp800171Requirement"
+          ],
+          "range": "Sp800171AssessmentMethod",
+          "multivalued": true,
+          "inlined": true,
+          "inlined_as_list": true
+        },
+        "requirement_references": {
+          "name": "requirement_references",
+          "description": "The publications SP 800-171 lists under the requirement's references, each with its citation and address as the catalog gives them.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Requirement",
+          "domain_of": [
+            "Sp800171Requirement"
+          ],
+          "range": "Sp800171Reference",
+          "multivalued": true,
+          "inlined": true,
+          "inlined_as_list": true
+        },
+        "source_controls": {
+          "name": "source_controls",
+          "description": "The controls of SP 800-53 Revision 5 the requirement is drawn from, by their identifiers, as the catalog lists them among the requirement's references. The identifier is data; the schema maps nothing to a model of SP 800-53.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Requirement",
+          "domain_of": [
+            "Sp800171Requirement"
+          ],
+          "range": "sp800171_source_control_identifier",
+          "multivalued": true
+        },
+        "title": {
+          "name": "title",
+          "description": "The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management.",
+          "comments": [
+            "It means what LOKF's title means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one title key."
+          ],
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "slot_uri": "schema:name",
+          "owner": "Sp800171Requirement",
+          "domain_of": [
+            "Sp800171Family",
+            "Sp800171Requirement"
+          ],
+          "range": "string"
+        },
+        "description": {
+          "name": "description",
+          "description": "What the family or requirement is about, in the words of whoever records it. SP 800-171 gives a family no text of its own, and a requirement's own text goes in its statement, items and discussion.",
+          "comments": [
+            "It means what LOKF's description means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one description key."
+          ],
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "slot_uri": "schema:description",
+          "owner": "Sp800171Requirement",
+          "domain_of": [
+            "Sp800171Family",
+            "Sp800171Requirement"
+          ],
+          "range": "string"
+        }
+      },
+      "class_uri": "nist_sp_800_171:Requirement"
+    },
+    "Sp800171RequirementItem": {
+      "name": "Sp800171RequirementItem",
+      "description": "One item of a requirement statement: a lettered item such as 03.01.01.a, or a numbered item under a lettered one such as 03.01.01.c.01.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "see_also": [
+        "https://csrc.nist.gov/pubs/sp/800/171/r3/final"
+      ],
+      "broad_mappings": [
+        "oscal:Part"
+      ],
+      "attributes": {
+        "requirement_item_id": {
+          "name": "requirement_item_id",
+          "description": "The item's identifier, such as 03.01.01.a.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171RequirementItem",
+          "domain_of": [
+            "Sp800171RequirementItem"
+          ],
+          "range": "sp800171_item_identifier",
+          "required": true
+        },
+        "requirement_item_text": {
+          "name": "requirement_item_text",
+          "description": "What the item requires. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171RequirementItem",
+          "domain_of": [
+            "Sp800171RequirementItem"
+          ],
+          "range": "string",
+          "required": true,
+          "pattern": "^\\s*\\S"
+        },
+        "requirement_subitems": {
+          "name": "requirement_subitems",
+          "description": "The numbered items under a lettered item, in order.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171RequirementItem",
+          "domain_of": [
+            "Sp800171RequirementItem"
+          ],
+          "range": "Sp800171RequirementItem",
+          "multivalued": true,
+          "inlined": true,
+          "inlined_as_list": true
+        }
+      },
+      "class_uri": "nist_sp_800_171:RequirementItem"
+    },
+    "Sp800171Parameter": {
+      "name": "Sp800171Parameter",
+      "description": "An organization-defined parameter (ODP): a value, such as a time period or a frequency, that a requirement statement leaves to the organization, with the guideline SP 800-171A gives for defining it. A few parameters are a selection among choices instead of a value.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "see_also": [
+        "https://doi.org/10.6028/NIST.SP.800-171Ar3"
+      ],
+      "broad_mappings": [
+        "oscal:Parameter"
+      ],
+      "attributes": {
+        "odp_id": {
+          "name": "odp_id",
+          "description": "The parameter's identifier, such as A.03.01.01.ODP[01].",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Parameter",
+          "domain_of": [
+            "Sp800171Parameter"
+          ],
+          "range": "sp800171_odp_identifier",
+          "required": true
+        },
+        "odp_label": {
+          "name": "odp_label",
+          "description": "What kind of value the parameter takes, such as time period or frequency, or SELECTED PARAMETER VALUES for a selection.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Parameter",
+          "domain_of": [
+            "Sp800171Parameter"
+          ],
+          "range": "string",
+          "required": true,
+          "pattern": "^\\s*\\S"
+        },
+        "odp_usage": {
+          "name": "odp_usage",
+          "description": "How the requirement statement names the parameter, such as organization-defined time period.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Parameter",
+          "domain_of": [
+            "Sp800171Parameter"
+          ],
+          "range": "string"
+        },
+        "odp_guideline": {
+          "name": "odp_guideline",
+          "description": "The determination SP 800-171A gives for the parameter: what the organization must have defined, such as the time period for account inactivity before disabling is defined.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Parameter",
+          "domain_of": [
+            "Sp800171Parameter"
+          ],
+          "range": "string"
+        },
+        "odp_choices": {
+          "name": "odp_choices",
+          "description": "For a selection, the choices SP 800-171 offers, in its order. A choice may itself carry an insert placeholder naming another parameter.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Parameter",
+          "domain_of": [
+            "Sp800171Parameter"
+          ],
+          "range": "string",
+          "multivalued": true
+        },
+        "odp_selection_count": {
+          "name": "odp_selection_count",
+          "description": "How many of the choices a selection takes.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Parameter",
+          "domain_of": [
+            "Sp800171Parameter"
+          ],
+          "range": "Sp800171SelectionCount"
+        }
+      },
+      "class_uri": "nist_sp_800_171:Parameter"
+    },
+    "Sp800171AssessmentObjective": {
+      "name": "Sp800171AssessmentObjective",
+      "description": "An assessment objective of SP 800-171A: one determination statement that an assessor checks, tied to the requirement or to one item of its statement.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "see_also": [
+        "https://doi.org/10.6028/NIST.SP.800-171Ar3"
+      ],
+      "broad_mappings": [
+        "oscal:Part"
+      ],
+      "attributes": {
+        "requirement_objective_id": {
+          "name": "requirement_objective_id",
+          "description": "The objective's identifier, such as A.03.01.01.b[01].",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171AssessmentObjective",
+          "domain_of": [
+            "Sp800171AssessmentObjective"
+          ],
+          "range": "sp800171_objective_identifier",
+          "required": true
+        },
+        "requirement_determination": {
+          "name": "requirement_determination",
+          "description": "The determination statement: what the assessor determines is the case, such as system accounts are created in accordance with organizational policy, procedures, prerequisites, and criteria.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171AssessmentObjective",
+          "domain_of": [
+            "Sp800171AssessmentObjective"
+          ],
+          "range": "string",
+          "required": true,
+          "pattern": "^\\s*\\S"
+        },
+        "assessed_requirement_item": {
+          "name": "assessed_requirement_item",
+          "description": "The statement item the objective assesses, such as 03.01.01.b. Absent when the objective assesses a requirement whose statement is one piece of text.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171AssessmentObjective",
+          "domain_of": [
+            "Sp800171AssessmentObjective"
+          ],
+          "range": "sp800171_item_identifier"
+        }
+      },
+      "class_uri": "nist_sp_800_171:AssessmentObjective"
+    },
+    "Sp800171AssessmentMethod": {
+      "name": "Sp800171AssessmentMethod",
+      "description": "One of the three assessment methods SP 800-171A applies to a requirement, examine, interview or test, with the assessment objects (documents, people, processes or mechanisms) it is applied to.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "see_also": [
+        "https://doi.org/10.6028/NIST.SP.800-171Ar3"
+      ],
+      "broad_mappings": [
+        "oscal:Part"
+      ],
+      "attributes": {
+        "requirement_method_kind": {
+          "name": "requirement_method_kind",
+          "description": "Which method it is.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171AssessmentMethod",
+          "domain_of": [
+            "Sp800171AssessmentMethod"
+          ],
+          "range": "Sp800171AssessmentMethodKind",
+          "required": true
+        },
+        "requirement_method_objects": {
+          "name": "requirement_method_objects",
+          "description": "The assessment objects, one entry each, in the order SP 800-171A lists them, such as access control policy and procedures or system administrators.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171AssessmentMethod",
+          "domain_of": [
+            "Sp800171AssessmentMethod"
+          ],
+          "range": "string",
+          "required": true,
+          "multivalued": true,
+          "pattern": "^\\s*\\S",
+          "minimum_cardinality": 1
+        }
+      },
+      "class_uri": "nist_sp_800_171:AssessmentMethod"
+    },
+    "Sp800171Reference": {
+      "name": "Sp800171Reference",
+      "description": "A publication that SP 800-171 lists under a requirement's references, by the short name the publication gives it, with the full citation and the address NIST's catalog gives it.",
+      "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+      "see_also": [
+        "https://csrc.nist.gov/pubs/sp/800/171/r3/final"
+      ],
+      "broad_mappings": [
+        "oscal:Resource"
+      ],
+      "attributes": {
+        "cited_publication": {
+          "name": "cited_publication",
+          "description": "The publication's short name, such as SP 800-63-3.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Reference",
+          "domain_of": [
+            "Sp800171Reference"
+          ],
+          "range": "sp800171_cited_publication_name",
+          "required": true
+        },
+        "cited_publication_citation": {
+          "name": "cited_publication_citation",
+          "description": "The full citation, as the catalog's back matter gives it.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Reference",
+          "domain_of": [
+            "Sp800171Reference"
+          ],
+          "range": "string",
+          "required": true
+        },
+        "cited_publication_url": {
+          "name": "cited_publication_url",
+          "description": "The publication's address, which the catalog gives as its digital object identifier at doi.org.",
+          "from_schema": "https://w3id.org/lmodel/nist-sp-800-171",
+          "owner": "Sp800171Reference",
+          "domain_of": [
+            "Sp800171Reference"
+          ],
+          "range": "uri",
+          "required": true,
+          "pattern": "^https://doi\\.org/10\\.[0-9]+/\\S+$"
+        }
+      },
+      "class_uri": "nist_sp_800_171:Reference"
+    }
+  },
+  "metamodel_version": "1.12.0",
+  "source_file": "src/nist_sp_800_171/schema/nist_sp_800_171.yaml",
+  "@type": "SchemaDefinition"
+}
