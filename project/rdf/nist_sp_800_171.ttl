@@ -1,0 +1,891 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix linkml: <https://w3id.org/linkml/> .
+@prefix pav: <http://purl.org/pav/> .
+<https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethod> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://doi.org/10.6028/NIST.SP.800-171Ar3"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Part"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_171:AssessmentMethod"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-171/requirement_method_kind> , <https://w3id.org/lmodel/nist-sp-800-171/requirement_method_objects> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-171/AssessmentMethod"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethod"^^xsd:anyURI ;
+	linkml:description "One of the three assessment methods SP 800-171A applies to a requirement, examine, interview or test, with the assessment objects (documents, people, processes or mechanisms) it is applied to." ;
+	linkml:slot_usage _:c14n10 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-171/sp800171AssessmentMethod__requirement_method_kind> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171AssessmentMethod__requirement_method_objects> .
+<https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethodKind> rdfs:seeAlso "https://doi.org/10.6028/NIST.SP.800-171Ar3"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethodKind"^^xsd:anyURI ;
+	linkml:description "The three assessment methods of SP 800-171A." ;
+	linkml:permissible_values <https://w3id.org/lmodel/nist-sp-800-171/examine> , <https://w3id.org/lmodel/nist-sp-800-171/interview> , <https://w3id.org/lmodel/nist-sp-800-171/test> .
+<https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentObjective> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://doi.org/10.6028/NIST.SP.800-171Ar3"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Part"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_171:AssessmentObjective"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-171/assessed_requirement_item> , <https://w3id.org/lmodel/nist-sp-800-171/requirement_determination> , <https://w3id.org/lmodel/nist-sp-800-171/requirement_objective_id> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-171/AssessmentObjective"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentObjective"^^xsd:anyURI ;
+	linkml:description "An assessment objective of SP 800-171A: one determination statement that an assessor checks, tied to the requirement or to one item of its statement." ;
+	linkml:slot_usage _:c14n9 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-171/sp800171AssessmentObjective__assessed_requirement_item> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171AssessmentObjective__requirement_determination> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171AssessmentObjective__requirement_objective_id> .
+<https://w3id.org/lmodel/nist-sp-800-171/Sp800171Family> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://csrc.nist.gov/pubs/sp/800/171/r3/final"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Group"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_171:Family"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-171/family_requirements> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-171/Family"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/Sp800171Family"^^xsd:anyURI ;
+	linkml:description "One of the seventeen families that SP 800-171 Revision 3 sorts its security requirements into, such as Access Control (03.01) or Supply Chain Risk Management (03.17)." ;
+	linkml:slot_usage _:c14n14 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Family_title> , <https://w3id.org/lmodel/nist-sp-800-171/description> , <https://w3id.org/lmodel/nist-sp-800-171/family_number> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Family__family_requirements> .
+<https://w3id.org/lmodel/nist-sp-800-171/Sp800171Family_title> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:mappingRelation "http://schema.org/name"^^xsd:anyURI ;
+	skos:note "It means what LOKF's title means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one title key." ;
+	skos:prefLabel "title" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/title"^^xsd:anyURI ;
+	linkml:description "The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management." ;
+	linkml:domain <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Family> ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Family> ;
+	linkml:is_a <https://w3id.org/lmodel/nist-sp-800-171/title> ;
+	linkml:is_usage_slot true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Family> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:required true ;
+	linkml:slot_uri "http://schema.org/name"^^xsd:anyURI ;
+	linkml:usage_slot_name "title" .
+<https://w3id.org/lmodel/nist-sp-800-171/Sp800171Parameter> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://doi.org/10.6028/NIST.SP.800-171Ar3"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Parameter"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_171:Parameter"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-171/odp_choices> , <https://w3id.org/lmodel/nist-sp-800-171/odp_guideline> , <https://w3id.org/lmodel/nist-sp-800-171/odp_id> , <https://w3id.org/lmodel/nist-sp-800-171/odp_label> , <https://w3id.org/lmodel/nist-sp-800-171/odp_selection_count> , <https://w3id.org/lmodel/nist-sp-800-171/odp_usage> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-171/Parameter"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/Sp800171Parameter"^^xsd:anyURI ;
+	linkml:description "An organization-defined parameter (ODP): a value, such as a time period or a frequency, that a requirement statement leaves to the organization, with the guideline SP 800-171A gives for defining it. A few parameters are a selection among choices instead of a value." ;
+	linkml:slot_usage _:c14n8 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-171/sp800171Parameter__odp_choices> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Parameter__odp_guideline> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Parameter__odp_id> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Parameter__odp_label> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Parameter__odp_selection_count> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Parameter__odp_usage> .
+<https://w3id.org/lmodel/nist-sp-800-171/Sp800171Publication> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://csrc.nist.gov/pubs/sp/800/171/r3/final"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Catalog"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_171:Publication"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-171/requirement_families> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171_revision> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-171/Publication"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/Sp800171Publication"^^xsd:anyURI ;
+	linkml:description "One revision of SP 800-171 as a whole: its requirement families, each holding its security requirements, with the assessment procedures of the matching revision of SP 800-171A inside each requirement." ;
+	linkml:slot_usage _:c14n12 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-171/sp800171Publication__requirement_families> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Publication__sp800171_revision> ;
+	linkml:tree_root true .
+<https://w3id.org/lmodel/nist-sp-800-171/Sp800171Reference> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://csrc.nist.gov/pubs/sp/800/171/r3/final"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Resource"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_171:Reference"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-171/cited_publication> , <https://w3id.org/lmodel/nist-sp-800-171/cited_publication_citation> , <https://w3id.org/lmodel/nist-sp-800-171/cited_publication_url> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-171/Reference"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/Sp800171Reference"^^xsd:anyURI ;
+	linkml:description "A publication that SP 800-171 lists under a requirement's references, by the short name the publication gives it, with the full citation and the address NIST's catalog gives it." ;
+	linkml:slot_usage _:c14n11 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-171/sp800171Reference__cited_publication> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Reference__cited_publication_citation> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Reference__cited_publication_url> .
+<https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://csrc.nist.gov/pubs/sp/800/171/r3/final"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Control"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_171:Requirement"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-171/addressed_by_requirements> , <https://w3id.org/lmodel/nist-sp-800-171/incorporated_into_requirements> , <https://w3id.org/lmodel/nist-sp-800-171/requirement_discussion> , <https://w3id.org/lmodel/nist-sp-800-171/requirement_id> , <https://w3id.org/lmodel/nist-sp-800-171/requirement_items> , <https://w3id.org/lmodel/nist-sp-800-171/requirement_methods> , <https://w3id.org/lmodel/nist-sp-800-171/requirement_objectives> , <https://w3id.org/lmodel/nist-sp-800-171/requirement_parameters> , <https://w3id.org/lmodel/nist-sp-800-171/requirement_references> , <https://w3id.org/lmodel/nist-sp-800-171/requirement_statement> , <https://w3id.org/lmodel/nist-sp-800-171/requirement_status> , <https://w3id.org/lmodel/nist-sp-800-171/source_controls> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-171/Requirement"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement"^^xsd:anyURI ;
+	linkml:description "A security requirement of SP 800-171: a numbered, named requirement for protecting CUI, with its statement, discussion, references and source controls, the organization-defined parameters its statement leaves open, and the assessment objectives and methods SP 800-171A gives it. A requirement that Revision 3 withdrew keeps its number and says which requirements took its place." ;
+	linkml:slot_usage _:c14n1 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-171/description> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__addressed_by_requirements> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__incorporated_into_requirements> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_discussion> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_id> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_items> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_methods> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_objectives> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_parameters> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_references> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_statement> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_status> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__source_controls> , <https://w3id.org/lmodel/nist-sp-800-171/title> .
+<https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementItem> a linkml:ClassDefinition ;
+	rdfs:seeAlso "https://csrc.nist.gov/pubs/sp/800/171/r3/final"^^xsd:anyURI ;
+	skos:broadMatch "oscal:Part"^^xsd:anyURI ;
+	skos:exactMatch "nist_sp_800_171:RequirementItem"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:attributes <https://w3id.org/lmodel/nist-sp-800-171/requirement_item_id> , <https://w3id.org/lmodel/nist-sp-800-171/requirement_item_text> , <https://w3id.org/lmodel/nist-sp-800-171/requirement_subitems> ;
+	linkml:class_uri "https://w3id.org/lmodel/nist-sp-800-171/RequirementItem"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementItem"^^xsd:anyURI ;
+	linkml:description "One item of a requirement statement: a lettered item such as 03.01.01.a, or a numbered item under a lettered one such as 03.01.01.c.01." ;
+	linkml:slot_usage _:c14n16 ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-171/sp800171RequirementItem__requirement_item_id> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171RequirementItem__requirement_item_text> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171RequirementItem__requirement_subitems> .
+<https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementStatus> rdfs:seeAlso "https://csrc.nist.gov/pubs/sp/800/171/r3/final"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementStatus"^^xsd:anyURI ;
+	linkml:description "The one status SP 800-171 Revision 3 states for a requirement. A requirement in force carries none." ;
+	linkml:permissible_values <https://w3id.org/lmodel/nist-sp-800-171/withdrawn> .
+<https://w3id.org/lmodel/nist-sp-800-171/Sp800171SelectionCount> skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/Sp800171SelectionCount"^^xsd:anyURI ;
+	linkml:description "How many choices a selection parameter takes, as OSCAL states it." ;
+	linkml:permissible_values <https://w3id.org/lmodel/nist-sp-800-171/one> , <https://w3id.org/lmodel/nist-sp-800-171/one_or_more> .
+<https://w3id.org/lmodel/nist-sp-800-171/addressed_by_requirements> a linkml:SlotDefinition ;
+	linkml:description "For a withdrawn requirement, the requirements of Revision 3 that address what it required, as the catalog states them." ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_requirement_identifier> .
+<https://w3id.org/lmodel/nist-sp-800-171/assessed_requirement_item> a linkml:SlotDefinition ;
+	linkml:description "The statement item the objective assesses, such as 03.01.01.b. Absent when the objective assesses a requirement whose statement is one piece of text." ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_item_identifier> .
+<https://w3id.org/lmodel/nist-sp-800-171/boolean> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"boolean\"." ;
+	skos:exactMatch "schema:Boolean"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "Bool" ;
+	linkml:definition_uri "https://w3id.org/linkml/Boolean"^^xsd:anyURI ;
+	linkml:description "A binary (true or false) value" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "bool" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#boolean"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/cited_publication> a linkml:SlotDefinition ;
+	linkml:description "The publication's short name, such as SP 800-63-3." ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_cited_publication_name> ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-171/cited_publication_citation> a linkml:SlotDefinition ;
+	linkml:description "The full citation, as the catalog's back matter gives it." ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-171/cited_publication_url> a linkml:SlotDefinition ;
+	linkml:description "The publication's address, which the catalog gives as its digital object identifier at doi.org." ;
+	linkml:pattern "^https://doi\\.org/10\\.[0-9]+/\\S+$" ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/uri> ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-171/curie> dcterms:conformsTo "https://www.w3.org/TR/curie/" ;
+	a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"curie\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	skos:note "in RDF serializations this MUST be expanded to a URI" , "in non-RDF serializations MAY be serialized as the compact representation" ;
+	linkml:base "Curie" ;
+	linkml:definition_uri "https://w3id.org/linkml/Curie"^^xsd:anyURI ;
+	linkml:description "a compact URI" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/date> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date\"." , "URI is dateTime because OWL reasoners don't work with straight date or time" ;
+	skos:exactMatch "schema:Date"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "XSDDate" ;
+	linkml:definition_uri "https://w3id.org/linkml/Date"^^xsd:anyURI ;
+	linkml:description "a date (year, month and day) in an idealized calendar" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#date"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/date_or_datetime> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"date_or_datetime\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/DateOrDatetime"^^xsd:anyURI ;
+	linkml:description "Either a date or a datetime" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "https://w3id.org/linkml/DateOrDatetime"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/datetime> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"datetime\"." ;
+	skos:exactMatch "schema:DateTime"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "XSDDateTime" ;
+	linkml:definition_uri "https://w3id.org/linkml/Datetime"^^xsd:anyURI ;
+	linkml:description "The combination of a date and time" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#dateTime"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/decimal> a linkml:TypeDefinition ;
+	skos:broadMatch "schema:Number"^^xsd:anyURI ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"decimal\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "Decimal" ;
+	linkml:definition_uri "https://w3id.org/linkml/Decimal"^^xsd:anyURI ;
+	linkml:description "A real number with arbitrary precision that conforms to the xsd:decimal specification" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#decimal"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/description> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:mappingRelation "http://schema.org/description"^^xsd:anyURI ;
+	skos:note "It means what LOKF's description means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one description key." ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/description"^^xsd:anyURI ;
+	linkml:description "What the family or requirement is about, in the words of whoever records it. SP 800-171 gives a family no text of its own, and a requirement's own text goes in its statement, items and discussion." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Family> , <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:slot_uri "http://schema.org/description"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/double> a linkml:TypeDefinition ;
+	skos:closeMatch "schema:Float"^^xsd:anyURI ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"double\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "float" ;
+	linkml:definition_uri "https://w3id.org/linkml/Double"^^xsd:anyURI ;
+	linkml:description "A real number that conforms to the xsd:double specification" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#double"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/examine> linkml:description "Reviewing, inspecting, observing, studying or analysing assessment objects such as policies, plans, records and configurations." .
+<https://w3id.org/lmodel/nist-sp-800-171/family_number> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:note "A slot of its own, listed first in Sp800171Family's slots, rather than an attribute, so that the generated Python dataclasses key a list of families by their number and not by their title: they key an inlined list by the first required slot of the class, and a class lists its slots before its attributes. The adapt copy roots the family on LOKF's Concept, whose id is its identifier, so the number cannot be marked as one." ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/family_number"^^xsd:anyURI ;
+	linkml:description "The family's number, such as 03.01." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Family> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Family> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_family_identifier> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/family_number"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/family_requirements> a linkml:SlotDefinition ;
+	linkml:description "The security requirements of the family, the withdrawn ones included, in the order SP 800-171 numbers them. A knowledge bundle relates a requirement to its family with isPartOf instead." ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> .
+<https://w3id.org/lmodel/nist-sp-800-171/float> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"float\"." ;
+	skos:exactMatch "schema:Float"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "float" ;
+	linkml:definition_uri "https://w3id.org/linkml/Float"^^xsd:anyURI ;
+	linkml:description "A real number that conforms to the xsd:float specification" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#float"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/incorporated_into_requirements> a linkml:SlotDefinition ;
+	linkml:description "For a withdrawn requirement, the requirements of Revision 3 that incorporate what it required, as the catalog states them." ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_requirement_identifier> .
+<https://w3id.org/lmodel/nist-sp-800-171/integer> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"integer\"." ;
+	skos:exactMatch "schema:Integer"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "int" ;
+	linkml:definition_uri "https://w3id.org/linkml/Integer"^^xsd:anyURI ;
+	linkml:description "An integer" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#integer"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/interview> linkml:description "Holding discussions with people such as administrators and personnel with security responsibilities." .
+<https://w3id.org/lmodel/nist-sp-800-171/jsonpath> dcterms:conformsTo "https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html" ;
+	a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpath\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/Jsonpath"^^xsd:anyURI ;
+	linkml:description "A string encoding a JSON Path. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded in tree form." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/jsonpointer> dcterms:conformsTo "https://datatracker.ietf.org/doc/html/rfc6901" ;
+	a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"jsonpointer\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/Jsonpointer"^^xsd:anyURI ;
+	linkml:description "A string encoding a JSON Pointer. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to a valid object within the current instance document when encoded in tree form." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/ncname> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"ncname\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "NCName" ;
+	linkml:definition_uri "https://w3id.org/linkml/Ncname"^^xsd:anyURI ;
+	linkml:description "Prefix part of CURIE" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/nist_sp_800_171> dcterms:license "Apache-2.0" ;
+	dcterms:source "https://doi.org/10.6028/NIST.SP.800-171r3"^^xsd:anyURI ;
+	dcterms:title "Protecting Controlled Unclassified Information in Nonfederal Systems and Organizations (SP 800-171 Revision 3)" ;
+	pav:version "3.0.0" ;
+	a linkml:SchemaDefinition ;
+	rdfs:seeAlso "https://csrc.nist.gov/projects/protecting-controlled-unclassified-information"^^xsd:anyURI , "https://csrc.nist.gov/pubs/sp/800/171/r3/final"^^xsd:anyURI , "https://doi.org/10.6028/NIST.SP.800-171Ar3"^^xsd:anyURI , "https://github.com/usnistgov/oscal-content/tree/v1.6.0/nist.gov/SP800-171/rev3"^^xsd:anyURI , "https://lmodel.github.io/nist-sp-800-171"^^xsd:anyURI ;
+	skos:note "NIST's catalog renders each family as an OSCAL group, each security requirement as an OSCAL control of class requirement, each statement item, discussion, assessment objective and assessment method as a part, each organization-defined parameter as a parameter, and each reference and source control as a link to a back-matter resource. The broad_mappings name those lmodel/oscal classes." , "SP 800-171 is a work of the United States Government and is not subject to copyright in the United States. The descriptions here are this project's own words; NIST's text of each requirement, discussion, parameter and assessment procedure stays in the catalog copy." , "The version is the revision of SP 800-171 the schema renders, written as NIST's Cybersecurity and Privacy Reference Tool numbers it (SP_800_171_3_0_0), and source is the publication's digital object identifier. The catalog NIST publishes for that revision in usnistgov/oscal-content, which carries the assessment procedures of SP 800-171A Revision 3 as well, is copied to src/nist_sp_800_171/schema/oscal-content/ at the tag and commit in the annotations. scripts/check_upstream_release.py reads the same pins and reports when NIST publishes a newer revision or changes the catalog. The catalog's own metadata version (1.1.0) numbers the catalog, not the publication. The release tags are the schema's own versions." ;
+	sh:declare _:c14n2 , _:c14n3 , _:c14n4 , _:c14n6 , _:c14n7 ;
+	linkml:annotations _:c14n0 , _:c14n13 , _:c14n15 , _:c14n5 ;
+	linkml:classes <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethod> , <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentObjective> , <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Family> , <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Parameter> , <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Publication> , <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Reference> , <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> , <https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementItem> ;
+	linkml:default_prefix "nist_sp_800_171" ;
+	linkml:default_range <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:description "A LinkML model of NIST Special Publication 800-171 Revision 3, the security requirements for protecting controlled unclassified information (CUI) in nonfederal systems and organizations: its seventeen requirement families, each security requirement with its statement, discussion, references and source controls, the organization-defined parameters (ODPs) a requirement leaves to the organization, and the assessment objectives and methods that SP 800-171A Revision 3 gives each requirement." ;
+	linkml:enums <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethodKind> , <https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementStatus> , <https://w3id.org/lmodel/nist-sp-800-171/Sp800171SelectionCount> ;
+	linkml:id "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:imports "linkml:types"^^xsd:anyURI ;
+	linkml:metamodel_version "1.12.0" ;
+	linkml:slots <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Family_title> , <https://w3id.org/lmodel/nist-sp-800-171/description> , <https://w3id.org/lmodel/nist-sp-800-171/family_number> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171AssessmentMethod__requirement_method_kind> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171AssessmentMethod__requirement_method_objects> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171AssessmentObjective__assessed_requirement_item> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171AssessmentObjective__requirement_determination> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171AssessmentObjective__requirement_objective_id> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Family__family_requirements> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Parameter__odp_choices> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Parameter__odp_guideline> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Parameter__odp_id> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Parameter__odp_label> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Parameter__odp_selection_count> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Parameter__odp_usage> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Publication__requirement_families> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Publication__sp800171_revision> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Reference__cited_publication> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Reference__cited_publication_citation> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Reference__cited_publication_url> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171RequirementItem__requirement_item_id> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171RequirementItem__requirement_item_text> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171RequirementItem__requirement_subitems> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__addressed_by_requirements> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__incorporated_into_requirements> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_discussion> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_id> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_items> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_methods> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_objectives> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_parameters> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_references> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_statement> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_status> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__source_controls> , <https://w3id.org/lmodel/nist-sp-800-171/title> ;
+	linkml:source_file "nist_sp_800_171.yaml" ;
+	linkml:source_file_date "2026-11-07T02:04:02"^^xsd:dateTime ;
+	linkml:source_file_size 20697 ;
+	linkml:types <https://w3id.org/lmodel/nist-sp-800-171/boolean> , <https://w3id.org/lmodel/nist-sp-800-171/curie> , <https://w3id.org/lmodel/nist-sp-800-171/date> , <https://w3id.org/lmodel/nist-sp-800-171/date_or_datetime> , <https://w3id.org/lmodel/nist-sp-800-171/datetime> , <https://w3id.org/lmodel/nist-sp-800-171/decimal> , <https://w3id.org/lmodel/nist-sp-800-171/double> , <https://w3id.org/lmodel/nist-sp-800-171/float> , <https://w3id.org/lmodel/nist-sp-800-171/integer> , <https://w3id.org/lmodel/nist-sp-800-171/jsonpath> , <https://w3id.org/lmodel/nist-sp-800-171/jsonpointer> , <https://w3id.org/lmodel/nist-sp-800-171/ncname> , <https://w3id.org/lmodel/nist-sp-800-171/nodeidentifier> , <https://w3id.org/lmodel/nist-sp-800-171/objectidentifier> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171_cited_publication_name> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171_family_identifier> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171_item_identifier> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171_objective_identifier> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171_odp_identifier> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171_requirement_identifier> , <https://w3id.org/lmodel/nist-sp-800-171/sp800171_source_control_identifier> , <https://w3id.org/lmodel/nist-sp-800-171/sparqlpath> , <https://w3id.org/lmodel/nist-sp-800-171/string> , <https://w3id.org/lmodel/nist-sp-800-171/time> , <https://w3id.org/lmodel/nist-sp-800-171/uri> , <https://w3id.org/lmodel/nist-sp-800-171/uriorcurie> .
+<https://w3id.org/lmodel/nist-sp-800-171/nodeidentifier> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"nodeidentifier\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "NodeIdentifier" ;
+	linkml:definition_uri "https://w3id.org/linkml/Nodeidentifier"^^xsd:anyURI ;
+	linkml:description "A URI, CURIE or BNODE that represents a node in a model." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/ns/shex#nonLiteral"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/objectidentifier> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"objectidentifier\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	skos:note "Used for inheritance and type checking" ;
+	linkml:base "ElementIdentifier" ;
+	linkml:definition_uri "https://w3id.org/linkml/Objectidentifier"^^xsd:anyURI ;
+	linkml:description "A URI or CURIE that represents an object in the model." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/ns/shex#iri"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/odp_choices> a linkml:SlotDefinition ;
+	linkml:description "For a selection, the choices SP 800-171 offers, in its order. A choice may itself carry an insert placeholder naming another parameter." ;
+	linkml:multivalued true .
+<https://w3id.org/lmodel/nist-sp-800-171/odp_guideline> a linkml:SlotDefinition ;
+	linkml:description "The determination SP 800-171A gives for the parameter: what the organization must have defined, such as the time period for account inactivity before disabling is defined." .
+<https://w3id.org/lmodel/nist-sp-800-171/odp_id> a linkml:SlotDefinition ;
+	linkml:description "The parameter's identifier, such as A.03.01.01.ODP[01]." ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_odp_identifier> ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-171/odp_label> a linkml:SlotDefinition ;
+	linkml:description "What kind of value the parameter takes, such as time period or frequency, or SELECTED PARAMETER VALUES for a selection." ;
+	linkml:pattern "^\\s*\\S" ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-171/odp_selection_count> a linkml:SlotDefinition ;
+	linkml:description "How many of the choices a selection takes." ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171SelectionCount> .
+<https://w3id.org/lmodel/nist-sp-800-171/odp_usage> a linkml:SlotDefinition ;
+	linkml:description "How the requirement statement names the parameter, such as organization-defined time period." .
+<https://w3id.org/lmodel/nist-sp-800-171/one> linkml:description "Exactly one of the choices." .
+<https://w3id.org/lmodel/nist-sp-800-171/one_or_more> linkml:description "One or more of the choices." .
+<https://w3id.org/lmodel/nist-sp-800-171/requirement_determination> a linkml:SlotDefinition ;
+	linkml:description "The determination statement: what the assessor determines is the case, such as system accounts are created in accordance with organizational policy, procedures, prerequisites, and criteria." ;
+	linkml:pattern "^\\s*\\S" ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-171/requirement_discussion> a linkml:SlotDefinition ;
+	linkml:description "The requirement's discussion: SP 800-171's explanation of what the requirement means and how it relates to other requirements." ;
+	linkml:pattern "^\\s*\\S" .
+<https://w3id.org/lmodel/nist-sp-800-171/requirement_families> a linkml:SlotDefinition ;
+	linkml:description "The requirement families, in the order SP 800-171 gives them." ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:minimum_cardinality 1 ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Family> ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-171/requirement_id> a linkml:SlotDefinition ;
+	linkml:description "The requirement's identifier, such as 03.01.01." ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_requirement_identifier> ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-171/requirement_item_id> a linkml:SlotDefinition ;
+	linkml:description "The item's identifier, such as 03.01.01.a." ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_item_identifier> ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-171/requirement_item_text> a linkml:SlotDefinition ;
+	linkml:description "What the item requires. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter." ;
+	linkml:pattern "^\\s*\\S" ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-171/requirement_items> a linkml:SlotDefinition ;
+	linkml:description "The lettered items of the requirement statement, in order, each with its numbered items where it has them. A requirement has either these or a statement, never both." ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementItem> .
+<https://w3id.org/lmodel/nist-sp-800-171/requirement_method_kind> a linkml:SlotDefinition ;
+	linkml:description "Which method it is." ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethodKind> ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-171/requirement_method_objects> a linkml:SlotDefinition ;
+	linkml:description "The assessment objects, one entry each, in the order SP 800-171A lists them, such as access control policy and procedures or system administrators." ;
+	linkml:minimum_cardinality 1 ;
+	linkml:multivalued true ;
+	linkml:pattern "^\\s*\\S" ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-171/requirement_methods> a linkml:SlotDefinition ;
+	linkml:description "The assessment methods SP 800-171A gives the requirement, each with the objects it is applied to." ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethod> .
+<https://w3id.org/lmodel/nist-sp-800-171/requirement_objective_id> a linkml:SlotDefinition ;
+	linkml:description "The objective's identifier, such as A.03.01.01.b[01]." ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_objective_identifier> ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-171/requirement_objectives> a linkml:SlotDefinition ;
+	linkml:description "The assessment objectives SP 800-171A gives the requirement: the determination statements an assessor checks." ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentObjective> .
+<https://w3id.org/lmodel/nist-sp-800-171/requirement_parameters> a linkml:SlotDefinition ;
+	linkml:description "The organization-defined parameters the requirement statement leaves to the organization, in the order SP 800-171A numbers them." ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Parameter> .
+<https://w3id.org/lmodel/nist-sp-800-171/requirement_references> a linkml:SlotDefinition ;
+	linkml:description "The publications SP 800-171 lists under the requirement's references, each with its citation and address as the catalog gives them." ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Reference> .
+<https://w3id.org/lmodel/nist-sp-800-171/requirement_statement> a linkml:SlotDefinition ;
+	linkml:description "The requirement statement when SP 800-171 writes it as one piece of text and not as lettered items. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter." ;
+	linkml:pattern "^\\s*\\S" .
+<https://w3id.org/lmodel/nist-sp-800-171/requirement_status> a linkml:SlotDefinition ;
+	linkml:description "Withdrawn when Revision 3 withdrew the requirement. A requirement with no status is in force." ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementStatus> .
+<https://w3id.org/lmodel/nist-sp-800-171/requirement_subitems> a linkml:SlotDefinition ;
+	linkml:description "The numbered items under a lettered item, in order." ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementItem> .
+<https://w3id.org/lmodel/nist-sp-800-171/source_controls> a linkml:SlotDefinition ;
+	linkml:description "The controls of SP 800-53 Revision 5 the requirement is drawn from, by their identifiers, as the catalog lists them among the requirement's references. The identifier is data; the schema maps nothing to a model of SP 800-53." ;
+	linkml:multivalued true ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_source_control_identifier> .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171AssessmentMethod__requirement_method_kind> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "requirement_method_kind" ;
+	linkml:description "Which method it is." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethod> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethod> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethodKind> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/requirement_method_kind"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171AssessmentMethod__requirement_method_objects> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "requirement_method_objects" ;
+	linkml:description "The assessment objects, one entry each, in the order SP 800-171A lists them, such as access control policy and procedures or system administrators." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethod> ;
+	linkml:minimum_cardinality 1 ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethod> ;
+	linkml:pattern "^\\s*\\S" ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/requirement_method_objects"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171AssessmentObjective__assessed_requirement_item> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "assessed_requirement_item" ;
+	linkml:description "The statement item the objective assesses, such as 03.01.01.b. Absent when the objective assesses a requirement whose statement is one piece of text." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentObjective> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentObjective> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_item_identifier> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/assessed_requirement_item"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171AssessmentObjective__requirement_determination> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "requirement_determination" ;
+	linkml:description "The determination statement: what the assessor determines is the case, such as system accounts are created in accordance with organizational policy, procedures, prerequisites, and criteria." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentObjective> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentObjective> ;
+	linkml:pattern "^\\s*\\S" ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/requirement_determination"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171AssessmentObjective__requirement_objective_id> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "requirement_objective_id" ;
+	linkml:description "The objective's identifier, such as A.03.01.01.b[01]." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentObjective> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentObjective> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_objective_identifier> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/requirement_objective_id"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Family__family_requirements> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "family_requirements" ;
+	linkml:description "The security requirements of the family, the withdrawn ones included, in the order SP 800-171 numbers them. A knowledge bundle relates a requirement to its family with isPartOf instead." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Family> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Family> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/family_requirements"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Parameter__odp_choices> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "odp_choices" ;
+	linkml:description "For a selection, the choices SP 800-171 offers, in its order. A choice may itself carry an insert placeholder naming another parameter." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Parameter> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Parameter> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/odp_choices"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Parameter__odp_guideline> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "odp_guideline" ;
+	linkml:description "The determination SP 800-171A gives for the parameter: what the organization must have defined, such as the time period for account inactivity before disabling is defined." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Parameter> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Parameter> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/odp_guideline"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Parameter__odp_id> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "odp_id" ;
+	linkml:description "The parameter's identifier, such as A.03.01.01.ODP[01]." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Parameter> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Parameter> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_odp_identifier> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/odp_id"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Parameter__odp_label> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "odp_label" ;
+	linkml:description "What kind of value the parameter takes, such as time period or frequency, or SELECTED PARAMETER VALUES for a selection." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Parameter> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Parameter> ;
+	linkml:pattern "^\\s*\\S" ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/odp_label"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Parameter__odp_selection_count> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "odp_selection_count" ;
+	linkml:description "How many of the choices a selection takes." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Parameter> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Parameter> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171SelectionCount> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/odp_selection_count"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Parameter__odp_usage> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "odp_usage" ;
+	linkml:description "How the requirement statement names the parameter, such as organization-defined time period." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Parameter> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Parameter> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/odp_usage"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Publication__requirement_families> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "requirement_families" ;
+	linkml:description "The requirement families, in the order SP 800-171 gives them." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Publication> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:minimum_cardinality 1 ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Publication> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Family> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/requirement_families"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Publication__sp800171_revision> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "sp800171_revision" ;
+	linkml:description "The revision of SP 800-171 the document renders, as NIST numbers it, such as 3." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Publication> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Publication> ;
+	linkml:pattern "^[1-9][0-9]*$" ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/sp800171_revision"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Reference__cited_publication> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "cited_publication" ;
+	linkml:description "The publication's short name, such as SP 800-63-3." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Reference> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Reference> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_cited_publication_name> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/cited_publication"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Reference__cited_publication_citation> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "cited_publication_citation" ;
+	linkml:description "The full citation, as the catalog's back matter gives it." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Reference> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Reference> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/cited_publication_citation"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Reference__cited_publication_url> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "cited_publication_url" ;
+	linkml:description "The publication's address, which the catalog gives as its digital object identifier at doi.org." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Reference> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Reference> ;
+	linkml:pattern "^https://doi\\.org/10\\.[0-9]+/\\S+$" ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/uri> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/cited_publication_url"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171RequirementItem__requirement_item_id> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "requirement_item_id" ;
+	linkml:description "The item's identifier, such as 03.01.01.a." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementItem> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementItem> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_item_identifier> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/requirement_item_id"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171RequirementItem__requirement_item_text> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "requirement_item_text" ;
+	linkml:description "What the item requires. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementItem> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementItem> ;
+	linkml:pattern "^\\s*\\S" ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/requirement_item_text"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171RequirementItem__requirement_subitems> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "requirement_subitems" ;
+	linkml:description "The numbered items under a lettered item, in order." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementItem> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementItem> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementItem> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/requirement_subitems"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__addressed_by_requirements> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "addressed_by_requirements" ;
+	linkml:description "For a withdrawn requirement, the requirements of Revision 3 that address what it required, as the catalog states them." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_requirement_identifier> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/addressed_by_requirements"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__incorporated_into_requirements> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "incorporated_into_requirements" ;
+	linkml:description "For a withdrawn requirement, the requirements of Revision 3 that incorporate what it required, as the catalog states them." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_requirement_identifier> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/incorporated_into_requirements"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_discussion> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "requirement_discussion" ;
+	linkml:description "The requirement's discussion: SP 800-171's explanation of what the requirement means and how it relates to other requirements." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:pattern "^\\s*\\S" ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/requirement_discussion"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_id> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "requirement_id" ;
+	linkml:description "The requirement's identifier, such as 03.01.01." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_requirement_identifier> ;
+	linkml:required true ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/requirement_id"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_items> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "requirement_items" ;
+	linkml:description "The lettered items of the requirement statement, in order, each with its numbered items where it has them. A requirement has either these or a statement, never both." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementItem> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/requirement_items"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_methods> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "requirement_methods" ;
+	linkml:description "The assessment methods SP 800-171A gives the requirement, each with the objects it is applied to." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentMethod> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/requirement_methods"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_objectives> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "requirement_objectives" ;
+	linkml:description "The assessment objectives SP 800-171A gives the requirement: the determination statements an assessor checks." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171AssessmentObjective> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/requirement_objectives"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_parameters> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "requirement_parameters" ;
+	linkml:description "The organization-defined parameters the requirement statement leaves to the organization, in the order SP 800-171A numbers them." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Parameter> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/requirement_parameters"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_references> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "requirement_references" ;
+	linkml:description "The publications SP 800-171 lists under the requirement's references, each with its citation and address as the catalog gives them." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:inlined true ;
+	linkml:inlined_as_list true ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Reference> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/requirement_references"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_statement> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "requirement_statement" ;
+	linkml:description "The requirement statement when SP 800-171 writes it as one piece of text and not as lettered items. The catalog marks an organization-defined parameter in the text with an insert placeholder that names the parameter." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:pattern "^\\s*\\S" ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/requirement_statement"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__requirement_status> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "requirement_status" ;
+	linkml:description "Withdrawn when Revision 3 withdrew the requirement. A requirement with no status is in force." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementStatus> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/requirement_status"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171Requirement__source_controls> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:prefLabel "source_controls" ;
+	linkml:description "The controls of SP 800-53 Revision 5 the requirement is drawn from, by their identifiers, as the catalog lists them among the requirement's references. The identifier is data; the schema maps nothing to a model of SP 800-53." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:multivalued true ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/sp800171_source_control_identifier> ;
+	linkml:slot_uri "https://w3id.org/lmodel/nist-sp-800-171/source_controls"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171_cited_publication_name> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/Sp800171CitedPublicationName"^^xsd:anyURI ;
+	linkml:description "The short name SP 800-171 gives a publication it references: the series (SP, FIPS or IR) and the publication's number, with the number of a part or volume where the publication has one, such as SP 800-57-1, SP 800-160-1, IR 8011-2 or FIPS 140-3. The short name leaves out the publication's revision, which the citation and the address carry: SP 800-53 stands for Revision 5." ;
+	linkml:pattern "^(FIPS|IR|SP) [1-9][0-9]*(-[0-9A-Z]+)*$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171_family_identifier> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/Sp800171FamilyIdentifier"^^xsd:anyURI ;
+	linkml:description "A family's number, as SP 800-171 Revision 3 numbers its seventeen families: 03, a dot and two digits from 01 to 17, such as 03.01 for Access Control." ;
+	linkml:pattern "^03\\.(0[1-9]|1[0-7])$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171_item_identifier> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/Sp800171ItemIdentifier"^^xsd:anyURI ;
+	linkml:description "The identifier of a lettered item of a requirement statement, such as 03.01.01.a, or of a numbered item under it, such as 03.01.01.c.01." ;
+	linkml:pattern "^03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])\\.[a-z](\\.(0[1-9]|[1-9][0-9]))?$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171_objective_identifier> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/Sp800171ObjectiveIdentifier"^^xsd:anyURI ;
+	linkml:description "An assessment objective's identifier, as SP 800-171A writes it: A and the identifier of the requirement or statement item it assesses, such as A.03.01.01.e, with a two-digit number in square brackets when that item has several objectives, such as A.03.01.01.b[01]. NIST's catalog writes the bracketed number as a dotted one, A.03.01.01.b.01." ;
+	linkml:pattern "^A\\.03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])(\\.[a-z](\\.(0[1-9]|[1-9][0-9]))?)?(\\[(0[1-9]|[1-9][0-9])\\])?$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171_odp_identifier> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/Sp800171OdpIdentifier"^^xsd:anyURI ;
+	linkml:description "An organization-defined parameter's identifier, as SP 800-171A writes it: A, the requirement's identifier, ODP and the parameter's two-digit number in square brackets, such as A.03.01.01.ODP[01]." ;
+	linkml:pattern "^A\\.03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])\\.ODP\\[(0[1-9]|[1-9][0-9])\\]$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171_requirement_identifier> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/Sp800171RequirementIdentifier"^^xsd:anyURI ;
+	linkml:description "A security requirement's identifier: its family's number, a dot and the requirement's two-digit number within the family, such as 03.01.01." ;
+	linkml:pattern "^03\\.(0[1-9]|1[0-7])\\.(0[1-9]|[1-9][0-9])$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171_revision> a linkml:SlotDefinition ;
+	linkml:description "The revision of SP 800-171 the document renders, as NIST numbers it, such as 3." ;
+	linkml:pattern "^[1-9][0-9]*$" ;
+	linkml:required true .
+<https://w3id.org/lmodel/nist-sp-800-171/sp800171_source_control_identifier> a linkml:TypeDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/Sp800171SourceControlIdentifier"^^xsd:anyURI ;
+	linkml:description "The identifier of a control of SP 800-53 Revision 5 as NIST's catalog of SP 800-171 writes it: the family's two letters, a hyphen and the control's two-digit number, with a two-digit enhancement number in parentheses where it is one, such as AC-02 and AC-02(03)." ;
+	linkml:pattern "^[A-Z]{2}-(0[1-9]|[1-9][0-9])(\\((0[1-9]|[1-9][0-9])\\))?$" ;
+	linkml:typeof <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/sparqlpath> dcterms:conformsTo "https://www.w3.org/TR/sparql11-query/#propertypaths" ;
+	a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"sparqlpath\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/Sparqlpath"^^xsd:anyURI ;
+	linkml:description "A string encoding a SPARQL Property Path. The value of the string MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded as RDF." ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/string> a linkml:TypeDefinition ;
+	skos:editorialNote "In RDF serializations, a slot with range of string is treated as a literal or type xsd:string. If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"string\"." ;
+	skos:exactMatch "schema:Text"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "str" ;
+	linkml:definition_uri "https://w3id.org/linkml/String"^^xsd:anyURI ;
+	linkml:description "A character string" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#string"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/test> linkml:description "Exercising mechanisms or processes under specified conditions and comparing the result with what is expected." .
+<https://w3id.org/lmodel/nist-sp-800-171/time> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"time\"." , "URI is dateTime because OWL reasoners do not work with straight date or time" ;
+	skos:exactMatch "schema:Time"^^xsd:anyURI ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "XSDTime" ;
+	linkml:definition_uri "https://w3id.org/linkml/Time"^^xsd:anyURI ;
+	linkml:description "A time object represents a (local) time of day, independent of any particular day" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#time"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/title> a linkml:SlotDefinition ;
+	skos:inScheme "https://w3id.org/lmodel/nist-sp-800-171"^^xsd:anyURI ;
+	skos:mappingRelation "http://schema.org/name"^^xsd:anyURI ;
+	skos:note "It means what LOKF's title means and carries the same IRI, so lokf adapt folds it into LOKF's slot and a knowledge bundle reads one title key." ;
+	linkml:definition_uri "https://w3id.org/lmodel/nist-sp-800-171/title"^^xsd:anyURI ;
+	linkml:description "The name SP 800-171 gives a family or a security requirement, such as Access Control or Account Management." ;
+	linkml:domain_of <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Family> , <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:owner <https://w3id.org/lmodel/nist-sp-800-171/Sp800171Requirement> ;
+	linkml:range <https://w3id.org/lmodel/nist-sp-800-171/string> ;
+	linkml:slot_uri "http://schema.org/name"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/uri> dcterms:conformsTo "https://www.ietf.org/rfc/rfc3987.txt" ;
+	a linkml:TypeDefinition ;
+	skos:closeMatch "schema:URL"^^xsd:anyURI ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uri\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	skos:note "in RDF serializations a slot with range of uri is treated as a literal or type xsd:anyURI unless it is an identifier or a reference to an identifier, in which case it is translated directly to a node" ;
+	linkml:base "URI" ;
+	linkml:definition_uri "https://w3id.org/linkml/Uri"^^xsd:anyURI ;
+	linkml:description "a complete URI" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#anyURI"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/uriorcurie> a linkml:TypeDefinition ;
+	skos:editorialNote "If you are authoring schemas in LinkML YAML, the type is referenced with the lower case \"uriorcurie\"." ;
+	skos:inScheme "https://w3id.org/linkml/types"^^xsd:anyURI ;
+	linkml:base "URIorCURIE" ;
+	linkml:definition_uri "https://w3id.org/linkml/Uriorcurie"^^xsd:anyURI ;
+	linkml:description "a URI or a CURIE" ;
+	linkml:imported_from "linkml:types" ;
+	linkml:repr "str" ;
+	linkml:uri "http://www.w3.org/2001/XMLSchema#anyURI"^^xsd:anyURI .
+<https://w3id.org/lmodel/nist-sp-800-171/withdrawn> linkml:description "Revision 3 withdrew the requirement; other requirements incorporate or address what it required, or nothing does." .
+_:c14n0 skos:example "SP_800_171_3_0_0" ;
+	linkml:tag "cprt_framework_version"^^xsd:anyURI .
+_:c14n13 skos:example "v1.6.0" ;
+	linkml:tag "oscal_content_tag"^^xsd:anyURI .
+_:c14n15 skos:example "f0de6d8d8c059d374f15e0ae07508d82e370fc1d" ;
+	linkml:tag "oscal_content_commit"^^xsd:anyURI .
+_:c14n2 sh:namespace "http://www.w3.org/2001/XMLSchema#"^^xsd:anyURI ;
+	sh:prefix "xsd" .
+_:c14n3 sh:namespace "https://w3id.org/lmodel/oscal/"^^xsd:anyURI ;
+	sh:prefix "oscal" .
+_:c14n4 sh:namespace "https://w3id.org/linkml/"^^xsd:anyURI ;
+	sh:prefix "linkml" .
+_:c14n5 skos:example "2024-05" ;
+	linkml:tag "publication_date"^^xsd:anyURI .
+_:c14n6 sh:namespace "https://w3id.org/lmodel/nist-sp-800-171/"^^xsd:anyURI ;
+	sh:prefix "nist_sp_800_171" .
+_:c14n7 sh:namespace "http://schema.org/"^^xsd:anyURI ;
+	sh:prefix "schema" .
+
