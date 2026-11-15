@@ -16,22 +16,22 @@ sources:
     title: what each page is built from
 generated:
   by: process:ktl-librarian
-  at: "2026-11-15T02:44:13Z"
+  at: "2026-11-15T03:06:43Z"
 status: draft
 ---
 
 # Documentation site
 
-`website/` holds a Hugo site. `website/site.toml` names the repository `lmodel/nist-sp-800-171`, the site `https://lmodel.github.io` with the base path `/nist-sp-800-171`, and the title `nist-sp-800-171`.[^site.toml] It shows the pages of `docs/` except `docs/templates-linkml/`. It redirects the addresses the retired mkdocs site gave its pages:
+`website/` holds a Hugo site. `website/site.toml` names the repository `lmodel/nist-sp-800-171`, the site `https://lmodel.github.io` with the base path `/nist-sp-800-171`, and the title `nist-sp-800-171`. It redirects the addresses the retired mkdocs site gave its pages:
 
-- `/elements` to `/schema/`;
-- each page of an element the schema still has to that element's page;
-- each page of a class or enum of the replaced OSCAL-shaped schema to its successor's page or, where none succeeds it, to `/schema/`;
-- `/about` to `/docs/about/`.
+- each page of a class or enum of the replaced OSCAL-shaped schema to its successor's page or, where none succeeds it, to the schema's index;
+- `/about` to `docs/about.md`.
 
-The other options take the site's defaults: the Knowledge Trust Ladder logo, the README as the home page, the changelog once it holds a release, and the schema's pages that `just gen-doc` writes.
+The other options take the site's defaults, such as the Knowledge Trust Ladder logo.[^site.toml]
 
-`website/README.md` says what each page is built from, and that `npm run build` syncs the bundle, the README, the docs and the schema's pages before it builds and checks every link.[^website-readme.md] [Knowledge website](../workflows/knowledge-website.md) builds the site on each change to its sources and publishes it once `KNOWLEDGE_WEBSITE_ENABLED` is `true`.
+The site shows the README as its home page, the pages of `docs/`, a page per release of the changelog, a page per concept of the bundle with its trust label, and a page per class, slot, enumeration and type of the schema, written by LinkML's `gen-doc`. Each page of the schema is also at `elements/<Name>/`, where the schema's w3id rules point.[^website-readme.md]
+
+`scripts/build.sh`, run in `website/`, writes the site to `dist/` with its search index and then checks every link between its pages. Hugo and Pagefind come from PyPI through uv, so the build needs bash, git and uv. `scripts/build.sh serve` serves the site at `http://localhost:1313/nist-sp-800-171/` and rebuilds it as you edit.[^website-readme.md] [Knowledge website](../workflows/knowledge-website.md) builds the site on each change to its sources and publishes it once `KNOWLEDGE_WEBSITE_ENABLED` is `true`.
 
 [^site.toml]: website/site.toml, the site's address, title and redirects
 [^website-readme.md]: website/README.md, the build and its sources
