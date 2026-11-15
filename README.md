@@ -2,6 +2,11 @@
 
 # nist-sp-800-171
 
+[![Build and test](https://github.com/lmodel/nist-sp-800-171/actions/workflows/main.yaml/badge.svg)](https://github.com/lmodel/nist-sp-800-171/actions/workflows/main.yaml)
+[![Licence](https://img.shields.io/github/license/lmodel/nist-sp-800-171?label=licence)](LICENSE)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/lmodel/nist-sp-800-171/badge)](https://scorecard.dev/viewer/?uri=github.com/lmodel/nist-sp-800-171)
+[![KTL scorecard](https://img.shields.io/endpoint?url=https://lmodel.github.io/nist-sp-800-171/badge.json)](https://lmodel.github.io/nist-sp-800-171/health/)
+
 NIST SP 800-171 Protecting Controlled Unclassified Information (CUI) in Nonfederal Systems and Organizations, Revision 3, with the SP 800-171A assessment procedures (LinkML)
 
 > **Only want to ask?** Install `ktl-docent` into any agent you use, by a route from [the install page](https://w3id.org/ktl/docs/install/), and ask it about this project. It answers from the bundle and says how far each answer has been checked.
