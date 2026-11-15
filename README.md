@@ -34,14 +34,14 @@ The schema models the security requirements for protecting controlled unclassifi
 
 ## Repository Structure
 
-* [docs/](docs/): the website's pages, with the generated schema pages in [elements/](docs/elements/)
+* [docs/](docs/): the website's pages, with the generated schema pages in `docs/elements/`
 * [examples/](examples/): usage examples
 * [project/](project/): generated project files (do not edit them)
 * [scripts/](scripts/): the upstream watch
 * [src/nist_sp_800_171/schema/](src/nist_sp_800_171/schema): the LinkML schema, `nist_sp_800_171.yaml` (edit this), and NIST's catalog copy
 * [src/nist_sp_800_171/datamodel/](src/nist_sp_800_171/datamodel): the generated Python datamodel
 * [tests/](tests/): Python tests, with example data in [data/](tests/data) and the neighbours' adapt copies in [neighbours/](tests/neighbours)
-* [website/](website/): the Astro Starlight site built from the README, `docs/`, the schema's pages and the knowledge bundle
+* [website/](website/): the Hugo site built from the README, `docs/`, the schema's pages and the knowledge bundle
 
 ## Developer Tools
 
