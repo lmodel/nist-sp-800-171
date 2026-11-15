@@ -2,6 +2,11 @@
 
 # nist-sp-800-171
 
+[![Build and test](https://github.com/lmodel/nist-sp-800-171/actions/workflows/main.yaml/badge.svg)](https://github.com/lmodel/nist-sp-800-171/actions/workflows/main.yaml)
+[![Licence](https://img.shields.io/github/license/lmodel/nist-sp-800-171?label=licence)](LICENSE)
+[![OpenSSF Scorecard](https://api.scorecard.dev/projects/github.com/lmodel/nist-sp-800-171/badge)](https://scorecard.dev/viewer/?uri=github.com/lmodel/nist-sp-800-171)
+[![KTL scorecard](https://img.shields.io/endpoint?url=https://lmodel.github.io/nist-sp-800-171/badge.json)](https://lmodel.github.io/nist-sp-800-171/health/)
+
 NIST SP 800-171 Protecting Controlled Unclassified Information (CUI) in Nonfederal Systems and Organizations, Revision 3, with the SP 800-171A assessment procedures (LinkML)
 
 > **Only want to ask?** Install `ktl-docent` into any agent you use, by a route from [the install page](https://w3id.org/ktl/docs/install/), and ask it about this project. It answers from the bundle and says how far each answer has been checked.
@@ -34,14 +39,14 @@ The schema models the security requirements for protecting controlled unclassifi
 
 ## Repository Structure
 
-* [docs/](docs/): the website's pages, with the generated schema pages in [elements/](docs/elements/)
+* [docs/](docs/): the website's pages, with the generated schema pages in `docs/elements/`
 * [examples/](examples/): usage examples
 * [project/](project/): generated project files (do not edit them)
 * [scripts/](scripts/): the upstream watch
 * [src/nist_sp_800_171/schema/](src/nist_sp_800_171/schema): the LinkML schema, `nist_sp_800_171.yaml` (edit this), and NIST's catalog copy
 * [src/nist_sp_800_171/datamodel/](src/nist_sp_800_171/datamodel): the generated Python datamodel
 * [tests/](tests/): Python tests, with example data in [data/](tests/data) and the neighbours' adapt copies in [neighbours/](tests/neighbours)
-* [website/](website/): the Astro Starlight site built from the README, `docs/`, the schema's pages and the knowledge bundle
+* [website/](website/): the Hugo site built from the README, `docs/`, the schema's pages and the knowledge bundle
 
 ## Developer Tools
 

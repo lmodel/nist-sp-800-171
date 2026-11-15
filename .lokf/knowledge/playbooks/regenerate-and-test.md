@@ -19,7 +19,7 @@ sources:
     title: the lokf-adapt recipes
 generated:
   by: process:ktl-librarian
-  at: "2026-11-06T21:22:53Z"
+  at: "2026-11-15T10:37:14Z"
 status: draft
 verified:
   - by: process:ktl-librarian
@@ -28,7 +28,7 @@ verified:
 
 # Regenerate and test after a schema change
 
-You need Python 3.10 or later, uv and just. Clone the repository, run `uv sync --group dev`, and run `just --list` to see the recipes.[^contributing.md]
+You need Python 3.11 or later, uv and just. Clone the repository, run `uv sync --group dev`, and run `just --list` to see the recipes.[^contributing.md]
 
 1. Edit `src/nist_sp_800_171/schema/nist_sp_800_171.yaml`, and name the section or table of SP 800-171 or SP 800-171A it renders in the pull request.
 2. Run `just lint`, which runs `linkml-lint --ignore-warnings` over the schema folder, so that only errors fail it.[^justfile]
